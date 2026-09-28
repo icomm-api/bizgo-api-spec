@@ -1,0 +1,11 @@
+type: object
+description: 브랜드메시지 이미지 요소입니다. 최상위 `attachment.image`는 FI, FW, FM 타입에서, 캐러셀 아이템의 `attachment.image`는 FC, FA 타입에서 필수입니다.
+required: [imgUrl]
+properties:
+  imgUrl:
+    type: string
+    description: 등록된 이미지 URL입니다. 브랜드메시지 이미지 업로드 API(`/api/comm/v1/file/brandmessage/...`)로 발급받은 `imgUrl`을 씁니다.
+  imgLink:
+    type: string
+    description: 이미지 클릭 시 이동할 URL입니다. 생략하면 카카오 뷰어로 열립니다. 최대 1,000자입니다.
+    maxLength: 1000

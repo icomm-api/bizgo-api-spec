@@ -1,0 +1,54 @@
+type: object
+description: 발신프로필 목록 조회(`GET /account/kakao/sender/profiles`)의 항목 1개입니다.
+properties:
+  senderKey:
+    type: string
+    description: 발신프로필 키입니다.
+    example: SENDER_KEY_EXAMPLE
+  senderKeyType:
+    type: string
+    description: 발신키 유형입니다. 문서 예시 값은 `S`입니다.
+    x-known-values: [S]
+    x-unverified: "이 응답의 senderKeyType 값 목록이 문서에 없습니다(다른 API는 S: 발신프로필, G: 그룹)."
+  channelName:
+    type: string
+    description: 카카오톡 채널 이름입니다.
+  channelId:
+    type: string
+    description: 카카오톡 채널 검색용 아이디입니다.
+  channelKey:
+    type: string
+    description: 카카오톡 채널 키입니다.
+  categoryCode:
+    type: string
+    description: 발신프로필 카테고리 코드입니다.
+  status:
+    type: string
+    description: 발신프로필 상태입니다.
+  profileStatus:
+    type: string
+    description: 카카오톡 채널 프로필 상태입니다.
+  dormant:
+    type: boolean
+    description: 휴면 상태 여부입니다.
+  block:
+    type: boolean
+    description: 차단 상태 여부입니다.
+  businessProfile:
+    type: boolean
+    description: 비즈니스 인증 채널 여부입니다.
+  businessType:
+    type: string
+    description: 비즈니스 인증 유형입니다.
+  createdAt:
+    type: string
+    description: 발신프로필 생성 일시(yyyy-MM-dd HH:mm:ss)입니다.
+    x-format: "yyyy-MM-dd HH:mm:ss"
+  regDate:
+    type: string
+    description: 등록 일시(yyyy-MM-dd HH:mm:ss)입니다.
+    x-format: "yyyy-MM-dd HH:mm:ss"
+  updateDate:
+    type: string
+    description: 수정 일시(yyyy-MM-dd HH:mm:ss)입니다.
+    x-format: "yyyy-MM-dd HH:mm:ss"

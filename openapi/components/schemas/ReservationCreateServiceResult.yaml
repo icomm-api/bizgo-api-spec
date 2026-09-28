@@ -1,0 +1,11 @@
+allOf:
+  - $ref: ./ServiceResult.yaml
+  - type: object
+    properties:
+      resvKey:
+        type: string
+        description: 예약 발송 키입니다. 예약 조회·수정·취소·중지·재개·수신자 관리에 씁니다. `data.data`가 아니라 `data` 바로 아래에 있습니다.
+        example: RESV_KEY_EXAMPLE
+        x-unverified: "문서 예시마다 resvKey 형식이 다릅니다(`MO`로 시작하는 22자 형식과 `RESV`가 들어간 28자 형식). SDK는 형식을 가정하지 않고 문자열로 다룹니다."
+      data:
+        $ref: ./SendOmniResult.yaml

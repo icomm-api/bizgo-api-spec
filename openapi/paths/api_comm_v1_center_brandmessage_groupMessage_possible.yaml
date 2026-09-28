@@ -1,0 +1,43 @@
+get:
+  operationId: checkBrandMessageAudiencePossible
+  summary: "발송 예상 모수 확인 (친구 그룹 기반)"
+  description: "메시지 타입과 친구 그룹 조건으로 동보 발송 예상 발송 수를 조회합니다. 친구 그룹을 쓰면 그룹 상태가 완료이고 등록 유저 수가 10 이상이어야 발송 예약이 가능하며, 친구 관계는 실시간으로 동기화됩니다."
+  tags: [BrandMessage]
+  x-source: "https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand"
+  x-sdk-resource: brandMessage.audience
+  x-sdk-method: checkPossible
+  x-sdk-retry: safe
+  parameters:
+    - name: senderKey
+      in: query
+      required: true
+      description: "발신프로필 키입니다."
+      schema:
+        type: string
+      example: SENDER_KEY_EXAMPLE
+    - name: msgType
+      in: query
+      required: true
+      description: "브랜드메시지 타입입니다(카카오 원본 chatBubbleType으로 변환됩니다). 알려진 값: `FT`, `FI`, `FW`, `FL`, `FC`, `FM`, `FA`, `FP`, `FG`."
+      schema:
+        type: string
+        x-known-values: [FT, FI, FW, FL, FC, FM, FA, FP, FG]
+      example: FI
+    - name: friendGroupKey
+      in: query
+      required: false
+      description: "대상 친구 그룹 키입니다. 생략하면 전체 친구를 기준으로 조회합니다."
+      schema:
+        type: string
+      example: FRIEND_GROUP_KEY_EXAMPLE
+  responses:
+    "200":
+      description: "예상 발송 수입니다."
+      content:
+        "application/json":
+          schema:
+            $ref: "../components/schemas/BrandMessageAudiencePossibleResponse.yaml"
+    "429":
+      $ref: "../components/responses/RateLimited.yaml"
+    default:
+      $ref: "../components/responses/ErrorResponse.yaml"

@@ -1,0 +1,7 @@
+name: resvKey
+in: path
+required: true
+description: 예약 발송 키입니다. 예약 발송 등록 응답의 `data.resvKey` 값입니다.
+schema:
+  type: string
+example: RESV_KEY_EXAMPLE

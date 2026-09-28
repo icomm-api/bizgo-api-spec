@@ -1,0 +1,12 @@
+type: object
+description: 템플릿 양식 로고 이미지 조회 결과 데이터입니다.
+properties:
+  rcs:
+    type: object
+    description: RCS 응답 정보입니다.
+    properties:
+      images:
+        type: array
+        description: 템플릿 양식 로고 이미지 목록입니다.
+        items:
+          $ref: ./RcsTemplateFormLogo.yaml

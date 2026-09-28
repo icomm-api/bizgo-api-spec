@@ -1,0 +1,6 @@
+type: object
+description: RCS 템플릿 등록·수정 요청입니다.
+required: [rcs]
+properties:
+  rcs:
+    $ref: ./RcsTemplateDefinition.yaml

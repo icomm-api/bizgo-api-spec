@@ -1,0 +1,22 @@
+get:
+  operationId: getReportInquiry
+  tags: [Report]
+  summary: 리포트 개별조회
+  description: 메시지 키 1개의 리포트를 조회합니다. 최대 30일 이전까지 조회할 수 있으며, Polling/Webhook에서 빠진 리포트를 보완하는 데 씁니다.
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/report
+  x-sdk-resource: reports
+  x-sdk-method: inquiry
+  x-sdk-retry: safe
+  parameters:
+    - $ref: ../components/parameters/MsgKeyPath.yaml
+  responses:
+    "200":
+      description: 리포트 목록입니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ReportInquiryResponse.yaml
+    "429":
+      $ref: ../components/responses/RateLimited.yaml
+    default:
+      $ref: ../components/responses/ErrorResponse.yaml

@@ -1,0 +1,64 @@
+post:
+  operationId: createBrandMessageGroupSend
+  summary: "브랜드메시지 동보 발송"
+  description: "기본형 템플릿을 기준으로 친구 그룹 또는 전체 친구에게 동보 발송을 예약합니다. 템플릿은 변수가 없고 상태가 등록(`A`)이어야 합니다. 발송 수는 요청 시점의 친구 관계로 정해지고, 실제 발송 시점의 친구 관계에 따라 그 수 안에서 순차 발송됩니다."
+  tags: [BrandMessage]
+  x-source: "https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand"
+  x-sdk-resource: brandMessage.groupSends
+  x-sdk-method: create
+  x-sdk-retry: rate_limit_only
+  x-sdk-rate: send
+  requestBody:
+    required: true
+    content:
+      "application/json":
+        schema:
+          $ref: "../components/schemas/BrandMessageGroupSendCreateRequest.yaml"
+  responses:
+    "200":
+      description: "동보 발송 예약 결과입니다."
+      content:
+        "application/json":
+          schema:
+            $ref: "../components/schemas/BrandMessageGroupSendResponse.yaml"
+    "429":
+      $ref: "../components/responses/RateLimited.yaml"
+    default:
+      $ref: "../components/responses/ErrorResponse.yaml"
+get:
+  operationId: getBrandMessageGroupSend
+  summary: "브랜드메시지 동보 발송 조회"
+  description: "발신프로필 키와 요청 아이디로 특정 동보 발송 요청의 상태를 조회합니다."
+  tags: [BrandMessage]
+  x-source: "https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand"
+  x-sdk-resource: brandMessage.groupSends
+  x-sdk-method: get
+  x-sdk-retry: safe
+  parameters:
+    - name: senderKey
+      in: query
+      required: true
+      description: "발신프로필 키입니다."
+      schema:
+        type: string
+      example: SENDER_KEY_EXAMPLE
+    - name: requestId
+      in: query
+      required: true
+      description: "동보 발송 요청 아이디입니다."
+      schema:
+        type: integer
+        format: int64
+        x-unverified: "조회 파라미터는 Integer로 표기되지만 요청·응답 본문의 `requestId`는 String입니다."
+      example: 1203981
+  responses:
+    "200":
+      description: "동보 발송 상태입니다."
+      content:
+        "application/json":
+          schema:
+            $ref: "../components/schemas/BrandMessageGroupSendResponse.yaml"
+    "429":
+      $ref: "../components/responses/RateLimited.yaml"
+    default:
+      $ref: "../components/responses/ErrorResponse.yaml"

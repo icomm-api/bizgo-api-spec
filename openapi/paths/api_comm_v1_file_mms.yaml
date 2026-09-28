@@ -1,0 +1,26 @@
+post:
+  operationId: uploadMmsFile
+  tags: [File]
+  summary: MMS 이미지 업로드
+  description: MMS 발송용 이미지를 올리고 `fileKey`를 받습니다. 받은 키는 `messageFlow[].mms.fileKey`에 넣습니다(최대 3개).
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/mt
+  x-sdk-resource: files
+  x-sdk-method: uploadMms
+  x-sdk-retry: rate_limit_only
+  requestBody:
+    required: true
+    content:
+      multipart/form-data:
+        schema:
+          $ref: ../components/schemas/MmsFileUploadRequest.yaml
+  responses:
+    "200":
+      description: 업로드 결과입니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/FileUploadResponse.yaml
+    "429":
+      $ref: ../components/responses/RateLimited.yaml
+    default:
+      $ref: ../components/responses/ErrorResponse.yaml

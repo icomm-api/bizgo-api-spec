@@ -1,0 +1,45 @@
+post:
+  operationId: onCounselSeenInfoWebhook
+  tags: [Webhook]
+  summary: 상담톡 읽음 정보 수신(Webhook)
+  description: |
+    사용자 읽음 정보가 전달됩니다. 상담 세션이 연결된 상태에서만, 발송 후 최대 24시간까지 수신되며 지연될 수 있습니다.
+    이 웹훅을 받으려면 카카오 비즈니스 라운지에 별도 문의가 필요합니다.
+
+    등록한 고객 Webhook URL 뒤에 `/cstalk/seen_info`를 붙인 주소로 POST됩니다. HTTP 200과 `{"code": "A000", "result": "Success"}` 형식의 응답을 받아야 정상 처리되며,
+    응답이 없거나 규격이 다르면 최대 3회 재시도하고 모두 실패하면 다시 보내지 않습니다(Connect/Read Timeout 각 5초).
+    재시도로 같은 이벤트가 다시 올 수 있으므로 멱등 처리하고, 수신 순서는 보장되지 않습니다. 세션 연결은 `sessionId`로 합니다.
+
+    서명: 상담톡 웹훅에는 서명 헤더(`X-IB-Timestamp`/`X-IB-Signature`)가 없습니다. 서명은 리포트·MO 웹훅에만 적용됩니다.
+    수신 엔드포인트에는 HTTPS와 발신 IP 허용 목록([방화벽 및 보안 프로토콜](https://developers.bizgo.io/api-sdk/api-reference#firewall-and-security))을 적용합니다.
+
+    본문에는 최종 사용자 식별자와 상담 내용이 들어 있으므로 개인정보로 취급하고 로그·APM·에러 리포트에 본문을 남기지 않습니다.
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-counsel
+  x-sdk-webhook: counselSeenInfo
+  security: []
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/CounselSeenInfoWebhookPayload.yaml
+        example:
+          msgKey: 20260424104234546POM101182450000
+          userKey: USER_KEY_EXAMPLE
+          senderKey: SENDER_KEY_EXAMPLE
+          serviceType: CSTALK
+          msgType: SEEN
+          requestType: seen_info
+          sendTime: "2026-04-24T10:42:34.546+09:00"
+          reportTime: "2026-04-24T10:42:35.120+09:00"
+          kakaoTime: "2026-04-24T10:42:35.000+09:00"
+  responses:
+    "200":
+      description: 수신 성공 응답입니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/CounselWebhookAck.yaml
+          example:
+            code: A000
+            result: Success

@@ -1,0 +1,8 @@
+type: object
+description: "증적자료 파일 업로드 응답입니다."
+required: [common]
+properties:
+  common:
+    $ref: "./CommonResult.yaml"
+  data:
+    $ref: "./BrandMessageMarketingAgreeServiceResult.yaml"

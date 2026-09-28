@@ -1,0 +1,8 @@
+type: object
+description: "그룹태그 조회·등록·수정 응답입니다. 단건 조회도 `groupTags` 배열로 돌려줍니다."
+required: [common]
+properties:
+  common:
+    $ref: "./CommonResult.yaml"
+  data:
+    $ref: "./BrandMessageGroupTagListServiceResult.yaml"

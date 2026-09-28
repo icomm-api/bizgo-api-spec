@@ -1,0 +1,43 @@
+type: object
+description: 브랜드메시지 커머스 요소입니다(FM, 캐러셀 커머스 FA).
+required: [title, regularPrice]
+properties:
+  title:
+    type: string
+    description: 상품명입니다. 최대 30자입니다.
+    maxLength: 30
+  regularPrice:
+    type: integer
+    description: 정가입니다. 0~99,999,999입니다.
+    minimum: 0
+    maximum: 99999999
+  discountPrice:
+    type: integer
+    description: 할인가입니다. 0~99,999,999입니다.
+    minimum: 0
+    maximum: 99999999
+  discountRate:
+    type: [integer, "null"]
+    description: |
+      할인율(%)입니다. `discountPrice`와 함께 씁니다. 허용 범위는 1~100입니다.
+      2026년 8월 4일부터 `0`이면 템플릿 등록·발송 요청이 실패하므로, 할인율을 쓰지 않을 때는 `0` 대신 `null`로 보냅니다.
+    minimum: 1
+    maximum: 100
+    x-unverified: "Part B 필드 표는 0~100으로 적혀 있으나 Part A 안내(1~100, 0 금지)를 따릅니다."
+  discountFixed:
+    type: integer
+    description: 정액 할인금액입니다. `discountPrice`와 함께 씁니다. 0~999,999입니다.
+    minimum: 0
+    maximum: 999999
+  regularPriceName:
+    type: string
+    description: 정상 가격명입니다.
+  discountPriceName:
+    type: string
+    description: 할인 후 가격명입니다.
+  discountRateName:
+    type: string
+    description: 할인율명입니다.
+  discountFixedName:
+    type: string
+    description: 정액 할인금액명입니다.

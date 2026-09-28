@@ -1,0 +1,7 @@
+type: object
+properties:
+  statistics:
+    type: array
+    description: 시간대별 통계 목록입니다.
+    items:
+      $ref: ./InsightKakaoHourlyStatistics.yaml

@@ -1,0 +1,11 @@
+type: object
+description: 알림톡 템플릿 이미지·아이템 하이라이트 이미지 업로드 결과입니다.
+properties:
+  imgUrl:
+    type: string
+    description: 업로드된 이미지 URL입니다. 템플릿 등록의 `imgUrl`에 씁니다.
+    example: https://example.kakao.image/template-image.jpg
+  fileName:
+    type: string
+    description: 업로드된 이미지 파일 이름입니다.
+    example: template-image.jpg

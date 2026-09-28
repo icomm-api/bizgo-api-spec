@@ -1,0 +1,32 @@
+type: object
+description: |
+  LMS(장문) 또는 MMS(이미지+장문) 메시지입니다. `fileKey`가 있으면 MMS, 없으면 LMS로 발송됩니다.
+required: [from, text]
+properties:
+  from:
+    type: string
+    description: 발신번호입니다. 비즈고에 미리 등록한 번호여야 합니다.
+    example: "01000000000"
+  title:
+    type: string
+    description: 제목입니다.
+  text:
+    type: string
+    description: 본문입니다. 최대 2,000byte이며, 이통사 규격상 EUC-KR 범위 밖 문자는 접수 오류가 날 수 있습니다.
+    x-max-bytes: 2000
+    x-charset: EUC-KR
+  fileKey:
+    type: array
+    description: 이미지 업로드(`POST /api/comm/v1/file/mms`)로 받은 파일 키입니다. MMS 발송 시 필수이며 최대 3개입니다. 이미지 순서는 보장되지 않습니다.
+    minItems: 1
+    maxItems: 3
+    items:
+      type: string
+    example: [FILE_KEY_001]
+  ttl:
+    type: string
+    description: 이통사 전달까지 유효한 최대 시간(초)입니다. 시간이 지나면 실패 처리됩니다.
+    pattern: "^[0-9]+$"
+  originCID:
+    type: string
+    description: 최초 발신사업자 식별코드(9자리)입니다. 일반 고객은 입력하지 않습니다.

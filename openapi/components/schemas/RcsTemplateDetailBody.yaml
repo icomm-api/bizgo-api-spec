@@ -1,0 +1,13 @@
+type: object
+description: 템플릿 상세 조회의 본문 영역입니다.
+x-unverified: "등록 요청의 body는 검증 파라미터 배열인데 상세 조회의 body는 description·mTitle·title 객체라서 구조가 다릅니다."
+properties:
+  description:
+    type: string
+    description: "본문 내용입니다. `#{변수}` 형태의 치환 변수를 포함할 수 있습니다."
+  mTitle:
+    type: string
+    description: 메인 타이틀입니다.
+  title:
+    type: string
+    description: 타이틀입니다.

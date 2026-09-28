@@ -1,0 +1,8 @@
+type: object
+description: 공용템플릿 조회 응답입니다.
+required: [common]
+properties:
+  common:
+    $ref: ./CommonResult.yaml
+  data:
+    $ref: ./AlimtalkTemplatePublicListServiceResult.yaml

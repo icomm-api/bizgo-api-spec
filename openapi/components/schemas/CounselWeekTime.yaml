@@ -1,0 +1,16 @@
+type: object
+description: 요일별 상담 시간입니다.
+required: [day, startAt, endAt]
+properties:
+  day:
+    type: string
+    description: 요일입니다.
+    enum: [mon, tue, wed, thu, fri, sat, sun]
+  startAt:
+    type: string
+    description: 상담 시작 시간입니다. 문서 예시는 `0900`입니다.
+    x-format: HHmm
+  endAt:
+    type: string
+    description: 상담 종료 시간입니다. 문서 예시는 `1800`입니다.
+    x-format: HHmm

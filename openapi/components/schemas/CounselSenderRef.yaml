@@ -1,0 +1,8 @@
+type: object
+description: 대상 발신프로필입니다.
+required: [senderKey]
+properties:
+  senderKey:
+    type: string
+    description: 발신프로필 키입니다.
+    example: SENDER_KEY_EXAMPLE

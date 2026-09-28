@@ -1,0 +1,15 @@
+type: object
+description: "친구 그룹 파일 업로드 결과입니다."
+properties:
+  friendGroup:
+    type: object
+    description: "임시 업로드 파일 정보입니다."
+    properties:
+      fileKey:
+        type: string
+        description: "친구 그룹 등록·전화번호 추가·삭제에 쓸 임시 파일 키입니다."
+        example: FILE_KEY_001
+      expiredAt:
+        type: string
+        description: "파일 키 만료 일시(`yyyy-MM-dd HH:mm:ss`)입니다."
+        x-format: "yyyy-MM-dd HH:mm:ss"

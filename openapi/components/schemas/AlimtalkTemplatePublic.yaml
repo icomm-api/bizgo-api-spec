@@ -1,0 +1,24 @@
+type: object
+description: 카카오가 제공하는 공용템플릿 1건입니다.
+properties:
+  templateName:
+    type: string
+    description: 공용 템플릿 이름입니다.
+  templateCode:
+    type: string
+    description: 공용 템플릿 코드입니다.
+    example: TEMPLATE_CODE_EXAMPLE
+  status:
+    type: string
+    description: 공용 템플릿 상태입니다. 문서 예시 값은 `APR`입니다.
+    x-known-values: [APR]
+  categoryCode:
+    type: string
+    description: 카테고리 코드입니다.
+  releaseDate:
+    type: string
+    description: 공용 템플릿 배포 일시(yyyy-MM-dd HH:mm:ss)입니다.
+    x-format: "yyyy-MM-dd HH:mm:ss"
+  previewImageUrl:
+    type: string
+    description: 미리보기 이미지 URL입니다.

@@ -1,0 +1,26 @@
+type: object
+description: 대화방 메뉴 클릭 일자별 통계 1건입니다.
+properties:
+  statDate:
+    type: string
+    description: 통계 일자(yyyyMMdd)입니다.
+    x-format: yyyyMMdd
+    example: "20260801"
+  corpId:
+    type: string
+    description: 기업 ID입니다.
+  corpRegNum:
+    type: string
+    description: 사업자등록번호입니다.
+  brandId:
+    type: string
+    description: RCS 브랜드 ID입니다.
+    example: BRAND_ID_EXAMPLE
+  chatbotId:
+    type: string
+    description: 챗봇 ID입니다.
+  menuList:
+    type: array
+    description: 메뉴별 클릭 상세입니다.
+    items:
+      $ref: ./InsightRcsMenuClick.yaml

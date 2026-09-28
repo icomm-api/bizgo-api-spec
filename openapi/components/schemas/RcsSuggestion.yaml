@@ -1,0 +1,9 @@
+type: object
+description: 버튼 액션 정의(버튼 1개)입니다.
+required: [displayText]
+properties:
+  action:
+    $ref: ./RcsAction.yaml
+  displayText:
+    type: string
+    description: 버튼 명입니다.

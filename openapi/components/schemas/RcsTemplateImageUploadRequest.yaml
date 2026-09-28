@@ -1,0 +1,13 @@
+type: object
+description: 템플릿 이미지 등록 요청(multipart/form-data)입니다.
+required: [brandId, file]
+properties:
+  brandId:
+    type: string
+    description: 브랜드 ID입니다.
+    example: BRAND_ID_EXAMPLE
+  file:
+    type: string
+    format: binary
+    description: 템플릿 등록에 사용할 이미지 파일입니다.
+    x-unverified: "허용 형식·용량·크기가 문서화되어 있지 않습니다."

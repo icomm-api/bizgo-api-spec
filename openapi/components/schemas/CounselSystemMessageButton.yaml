@@ -1,0 +1,27 @@
+type: object
+description: 시스템 메시지 하단 버튼입니다.
+required: [ordering, type, name]
+properties:
+  ordering:
+    type: integer
+    description: 버튼 노출 순서입니다.
+  type:
+    type: string
+    description: 시스템 메시지 버튼 링크 타입입니다. 문서 예시 값은 `WL`입니다.
+    x-known-values: [WL]
+    x-unverified: "시스템 메시지 버튼 타입 목록이 문서에 없습니다."
+  name:
+    type: string
+    description: 버튼 이름입니다.
+  urlMobile:
+    type: string
+    description: 모바일 웹링크 주소입니다.
+  urlPc:
+    type: string
+    description: PC 웹링크 주소입니다.
+  schemeIos:
+    type: string
+    description: iOS 앱링크 주소입니다.
+  schemeAndroid:
+    type: string
+    description: Android 앱링크 주소입니다.

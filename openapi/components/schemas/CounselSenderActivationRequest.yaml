@@ -1,0 +1,6 @@
+type: object
+description: 상담톡 이용 활성화·비활성화 요청입니다.
+required: [cstalk]
+properties:
+  cstalk:
+    $ref: ./CounselSenderActivation.yaml

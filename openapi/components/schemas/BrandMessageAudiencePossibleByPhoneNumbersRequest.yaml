@@ -1,0 +1,16 @@
+type: object
+description: "전화번호 명단 기반 발송 예상 모수 확인 요청입니다."
+required: [senderKey, phoneNumbers]
+properties:
+  senderKey:
+    type: string
+    description: "발신프로필 키입니다."
+    example: SENDER_KEY_EXAMPLE
+  phoneNumbers:
+    type: array
+    description: "발송 가능 여부를 확인할 전화번호 목록입니다. 최소 10건이며, 하나라도 형식이 잘못되면 요청 전체가 거부됩니다. 국가코드는 자동 정규화됩니다(010 / +82 / 82 → 82)."
+    items:
+      type: string
+      description: "전화번호입니다."
+      example: "01000000000"
+    minItems: 10

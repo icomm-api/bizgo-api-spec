@@ -1,0 +1,44 @@
+post:
+  operationId: deactivateCounsel
+  tags: [Counsel]
+  summary: 상담톡 이용 비활성화
+  description: |
+    발신프로필의 상담톡 이용을 비활성화합니다. 해지하면 저장된 상담시간이 삭제됩니다.
+
+    상담톡 요청·응답에는 최종 사용자 식별자(`userKey`)와 상담 내용이 들어가므로 개인정보로 취급하고 본문을 로그에 남기지 않습니다.
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-counsel
+  x-sdk-resource: counsel.channels
+  x-sdk-method: deactivate
+  x-sdk-retry: rate_limit_only
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/CounselSenderActivationRequest.yaml
+        examples:
+          activate:
+            summary: 발신프로필 지정
+            value:
+              cstalk:
+                senderKey: SENDER_KEY_EXAMPLE
+                committalCompany: COMMITTAL_COMPANY_EXAMPLE
+  responses:
+    "200":
+      description: 처리 결과입니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ApiResponse.yaml
+          example:
+            common:
+              authCode: A000
+              authResult: Success
+              infobankTrId: Infobank-Tracking-Id
+            data:
+              code: A000
+              result: Success
+    "429":
+      $ref: ../components/responses/RateLimited.yaml
+    default:
+      $ref: ../components/responses/ErrorResponse.yaml

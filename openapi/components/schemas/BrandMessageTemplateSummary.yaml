@@ -1,0 +1,17 @@
+type: object
+description: "템플릿 목록의 항목 1개입니다."
+properties:
+  senderKey:
+    type: string
+    description: "발신프로필 키입니다."
+  senderKeyType:
+    type: string
+    description: "발신키 유형입니다. 문서 예시 값은 `S`(발신프로필)입니다. 기본값은 `S`입니다."
+  templateCode:
+    type: string
+    description: "템플릿 코드입니다."
+  status:
+    type: string
+    description: "템플릿 상태입니다. 알려진 값: `A`(등록), `S`(차단). 최근 변경 템플릿 조회 응답에는 없습니다."
+    x-known-values: [A, S]
+    example: A

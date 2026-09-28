@@ -1,0 +1,34 @@
+type: object
+description: MO(인증/투표) 수신 웹훅 본문입니다.
+required: [msgKey, serviceType, msgType, to, from, carrier, originator, content, occurredTime]
+properties:
+  msgKey:
+    type: string
+    description: 메시지 키입니다.
+  serviceType:
+    type: string
+    description: 서비스 타입입니다. MO로 고정입니다.
+    enum: [MO]
+  msgType:
+    type: string
+    description: 메시지 타입입니다. SM으로 고정입니다.
+    enum: [SM]
+  to:
+    type: string
+    description: 수신번호(MO 번호)입니다.
+  from:
+    type: string
+    description: MO 발신자가 입력한 번호입니다(기본은 단말기 번호).
+  carrier:
+    type: string
+    description: 이통사 코드입니다.
+  originator:
+    type: string
+    description: MO 발신 단말기 번호입니다.
+  content:
+    type: string
+    description: MO 메시지 본문입니다.
+  occurredTime:
+    type: string
+    description: MO 발생 시각(ISO 8601)입니다.
+    x-format: "yyyy-MM-dd'T'HH:mm:ssXXX"

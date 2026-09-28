@@ -1,0 +1,87 @@
+get:
+  operationId: getBrandMessageGroupTag
+  summary: "브랜드메시지 그룹태그 조회"
+  description: "발신프로필 키와 그룹태그 키로 그룹태그 상세 정보를 조회합니다."
+  tags: [BrandMessage]
+  x-source: "https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand"
+  x-sdk-resource: brandMessage.groupTags
+  x-sdk-method: get
+  x-sdk-retry: safe
+  parameters:
+    - name: senderKey
+      in: query
+      required: true
+      description: "발신프로필 키입니다."
+      schema:
+        type: string
+      example: SENDER_KEY_EXAMPLE
+    - name: groupTagKey
+      in: query
+      required: true
+      description: "그룹태그 키입니다."
+      schema:
+        type: string
+      example: GROUP_TAG_KEY_EXAMPLE
+  responses:
+    "200":
+      description: "그룹태그 정보입니다(`groupTags` 배열)."
+      content:
+        "application/json":
+          schema:
+            $ref: "../components/schemas/BrandMessageGroupTagListResponse.yaml"
+    "429":
+      $ref: "../components/responses/RateLimited.yaml"
+    default:
+      $ref: "../components/responses/ErrorResponse.yaml"
+post:
+  operationId: createBrandMessageGroupTag
+  summary: "브랜드메시지 그룹태그 등록"
+  description: "브랜드메시지 그룹태그를 등록합니다."
+  tags: [BrandMessage]
+  x-source: "https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand"
+  x-sdk-resource: brandMessage.groupTags
+  x-sdk-method: create
+  x-sdk-retry: rate_limit_only
+  requestBody:
+    required: true
+    content:
+      "application/json":
+        schema:
+          $ref: "../components/schemas/BrandMessageGroupTagRequest.yaml"
+  responses:
+    "200":
+      description: "등록된 그룹태그입니다."
+      content:
+        "application/json":
+          schema:
+            $ref: "../components/schemas/BrandMessageGroupTagListResponse.yaml"
+    "429":
+      $ref: "../components/responses/RateLimited.yaml"
+    default:
+      $ref: "../components/responses/ErrorResponse.yaml"
+put:
+  operationId: updateBrandMessageGroupTag
+  summary: "브랜드메시지 그룹태그 수정"
+  description: "등록된 브랜드메시지 그룹태그 정보를 수정합니다."
+  tags: [BrandMessage]
+  x-source: "https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand"
+  x-sdk-resource: brandMessage.groupTags
+  x-sdk-method: update
+  x-sdk-retry: safe
+  requestBody:
+    required: true
+    content:
+      "application/json":
+        schema:
+          $ref: "../components/schemas/BrandMessageGroupTagRequest.yaml"
+  responses:
+    "200":
+      description: "수정된 그룹태그입니다."
+      content:
+        "application/json":
+          schema:
+            $ref: "../components/schemas/BrandMessageGroupTagListResponse.yaml"
+    "429":
+      $ref: "../components/responses/RateLimited.yaml"
+    default:
+      $ref: "../components/responses/ErrorResponse.yaml"

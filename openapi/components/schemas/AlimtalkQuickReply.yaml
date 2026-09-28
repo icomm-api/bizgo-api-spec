@@ -1,0 +1,32 @@
+type: object
+description: 알림톡 바로연결 1개입니다.
+required: [type, name]
+properties:
+  type:
+    type: string
+    description: 바로연결 타입 코드입니다.
+    x-unverified: "바로연결 타입 코드 목록이 문서에 없습니다."
+  name:
+    type: string
+    description: 바로연결 제목입니다. 템플릿 등록 규격상 최대 14자입니다.
+  urlPc:
+    type: string
+    description: PC 환경에서 클릭 시 이동할 URL입니다.
+  urlMobile:
+    type: string
+    description: 모바일 환경에서 클릭 시 이동할 URL입니다.
+  schemeIos:
+    type: string
+    description: iOS 커스텀 스킴입니다.
+  schemeAndroid:
+    type: string
+    description: Android 커스텀 스킴입니다.
+  chatExtra:
+    type: string
+    description: 봇/상담톡 전환 시 전달할 메타 정보입니다.
+  chatEvent:
+    type: string
+    description: 봇/상담톡 전환 시 연결할 이벤트명입니다.
+  bizFormId:
+    type: string
+    description: 비즈폼 ID입니다.

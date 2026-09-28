@@ -1,0 +1,49 @@
+get:
+  operationId: getCounselCertStatus
+  tags: [Counsel]
+  summary: 카카오톡 인증 상태 조회
+  description: |
+    인증 트랜잭션 ID로 사용자의 카카오톡 인증(전자서명) 진행 상태를 조회합니다. 최종 결과(암호화된 인증정보)는 `counselCertResult` 웹훅으로 받습니다.
+
+    상담톡 요청·응답에는 최종 사용자 식별자(`userKey`)와 상담 내용이 들어가므로 개인정보로 취급하고 본문을 로그에 남기지 않습니다.
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-counsel
+  x-sdk-resource: counsel.certs
+  x-sdk-method: get
+  x-sdk-retry: safe
+  x-unverified: "한국어 페이지(Part A)에만 있고 Copy Markdown(Part B)에는 없는 엔드포인트입니다."
+  parameters:
+    - name: certTxId
+      in: query
+      required: true
+      description: 인증 트랜잭션 ID입니다. 카카오가 인증 요청 시 발급하며 `counselCertResult` 웹훅의 `certTxId`와 같습니다.
+      schema:
+        type: string
+      example: CERT_TX_ID_EXAMPLE
+  responses:
+    "200":
+      description: 인증 진행 상태입니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/CounselCertStatusResponse.yaml
+          example:
+            common:
+              authCode: A000
+              authResult: Success
+              infobankTrId: Infobank-Tracking-Id
+            data:
+              code: A000
+              result: Success
+              data:
+                cert:
+                  txId: CERT_TX_ID_EXAMPLE
+                  sessionId: 1
+                  signStatus: COMPLETED
+                  createdAt: "2026-09-10T10:00:00"
+                  viewedAt: "2026-09-10T10:00:30"
+                  completedAt: "2026-09-10T10:01:12"
+                  expiredAt: "2026-09-10T10:10:00"
+    "429":
+      $ref: ../components/responses/RateLimited.yaml
+    default:
+      $ref: ../components/responses/ErrorResponse.yaml

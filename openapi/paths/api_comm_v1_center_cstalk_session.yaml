@@ -1,0 +1,50 @@
+get:
+  operationId: getCounselSession
+  tags: [Counsel]
+  summary: 세션 조회
+  description: |
+    사용자 키 기준으로 현재 상담 세션 정보를 조회합니다.
+
+    상담톡 요청·응답에는 최종 사용자 식별자(`userKey`)와 상담 내용이 들어가므로 개인정보로 취급하고 본문을 로그에 남기지 않습니다.
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-counsel
+  x-sdk-resource: counsel.sessions
+  x-sdk-method: get
+  x-sdk-retry: safe
+  parameters:
+    - name: userKey
+      in: query
+      required: true
+      description: 상담톡 사용자 키입니다. 1~20자입니다.
+      x-unverified: "senderKey 없이 userKey만 받습니다. userKey는 채널별로 발급되지만 여러 채널을 쓰는 경우의 동작이 문서에 없습니다."
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 20
+      example: USER_KEY_EXAMPLE
+  responses:
+    "200":
+      description: 세션 정보입니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/CounselSessionResponse.yaml
+          example:
+            common:
+              authCode: A000
+              authResult: Success
+              infobankTrId: Infobank-Tracking-Id
+            data:
+              code: A000
+              result: Success
+              data:
+                session:
+                  sessionId: 1
+                  senderKey: SENDER_KEY_EXAMPLE
+                  startedType: UM
+                  startedAt: "2025-09-24T11:22:08.557"
+                  expiredType: AE
+                  expiredAt: "2025-10-25T10:00:00"
+    "429":
+      $ref: ../components/responses/RateLimited.yaml
+    default:
+      $ref: ../components/responses/ErrorResponse.yaml

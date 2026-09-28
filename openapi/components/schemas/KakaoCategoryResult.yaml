@@ -1,0 +1,9 @@
+type: object
+description: 발신프로필 카테고리 상세조회 응답 데이터입니다.
+properties:
+  kakao:
+    type: object
+    description: 카카오 비즈메시지 응답 데이터입니다.
+    properties:
+      category:
+        $ref: ./KakaoCategory.yaml

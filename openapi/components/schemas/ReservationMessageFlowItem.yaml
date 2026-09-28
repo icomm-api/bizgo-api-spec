@@ -1,0 +1,14 @@
+description: |
+  예약 발송할 채널 메시지 1개입니다. 객체에는 채널 키(`sms`, `mms`, `international`, `rcs`, `alimtalk`,
+  `brandmessage`) 중 **정확히 하나**를 넣습니다. 채널별 필드는 통합 발송(`POST /api/comm/v1/send/omni`) 규격과 같습니다.
+  `messageFlow` 배열의 앞 메시지가 실패하면 다음 메시지가 자동으로 대체발송(Fallback)됩니다.
+
+  네이버 톡톡(`navertalk`)은 예약 발송 문서에 없으므로 넣지 않았습니다.
+x-unverified: "네이버 톡톡 예약 발송 가능 여부가 문서에 없습니다. RCS도 통합 RCS 예약 발송만 안내되고 안드로이드 RCS 예약 발송 섹션은 없습니다."
+oneOf:
+  - $ref: ./SmsFlowItem.yaml
+  - $ref: ./MmsFlowItem.yaml
+  - $ref: ./InternationalFlowItem.yaml
+  - $ref: ./RcsFlowItem.yaml
+  - $ref: ./AlimtalkFlowItem.yaml
+  - $ref: ./BrandMessageFlowItem.yaml

@@ -1,0 +1,21 @@
+type: object
+description: Rich 메시지 첨부 정보입니다.
+properties:
+  image:
+    $ref: ./CounselImage.yaml
+  buttons:
+    type: array
+    description: 버튼 목록입니다. TEXT, IMAGE, ITEM_LIST는 쿠폰 적용 시 최대 4개, 그 외 최대 5개이며 WIDE, WIDE_ITEM_LIST, CAROUSEL_FEED는 최대 2개입니다.
+    maxItems: 5
+    items:
+      $ref: ./CounselButton.yaml
+  quickReplies:
+    type: array
+    description: 바로연결 목록입니다. 최대 10개입니다.
+    maxItems: 10
+    items:
+      $ref: ./CounselQuickReply.yaml
+  coupon:
+    $ref: ./CounselCoupon.yaml
+  item:
+    $ref: ./CounselItem.yaml

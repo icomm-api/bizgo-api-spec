@@ -1,0 +1,17 @@
+type: object
+description: "동영상 목록 데이터입니다."
+properties:
+  offset:
+    type: integer
+    description: "조회 시작 위치입니다."
+  limit:
+    type: integer
+    description: "조회 건수입니다."
+  totalCount:
+    type: integer
+    description: "전체 동영상 건수입니다."
+  videos:
+    type: array
+    description: "동영상 이력 배열입니다."
+    items:
+      $ref: "./BrandMessageVideoListEntry.yaml"

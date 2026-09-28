@@ -1,0 +1,11 @@
+type: object
+description: "친구 수 응답 데이터입니다."
+properties:
+  brandmessage:
+    type: object
+    description: "친구 수 조회 결과입니다."
+    properties:
+      count:
+        type: integer
+        description: "보유 친구 수입니다."
+        example: 1250

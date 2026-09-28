@@ -1,0 +1,18 @@
+type: object
+description: "그룹태그 등록·수정 요청입니다."
+required: [groupTag]
+x-unverified: "등록·수정 요청 본문에 `senderKey`가 없습니다(Part A·B 동일). 어떤 발신프로필에 등록되는지, 키·이름 길이 제한이 문서에 없습니다."
+properties:
+  groupTag:
+    type: object
+    description: "브랜드메시지 그룹태그 정보입니다."
+    required: [groupTagKey, groupTagName]
+    properties:
+      groupTagKey:
+        type: string
+        description: "그룹태그 키입니다."
+        example: GROUP_TAG_KEY_EXAMPLE
+      groupTagName:
+        type: string
+        description: "그룹태그 이름입니다."
+        example: "VIP 고객"

@@ -1,0 +1,12 @@
+type: object
+description: |
+  템플릿 카테고리 조회 응답 데이터입니다.
+  `categoryCode` 없이 호출하면 `categories`(전체 목록), `categoryCode`를 주면 `category`(상세 1건)가 옵니다.
+properties:
+  categories:
+    type: array
+    description: 템플릿 카테고리 목록입니다(전체 조회).
+    items:
+      $ref: ./AlimtalkTemplateCategory.yaml
+  category:
+    $ref: ./AlimtalkTemplateCategory.yaml

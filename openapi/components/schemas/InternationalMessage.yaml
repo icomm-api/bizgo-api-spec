@@ -1,0 +1,30 @@
+type: object
+description: |
+  국제메시지(해외 수신자 대상 문자)입니다. `messageFlow[].international` 객체로 보냅니다.
+  본문은 UTF-8을 지원하며, 실제 단말 전달 여부와 무관하게 접수 기준으로 과금됩니다.
+
+  수신번호 규칙(`destinations[].to`): 국가번호를 포함한 E.164 형식에서 `+`를 뺀 숫자로 입력합니다
+  (예: `821000000000`, 길이 8~15자리). 국가번호 목록이나 국가별 길이·세그먼트(분할) 규칙은 원문에 없습니다.
+
+  국제문자에서는 `title`, `fileKey`를 쓸 수 없습니다(접수코드 A321).
+required: [from, text]
+properties:
+  from:
+    type: string
+    description: 발신번호입니다.
+    example: "01000000000"
+  text:
+    type: string
+    description: 국제메시지 본문입니다. 최대 1,000자이며 UTF-8로 인코딩됩니다(글자 수 기준, 바이트 제한 아님).
+    maxLength: 1000
+    x-charset: UTF-8
+    example: Your verification code is 000000.
+  ttl:
+    type: string
+    description: 메시지 유효 시간(초)입니다. 생략하면 86400(24시간)입니다.
+    default: "86400"
+  clientSubId:
+    type: string
+    description: Sender ID, 메시지 서명을 복수로 지정하기 위한 구분자입니다. 최대 20자입니다.
+    maxLength: 20
+    example: sender-id-01

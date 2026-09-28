@@ -1,0 +1,8 @@
+type: object
+description: 시스템 메시지 조회 결과 데이터입니다.
+properties:
+  systemMessages:
+    type: array
+    description: 시스템 메시지 목록입니다.
+    items:
+      $ref: ./CounselSystemMessage.yaml

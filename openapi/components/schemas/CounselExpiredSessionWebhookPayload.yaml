@@ -1,0 +1,18 @@
+description: 세션 종료 수신 웹훅(`{고객 Webhook URL}/cstalk/expired_session`) 본문입니다.
+allOf:
+  - $ref: ./CounselWebhookCommon.yaml
+  - type: object
+    required: [msgKey, userKey, senderKey, serviceType, msgType, requestType, sendTime, reportTime]
+    x-unverified: "Copy Markdown(Part B)에는 msgKey 필드가 없습니다. 한국어 페이지(Part A)를 따라 필수로 둡니다."
+    properties:
+      msgType:
+        type: string
+        description: 메시지 타입입니다. 문서 예시 값은 `SESSION`입니다.
+        x-known-values: [SESSION]
+      requestType:
+        type: string
+        description: 요청 타입입니다. 문서 예시 값은 `expired_session`입니다.
+        x-known-values: [expired_session]
+      sessionId:
+        type: string
+        description: 종료된 상담 세션 아이디입니다.

@@ -1,0 +1,68 @@
+get:
+  operationId: getMessageHistory
+  tags: [Message]
+  summary: 발송 이력 조회
+  description: 요청 시각 기준으로 발송 이력(접수·발송·리포트 단계)을 조회합니다.
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/insight
+  x-sdk-resource: messages
+  x-sdk-method: history
+  x-sdk-retry: safe
+  x-sdk-pagination:
+    style: cursor
+    request: lastSeq
+    response: data.data.lastSeq
+    hasNext: data.data.hasNext
+    items: data.data.messages
+  parameters:
+    - name: requestTime
+      in: query
+      required: true
+      description: 조회 기준 시각(YYYY-MM-DDTHH:mm:ss)입니다.
+      schema:
+        type: string
+        x-format: "yyyy-MM-dd'T'HH:mm:ss"
+      example: "2025-11-01T00:00:00"
+    - name: serviceType
+      in: query
+      required: false
+      description: 채널 타입입니다. 여러 개는 콤마(,)로 구분합니다.
+      style: form
+      explode: false
+      schema:
+        type: array
+        items:
+          type: string
+          x-known-values: [SMS, MMS, RCS, ALIMTALK, BRANDMESSAGE]
+    - name: groupKey
+      in: query
+      required: false
+      description: 메시지 그룹 키입니다.
+      schema:
+        type: string
+    - name: lastSeq
+      in: query
+      required: false
+      description: 페이지네이션 시퀀스입니다.
+      schema:
+        type: integer
+        format: int64
+    - name: limit
+      in: query
+      required: false
+      description: 조회 건수입니다. 기본값 100, 최대 1,000입니다.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 1000
+        default: 100
+  responses:
+    "200":
+      description: 발송 이력입니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/MessageStatusListResponse.yaml
+    "429":
+      $ref: ../components/responses/RateLimited.yaml
+    default:
+      $ref: ../components/responses/ErrorResponse.yaml

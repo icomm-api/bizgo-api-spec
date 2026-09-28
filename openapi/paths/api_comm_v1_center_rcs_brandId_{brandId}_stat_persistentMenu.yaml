@@ -1,0 +1,33 @@
+get:
+  operationId: getRcsPersistentMenuInsight
+  tags: [Insight]
+  summary: RCS 대화방 메뉴 클릭 통계
+  description: |
+    대화방 하단 고정 메뉴의 클릭 수를 메뉴 단위로 조회합니다. RCS 인사이트 중 이 API만 `chatbotId`가 필수입니다.
+    응답 데이터는 `data.data`가 아니라 `data.rcs`에 있습니다.
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/insight
+  x-sdk-resource: insights.rcs
+  x-sdk-method: getPersistentMenu
+  x-sdk-retry: safe
+  x-sdk-result: data.rcs
+  parameters:
+    - $ref: ../components/parameters/RcsBrandIdPath.yaml
+    - $ref: ../components/parameters/InsightStartDateQuery.yaml
+    - $ref: ../components/parameters/InsightEndDateQuery.yaml
+    - name: chatbotId
+      in: query
+      required: true
+      description: 챗봇 ID입니다. 넣지 않으면 요청이 거절됩니다.
+      schema:
+        type: string
+  responses:
+    "200":
+      description: 일자별 메뉴 클릭 통계입니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/InsightRcsPersistentMenuStatResponse.yaml
+    "429":
+      $ref: ../components/responses/RateLimited.yaml
+    default:
+      $ref: ../components/responses/ErrorResponse.yaml

@@ -1,0 +1,26 @@
+description: 사용자 메타 정보 수신 웹훅(`{고객 Webhook URL}/cstalk/reference`) 본문입니다. 사용자가 상담 연결을 요청한 시점의 메타 정보가 담깁니다.
+allOf:
+  - $ref: ./CounselWebhookCommon.yaml
+  - type: object
+    required: [msgKey, userKey, senderKey, serviceType, msgType, requestType, sendTime, reportTime]
+    properties:
+      msgType:
+        type: string
+        description: 메시지 타입입니다. 문서 예시 값은 `REFERENCE`입니다.
+        x-known-values: [REFERENCE]
+      requestType:
+        type: string
+        description: 요청 타입입니다. 문서 예시 값은 `reference`입니다.
+        x-known-values: [reference]
+      appUserId:
+        type: integer
+        format: int64
+        description: 카카오톡 앱 사용자 ID입니다. 개인 식별자이므로 로그에 남기지 않습니다.
+        x-unverified: "한국어 페이지(Part A)에만 있고 Copy Markdown(Part B)에는 없습니다. 문서상 타입은 Number입니다."
+      sessionId:
+        type: string
+        description: 상담 세션 아이디입니다. 세션이 생성된 상태에서만 상담원이 메시지를 보낼 수 있습니다.
+      reference:
+        $ref: ./CounselReference.yaml
+      lastReference:
+        $ref: ./CounselLastReference.yaml

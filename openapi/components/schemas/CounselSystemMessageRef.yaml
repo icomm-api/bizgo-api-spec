@@ -1,0 +1,6 @@
+type: object
+description: 생성된 시스템 메시지 정보입니다.
+properties:
+  id:
+    type: string
+    description: 생성된 시스템 메시지 ID입니다.

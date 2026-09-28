@@ -1,0 +1,49 @@
+get:
+  operationId: getRcsMessageInsight
+  tags: [Insight]
+  summary: RCS 메시지 발송·노출 통계
+  description: |
+    브랜드·그룹 기준으로 RCS 메시지의 발송 건수와 노출(읽음) 건수를 일자별로 조회합니다.
+    통계는 발송 요청의 `groupId` 단위로 집계되며, `groupId` 없이 보낸 건은 포함되지 않습니다.
+    응답 데이터는 `data.data`가 아니라 `data.rcs`에 있습니다.
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/insight
+  x-sdk-resource: insights.rcs
+  x-sdk-method: getMessage
+  x-sdk-retry: safe
+  x-sdk-result: data.rcs
+  parameters:
+    - $ref: ../components/parameters/RcsBrandIdPath.yaml
+    - $ref: ../components/parameters/InsightStartDateQuery.yaml
+    - $ref: ../components/parameters/InsightEndDateQuery.yaml
+    - $ref: ../components/parameters/InsightRcsGroupIdQuery.yaml
+    - $ref: ../components/parameters/InsightRcsChatbotIdQuery.yaml
+  responses:
+    "200":
+      description: 일자별 발송·노출 통계입니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/InsightRcsMessageStatResponse.yaml
+          example:
+            common:
+              authCode: A000
+              authResult: Success
+              infobankTrId: Infobank-Tracking-Id
+            data:
+              code: A000
+              result: Success
+              rcs:
+                stat:
+                  - statDate: "20260801"
+                    corpId: CORP_ID_EXAMPLE
+                    corpRegNum: "0000000000"
+                    brandId: BRAND_ID_EXAMPLE
+                    chatbotId: CHATBOT_ID_EXAMPLE
+                    groupId: GROUP_ID_EXAMPLE
+                    messagebaseId: MESSAGEBASE_ID_EXAMPLE
+                    deliveredCount: 2540
+                    displayedCount: 1980
+    "429":
+      $ref: ../components/responses/RateLimited.yaml
+    default:
+      $ref: ../components/responses/ErrorResponse.yaml

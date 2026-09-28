@@ -1,0 +1,34 @@
+type: object
+description: |
+  템플릿 버튼의 지도 액션입니다. 발송용 `RcsMapAction`과 달리 `showLocation`이 선택이고
+  `fallbackUrl`이 `mapAction` 바로 아래에 있으며, 위치 `label`이 문자열입니다.
+x-unverified: "발송 API의 mapAction(showLocation 필수, fallbackUrl이 showLocation 아래)과 구조가 다릅니다. 어느 쪽이 맞는지, requestLocationPush의 하위 필드는 무엇인지 문서화되어 있지 않습니다."
+properties:
+  showLocation:
+    type: object
+    description: 지도 위치 표시 객체입니다.
+    required: [location]
+    properties:
+      location:
+        type: object
+        description: 지도 위치 정보입니다.
+        required: [latitude, longitude, query]
+        properties:
+          latitude:
+            type: number
+            description: 위도입니다.
+          longitude:
+            type: number
+            description: 경도입니다.
+          label:
+            type: string
+            description: 라벨입니다.
+          query:
+            type: string
+            description: 검색 내용입니다.
+  fallbackUrl:
+    type: string
+    description: 위치 조회 실패 시 이동할 fallback URL입니다.
+  requestLocationPush:
+    type: object
+    description: 위치 전송 요청 객체입니다.

@@ -1,0 +1,8 @@
+type: object
+description: "브랜드메시지 템플릿 조회·등록·수정 응답입니다."
+required: [common]
+properties:
+  common:
+    $ref: "./CommonResult.yaml"
+  data:
+    $ref: "./BrandMessageTemplateServiceResult.yaml"

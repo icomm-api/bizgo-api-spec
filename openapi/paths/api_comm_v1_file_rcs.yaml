@@ -1,0 +1,35 @@
+post:
+  operationId: uploadRcsFile
+  summary: RCS 이미지 업로드
+  description: |
+    RCS 발송 전에 이미지를 업로드합니다. 응답의 `data.data.media` 값을 발송 요청의
+    `messageFlow[].rcs.body.media`에 넣어 사용합니다.
+  tags: [File]
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/rcs
+  x-sdk-resource: files
+  x-sdk-method: uploadRcs
+  x-sdk-retry: rate_limit_only
+  requestBody:
+    required: true
+    content:
+      multipart/form-data:
+        schema:
+          $ref: ../components/schemas/RcsFileUploadRequest.yaml
+  responses:
+    "200":
+      description: 업로드 결과입니다. 성공 여부는 `common.authCode`와 `data.code`로 확인합니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/RcsFileUploadResponse.yaml
+          example:
+            common:
+              authCode: A000
+              authResult: Success
+              infobankTrId: Infobank-Tracking-Id
+            data:
+              code: A000
+              result: Success
+              data:
+                media: maapfile://MEDIA_KEY_EXAMPLE
+                expired: "2027-04-24T12:16:38+09:00"

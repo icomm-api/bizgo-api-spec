@@ -1,0 +1,30 @@
+type: object
+description: 문자 보내기 또는 영상/음성 보내기 액션입니다.
+x-unverified: "문서상 composeTextMessage가 필수로 표시되어 있어, composeRecordingMessage만 쓰는 경우에도 composeTextMessage가 필요한지 불명확합니다."
+required: [composeTextMessage]
+properties:
+  composeTextMessage:
+    type: object
+    description: 문자 보내기 객체입니다.
+    required: [phoneNumber]
+    properties:
+      phoneNumber:
+        type: string
+        description: 전화 번호입니다.
+        example: "01000000000"
+      text:
+        type: string
+        description: 문자(SMS/LMS/MMS) 내용입니다.
+  composeRecordingMessage:
+    type: object
+    description: 영상/음성 보내기 객체입니다.
+    required: [phoneNumber, type]
+    properties:
+      phoneNumber:
+        type: string
+        description: 전화 번호입니다.
+        example: "01000000000"
+      type:
+        type: string
+        description: 영상(`VIDEO`) 또는 음성(`AUDIO`)입니다.
+        enum: [VIDEO, AUDIO]

@@ -1,0 +1,29 @@
+description: |
+  본인인증 결과 수신 웹훅(`{고객 Webhook URL}/cstalk/cert_result`) 본문입니다. `KAKAO_CERT` 말풍선으로 요청한 카카오톡 본인인증(전자서명)이 완료되면
+  상담 세션 상태와 관계없이 전달됩니다.
+allOf:
+  - $ref: ./CounselWebhookCommon.yaml
+  - type: object
+    required: [msgKey, userKey, senderKey, serviceType, msgType, requestType, sendTime, reportTime, certTxId, certResult]
+    x-unverified: "한국어 페이지(Part A)에만 있는 웹훅입니다. 시각 형식을 `yyyy-MM-dd'T'HH:mm:ss.SSS`(오프셋 없음)로 적었지만 예시와 공통 안내는 `+09:00`을 붙입니다."
+    properties:
+      msgType:
+        type: string
+        description: 메시지 타입입니다. 문서 예시 값은 `KAKAO_CERT`입니다.
+        x-known-values: [KAKAO_CERT]
+      requestType:
+        type: string
+        description: 요청 타입입니다. `cert_result`로 전달됩니다.
+        enum: [cert_result]
+      sessionId:
+        type: string
+        description: 상담 세션 ID입니다.
+      certTxId:
+        type: string
+        description: 인증 트랜잭션 ID입니다. 인증 상태 조회 API(`/api/comm/v1/center/cstalk/cert/status`)의 `certTxId`와 같은 값입니다.
+      certResult:
+        type: string
+        description: |
+          AES256/CTR/NoPadding으로 암호화한 뒤 Base64로 인코딩한 본인인증 결과입니다. 복호화하면 이름·전화번호·생년월일·성별·내외국인·CI가 들어 있습니다
+          (`ci`는 취급 검증을 마친 발신프로필에만 제공). 복호화 키는 카카오가 이메일로 별도 전달하며 Base64로 인코딩되어 있습니다.
+          카카오 정책상 저장하지 말고 사용자를 식별한 즉시 파기해야 하며, 로그·APM·에러 리포트에 남지 않도록 마스킹합니다.

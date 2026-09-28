@@ -1,0 +1,11 @@
+name: templateCode
+in: query
+required: false
+description: 템플릿 코드입니다. 여러 개를 조회하려면 콤마(,)로 구분해 전달합니다. 넣지 않으면 전체를 조회합니다.
+style: form
+explode: false
+schema:
+  type: array
+  items:
+    type: string
+example: [TEMPLATE_CODE_EXAMPLE]

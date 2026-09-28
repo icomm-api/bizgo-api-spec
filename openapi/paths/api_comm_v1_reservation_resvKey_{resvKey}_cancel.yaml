@@ -1,0 +1,22 @@
+post:
+  operationId: cancelReservation
+  tags: [Reservation]
+  summary: 예약 취소
+  description: 예약 대기(PENDING) 또는 예약 중지(STOPPED) 상태인 예약 건을 취소합니다. 성공하면 `status`가 `CANCELLED`가 됩니다.
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/reservation
+  x-sdk-resource: reservations
+  x-sdk-method: cancel
+  x-sdk-retry: rate_limit_only
+  parameters:
+    - $ref: ../components/parameters/ResvKeyPath.yaml
+  responses:
+    "200":
+      description: 취소된 예약 건입니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ReservationResponse.yaml
+    "429":
+      $ref: ../components/responses/RateLimited.yaml
+    default:
+      $ref: ../components/responses/ErrorResponse.yaml

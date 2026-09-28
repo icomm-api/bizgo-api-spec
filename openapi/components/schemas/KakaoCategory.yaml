@@ -1,0 +1,10 @@
+type: object
+description: 발신프로필 카테고리입니다.
+properties:
+  code:
+    type: string
+    description: 카테고리 코드입니다.
+    x-unverified: "발신프로필 등록 규격은 11자리 숫자라고 하나 카테고리 조회 응답 예시는 `001`처럼 3자리입니다."
+  name:
+    type: string
+    description: 카테고리 이름입니다.

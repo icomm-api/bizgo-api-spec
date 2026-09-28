@@ -1,0 +1,11 @@
+type: object
+description: 템플릿 등록·수정·승인 취소·삭제 결과 데이터입니다.
+properties:
+  rcs:
+    type: object
+    description: RCS 응답 정보입니다.
+    properties:
+      messagebaseId:
+        type: string
+        description: 처리된 메시지베이스 ID입니다. 발송 시에는 이 값을 `formatId` 필드에 넣습니다(영문 문서 기준).
+        example: MESSAGEBASE_ID_EXAMPLE

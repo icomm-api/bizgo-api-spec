@@ -1,0 +1,7 @@
+type: object
+title: RCS
+required: [rcs]
+additionalProperties: false
+properties:
+  rcs:
+    $ref: ./RcsMessage.yaml

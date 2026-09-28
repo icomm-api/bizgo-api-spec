@@ -1,0 +1,14 @@
+type: object
+properties:
+  lastSeq:
+    type: integer
+    format: int64
+    description: 다음 페이지 조회에 쓰는 커서입니다. 다음 요청의 `lastSeq` 쿼리에 그대로 넣습니다. 결과가 없으면 0입니다.
+  hasNext:
+    type: boolean
+    description: 다음 페이지가 있는지 여부입니다.
+  reservations:
+    type: array
+    description: 예약 발송 건 목록입니다.
+    items:
+      $ref: ./Reservation.yaml

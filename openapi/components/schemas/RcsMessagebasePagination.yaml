@@ -1,0 +1,13 @@
+type: object
+description: 전체 건수와 페이지 조건 정보입니다. 문서상 모든 값이 문자열입니다.
+x-unverified: "offset·limit·total이 문자열(String)로 표기되어 있으나 숫자일 가능성이 있습니다. 문서 응답 예시에는 pagination이 없습니다."
+properties:
+  offset:
+    type: string
+    description: 조회 기준 위치입니다.
+  limit:
+    type: string
+    description: 페이지당 조회 건수입니다.
+  total:
+    type: string
+    description: 전체 건수입니다.

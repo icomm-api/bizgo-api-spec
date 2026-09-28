@@ -1,0 +1,26 @@
+post:
+  operationId: registerBrandMessageVideoUpload
+  summary: "브랜드메시지 동영상 업로드 등록"
+  description: "브랜드메시지에 쓸 동영상의 업로드를 등록하고 카카오 업로드 채널(`vid`, `uploadUrl`, `token`)을 발급받습니다. 파일은 이 API로 보내지 않고 `uploadUrl`로 직접 전송합니다(5분 안에). 전송 후 동영상 조회로 `status`가 `PUBLIC`인지 확인합니다."
+  tags: [BrandMessage]
+  x-source: "https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand"
+  x-sdk-resource: brandMessage.videos
+  x-sdk-method: registerUpload
+  x-sdk-retry: rate_limit_only
+  requestBody:
+    required: true
+    content:
+      "application/json":
+        schema:
+          $ref: "../components/schemas/BrandMessageVideoUploadRegisterRequest.yaml"
+  responses:
+    "200":
+      description: "업로드 채널 발급 결과입니다."
+      content:
+        "application/json":
+          schema:
+            $ref: "../components/schemas/BrandMessageVideoUploadRegisterResponse.yaml"
+    "429":
+      $ref: "../components/responses/RateLimited.yaml"
+    default:
+      $ref: "../components/responses/ErrorResponse.yaml"

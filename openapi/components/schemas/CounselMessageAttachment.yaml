@@ -1,0 +1,7 @@
+type: object
+description: 사용자 메시지가 4,000자를 넘으면 전체 메시지를 txt 파일 URL로 추가 전달하는 영역입니다.
+properties:
+  url:
+    type: string
+    description: 전체 메시지를 확인할 수 있는 txt 파일 URL입니다.
+x-unverified: "한국어 페이지(Part A)는 attachment 타입을 String으로 적으면서 하위 필드 attachment.url을 둡니다. Copy Markdown(Part B)은 Object입니다."

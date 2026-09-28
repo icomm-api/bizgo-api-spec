@@ -1,0 +1,19 @@
+type: object
+description: 브랜드 이미지의 파일 ID, URL, 사용 유형 정보입니다.
+properties:
+  fileId:
+    type: string
+    description: 파일 ID입니다.
+    example: FILE_ID_EXAMPLE
+  url:
+    type: string
+    description: 파일 URL입니다.
+  typeName:
+    type: string
+    description: |
+      이미지의 사용 유형입니다. 알려진 값(영문 문서 기준): `icon`(템플릿 양식 아이콘 이미지),
+      `profile`(브랜드 프로필 이미지), `background`(브랜드 배경 이미지).
+    x-known-values: [icon, profile, background]
+  fileName:
+    type: string
+    description: 등록한 파일의 이름입니다.

@@ -1,0 +1,12 @@
+type: object
+description: 알림톡 첨부 정보(버튼, 아이템, 아이템 하이라이트)입니다.
+properties:
+  button:
+    type: array
+    description: 버튼 정보입니다.
+    items:
+      $ref: ./AlimtalkButton.yaml
+  item:
+    $ref: ./AlimtalkItem.yaml
+  itemHighlight:
+    $ref: ./AlimtalkItemHighlight.yaml

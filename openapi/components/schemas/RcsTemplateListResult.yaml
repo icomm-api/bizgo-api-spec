@@ -1,0 +1,14 @@
+type: object
+description: RCS 템플릿 목록 조회 결과 데이터입니다.
+properties:
+  rcs:
+    type: object
+    description: RCS 응답 정보입니다.
+    properties:
+      pagination:
+        $ref: ./RcsMessagebasePagination.yaml
+      templates:
+        type: array
+        description: 템플릿 목록입니다.
+        items:
+          $ref: ./RcsTemplateSummary.yaml

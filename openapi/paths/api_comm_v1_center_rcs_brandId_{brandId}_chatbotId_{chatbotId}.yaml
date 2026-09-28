@@ -1,0 +1,55 @@
+parameters:
+  - name: brandId
+    in: path
+    required: true
+    description: 브랜드 ID입니다.
+    schema:
+      type: string
+    example: "BRAND_ID_EXAMPLE"
+  - name: chatbotId
+    in: path
+    required: true
+    description: 대화방 ID입니다.
+    schema:
+      type: string
+    example: "CHATBOT_ID_EXAMPLE"
+delete:
+  operationId: deleteRcsChatbot
+  tags: [RCS]
+  summary: RCS 대화방 삭제
+  description: |
+    등록된 RCS 대화방을 삭제합니다.
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/rcs
+  x-sdk-resource: rcs.chatbots
+  x-sdk-method: delete
+  x-sdk-retry: safe
+  x-unverified: "응답이 대화방 조회와 같은 chatbot 배열로 문서화되어 있으나, 삭제 결과로 무엇이 돌아오는지 확인되지 않았습니다."
+  responses:
+    "200":
+      description: 처리 결과입니다. 성공 여부는 `common.authCode`와 `data.code`로 확인합니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/RcsChatbotResponse.yaml
+          example:
+            common:
+              authCode: "A000"
+              authResult: "Success"
+              infobankTrId: "Infobank-Tracking-Id"
+            data:
+              code: "A000"
+              result: "Success"
+              data:
+                rcs:
+                  chatbot:
+                    - chatbotId: "CHATBOT_ID_EXAMPLE"
+                      brandId: "BRAND_ID_EXAMPLE"
+                      mdn: "01000000000"
+                      subTitle: "고객센터 대화방"
+                      status: "ready"
+                      approvalResult: "approved"
+                      registerDate: "2026-07-21 10:00:00"
+    "429":
+      $ref: ../components/responses/RateLimited.yaml
+    default:
+      $ref: ../components/responses/ErrorResponse.yaml

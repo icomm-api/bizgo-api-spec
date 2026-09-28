@@ -1,0 +1,135 @@
+get:
+  operationId: getAlimtalkTemplate
+  tags: [Alimtalk]
+  summary: 알림톡 템플릿 조회
+  description: 발신프로필 키와 템플릿 코드를 기준으로 알림톡 템플릿 상세 정보(검수 상태, 심사 의견 포함)를 조회합니다.
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-alimtalk
+  x-sdk-resource: alimtalk.templates
+  x-sdk-method: get
+  x-sdk-retry: safe
+  x-sdk-result: data.data.alimtalk
+  parameters:
+    - name: senderKey
+      in: query
+      required: true
+      description: 발신프로필 키입니다.
+      schema:
+        type: string
+      example: SENDER_KEY_EXAMPLE
+    - name: templateCode
+      in: query
+      required: true
+      description: 템플릿 코드입니다.
+      schema:
+        type: string
+      example: TEMPLATE_CODE_EXAMPLE
+  responses:
+    "200":
+      description: 템플릿 정보입니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/AlimtalkTemplateResponse.yaml
+          example:
+            common:
+              authCode: A000
+              authResult: Success
+              infobankTrId: Infobank-Tracking-Id
+            data:
+              code: A000
+              result: Success
+              data:
+                alimtalk:
+                  senderKey: SENDER_KEY_EXAMPLE
+                  templateCode: TEMPLATE_CODE_EXAMPLE
+                  text: "#{name}님, 주문이 완료되었습니다."
+    "429":
+      $ref: ../components/responses/RateLimited.yaml
+    default:
+      $ref: ../components/responses/ErrorResponse.yaml
+post:
+  operationId: createAlimtalkTemplate
+  tags: [Alimtalk]
+  summary: 알림톡 템플릿 등록
+  description: |
+    알림톡 템플릿을 등록합니다. 등록한 템플릿은 검수 요청(`POST /api/comm/v1/center/alimtalk/template/request`) 후 카카오 승인을 받아야 발송할 수 있습니다.
+    이미지형·아이템리스트형 템플릿은 템플릿 이미지 업로드 API로 받은 `imgUrl`을 함께 넣습니다.
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-alimtalk
+  x-sdk-resource: alimtalk.templates
+  x-sdk-method: create
+  x-sdk-retry: rate_limit_only
+  x-sdk-result: data.data.alimtalk
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/AlimtalkTemplateSaveRequest.yaml
+        example:
+          alimtalk:
+            senderKey: SENDER_KEY_EXAMPLE
+            templateName: 주문 완료 안내
+            templateCode: TEMPLATE_CODE_EXAMPLE
+            templateMessageType: BA
+            templateEmphasizeType: NONE
+            text: "#{name}님, 주문이 완료되었습니다."
+            categoryCode: "001001"
+  responses:
+    "200":
+      description: 등록된 템플릿 정보입니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/AlimtalkTemplateResponse.yaml
+          example:
+            common:
+              authCode: A000
+              authResult: Success
+              infobankTrId: Infobank-Tracking-Id
+            data:
+              code: A000
+              result: Success
+              data:
+                alimtalk:
+                  senderKey: SENDER_KEY_EXAMPLE
+                  templateCode: TEMPLATE_CODE_EXAMPLE
+                  text: "#{name}님, 주문이 완료되었습니다."
+    "429":
+      $ref: ../components/responses/RateLimited.yaml
+    default:
+      $ref: ../components/responses/ErrorResponse.yaml
+put:
+  operationId: updateAlimtalkTemplate
+  tags: [Alimtalk]
+  summary: 알림톡 템플릿 수정
+  description: 등록된 알림톡 템플릿 정보를 수정합니다. 검수 상태와 카카오 정책에 따라 수정 가능한 범위가 달라질 수 있습니다. 대상 템플릿은 본문의 `senderKey`와 `templateCode`로 지정합니다.
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-alimtalk
+  x-sdk-resource: alimtalk.templates
+  x-sdk-method: update
+  x-sdk-retry: safe
+  x-sdk-result: data.data.alimtalk
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/AlimtalkTemplateSaveRequest.yaml
+        example:
+          alimtalk:
+            senderKey: SENDER_KEY_EXAMPLE
+            templateName: 주문 완료 안내 수정
+            templateCode: TEMPLATE_CODE_EXAMPLE
+            templateMessageType: BA
+            templateEmphasizeType: NONE
+            text: "#{name}님, 주문 접수가 완료되었습니다."
+  responses:
+    "200":
+      description: 수정된 템플릿 정보입니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/AlimtalkTemplateResponse.yaml
+    "429":
+      $ref: ../components/responses/RateLimited.yaml
+    default:
+      $ref: ../components/responses/ErrorResponse.yaml

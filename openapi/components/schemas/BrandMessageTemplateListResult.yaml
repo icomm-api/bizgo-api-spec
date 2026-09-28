@@ -1,0 +1,12 @@
+type: object
+description: "템플릿 목록 응답 데이터입니다."
+properties:
+  brandmessage:
+    type: object
+    description: "브랜드메시지 템플릿 결과 영역입니다."
+    properties:
+      templates:
+        type: array
+        description: "조회한 템플릿 목록입니다."
+        items:
+          $ref: "./BrandMessageTemplateSummary.yaml"

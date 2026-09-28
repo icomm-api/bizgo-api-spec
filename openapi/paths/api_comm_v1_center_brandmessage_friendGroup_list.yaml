@@ -1,0 +1,28 @@
+get:
+  operationId: listBrandMessageFriendGroups
+  summary: "친구 그룹 목록 조회"
+  description: "발신프로필 기준으로 등록된 친구 그룹 목록을 조회합니다. 문서에 페이징 파라미터가 없습니다."
+  tags: [BrandMessage]
+  x-source: "https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand"
+  x-sdk-resource: brandMessage.friendGroups
+  x-sdk-method: list
+  x-sdk-retry: safe
+  parameters:
+    - name: senderKey
+      in: query
+      required: true
+      description: "발신프로필 키입니다."
+      schema:
+        type: string
+      example: SENDER_KEY_EXAMPLE
+  responses:
+    "200":
+      description: "친구 그룹 목록입니다."
+      content:
+        "application/json":
+          schema:
+            $ref: "../components/schemas/BrandMessageFriendGroupListResponse.yaml"
+    "429":
+      $ref: "../components/responses/RateLimited.yaml"
+    default:
+      $ref: "../components/responses/ErrorResponse.yaml"

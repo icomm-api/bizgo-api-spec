@@ -1,0 +1,13 @@
+name: senderKey
+in: query
+required: true
+description: 발신프로필 키입니다. 여러 개를 조회하려면 콤마(,)로 구분해 전달합니다.
+style: form
+explode: false
+schema:
+  type: array
+  minItems: 1
+  items:
+    type: string
+example: [SENDER_KEY_EXAMPLE]
+x-unverified: "한 번에 넣을 수 있는 senderKey 최대 개수가 문서에 없습니다."

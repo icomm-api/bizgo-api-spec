@@ -1,0 +1,73 @@
+type: object
+description: "브랜드메시지 템플릿 상세 정보입니다."
+x-unverified: "응답 필드 표에 `templateName`, `headerDescription`, `catalogVariable`, 카탈로그(`attachment.catalog`)가 없어 응답에 포함되는지 알 수 없습니다. 첨부 스키마는 발송용 스키마를 재사용하므로 발송 규격의 필수 표시가 응답에도 적용되는지는 확인이 필요합니다."
+properties:
+  senderKey:
+    type: string
+    description: "발신프로필 키입니다."
+  sendType:
+    type: string
+    description: "브랜드메시지 발송 타입입니다(`basic`, `free`)."
+  templateCode:
+    type: string
+    description: "템플릿 코드입니다."
+  msgType:
+    type: string
+    description: "브랜드메시지 메시지 타입입니다."
+  text:
+    type: string
+    description: "템플릿 본문입니다."
+  carousel:
+    $ref: "./BrandMessageCarousel.yaml"
+    description: "캐러셀 정보입니다."
+  attachment:
+    $ref: "./BrandMessageAttachment.yaml"
+    description: "첨부 정보입니다."
+  header:
+    type: string
+    description: "헤더 정보입니다."
+  additionalContent:
+    type: string
+    description: "부가 정보입니다."
+  pushAlarm:
+    type: string
+    description: "메시지 푸시 알림 발송 여부입니다."
+    enum: ["Y", "N"]
+  messageVariable:
+    type: object
+    description: "메시지 영역 변수입니다."
+  buttonVariable:
+    type: object
+    description: "버튼 영역 변수입니다."
+  couponVariable:
+    type: object
+    description: "쿠폰 영역 변수입니다."
+  imageVariable:
+    type: object
+    description: "이미지 영역 변수입니다."
+  videoVariable:
+    type: object
+    description: "비디오 영역 변수입니다."
+  commerceVariable:
+    type: object
+    description: "커머스 영역 변수입니다."
+  carouselVariable:
+    type: array
+    description: "캐러셀 영역 변수입니다."
+    items:
+      $ref: "./BrandMessageCarouselVariable.yaml"
+  createAt:
+    type: string
+    description: "등록일(`yyyy-MM-dd'T'HH:mm:ssXXX`)입니다."
+    x-format: "yyyy-MM-dd'T'HH:mm:ssXXX"
+    example: "2026-04-24T10:42:34+09:00"
+  modifiedAt:
+    type: string
+    description: "수정일(`yyyy-MM-dd'T'HH:mm:ssXXX`)입니다."
+    x-format: "yyyy-MM-dd'T'HH:mm:ssXXX"
+    example: "2026-04-24T10:42:34+09:00"
+  status:
+    type: string
+    description: "템플릿 상태입니다. 알려진 값: `A`(등록), `S`(차단)."
+    x-known-values: [A, S]
+    example: A

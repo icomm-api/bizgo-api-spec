@@ -1,0 +1,14 @@
+type: object
+description: 캐러셀 아이템 첨부 정보입니다.
+required: [image]
+properties:
+  buttons:
+    type: array
+    description: 캐러셀 아이템 버튼 목록입니다. 쿠폰을 적용하면 최대 4개, 그 외 최대 5개입니다.
+    maxItems: 5
+    items:
+      $ref: ./CounselButton.yaml
+  image:
+    $ref: ./CounselImage.yaml
+  coupon:
+    $ref: ./CounselCoupon.yaml

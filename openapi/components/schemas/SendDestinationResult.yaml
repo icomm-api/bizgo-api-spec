@@ -1,0 +1,18 @@
+type: object
+description: 수신자별 접수 결과입니다.
+properties:
+  to:
+    type: string
+    description: 수신번호입니다.
+  msgKey:
+    type: string
+    description: 메시지 키입니다. 리포트·상태 조회에 씁니다. 끝 3자리를 뺀 값이 동보 요청의 `requestId`입니다.
+    example: 20260424104234546POM101182450000
+  code:
+    type: string
+    description: 수신자별 접수 코드입니다. `A000`이 아니면 해당 수신자는 접수되지 않은 것입니다.
+    example: A000
+  result:
+    type: string
+    description: 수신자별 접수 결과입니다.
+    example: Success

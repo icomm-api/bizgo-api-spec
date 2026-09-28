@@ -1,0 +1,46 @@
+get:
+  operationId: getAlimtalkInsight
+  tags: [Insight]
+  summary: 알림톡 주요 인사이트 조회
+  description: 기간·발신프로필 기준으로 알림톡 발송 성공/실패·읽음·클릭 등 주요 통계를 조회합니다. 카카오가 직접 제공하는 통계입니다.
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/insight
+  x-sdk-resource: insights.alimtalk
+  x-sdk-method: get
+  x-sdk-retry: safe
+  parameters:
+    - $ref: ../components/parameters/InsightStartDateQuery.yaml
+    - $ref: ../components/parameters/InsightEndDateQuery.yaml
+    - $ref: ../components/parameters/InsightSenderKeyQuery.yaml
+    - $ref: ../components/parameters/InsightTemplateCodeQuery.yaml
+  responses:
+    "200":
+      description: 알림톡 주요 통계입니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/InsightKakaoStatisticsResponse.yaml
+          example:
+            common:
+              authCode: A000
+              authResult: Success
+              infobankTrId: Infobank-Tracking-Id
+            data:
+              code: A000
+              result: Success
+              data:
+                statistics:
+                  - successCount: 1240
+                    failCount: 18
+                    readCount: 875
+                    buttonClickCount: 312
+                    listClickCount: 0
+                    thumbnailClickCount: 0
+                    etcClickCount: 44
+                    sendRate: 98.57
+                    readRate: 70.56
+                    clickRate: 25.16
+                    ctr: 35.66
+    "429":
+      $ref: ../components/responses/RateLimited.yaml
+    default:
+      $ref: ../components/responses/ErrorResponse.yaml

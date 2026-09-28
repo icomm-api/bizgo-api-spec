@@ -1,0 +1,5 @@
+type: object
+description: 브랜드 조회·수정 결과 데이터입니다.
+properties:
+  rcs:
+    $ref: ./RcsBrand.yaml

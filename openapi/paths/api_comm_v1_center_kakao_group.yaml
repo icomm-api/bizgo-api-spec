@@ -1,0 +1,71 @@
+get:
+  operationId: listKakaoGroups
+  tags: [Kakao]
+  summary: 발신프로필키로 그룹 조회
+  description: 발신프로필 키를 기준으로 연결된 발신프로필 그룹 정보를 조회합니다. `senderKey`를 생략하면 조회 가능한 그룹 정보를 기준으로 응답합니다.
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-common
+  x-sdk-resource: kakao.groups
+  x-sdk-method: list
+  x-sdk-retry: safe
+  x-sdk-result: data.data.kakao.groups
+  parameters:
+    - name: senderKey
+      in: query
+      required: false
+      description: 조회 기준 발신프로필 키입니다.
+      schema:
+        type: string
+      example: SENDER_KEY_EXAMPLE
+  responses:
+    "200":
+      description: 발신프로필 그룹 목록입니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/KakaoGroupListResponse.yaml
+          example:
+            common:
+              authCode: A000
+              authResult: Success
+              infobankTrId: Infobank-Tracking-Id
+            data:
+              code: A000
+              result: Success
+              data:
+                kakao:
+                  groups:
+                    - groupKey: GROUP_KEY_EXAMPLE
+                      groupName: 기본 그룹
+    "429":
+      $ref: ../components/responses/RateLimited.yaml
+    default:
+      $ref: ../components/responses/ErrorResponse.yaml
+post:
+  operationId: addKakaoGroupSender
+  tags: [Kakao]
+  summary: 그룹에 발신프로필 등록
+  description: 발신프로필 그룹에 발신프로필을 등록합니다. 그룹 키와 등록할 발신프로필 키를 함께 전달합니다.
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-common
+  x-sdk-resource: kakao.groups
+  x-sdk-method: addSender
+  x-sdk-retry: rate_limit_only
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/KakaoGroupSenderAddRequest.yaml
+        example:
+          groupKey: GROUP_KEY_EXAMPLE
+          senderKey: SENDER_KEY_EXAMPLE
+  responses:
+    "200":
+      description: 등록 결과입니다. 문서상 `data.data`는 내용이 정의되지 않은 객체입니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ApiResponse.yaml
+    "429":
+      $ref: ../components/responses/RateLimited.yaml
+    default:
+      $ref: ../components/responses/ErrorResponse.yaml

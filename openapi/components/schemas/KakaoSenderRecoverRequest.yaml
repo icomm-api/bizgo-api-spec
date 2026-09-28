@@ -1,0 +1,8 @@
+type: object
+description: 발신프로필 휴면 해제 요청 본문입니다.
+required: [senderKey]
+properties:
+  senderKey:
+    type: string
+    description: 휴면 해제할 발신프로필 키입니다.
+    example: SENDER_KEY_EXAMPLE

@@ -1,0 +1,6 @@
+type: object
+description: 상담 메시지 삭제 요청입니다.
+required: [cstalk]
+properties:
+  cstalk:
+    $ref: ./CounselMessageDeleteTarget.yaml

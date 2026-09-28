@@ -1,0 +1,33 @@
+type: object
+description: RCS 메시지 발송·노출 일자별 통계 1건입니다.
+properties:
+  statDate:
+    type: string
+    description: 통계 일자(yyyyMMdd)입니다.
+    x-format: yyyyMMdd
+    example: "20260801"
+  corpId:
+    type: string
+    description: 기업 ID입니다.
+  corpRegNum:
+    type: string
+    description: 사업자등록번호입니다.
+  brandId:
+    type: string
+    description: RCS 브랜드 ID입니다.
+    example: BRAND_ID_EXAMPLE
+  chatbotId:
+    type: string
+    description: 챗봇 ID입니다.
+  groupId:
+    type: string
+    description: 그룹 ID입니다. 발송 요청의 `messageFlow[].rcs.groupId` 값입니다.
+  messagebaseId:
+    type: string
+    description: 메시지베이스 ID입니다.
+  deliveredCount:
+    type: integer
+    description: 발송 건수입니다.
+  displayedCount:
+    type: integer
+    description: 노출(읽음) 건수입니다.

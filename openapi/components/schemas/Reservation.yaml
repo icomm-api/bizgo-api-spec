@@ -1,0 +1,61 @@
+type: object
+description: 예약 발송 건입니다.
+properties:
+  seq:
+    type: integer
+    format: int64
+    description: 예약 순번입니다. 목록 조회의 `lastSeq` 기준값으로 쓸 수 있습니다.
+  resvKey:
+    type: string
+    description: 예약 발송 키입니다.
+    example: RESV_KEY_EXAMPLE
+  paymentCode:
+    type: string
+    description: 정산 코드입니다.
+  resvName:
+    type: string
+    description: 예약명입니다.
+  productType:
+    type: string
+    description: 상품 유형입니다. 알려진 값은 `MESSAGE`입니다.
+    x-known-values: [MESSAGE]
+    x-unverified: "productType 값 목록이 문서에 없습니다(예시에 MESSAGE만 있음)."
+  status:
+    type: string
+    description: |
+      예약 상태입니다. 알려진 값: `PENDING`(예약 대기), `PROCESSING`(발송 처리 중), `STOPPED`(예약 중지), `CANCELLED`(취소).
+      수정은 PENDING, 취소는 PENDING·STOPPED, 중지는 PROCESSING, 재개는 STOPPED 상태에서만 할 수 있습니다(그 밖에는 A824).
+    x-known-values: [PENDING, PROCESSING, STOPPED, CANCELLED]
+    x-unverified: "예약 상태 전체 목록(발송 완료 등)이 문서에 없습니다. A824 적용 여부는 에러코드표 설명에서 추정했습니다."
+  adYn:
+    type: string
+    description: 광고 메시지 여부입니다(Y/N).
+    x-known-values: [Y, N]
+  resvSendTime:
+    type: string
+    description: 예약 발송 시각입니다(yyyy-MM-dd HH:mm:ss).
+    x-format: "yyyy-MM-dd HH:mm:ss"
+  resvData:
+    type: string
+    description: 예약 발송 요청 본문(JSON 문자열)입니다. 수정 응답과 목록 응답 예시에는 없습니다.
+    x-unverified: "resvData에 담기는 범위가 불명확합니다. 문서 예시는 messageFlow 항목 하나(sms 객체)만 담고 있습니다."
+  expectedCnt:
+    type: integer
+    description: 예상 발송 수량입니다.
+  sentCnt:
+    type: integer
+    description: 발송 처리 수량입니다.
+  successCnt:
+    type: integer
+    description: 성공 수량입니다.
+  failCnt:
+    type: integer
+    description: 실패 수량입니다.
+  updateDate:
+    type: string
+    description: 수정 일시입니다(yyyy-MM-dd HH:mm:ss).
+    x-format: "yyyy-MM-dd HH:mm:ss"
+  regDate:
+    type: string
+    description: 등록 일시입니다(yyyy-MM-dd HH:mm:ss).
+    x-format: "yyyy-MM-dd HH:mm:ss"

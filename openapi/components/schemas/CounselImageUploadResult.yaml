@@ -1,0 +1,7 @@
+type: object
+description: 상담톡 이미지 업로드 결과입니다.
+properties:
+  imgUrl:
+    type: string
+    description: 업로드된 이미지 URL입니다. 발송 요청의 `attachment.image.imgUrl`에 넣습니다.
+    example: https://example.kakao.image/cstalk_image.jpg

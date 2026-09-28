@@ -1,0 +1,15 @@
+type: object
+description: 템플릿 양식 로고 이미지 정보입니다.
+x-unverified: "표에는 fileId·fileUrl·fileName이 있으나 응답 예시에는 fileUrl 대신 imageWidth·imageHeight가 있습니다."
+properties:
+  fileId:
+    type: string
+    description: 로고 이미지 파일 ID입니다.
+    example: FILE_ID_EXAMPLE
+  fileUrl:
+    type: string
+    description: 로고 이미지 파일 URL입니다.
+  fileName:
+    type: string
+    maxLength: 256
+    description: 로고 이미지 파일 이름입니다(최대 256자).

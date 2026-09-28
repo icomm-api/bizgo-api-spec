@@ -1,0 +1,26 @@
+post:
+  operationId: uploadBrandMessageFriendGroupFile
+  summary: "친구 그룹 파일 업로드"
+  description: "전화번호 목록 파일(txt, csv)을 업로드해 친구 그룹 등록 또는 전화번호 추가·삭제에 쓸 임시 파일 키를 발급받습니다."
+  tags: [BrandMessage]
+  x-source: "https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand"
+  x-sdk-resource: brandMessage.friendGroups
+  x-sdk-method: uploadFile
+  x-sdk-retry: rate_limit_only
+  requestBody:
+    required: true
+    content:
+      "multipart/form-data":
+        schema:
+          $ref: "../components/schemas/BrandMessageFriendGroupFileUploadRequest.yaml"
+  responses:
+    "200":
+      description: "임시 파일 키입니다."
+      content:
+        "application/json":
+          schema:
+            $ref: "../components/schemas/BrandMessageFriendGroupFileUploadResponse.yaml"
+    "429":
+      $ref: "../components/responses/RateLimited.yaml"
+    default:
+      $ref: "../components/responses/ErrorResponse.yaml"

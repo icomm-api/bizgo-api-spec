@@ -1,0 +1,8 @@
+type: object
+description: "동보 발송 생성·제어·조회 응답입니다."
+required: [common]
+properties:
+  common:
+    $ref: "./CommonResult.yaml"
+  data:
+    $ref: "./BrandMessageGroupSendServiceResult.yaml"

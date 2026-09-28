@@ -1,0 +1,8 @@
+type: object
+description: 상담 운영 시간입니다.
+properties:
+  weekTimeTable:
+    type: array
+    description: 요일별 상담 시간 목록입니다.
+    items:
+      $ref: ./CounselWeekTime.yaml

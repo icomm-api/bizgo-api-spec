@@ -1,0 +1,37 @@
+post:
+  operationId: uploadAlimtalkTemplateImage
+  tags: [File]
+  summary: 알림톡 템플릿 이미지 업로드
+  description: 알림톡 이미지형, 와이드 이미지형, 아이템리스트형 템플릿 등록에 사용할 이미지를 업로드합니다. 메시지 발송용 업로드가 아니라 템플릿 등록을 위한 사전 이미지 등록 API입니다. 응답의 `imgUrl`을 템플릿 등록의 `imgUrl`에 넣습니다.
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-alimtalk
+  x-sdk-resource: files
+  x-sdk-method: uploadAlimtalkTemplateImage
+  x-sdk-retry: rate_limit_only
+  requestBody:
+    required: true
+    content:
+      multipart/form-data:
+        schema:
+          $ref: ../components/schemas/AlimtalkTemplateImageUploadRequest.yaml
+  responses:
+    "200":
+      description: 업로드 결과입니다. 성공 시 `data.data.imgUrl`에 템플릿 등록에 쓸 이미지 URL이 담깁니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/AlimtalkTemplateImageUploadResponse.yaml
+          example:
+            common:
+              authCode: A000
+              authResult: Success
+              infobankTrId: Infobank-Tracking-Id
+            data:
+              code: A000
+              result: Success
+              data:
+                imgUrl: https://example.kakao.image/template-image.jpg
+                fileName: template-image.jpg
+    "429":
+      $ref: ../components/responses/RateLimited.yaml
+    default:
+      $ref: ../components/responses/ErrorResponse.yaml

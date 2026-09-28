@@ -1,0 +1,6 @@
+type: object
+description: 사용자 수신 차단·차단 해제 요청입니다.
+required: [cstalk]
+properties:
+  cstalk:
+    $ref: ./CounselUserTarget.yaml

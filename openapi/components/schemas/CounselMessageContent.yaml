@@ -1,0 +1,9 @@
+type: object
+description: 사용자가 전송한 메시지 데이터 1건입니다.
+properties:
+  url:
+    type: string
+    description: 이미지, 파일 등 데이터 경로입니다.
+  comment:
+    type: string
+    description: 사용자가 입력한 문구입니다.

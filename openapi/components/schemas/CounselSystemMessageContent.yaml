@@ -1,0 +1,17 @@
+type: object
+description: 시스템 메시지 1건의 내용입니다.
+required: [messageType, content, buttons]
+properties:
+  messageType:
+    type: string
+    description: 시스템 메시지 타입입니다. 문서 예시 값은 `ST`입니다.
+    x-known-values: [ST]
+    x-unverified: "messageType 코드 목록과 의미가 문서에 없습니다."
+  content:
+    type: string
+    description: 메시지 내용입니다.
+  buttons:
+    type: array
+    description: 메시지 하단 버튼 목록입니다. 등록 요청에서는 필수로 표시되어 있습니다.
+    items:
+      $ref: ./CounselSystemMessageButton.yaml

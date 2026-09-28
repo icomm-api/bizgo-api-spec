@@ -1,0 +1,17 @@
+description: |
+  읽음 정보 수신 웹훅(`{고객 Webhook URL}/cstalk/seen_info`) 본문입니다. 상담 세션이 연결된 상태에서만, 발송 후 최대 24시간까지 수신되며
+  실시간이 아니라 지연될 수 있습니다. 이 웹훅을 받으려면 카카오 비즈니스 라운지에 별도 문의가 필요합니다.
+allOf:
+  - $ref: ./CounselWebhookCommon.yaml
+  - type: object
+    required: [msgKey, userKey, senderKey, serviceType, msgType, requestType, sendTime, reportTime]
+    x-unverified: "Copy Markdown(Part B)에는 msgKey 필드가 없습니다. 어떤 발송 메시지를 읽었는지 나타내는 필드도 문서에 없습니다."
+    properties:
+      msgType:
+        type: string
+        description: 메시지 타입입니다. 문서 예시 값은 `SEEN`입니다.
+        x-known-values: [SEEN]
+      requestType:
+        type: string
+        description: 요청 타입입니다. 문서 예시 값은 `seen_info`입니다.
+        x-known-values: [seen_info]

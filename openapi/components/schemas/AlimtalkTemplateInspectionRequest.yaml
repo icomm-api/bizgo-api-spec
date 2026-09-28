@@ -1,0 +1,28 @@
+type: object
+description: 알림톡 템플릿 검수 요청 본문(JSON)입니다. 템플릿 상태가 대기이고 검수 상태가 등록(`REG`)일 때 요청할 수 있습니다.
+required: [alimtalk]
+properties:
+  alimtalk:
+    type: object
+    description: 검수 요청할 알림톡 템플릿 정보입니다.
+    required: [senderKey, templateCode]
+    properties:
+      senderKey:
+        type: string
+        description: 발신프로필 키입니다.
+        example: SENDER_KEY_EXAMPLE
+      senderKeyType:
+        type: string
+        description: |
+          발신프로필 키 타입입니다. 기본값은 `S`입니다.
+          - `G`: 그룹
+          - `S`: 발신프로필
+        enum: [G, S]
+        default: S
+      templateCode:
+        type: string
+        description: 템플릿 코드입니다.
+        example: TEMPLATE_CODE_EXAMPLE
+      comment:
+        type: string
+        description: 검수 의견 또는 문의 사항입니다.

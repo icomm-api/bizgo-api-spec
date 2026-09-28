@@ -1,0 +1,26 @@
+type: object
+description: |
+  네이버 톡톡 버튼입니다.
+  - `WEB_LINK` 버튼은 `mobileUrl`이 필수입니다(접수코드 A606).
+  - `APP_LINK` 버튼은 `aOsAppScheme`과 `iOsAppScheme`이 모두 필수입니다(접수코드 A607).
+required: [buttonCode]
+properties:
+  buttonCode:
+    type: string
+    description: 버튼 코드입니다. 알려진 값은 `WEB_LINK`, `APP_LINK`입니다(요청 예시와 접수코드 A605~A607 기준). 전체 목록은 원문에 없습니다.
+    x-known-values: [WEB_LINK, APP_LINK]
+    example: WEB_LINK
+  mobileUrl:
+    type: string
+    description: 모바일 이동 URL입니다.
+    example: https://m.example.com
+  pcUrl:
+    type: string
+    description: PC 이동 URL입니다.
+    example: https://example.com
+  aOsAppScheme:
+    type: string
+    description: Android OS 환경에서 버튼 클릭 시 이동할 앱 링크입니다.
+  iOsAppScheme:
+    type: string
+    description: iOS 환경에서 버튼 클릭 시 이동할 앱 링크입니다.

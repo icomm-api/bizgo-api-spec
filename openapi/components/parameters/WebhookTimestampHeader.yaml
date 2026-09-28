@@ -1,0 +1,9 @@
+name: X-IB-Timestamp
+in: header
+required: true
+description: |
+  웹훅 전송 시점의 타임스탬프입니다. 문서 예시 값은 epoch 밀리초(`1743381600000`)입니다.
+  이 헤더 값이 `X-IB-Signature` 서명의 HMAC 입력(message)입니다.
+schema:
+  type: string
+  pattern: "^[0-9]+$"

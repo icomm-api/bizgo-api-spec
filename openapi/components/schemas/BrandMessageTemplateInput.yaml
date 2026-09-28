@@ -1,0 +1,99 @@
+type: object
+description: "브랜드메시지 템플릿 등록·수정 정보입니다. 이미지가 필요한 유형은 이미지 파일 관리 API로 먼저 `imgUrl`을 발급받아 씁니다."
+required: [senderKey, senderKeyType, sendType, templateName, msgType]
+x-unverified: "등록 요청 필드 표에 응답용으로 보이는 `createAt`·`modifiedAt`·`status`가 포함되어 있습니다(문서 그대로 옮김). 변수 객체(`*Variable`) 내부 구조도 문서에 없습니다."
+properties:
+  senderKey:
+    type: string
+    description: "카카오 비즈메시지 발신프로필 키입니다."
+    example: SENDER_KEY_EXAMPLE
+  senderKeyType:
+    type: string
+    description: "발신프로필 키 타입입니다. 문서 예시 값은 `S`입니다."
+    example: S
+    x-unverified: "Part A 필드 표는 필수로 표시하지만 요청 예시와 Part B 필드 표에는 없습니다. 값 목록도 문서에 없습니다."
+  sendType:
+    type: string
+    description: "브랜드메시지 발송 타입입니다. `basic`(기본형) 또는 `free`(자유형)입니다."
+    enum: [basic, free]
+    example: basic
+    x-unverified: "`basic`/`free` 값 목록은 Part B에만 있습니다. 자유형(`free`) 템플릿의 의미가 문서에 설명되어 있지 않습니다."
+  templateName:
+    type: string
+    description: "템플릿 이름입니다. 최대 200자입니다."
+    maxLength: 200
+    example: "브랜드 혜택 안내"
+  msgType:
+    type: string
+    description: "브랜드메시지 메시지 타입입니다. 알려진 값: `FT`, `FI`, `FW`, `FL`, `FC`, `FM`, `FA`, `FP`, `FG`(카탈로그)."
+    x-known-values: [FT, FI, FW, FL, FC, FM, FA, FP, FG]
+    example: FT
+  templateCode:
+    type: string
+    description: "템플릿 코드입니다. 수정 시 대상 템플릿을 지정합니다."
+    example: TEMPLATE_CODE_EXAMPLE
+    x-unverified: "등록 시 직접 지정할 수 있는지(응답에서 발급되는지), 수정 시 필수인지 문서에 없습니다. 수정 요청 예시에도 templateCode가 없습니다."
+  text:
+    type: string
+    description: "템플릿 본문입니다."
+    example: "#{customerName}님, 새로운 혜택을 확인해 주세요."
+  carousel:
+    $ref: "./BrandMessageCarousel.yaml"
+    description: "캐러셀 정보입니다(FC, FA)."
+  attachment:
+    $ref: "./BrandMessageAttachment.yaml"
+    description: "첨부 정보입니다. 버튼은 최대 5개, FT/FI에 쿠폰을 함께 쓰면 최대 4개입니다."
+  header:
+    type: string
+    description: "헤더 정보입니다. 최대 20자입니다. `FG`에서는 헤더 타이틀로 씁니다."
+    maxLength: 20
+  headerDescription:
+    type: string
+    description: "헤더 디스크립션입니다. `msgType`이 `FG`일 때만 사용합니다."
+  additionalContent:
+    type: string
+    description: "부가 정보입니다. `msgType`이 `FM`일 때 사용합니다."
+  pushAlarm:
+    type: string
+    description: "메시지 푸시 알림 발송 여부입니다. 기본값은 `Y`입니다."
+    enum: ["Y", "N"]
+    default: "Y"
+  messageVariable:
+    type: object
+    description: "메시지 영역 변수입니다."
+  buttonVariable:
+    type: object
+    description: "버튼 영역 변수입니다."
+  couponVariable:
+    type: object
+    description: "쿠폰 영역 변수입니다."
+  imageVariable:
+    type: object
+    description: "이미지 영역 변수입니다."
+  videoVariable:
+    type: object
+    description: "비디오 영역 변수입니다."
+  commerceVariable:
+    type: object
+    description: "커머스 영역 변수입니다."
+  carouselVariable:
+    type: array
+    description: "캐러셀 영역 변수입니다."
+    items:
+      $ref: "./BrandMessageCarouselVariable.yaml"
+  catalogVariable:
+    type: array
+    description: "FG(카탈로그) 전용 아이템 단위 변수입니다."
+    items:
+      $ref: "./BrandMessageCatalogVariable.yaml"
+  createAt:
+    type: string
+    description: "등록일입니다."
+  modifiedAt:
+    type: string
+    description: "수정일입니다."
+  status:
+    type: string
+    description: "템플릿 상태입니다. 알려진 값: `A`(등록), `S`(차단)."
+    x-known-values: [A, S]
+    example: A

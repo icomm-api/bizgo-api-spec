@@ -1,0 +1,35 @@
+delete:
+  operationId: removeKakaoGroupSender
+  tags: [Kakao]
+  summary: 그룹에서 발신프로필 삭제
+  description: 발신프로필 그룹에서 특정 발신프로필을 삭제합니다.
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-common
+  x-sdk-resource: kakao.groups
+  x-sdk-method: removeSender
+  x-sdk-retry: safe
+  parameters:
+    - name: groupKey
+      in: path
+      required: true
+      description: 그룹 키입니다.
+      schema:
+        type: string
+      example: GROUP_KEY_EXAMPLE
+    - name: senderKey
+      in: path
+      required: true
+      description: 삭제할 발신프로필 키입니다.
+      schema:
+        type: string
+      example: SENDER_KEY_EXAMPLE
+  responses:
+    "200":
+      description: 삭제 결과입니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ApiResponse.yaml
+    "429":
+      $ref: ../components/responses/RateLimited.yaml
+    default:
+      $ref: ../components/responses/ErrorResponse.yaml

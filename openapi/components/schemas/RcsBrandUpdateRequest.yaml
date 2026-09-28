@@ -1,0 +1,29 @@
+type: object
+description: 브랜드 수정 요청(multipart/form-data)입니다. `regBrand`는 JSON 문자열 파트로 보냅니다.
+required: [brandId, regBrand]
+properties:
+  brandId:
+    type: string
+    description: 수정할 브랜드 ID입니다.
+    example: BRAND_ID_EXAMPLE
+  regBrand:
+    description: 브랜드 수정 정보입니다. JSON으로 직렬화해 한 파트로 보냅니다.
+    x-unverified: "regBrand.brandId·name이 필수로 표시되어 있으나 문서 요청 예시에는 brandId가 없습니다. 또 registerDate·approvalDate·status·approvalReason처럼 서버가 정하는 값도 요청 필드로 나열되어 있어 실제로 반영되는지 불명확합니다."
+    allOf:
+      - $ref: ./RcsBrand.yaml
+      - type: object
+        required: [brandId, name]
+  brandProfile:
+    type: string
+    format: binary
+    description: 브랜드 프로필 이미지 파일입니다.
+    x-unverified: "허용 형식·용량·크기가 문서화되어 있지 않습니다."
+  brandBackground:
+    type: string
+    format: binary
+    description: 브랜드 배경 이미지 파일입니다.
+    x-unverified: "허용 형식·용량·크기가 문서화되어 있지 않습니다."
+  seasonDocFile:
+    type: string
+    format: binary
+    description: 시즌성 증빙 파일입니다.

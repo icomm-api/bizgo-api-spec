@@ -1,0 +1,7 @@
+type: object
+description: Plain 메시지 첨부 객체입니다. IMAGE는 `image`, VIDEO·AUDIO·FILE은 `file`을 사용합니다.
+properties:
+  image:
+    $ref: ./CounselImage.yaml
+  file:
+    $ref: ./CounselFile.yaml

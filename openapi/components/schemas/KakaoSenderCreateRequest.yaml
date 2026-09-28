@@ -1,0 +1,19 @@
+type: object
+description: 인증 토큰으로 발신프로필을 등록하는 요청 본문입니다. 인증 토큰과 관리자 전화번호는 헤더(`token`, `phoneNumber`)로 보냅니다.
+required: [yellowId, categoryCode]
+properties:
+  yellowId:
+    type: string
+    description: 등록할 카카오톡 채널 아이디입니다.
+    example: "@KAKAO_CHANNEL_ID_EXAMPLE"
+  categoryCode:
+    type: string
+    description: 발신프로필 카테고리 코드(11자리 숫자)입니다. 사용할 수 있는 코드는 카테고리 전체조회로 확인합니다.
+    pattern: "^[0-9]{11}$"
+    example: "00000000001"
+  unsubscribePhoneNumber:
+    type: string
+    description: 무료수신거부 전화번호입니다(예 `080-0000-0000`). 브랜드메시지를 쓰는 발신프로필이 설정하며, 타겟팅 M, N, O 사용 시 필수입니다.
+  unsubscribeAuthNumber:
+    type: string
+    description: 무료수신거부 인증번호입니다(예 `12345`). 타겟팅 M, N, O 사용 시 필수입니다.

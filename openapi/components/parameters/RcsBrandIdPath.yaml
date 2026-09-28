@@ -1,0 +1,7 @@
+name: brandId
+in: path
+required: true
+description: RCS 브랜드 ID입니다.
+schema:
+  type: string
+example: BRAND_ID_EXAMPLE

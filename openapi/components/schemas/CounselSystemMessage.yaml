@@ -1,0 +1,44 @@
+type: object
+description: 등록된 시스템 메시지입니다.
+properties:
+  id:
+    type: string
+    description: 시스템 메시지 ID입니다.
+  name:
+    type: string
+    description: 시스템 메시지 이름입니다.
+  status:
+    type: string
+    description: 시스템 메시지 상태입니다. 문서 예시 값은 `A`입니다.
+    x-known-values: [A]
+    x-unverified: "status·inspectStatus 코드 목록이 문서에 없습니다."
+  createdAt:
+    type: string
+    description: 등록일입니다.
+    x-format: "yyyy-MM-dd HH:mm:ss"
+  modifiedAt:
+    type: string
+    description: 수정일입니다.
+    x-format: "yyyy-MM-dd HH:mm:ss"
+  inspectStatus:
+    type: string
+    description: 검수 상태입니다. 문서 예시 값은 `REG`입니다.
+    x-known-values: [REG]
+  inspectRequestAt:
+    type: string
+    description: 검수 요청일입니다. 값이 없으면 빈 문자열일 수 있습니다.
+    x-format: "yyyy-MM-dd HH:mm:ss"
+  inspectedAt:
+    type: string
+    description: 검수일입니다. 값이 없으면 빈 문자열일 수 있습니다.
+    x-format: "yyyy-MM-dd HH:mm:ss"
+  messages:
+    type: array
+    description: 시스템 메시지 배열입니다.
+    items:
+      $ref: ./CounselSystemMessageContent.yaml
+  comments:
+    type: array
+    description: 검수 결과 및 문의 목록입니다.
+    items:
+      $ref: ./CounselSystemMessageComment.yaml

@@ -1,0 +1,39 @@
+post:
+  operationId: uploadCounselImage
+  tags: [Counsel]
+  summary: 상담톡 이미지 업로드
+  description: |
+    상담톡 이미지(jpg, png, gif, 최대 5MB)를 올리고 `imgUrl`을 받습니다. Rich 메시지용은 `imageType=rich`로 올립니다.
+
+    상담톡 요청·응답에는 최종 사용자 식별자(`userKey`)와 상담 내용이 들어가므로 개인정보로 취급하고 본문을 로그에 남기지 않습니다.
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-counsel
+  x-sdk-resource: counsel.files
+  x-sdk-method: uploadImage
+  x-sdk-retry: rate_limit_only
+  requestBody:
+    required: true
+    content:
+      multipart/form-data:
+        schema:
+          $ref: ../components/schemas/CounselImageUploadRequest.yaml
+  responses:
+    "200":
+      description: 업로드 결과입니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/CounselImageUploadResponse.yaml
+          example:
+            common:
+              authCode: A000
+              authResult: Success
+              infobankTrId: Infobank-Tracking-Id
+            data:
+              code: A000
+              result: Success
+              data:
+                imgUrl: https://example.kakao.image/cstalk_image.jpg
+    "429":
+      $ref: ../components/responses/RateLimited.yaml
+    default:
+      $ref: ../components/responses/ErrorResponse.yaml

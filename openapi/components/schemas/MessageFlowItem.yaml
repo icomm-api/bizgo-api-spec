@@ -1,0 +1,12 @@
+description: |
+  발송할 채널 메시지 1개입니다. 객체에는 채널 키(`sms`, `mms`, `international`, `rcs`, `alimtalk`,
+  `brandmessage`, `navertalk`) 중 **정확히 하나**를 넣습니다.
+  `messageFlow` 배열의 앞 메시지가 실패하면 다음 메시지가 자동으로 대체발송(Fallback)됩니다.
+oneOf:
+  - $ref: ./SmsFlowItem.yaml
+  - $ref: ./MmsFlowItem.yaml
+  - $ref: ./InternationalFlowItem.yaml
+  - $ref: ./RcsFlowItem.yaml
+  - $ref: ./AlimtalkFlowItem.yaml
+  - $ref: ./BrandMessageFlowItem.yaml
+  - $ref: ./NaverTalkFlowItem.yaml

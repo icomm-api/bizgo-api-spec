@@ -1,0 +1,33 @@
+delete:
+  operationId: deleteReservationRecipient
+  tags: [Reservation]
+  summary: 예약 수신자 삭제
+  description: 예약 건에 등록된 수신자를 메시지 키(msgKey) 기준으로 삭제합니다.
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/reservation
+  x-sdk-resource: reservations.recipients
+  x-sdk-method: delete
+  x-sdk-retry: safe
+  x-unverified: "이미 삭제한 수신자를 다시 삭제할 때의 응답 코드가 문서에 없습니다(재시도 시 오류가 날 수 있음)."
+  parameters:
+    - $ref: ../components/parameters/ResvKeyPath.yaml
+    - $ref: ../components/parameters/MsgKeyPath.yaml
+      description: 삭제할 수신자의 메시지 키입니다. 수신자 추가 응답 또는 수신자 목록 조회의 `msgKey` 값입니다.
+  responses:
+    "200":
+      description: 삭제 결과입니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ApiResponse.yaml
+          example:
+            common:
+              authCode: A000
+              authResult: Success
+              infobankTrId: Infobank-Tracking-Id
+            data:
+              code: A000
+              result: Success
+    "429":
+      $ref: ../components/responses/RateLimited.yaml
+    default:
+      $ref: ../components/responses/ErrorResponse.yaml

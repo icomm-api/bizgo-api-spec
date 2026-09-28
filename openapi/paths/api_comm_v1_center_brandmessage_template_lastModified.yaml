@@ -1,0 +1,66 @@
+get:
+  operationId: listBrandMessageTemplatesLastModified
+  summary: "최근 변경 브랜드메시지 템플릿 조회"
+  description: "지정한 시각 이후 변경된 브랜드메시지 템플릿 목록을 조회합니다. 템플릿 최신화나 내부 동기화 배치에 씁니다."
+  tags: [BrandMessage]
+  x-source: "https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand"
+  x-sdk-resource: brandMessage.templates
+  x-sdk-method: listLastModified
+  x-sdk-retry: safe
+  x-sdk-pagination:
+    style: page
+    request: page
+    size: count
+    items: data.data.brandmessage.templates
+  parameters:
+    - name: senderKey
+      in: query
+      required: true
+      description: "발신프로필 키입니다. 최대 40자입니다."
+      schema:
+        type: string
+        maxLength: 40
+      example: SENDER_KEY_EXAMPLE
+    - name: senderKeyType
+      in: query
+      required: false
+      description: "발신키 유형입니다. 문서 예시 값은 `S`(발신프로필)입니다. 기본값은 `S`입니다."
+      schema:
+        type: string
+        default: S
+      example: S
+    - name: since
+      in: query
+      required: false
+      description: "조회 시작 시각(`yyyy-MM-dd'T'HH:mm:ss`)입니다."
+      schema:
+        type: string
+        x-format: "yyyy-MM-dd'T'HH:mm:ss"
+      example: "2026-04-23T09:00:00"
+    - name: page
+      in: query
+      required: false
+      description: "페이지 번호입니다. 기본값 1, 최소 1입니다."
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    - name: count
+      in: query
+      required: false
+      description: "페이지당 조회 건수입니다. 기본값 100, 최소 1입니다."
+      schema:
+        type: integer
+        minimum: 1
+        default: 100
+  responses:
+    "200":
+      description: "최근 변경된 템플릿 목록입니다."
+      content:
+        "application/json":
+          schema:
+            $ref: "../components/schemas/BrandMessageTemplateListResponse.yaml"
+    "429":
+      $ref: "../components/responses/RateLimited.yaml"
+    default:
+      $ref: "../components/responses/ErrorResponse.yaml"

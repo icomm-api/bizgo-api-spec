@@ -1,0 +1,7 @@
+type: object
+properties:
+  destinations:
+    type: array
+    description: 수신자별 접수 결과입니다.
+    items:
+      $ref: ./SendDestinationResult.yaml

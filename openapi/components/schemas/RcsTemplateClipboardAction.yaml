@@ -1,0 +1,12 @@
+type: object
+description: 클립보드 복사 액션입니다.
+required: [copyToClipboard]
+properties:
+  copyToClipboard:
+    type: object
+    description: 클립보드 복사 객체입니다.
+    required: [text]
+    properties:
+      text:
+        type: string
+        description: 클립보드에 복사할 텍스트입니다.

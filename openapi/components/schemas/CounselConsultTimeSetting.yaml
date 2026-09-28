@@ -1,0 +1,13 @@
+type: object
+description: 저장할 상담시간입니다.
+required: [senderKey, weekTimeTable]
+properties:
+  senderKey:
+    type: string
+    description: 발신프로필 키입니다.
+    example: SENDER_KEY_EXAMPLE
+  weekTimeTable:
+    type: array
+    description: 요일별 상담 시간 목록입니다.
+    items:
+      $ref: ./CounselWeekTime.yaml

@@ -1,0 +1,17 @@
+type: object
+properties:
+  messages:
+    type: array
+    description: 메시지 목록입니다.
+    items:
+      $ref: ./MessageStatus.yaml
+  lastSeq:
+    type: integer
+    format: int64
+    description: |
+      다음 페이지 조회에 쓰는 커서입니다. 다음 요청의 `lastSeq` 쿼리에 그대로 넣습니다.
+      발송 이력 조회(`GET /message/history`) 응답에 있으며, 상태 조회(inquiry) 응답에는 없을 수 있습니다.
+    x-verified: "2026-09-23 sandbox: GET /message/history 응답 data.data에 hasNext, lastSeq, messages가 있음"
+  hasNext:
+    type: boolean
+    description: 다음 페이지가 있는지 여부입니다. 발송 이력 조회 응답에 있습니다.

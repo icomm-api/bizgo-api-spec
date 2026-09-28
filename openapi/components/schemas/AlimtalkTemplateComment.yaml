@@ -1,0 +1,24 @@
+type: object
+description: 템플릿 심사 의견 1건입니다.
+properties:
+  id:
+    type: integer
+    format: int64
+    description: 심사 의견 ID입니다.
+  userName:
+    type: string
+    description: 심사 의견을 남긴 담당자명입니다.
+  createdAt:
+    type: string
+    description: 심사 의견 등록일입니다.
+    x-unverified: "날짜 형식이 문서에 없습니다."
+  status:
+    type: string
+    description: 해당 의견 시점의 심사 상태입니다.
+  attachment:
+    type: array
+    description: 심사 의견에 첨부된 파일 목록입니다.
+    items:
+      type: object
+      description: 첨부 파일 정보입니다.
+    x-unverified: "첨부 파일 항목의 하위 필드가 문서에 없습니다."

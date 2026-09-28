@@ -1,0 +1,12 @@
+description: 카카오(알림톡·브랜드메시지) 템플릿별 통계 1건입니다.
+allOf:
+  - type: object
+    properties:
+      templateCode:
+        type: string
+        description: 템플릿 코드입니다.
+        example: TEMPLATE_CODE_EXAMPLE
+      templateName:
+        type: string
+        description: 템플릿 이름입니다.
+  - $ref: ./InsightKakaoStatistics.yaml

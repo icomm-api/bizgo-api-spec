@@ -1,0 +1,6 @@
+allOf:
+  - $ref: ./ServiceResult.yaml
+  - type: object
+    properties:
+      data:
+        $ref: ./KakaoSenderResult.yaml

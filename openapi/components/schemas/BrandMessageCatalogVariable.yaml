@@ -1,0 +1,13 @@
+type: object
+description: 기본형 변수 분리 방식에서 카탈로그(FG) 아이템 1개에 대한 변수입니다.
+x-unverified: "각 변수 객체의 내부 구조(키·값 형식)가 문서에 없습니다."
+properties:
+  messageVariable:
+    type: object
+    description: 아이템 `title`·`description`의 변수입니다.
+  commerceVariable:
+    type: object
+    description: 가격 관련 변수입니다.
+  imageVariable:
+    type: object
+    description: 아이템 `imgUrl`·`imgLink`의 변수입니다.

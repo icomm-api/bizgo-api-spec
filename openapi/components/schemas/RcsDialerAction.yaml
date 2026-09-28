@@ -1,0 +1,13 @@
+type: object
+description: 전화 걸기 액션입니다.
+required: [dialPhoneNumber]
+properties:
+  dialPhoneNumber:
+    type: object
+    description: 전화 걸기 객체입니다.
+    required: [phoneNumber]
+    properties:
+      phoneNumber:
+        type: string
+        description: 전화 번호입니다.
+        example: "01000000000"

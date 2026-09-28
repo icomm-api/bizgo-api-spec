@@ -1,0 +1,17 @@
+type: object
+description: 삭제할 상담톡 메시지입니다.
+required: [senderKey, userKey, msgKey]
+properties:
+  senderKey:
+    type: string
+    description: 발신프로필 키입니다. 호출자 소유가 아니면 `A502`로 거부됩니다.
+    example: SENDER_KEY_EXAMPLE
+  userKey:
+    type: string
+    description: 메시지를 받은 사용자 키입니다.
+    minLength: 1
+    maxLength: 20
+    example: USER_KEY_EXAMPLE
+  msgKey:
+    type: string
+    description: 삭제할 메시지의 발송 시 msgKey입니다.

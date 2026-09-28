@@ -1,0 +1,26 @@
+post:
+  operationId: addBrandMessageFriendGroupPhoneNumbers
+  summary: "친구 그룹 내 전화번호 추가"
+  description: "기존 친구 그룹에 전화번호를 추가합니다. `fileKey` 또는 `phoneNumbers`로 입력합니다. 처리는 비동기이며 진행 상황은 전화번호 요청 조회로 확인합니다."
+  tags: [BrandMessage]
+  x-source: "https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand"
+  x-sdk-resource: brandMessage.friendGroups
+  x-sdk-method: addPhoneNumbers
+  x-sdk-retry: rate_limit_only
+  requestBody:
+    required: true
+    content:
+      "application/json":
+        schema:
+          $ref: "../components/schemas/BrandMessageFriendGroupRequest.yaml"
+  responses:
+    "200":
+      description: "전화번호 추가 요청 결과입니다."
+      content:
+        "application/json":
+          schema:
+            $ref: "../components/schemas/BrandMessageFriendGroupProcessingResponse.yaml"
+    "429":
+      $ref: "../components/responses/RateLimited.yaml"
+    default:
+      $ref: "../components/responses/ErrorResponse.yaml"

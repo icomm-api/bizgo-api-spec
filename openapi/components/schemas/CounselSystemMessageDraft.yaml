@@ -1,0 +1,16 @@
+type: object
+description: 등록할 시스템 메시지입니다.
+required: [senderKey, name, messages]
+properties:
+  senderKey:
+    type: string
+    description: 발신프로필 키입니다.
+    example: SENDER_KEY_EXAMPLE
+  name:
+    type: string
+    description: 시스템 메시지 이름입니다.
+  messages:
+    type: array
+    description: 시스템 메시지 배열입니다.
+    items:
+      $ref: ./CounselSystemMessageContent.yaml

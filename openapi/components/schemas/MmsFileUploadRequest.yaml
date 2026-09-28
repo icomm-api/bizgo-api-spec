@@ -1,0 +1,13 @@
+type: object
+required: [file]
+properties:
+  file:
+    type: string
+    format: binary
+    description: 업로드할 이미지 파일입니다. jpg(jpeg), 최대 300KB, 권장 1,500×1,440px 이하입니다.
+  fileKey:
+    type: string
+    description: 업로드 파일을 식별하는 키입니다. 생략하면 서버가 생성합니다.
+  imageName:
+    type: string
+    description: 파일 이름입니다. 생략하면 확장자를 뺀 파일명을 씁니다.

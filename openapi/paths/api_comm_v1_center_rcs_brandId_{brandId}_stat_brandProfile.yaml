@@ -1,0 +1,27 @@
+get:
+  operationId: getRcsBrandProfileInsight
+  tags: [Insight]
+  summary: RCS 브랜드 프로필 노출 통계
+  description: |
+    브랜드 프로필이 노출된 건수를 일자별로 조회합니다. 그룹·챗봇 조건 없이 기간만으로 조회합니다.
+    응답 데이터는 `data.data`가 아니라 `data.rcs`에 있습니다.
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/insight
+  x-sdk-resource: insights.rcs
+  x-sdk-method: getBrandProfile
+  x-sdk-retry: safe
+  x-sdk-result: data.rcs
+  parameters:
+    - $ref: ../components/parameters/RcsBrandIdPath.yaml
+    - $ref: ../components/parameters/InsightStartDateQuery.yaml
+    - $ref: ../components/parameters/InsightEndDateQuery.yaml
+  responses:
+    "200":
+      description: 일자별 브랜드 프로필 노출 통계입니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/InsightRcsBrandProfileStatResponse.yaml
+    "429":
+      $ref: ../components/responses/RateLimited.yaml
+    default:
+      $ref: ../components/responses/ErrorResponse.yaml

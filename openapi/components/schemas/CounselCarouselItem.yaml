@@ -1,0 +1,11 @@
+type: object
+description: 캐러셀 아이템 1개입니다.
+properties:
+  header:
+    type: string
+    description: 캐러셀 아이템 제목입니다. CAROUSEL_FEED 타입에서 사용합니다.
+  message:
+    type: string
+    description: 캐러셀 아이템 메시지입니다. CAROUSEL_FEED 타입에서 사용합니다.
+  attachment:
+    $ref: ./CounselCarouselItemAttachment.yaml

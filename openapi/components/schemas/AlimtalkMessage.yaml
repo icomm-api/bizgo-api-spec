@@ -1,0 +1,78 @@
+type: object
+description: |
+  카카오 알림톡 메시지입니다. 카카오가 승인한 템플릿을 기반으로 정보성 메시지를 발송합니다.
+
+  발송 방식은 2가지입니다.
+  - **전문 발송**: `msgType`(AT/AI), `text` 등 템플릿 전문을 본문에 직접 넣습니다. 이때 `msgType`과 `text`는 필수입니다.
+  - **템플릿 자동 치환 발송**: `sendType`을 `template`으로 두고 `senderKey`, `templateCode`만 보냅니다.
+    Bizgo API가 템플릿 코드에 맞는 전문을 만든 뒤 `destinations[].replaceWords` 값을 치환합니다.
+    이 방식에서는 `destinations[].replaceWords`가 필수이며, `msgType`·`text`·`attachment` 등 전문 필드는 문서에 없습니다.
+
+  두 방식의 조건부 필수 필드는 `x-sdk-required-if`에 있습니다. SDK는 보내기 전에 이 규칙을 검사합니다.
+required: [senderKey, templateCode]
+x-sdk-required-if:
+  - when: { field: sendType, notEquals: template }
+    required: [msgType, text]
+  - when: { field: sendType, equals: template }
+    requiredPaths: ["$.destinations[].replaceWords"]
+properties:
+  msgType:
+    type: string
+    description: |
+      카카오 비즈메시지 타입입니다. 전문 발송(`sendType`이 `template`이 아님) 시 필수이며, 빠지면 서버가 A523으로 거절합니다(템플릿 자동 치환 발송에서는 생략).
+      - `AT`: 텍스트형
+      - `AI`: 이미지형
+    enum: [AT, AI]
+    x-verified: "2026-09-28 sandbox: sendType 없이 msgType을 뺀 알림톡 발송은 A523(msgType)으로 거절"
+    x-unverified: "이미지형(AI) 발송 시 이미지를 지정하는 발송 필드가 문서에 없습니다. 템플릿에 등록된 이미지를 쓰는 것으로 추정됩니다."
+    example: AT
+  senderKey:
+    type: string
+    description: 카카오 비즈메시지 발신프로필 키입니다.
+    example: SENDER_KEY_EXAMPLE
+  templateCode:
+    type: string
+    description: 알림톡 템플릿 코드입니다.
+    example: TEMPLATE_CODE_EXAMPLE
+  sendType:
+    type: string
+    description: 템플릿 변수 자동 치환 발송 타입입니다. 템플릿 자동 치환 발송 시 필수이며 `template`을 입력합니다. 전문 발송에서는 생략합니다.
+    enum: [template]
+  responseMethod:
+    type: string
+    description: |
+      카카오 응답 방식입니다. 기본값은 `push`입니다.
+      - `push`(권장): 활성 사용자 조건에 해당하면 ACK 수신 여부를 확인하지 않고 성공 처리합니다. 조건을 만족하지 않으면 `NoSendAvailableException` 오류를 응답합니다.
+      - `polling`: `timeout` 안에 수신 결과가 도착하면 성공(`MS03`), 나머지는 성공불확실(`ME09`)로 처리합니다.
+    enum: [push, polling]
+    default: push
+  timeout:
+    type: string
+    description: polling 발송 시 수신 결과를 기다리는 시간(초)입니다. 10~86,400초이며 기본값은 180초입니다.
+    pattern: "^[0-9]+$"
+    default: "180"
+  text:
+    type: string
+    description: 알림톡 본문입니다. 전문 발송(`sendType`이 `template`이 아님) 시 필수입니다. 최대 1,300자입니다.
+    maxLength: 1300
+  title:
+    type: string
+    description: 알림톡 제목입니다(강조표기형 템플릿). 최대 50자입니다.
+    maxLength: 50
+  header:
+    type: string
+    description: 메시지 상단에 표기할 제목입니다.
+  link:
+    $ref: ./AlimtalkLink.yaml
+  attachment:
+    $ref: ./AlimtalkAttachment.yaml
+  supplement:
+    $ref: ./AlimtalkSupplement.yaml
+  price:
+    type: string
+    description: 메시지에 포함된 가격/금액/결제금액입니다.
+  currencyType:
+    type: string
+    description: 가격/금액/결제금액의 통화 단위입니다. 알려진 값은 `KRW`, `USD`, `EUR`입니다.
+    x-known-values: [KRW, USD, EUR]
+    example: KRW

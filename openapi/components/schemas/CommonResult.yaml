@@ -1,0 +1,16 @@
+type: object
+description: API Gateway 공통 결과(인증·권한·요청 형식 검증)입니다.
+required: [authCode, authResult]
+properties:
+  authCode:
+    type: string
+    description: 인증 결과 코드입니다. `A000`이면 성공입니다.
+    example: A000
+  authResult:
+    type: string
+    description: 인증 결과 메시지입니다.
+    example: Success
+  infobankTrId:
+    type: string
+    description: 인포뱅크 트랜잭션 추적 ID입니다. 문의 시 이 값을 전달합니다.
+    example: Infobank-Tracking-Id

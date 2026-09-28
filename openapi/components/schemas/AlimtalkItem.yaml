@@ -1,0 +1,12 @@
+type: object
+description: 알림톡 아이템 정보입니다.
+properties:
+  list:
+    type: array
+    description: 아이템 리스트입니다. 최소 2개, 최대 10개입니다.
+    minItems: 2
+    maxItems: 10
+    items:
+      $ref: ./AlimtalkItemListEntry.yaml
+  summary:
+    $ref: ./AlimtalkItemSummary.yaml

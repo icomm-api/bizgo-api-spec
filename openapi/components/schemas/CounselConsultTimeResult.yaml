@@ -1,0 +1,5 @@
+type: object
+description: 상담시간 조회 결과 데이터입니다.
+properties:
+  cstalk:
+    $ref: ./CounselConsultTime.yaml

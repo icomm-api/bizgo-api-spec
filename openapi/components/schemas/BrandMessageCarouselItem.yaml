@@ -1,0 +1,17 @@
+type: object
+description: 캐러셀 아이템 1개입니다.
+properties:
+  header:
+    type: string
+    description: 캐러셀 아이템 제목입니다. FC 타입에서 필수, FA 타입에서는 사용할 수 없습니다. 줄바꿈 불가, 최대 20자입니다.
+    maxLength: 20
+  message:
+    type: string
+    description: 캐러셀 아이템 본문입니다. FC 타입에서 필수, FA 타입에서는 사용할 수 없습니다. 줄바꿈 최대 2회, 최대 180자입니다.
+    maxLength: 180
+  additionalContent:
+    type: string
+    description: 부가 정보입니다. FA 타입에서는 사용할 수 없습니다. 줄바꿈 최대 1회, 최대 34자입니다.
+    maxLength: 34
+  attachment:
+    $ref: ./BrandMessageCarouselItemAttachment.yaml

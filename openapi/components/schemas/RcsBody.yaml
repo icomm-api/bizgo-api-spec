@@ -1,0 +1,17 @@
+type: object
+description: RCS 메시지 본문입니다. 입력할 수 있는 항목은 `formatId`로 지정한 포맷에 따라 다릅니다.
+x-unverified: "포맷별로 title/description/media 중 어떤 항목이 필수인지와 길이 제한이 문서화되어 있지 않습니다."
+properties:
+  title:
+    type: string
+    description: 메시지 제목입니다.
+  description:
+    type: string
+    description: 메시지 본문입니다.
+  media:
+    type: string
+    description: |
+      이미지입니다. 필드 설명은 "이미지 URL"이지만, 이미지 업로드(`POST /api/comm/v1/file/rcs`)
+      응답의 `data.data.media` 값(미디어 키)을 넣도록 안내합니다.
+    x-unverified: "외부 이미지 URL을 직접 넣을 수 있는지, 업로드로 받은 미디어 키(maapfile://...)만 허용되는지 불명확합니다."
+    example: maapfile://MEDIA_KEY_EXAMPLE

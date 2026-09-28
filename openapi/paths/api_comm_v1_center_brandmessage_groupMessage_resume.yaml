@@ -1,0 +1,26 @@
+post:
+  operationId: resumeBrandMessageGroupSend
+  summary: "브랜드메시지 동보 발송 재개"
+  description: "중지된 기본형 템플릿 동보 발송 요청을 다시 시작합니다."
+  tags: [BrandMessage]
+  x-source: "https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand"
+  x-sdk-resource: brandMessage.groupSends
+  x-sdk-method: resume
+  x-sdk-retry: rate_limit_only
+  requestBody:
+    required: true
+    content:
+      "application/json":
+        schema:
+          $ref: "../components/schemas/BrandMessageGroupSendControlRequest.yaml"
+  responses:
+    "200":
+      description: "동보 발송 재개 결과입니다."
+      content:
+        "application/json":
+          schema:
+            $ref: "../components/schemas/BrandMessageGroupSendResponse.yaml"
+    "429":
+      $ref: "../components/responses/RateLimited.yaml"
+    default:
+      $ref: "../components/responses/ErrorResponse.yaml"

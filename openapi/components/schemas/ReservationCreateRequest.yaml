@@ -1,0 +1,43 @@
+type: object
+description: |
+  예약 발송 등록 요청입니다. 통합 발송 요청과 같은 `destinations`·`messageFlow` 구조에 예약 시각(`resvSendTime`)과 예약명(`resvName`)을 더합니다.
+  예약 발송 문서에는 `groupKey`, `idempotencyKey`, `idempotencyTtl`이 없으므로 넣지 않았습니다.
+required: [destinations, messageFlow, resvSendTime]
+x-unverified: "예약 발송 요청이 idempotencyKey·idempotencyTtl·groupKey를 받는지 문서에 없습니다. 멱등성 키가 없으면 네트워크 오류 뒤 재시도할 때 예약이 중복 등록될 수 있습니다."
+properties:
+  destinations:
+    type: array
+    description: 수신자 목록입니다. 한 요청에 최대 200건까지 동보발송할 수 있습니다. 국제메시지는 국가번호를 포함한 E.164 형식(+ 제외)을 씁니다.
+    minItems: 1
+    maxItems: 200
+    items:
+      $ref: ./Destination.yaml
+  messageFlow:
+    type: array
+    description: 예약 발송할 메시지 목록입니다. 순서대로 대체발송(Fallback)됩니다.
+    minItems: 1
+    items:
+      $ref: ./ReservationMessageFlowItem.yaml
+  resvSendTime:
+    type: string
+    description: |
+      예약 발송 시각입니다. `yyyy-MM-dd HH:mm:ss` 또는 `yyyy-MM-dd'T'HH:mm:ss` 형식을 씁니다.
+      현재 시각 + 10분부터 1년 이내로 지정할 수 있습니다(너무 이르면 A316, 1년 초과 시 A331).
+      광고성 메시지는 야간 차단 시간대(20:00~08:00 KST)에 예약할 수 없습니다(A330).
+    x-format: "yyyy-MM-dd HH:mm:ss"
+    x-unverified: "시각의 기준 시간대가 명시되지 않았습니다(야간 차단 규칙만 KST로 표기). 형식·범위 제약은 영문 문서(Part B)에만 있습니다."
+    example: "2026-05-01 10:00:00"
+  resvName:
+    type: string
+    description: 예약 건을 식별하기 위한 이름입니다.
+    maxLength: 100
+    example: 문자 예약 발송
+  paymentCode:
+    type: string
+    description: 정산용 부서 코드입니다.
+    maxLength: 20
+    x-unverified: "한국어 문서(Part A)는 SMS/MMS·알림톡 예약 발송에만 paymentCode를 표기하고 국제·RCS·브랜드메시지 예약 발송에는 없습니다."
+  ref:
+    type: string
+    description: 요청 단위 참조 필드입니다. 리포트에 그대로 담겨 요청·메시지를 구분하는 데 씁니다.
+    maxLength: 200

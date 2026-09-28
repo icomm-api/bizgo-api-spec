@@ -1,0 +1,17 @@
+type: object
+description: 알림톡 템플릿 검수 요청 취소 본문입니다.
+required: [alimtalk]
+properties:
+  alimtalk:
+    type: object
+    description: 검수 요청 취소 대상 템플릿 정보입니다.
+    required: [senderKey, templateCode]
+    properties:
+      senderKey:
+        type: string
+        description: 발신프로필 키입니다.
+        example: SENDER_KEY_EXAMPLE
+      templateCode:
+        type: string
+        description: 템플릿 코드입니다.
+        example: TEMPLATE_CODE_EXAMPLE

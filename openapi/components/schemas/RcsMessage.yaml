@@ -1,0 +1,73 @@
+type: object
+description: |
+  RCS 메시지입니다. 같은 `rcs` 키로 **통합 RCS**(iOS·안드로이드 동시 지원, 신규 연동 권장)와
+  **안드로이드 RCS**(기존 안드로이드 채팅+ 연동 규격 유지용)를 모두 발송합니다.
+  `copyAllowed`, `header`, `footer`는 안드로이드 RCS 발송 문서에만 있는 필드입니다.
+x-unverified: "통합 RCS와 안드로이드 RCS를 요청에서 어떻게 구분하는지(formatId 등) 문서에 명시되어 있지 않습니다. copyAllowed/header/footer를 통합 RCS에 보냈을 때의 동작도 문서화되어 있지 않습니다."
+required: [from, formatId, brandKey, body]
+x-sdk-required-if:
+  - when: { field: header, equals: "1" }
+    required: [footer]
+properties:
+  from:
+    type: string
+    description: 발신번호입니다.
+    example: "01000000000"
+  formatId:
+    type: string
+    description: RCS 메시지 포맷(템플릿) ID입니다.
+    example: RCS_FORMAT_ID
+  brandKey:
+    type: string
+    description: RCS 브랜드 식별 키입니다.
+    example: RCS_BRAND_KEY
+  body:
+    $ref: ./RcsBody.yaml
+  buttons:
+    type: array
+    description: RCS 버튼 목록입니다.
+    items:
+      $ref: ./RcsButton.yaml
+  brandId:
+    type: string
+    description: RCS 브랜드 ID입니다.
+    example: BRAND_ID_EXAMPLE
+  groupId:
+    type: string
+    description: RCS 메시지 그룹 ID입니다.
+  expiryOption:
+    type: string
+    description: |
+      전송 타임아웃 설정입니다. 기본값은 `1`입니다.
+      - `1`: 24시간
+      - `2`: 40초
+      - `3`: 3분 10초
+      - `4`: 1시간
+    enum: ["1", "2", "3", "4"]
+    default: "1"
+  copyAllowed:
+    type: string
+    description: (안드로이드 RCS) 메시지 복사 허용 여부입니다. `0`=허용 안 함, `1`=허용. 기본값은 `0`입니다.
+    enum: ["0", "1"]
+    default: "0"
+  header:
+    type: string
+    description: (안드로이드 RCS) 광고 표시 레이블 여부입니다. `0`=표시 안 함, `1`=표시. 기본값은 `0`입니다.
+    enum: ["0", "1"]
+    default: "0"
+  footer:
+    type: string
+    description: (안드로이드 RCS) 수신거부 번호입니다. `header`가 `1`이면 필수이며 최대 100자입니다.
+    maxLength: 100
+  agencyId:
+    type: string
+    description: 대행사 ID입니다. 기본값은 `infobank`입니다.
+    default: infobank
+  agencyKey:
+    type: string
+    description: 대행사 키입니다.
+  ttl:
+    type: string
+    description: 메시지 유효 시간(초)입니다. 기본값은 `86400`입니다.
+    pattern: "^[0-9]+$"
+    default: "86400"

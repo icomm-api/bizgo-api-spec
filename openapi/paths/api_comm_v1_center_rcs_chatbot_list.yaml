@@ -1,0 +1,67 @@
+get:
+  operationId: listRcsChatbots
+  tags: [RCS]
+  summary: RCS 대화방 목록 조회
+  description: |
+    브랜드 ID를 기준으로 등록된 RCS 대화방 목록을 조회합니다. 대화방(챗봇)은 브랜드에 속해 실제로 메시지를 주고받는 단위입니다.
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/rcs
+  x-sdk-resource: rcs.chatbots
+  x-sdk-method: list
+  x-sdk-retry: safe
+  x-sdk-pagination:
+    style: offset
+    request: offset
+    size: limit
+    items: data.data.rcs.chatbot
+  x-unverified: "응답에 전체 건수나 다음 페이지 여부가 없어, 받은 건수가 limit보다 적을 때 끝으로 판단해야 합니다."
+  parameters:
+    - name: brandId
+      in: query
+      required: true
+      description: 조회할 브랜드 ID입니다.
+      schema:
+        type: string
+      example: "BRAND_ID_EXAMPLE"
+    - name: offset
+      in: query
+      required: false
+      description: 조회 시작 위치입니다. 기본값 0(영문 문서 기준).
+      schema:
+        type: integer
+        default: 0
+    - name: limit
+      in: query
+      required: false
+      description: 조회 최대 건수입니다. 기본값 1000(영문 문서 기준).
+      schema:
+        type: integer
+        default: 1000
+  responses:
+    "200":
+      description: 처리 결과입니다. 성공 여부는 `common.authCode`와 `data.code`로 확인합니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/RcsChatbotResponse.yaml
+          example:
+            common:
+              authCode: "A000"
+              authResult: "Success"
+              infobankTrId: "Infobank-Tracking-Id"
+            data:
+              code: "A000"
+              result: "Success"
+              data:
+                rcs:
+                  chatbot:
+                    - chatbotId: "CHATBOT_ID_EXAMPLE"
+                      brandId: "BRAND_ID_EXAMPLE"
+                      mdn: "01000000000"
+                      subTitle: "고객센터 대화방"
+                      status: "ready"
+                      approvalResult: "approved"
+                      registerDate: "2026-07-21 10:00:00"
+    "429":
+      $ref: ../components/responses/RateLimited.yaml
+    default:
+      $ref: ../components/responses/ErrorResponse.yaml

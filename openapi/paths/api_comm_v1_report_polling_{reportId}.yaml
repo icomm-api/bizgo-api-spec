@@ -1,0 +1,27 @@
+delete:
+  operationId: ackReportPolling
+  tags: [Report]
+  summary: 리포트 수신 확인
+  description: 가져오기(GET) 응답의 `reportId`로 수신 확인을 합니다.
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/report
+  x-sdk-resource: reports
+  x-sdk-method: ack
+  x-sdk-retry: safe
+  parameters:
+    - name: reportId
+      in: path
+      required: true
+      description: 가져오기(GET) 응답에서 받은 리포트 ID입니다.
+      schema:
+        type: string
+  responses:
+    "200":
+      description: 수신 확인 결과입니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ApiResponse.yaml
+    "429":
+      $ref: ../components/responses/RateLimited.yaml
+    default:
+      $ref: ../components/responses/ErrorResponse.yaml

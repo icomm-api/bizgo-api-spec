@@ -1,0 +1,30 @@
+type: object
+description: 알림톡 템플릿 검수 요청(파일첨부, multipart/form-data)입니다. 파일 형식은 png, jpg, jpeg, gif, pdf, hwp, doc, docx입니다.
+required: [senderKey, templateCode, comment]
+properties:
+  senderKey:
+    type: string
+    description: 발신프로필 키입니다.
+  senderKeyType:
+    type: string
+    description: |
+      발신프로필 키 타입입니다. 기본값은 `S`입니다.
+      - `G`: 그룹
+      - `S`: 발신프로필
+    enum: [G, S]
+    default: S
+  templateCode:
+    type: string
+    description: 템플릿 코드입니다.
+  comment:
+    type: string
+    description: 검수 의견 또는 문의 사항입니다. 파일첨부 요청에서는 필수입니다.
+  attachment:
+    type: array
+    description: 검수 요청에 첨부할 파일입니다. `attachment` 필드를 반복해 최대 10개까지 보낼 수 있으며, 파일당 최대 50MB, 합계 최대 100MB입니다.
+    maxItems: 10
+    items:
+      type: string
+      format: binary
+      description: 첨부 파일 바이너리입니다.
+    x-unverified: "한국어 페이지(Part A)는 단일 Binary로, Copy Markdown(Part B)은 최대 10개·파일당 50MB·합계 100MB로 설명합니다. 여러 파일을 같은 필드명으로 반복하는지 확인이 필요합니다."

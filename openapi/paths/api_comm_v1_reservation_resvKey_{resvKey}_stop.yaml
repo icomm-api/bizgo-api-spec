@@ -1,0 +1,22 @@
+post:
+  operationId: stopReservation
+  tags: [Reservation]
+  summary: 예약 중지
+  description: 발송 처리 중(PROCESSING)인 예약 건을 중지합니다. 성공하면 `status`가 `STOPPED`가 되며, 재개(`resume`)로 다시 발송할 수 있습니다.
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/reservation
+  x-sdk-resource: reservations
+  x-sdk-method: pause
+  x-sdk-retry: rate_limit_only
+  parameters:
+    - $ref: ../components/parameters/ResvKeyPath.yaml
+  responses:
+    "200":
+      description: 중지된 예약 건입니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ReservationResponse.yaml
+    "429":
+      $ref: ../components/responses/RateLimited.yaml
+    default:
+      $ref: ../components/responses/ErrorResponse.yaml

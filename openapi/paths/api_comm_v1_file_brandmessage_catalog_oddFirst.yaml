@@ -1,0 +1,26 @@
+post:
+  operationId: uploadBrandMessageCatalogOddFirstImage
+  summary: "브랜드메시지 카탈로그 홀수형 첫번째 이미지 업로드"
+  description: "카탈로그형(FG) 홀수형의 첫 번째 아이템에 쓰는 2:1 비율 이미지를 업로드합니다. 나머지 아이템과 짝수형(4·6개)은 카탈로그 이미지 업로드를 씁니다."
+  tags: [File]
+  x-source: "https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand"
+  x-sdk-resource: files
+  x-sdk-method: uploadBrandMessageCatalogOddFirst
+  x-sdk-retry: rate_limit_only
+  requestBody:
+    required: true
+    content:
+      "multipart/form-data":
+        schema:
+          $ref: "../components/schemas/BrandMessageCatalogOddFirstFileUploadRequest.yaml"
+  responses:
+    "200":
+      description: "업로드 결과입니다. 성공 시 `data.data.imgUrl`에 이미지 URL이 담깁니다."
+      content:
+        "application/json":
+          schema:
+            $ref: "../components/schemas/BrandMessageFileUploadResponse.yaml"
+    "429":
+      $ref: "../components/responses/RateLimited.yaml"
+    default:
+      $ref: "../components/responses/ErrorResponse.yaml"

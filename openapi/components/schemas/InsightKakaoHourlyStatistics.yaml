@@ -1,0 +1,10 @@
+description: 카카오(알림톡·브랜드메시지) 시간대별 반응 통계 1건입니다.
+allOf:
+  - type: object
+    properties:
+      hour:
+        type: string
+        description: 집계 시간대(0~23)입니다.
+        example: "14"
+        x-unverified: "한 자리 시간대를 0으로 채우는지(`9`/`09`) 문서에 없습니다."
+  - $ref: ./InsightKakaoStatistics.yaml

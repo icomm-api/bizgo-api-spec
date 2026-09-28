@@ -1,0 +1,6 @@
+type: object
+description: "템플릿 응답 데이터입니다."
+properties:
+  brandmessage:
+    $ref: "./BrandMessageTemplate.yaml"
+    description: "브랜드메시지 템플릿 정보입니다."

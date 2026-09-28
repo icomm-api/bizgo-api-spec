@@ -1,0 +1,7 @@
+type: object
+title: AlimTalk
+required: [alimtalk]
+additionalProperties: false
+properties:
+  alimtalk:
+    $ref: ./AlimtalkMessage.yaml

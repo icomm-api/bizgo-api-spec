@@ -1,0 +1,8 @@
+type: object
+description: "발송 예상 모수 확인 응답입니다."
+required: [common]
+properties:
+  common:
+    $ref: "./CommonResult.yaml"
+  data:
+    $ref: "./BrandMessageAudiencePossibleServiceResult.yaml"

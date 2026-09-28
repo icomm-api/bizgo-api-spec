@@ -1,0 +1,16 @@
+type: object
+description: 템플릿 이미지 정보입니다.
+properties:
+  fileId:
+    type: string
+    description: 템플릿 파일 ID입니다.
+    example: FILE_ID_EXAMPLE
+  fileName:
+    type: string
+    description: 파일 이름입니다.
+  imageWidth:
+    type: integer
+    description: 이미지 가로 크기입니다.
+  imageHeight:
+    type: integer
+    description: 이미지 세로 크기입니다.

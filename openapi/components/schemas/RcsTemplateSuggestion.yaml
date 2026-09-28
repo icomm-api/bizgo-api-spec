@@ -1,0 +1,5 @@
+type: object
+description: 템플릿 버튼 액션 정의(버튼 1개)입니다.
+properties:
+  action:
+    $ref: ./RcsTemplateAction.yaml

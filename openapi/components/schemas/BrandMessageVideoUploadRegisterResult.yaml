@@ -1,0 +1,10 @@
+type: object
+description: "업로드 등록 결과 데이터입니다."
+properties:
+  brandmessage:
+    type: object
+    description: "브랜드메시지 응답 영역입니다."
+    properties:
+      video:
+        $ref: "./BrandMessageVideoUploadChannel.yaml"
+        description: "발급된 업로드 채널 정보입니다."

@@ -1,0 +1,6 @@
+type: object
+description: 발신프로필 키만 담는 상담톡 요청입니다(채팅 기능 활성화·비활성화, 시스템 메시지 검수 요청·취소).
+required: [cstalk]
+properties:
+  cstalk:
+    $ref: ./CounselSenderRef.yaml

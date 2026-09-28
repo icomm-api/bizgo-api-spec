@@ -1,0 +1,15 @@
+type: object
+description: 캐러셀 아이템 첨부 정보입니다.
+properties:
+  button:
+    type: array
+    description: 캐러셀 아이템 버튼 목록입니다. 최대 5개이며, FC/FA 타입에 쿠폰을 함께 쓰면 최대 4개입니다.
+    maxItems: 5
+    items:
+      $ref: ./BrandMessageButton.yaml
+  image:
+    $ref: ./BrandMessageImage.yaml
+  coupon:
+    $ref: ./BrandMessageCoupon.yaml
+  commerce:
+    $ref: ./BrandMessageCommerce.yaml

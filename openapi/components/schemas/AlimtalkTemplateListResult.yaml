@@ -1,0 +1,13 @@
+type: object
+description: 템플릿 목록 조회·최근 변경 템플릿 조회 응답 데이터입니다.
+properties:
+  alimtalk:
+    type: object
+    description: 알림톡 템플릿 결과 영역입니다.
+    properties:
+      templates:
+        type: array
+        description: 조회한 템플릿 목록입니다.
+        items:
+          $ref: ./AlimtalkTemplate.yaml
+        x-unverified: "최근 변경 템플릿 조회 응답 예시에는 필드 표에 없는 `msgType`(예 AT)이 들어 있습니다."

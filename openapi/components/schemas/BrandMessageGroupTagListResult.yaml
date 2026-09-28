@@ -1,0 +1,8 @@
+type: object
+description: "그룹태그 응답 데이터입니다."
+properties:
+  groupTags:
+    type: array
+    description: "그룹태그 목록입니다."
+    items:
+      $ref: "./BrandMessageGroupTag.yaml"

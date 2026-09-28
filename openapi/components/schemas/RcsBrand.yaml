@@ -1,0 +1,128 @@
+type: object
+description: RCS 브랜드 정보입니다.
+x-unverified: "일시 필드(registerDate, approvalDate, updateDate, chatbotDate, logoDate, messagebaseDate)의 형식이 문서화되어 있지 않습니다."
+properties:
+  brandId:
+    type: string
+    description: 브랜드 ID입니다.
+    example: BRAND_ID_EXAMPLE
+  name:
+    type: string
+    description: 브랜드 이름입니다.
+  brandKey:
+    type: string
+    maxLength: 200
+    description: 브랜드 키입니다(최대 200자).
+    example: RCS_BRAND_KEY
+  registerDate:
+    type: string
+    maxLength: 30
+    description: 등록일시입니다(최대 30자).
+  approvalDate:
+    type: string
+    description: 승인일시입니다.
+  updateDate:
+    type: string
+    description: 수정일시입니다.
+  status:
+    type: string
+    maxLength: 1300
+    description: 브랜드의 상태입니다(최대 1300자). 문서 예시 값은 `ready`입니다.
+    x-unverified: "상태 값 목록이 문서화되어 있지 않고, 길이 제한 1300자는 상태 코드로 보기에 이례적입니다."
+  mediaUrl:
+    type: array
+    description: 이미지 파일 ID와 URL 및 사용 유형 정보입니다.
+    items:
+      $ref: ./RcsBrandMediaUrl.yaml
+  chatbotDate:
+    type: string
+    description: 브랜드 내 등록된 대화방 중 가장 최근에 변경된 대화방의 일시입니다.
+  logoDate:
+    type: string
+    description: 로고 이미지 중 가장 최근에 변경된 일시입니다.
+  messagebaseDate:
+    type: string
+    description: 브랜드 내 등록된 템플릿 중 가장 최근에 변경된 템플릿의 일시입니다.
+  description:
+    type: string
+    description: 브랜드 설명에 등록된 내용입니다.
+  tel:
+    type: string
+    description: 브랜드 홈에 노출될 전화번호입니다.
+  menus:
+    type: array
+    description: 메뉴입니다.
+    items:
+      $ref: ./RcsBrandMenu.yaml
+  categoryId:
+    type: object
+    description: 브랜드 카테고리 ID입니다.
+    x-unverified: "문서 타입은 Object이지만 하위 필드가 없고, ID 값이므로 문자열일 가능성이 있습니다."
+  categoryName:
+    type: array
+    description: 브랜드 카테고리명입니다.
+    items:
+      type: object
+      description: 브랜드 카테고리명 항목입니다.
+    x-unverified: "문서 타입은 Object Array이지만 하위 필드가 없고, 이름 값이므로 문자열일 가능성이 있습니다."
+  subCategoryId:
+    type: object
+    description: 브랜드 하위 카테고리 ID입니다.
+    x-unverified: "문서 타입은 Object이지만 하위 필드가 없고, ID 값이므로 문자열일 가능성이 있습니다."
+  subCategoryName:
+    type: object
+    description: 브랜드 하위 카테고리명입니다.
+    x-unverified: "문서 타입은 Object이지만 하위 필드가 없고, 이름 값이므로 문자열일 가능성이 있습니다."
+  categoryOpt:
+    type: object
+    description: 검색용 키워드입니다.
+    x-unverified: "문서 타입은 Object이지만 하위 필드가 없습니다."
+  zipCode:
+    type: array
+    description: 브랜드 홈에 표시될 우편번호입니다.
+    items:
+      type: object
+      description: 우편번호 항목입니다.
+    x-unverified: "문서 타입은 Object Array이지만 하위 필드가 없고, 우편번호는 문자열일 가능성이 있습니다."
+  roadAddress:
+    type: string
+    description: 브랜드 홈에 표시되는 도로명주소입니다.
+  detailAddress:
+    type: string
+    description: 브랜드 홈에 표시되는 상세주소입니다.
+  email:
+    type: string
+    description: 브랜드 홈에 표시되는 이메일 주소입니다.
+  webSiteUrl:
+    type: string
+    description: 브랜드 홈에 표시되는 홈페이지 주소입니다.
+  approvalReason:
+    type: string
+    description: 검수 시 반려 사유입니다.
+  brandFeedUrl:
+    type: string
+    description: 브랜드 소식 URL입니다.
+  initTab:
+    type: string
+    description: 단말에 표시되는 브랜드 홈의 기본 탭입니다. 알려진 값은 `FEED`입니다.
+    x-known-values: [FEED]
+    x-unverified: "FEED 외의 탭 값이 문서화되어 있지 않습니다."
+  initFeedItems:
+    type: string
+    description: "`initTab`이 `FEED`인 경우 소식 탭에 표시할 메뉴입니다."
+  templateColor:
+    type: string
+    description: 브랜드 내 등록되는 템플릿의 버튼 컬러 값입니다.
+  bizInfoYn:
+    type: string
+    description: 브랜드 소식 탭에 운영정보를 사용할지 여부입니다(`Y`/`N`).
+    x-unverified: "Y 외의 값(N 등)이 문서에 명시되어 있지 않습니다."
+  bizInfoTitle:
+    type: string
+    description: "`bizInfoYn`이 `Y`인 경우 운영정보 제목입니다."
+  bizInfoContent:
+    type: string
+    description: "`bizInfoYn`이 `Y`인 경우 운영정보 내용입니다."
+  saftyStatusYn:
+    type: string
+    description: 안심마크 지정 기업 여부입니다. 필드명은 문서 표기(`safty`)를 따릅니다.

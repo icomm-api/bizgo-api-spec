@@ -1,0 +1,11 @@
+type: object
+description: 예약 수신자 추가 요청입니다.
+required: [destinations]
+properties:
+  destinations:
+    type: array
+    description: 추가할 수신자 목록입니다. 한 번에 최대 1,000건까지 추가할 수 있습니다.
+    minItems: 1
+    maxItems: 1000
+    items:
+      $ref: ./Destination.yaml

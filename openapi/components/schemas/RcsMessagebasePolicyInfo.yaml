@@ -1,0 +1,25 @@
+type: object
+description: 리치카드, 오픈리치카드에 포함된 content에 대한 검증 정책입니다.
+properties:
+  buttonsAllowed:
+    type: boolean
+    description: 버튼 사용 가능 여부입니다.
+  adHeaderAllowed:
+    type: boolean
+    description: 헤더 광고 문구 사용 여부입니다.
+  adBodyAllowed:
+    type: boolean
+    description: 본문 광고 문구 사용 여부입니다.
+  cardCount:
+    type: integer
+    description: 카드 개수입니다.
+  maxButtonCount:
+    type: integer
+    description: 최대 버튼 개수입니다.
+  maxDescriptionSize:
+    type: integer
+    description: description 영역 최대 글자 수입니다.
+  maxMediaSize:
+    type: integer
+    description: 미디어 최대 크기입니다.
+    x-unverified: "단위(byte 등)가 문서화되어 있지 않습니다."

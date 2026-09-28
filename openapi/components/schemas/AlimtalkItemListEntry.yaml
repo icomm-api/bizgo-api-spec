@@ -1,0 +1,12 @@
+type: object
+description: 알림톡 아이템 리스트의 항목 1개입니다.
+required: [title, description]
+properties:
+  title:
+    type: string
+    description: 아이템 타이틀입니다. 최대 6자입니다.
+    maxLength: 6
+  description:
+    type: string
+    description: 아이템 부가정보입니다. 최대 23자입니다.
+    maxLength: 23

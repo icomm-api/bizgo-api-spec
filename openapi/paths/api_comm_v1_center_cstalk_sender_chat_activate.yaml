@@ -1,0 +1,43 @@
+post:
+  operationId: activateCounselChat
+  tags: [Counsel]
+  summary: 채팅 기능 활성화
+  description: |
+    카카오톡 채널의 채팅 기능을 활성화합니다.
+
+    상담톡 요청·응답에는 최종 사용자 식별자(`userKey`)와 상담 내용이 들어가므로 개인정보로 취급하고 본문을 로그에 남기지 않습니다.
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-counsel
+  x-sdk-resource: counsel.channels
+  x-sdk-method: activateChat
+  x-sdk-retry: rate_limit_only
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/CounselSenderRequest.yaml
+        examples:
+          sender:
+            summary: 발신프로필 지정
+            value:
+              cstalk:
+                senderKey: SENDER_KEY_EXAMPLE
+  responses:
+    "200":
+      description: 처리 결과입니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ApiResponse.yaml
+          example:
+            common:
+              authCode: A000
+              authResult: Success
+              infobankTrId: Infobank-Tracking-Id
+            data:
+              code: A000
+              result: Success
+    "429":
+      $ref: ../components/responses/RateLimited.yaml
+    default:
+      $ref: ../components/responses/ErrorResponse.yaml

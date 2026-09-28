@@ -1,0 +1,5 @@
+type: object
+description: 발신프로필 키로 조회(`GET /center/kakao/sender`) 응답 데이터입니다.
+properties:
+  kakao:
+    $ref: ./KakaoSenderProfileResult.yaml

@@ -1,0 +1,6 @@
+type: object
+description: 시스템 메시지 등록 요청입니다.
+required: [cstalk]
+properties:
+  cstalk:
+    $ref: ./CounselSystemMessageDraft.yaml

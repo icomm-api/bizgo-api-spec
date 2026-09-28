@@ -1,0 +1,14 @@
+type: object
+required: [file]
+properties:
+  file:
+    type: string
+    format: binary
+    description: "업로드할 카탈로그(FG) 아이템 이미지 파일입니다. 1:1 비율 이미지를 씁니다. 홀수형의 첫 번째 아이템(2:1)은 카탈로그 홀수형 첫번째 이미지 업로드를 씁니다."
+    x-unverified: "형식·용량·권장 크기가 문서에 없습니다(이 엔드포인트는 Copy Markdown(Part B)에 없음)."
+  fileKey:
+    type: string
+    description: "업로드 파일을 식별하는 키입니다. 생략하면 서버가 자동으로 생성합니다."
+  imageName:
+    type: string
+    description: "업로드 파일의 이름입니다. 생략하면 확장자를 제외한 파일명을 사용합니다."

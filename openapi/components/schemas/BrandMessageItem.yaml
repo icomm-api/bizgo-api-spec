@@ -1,0 +1,8 @@
+type: object
+description: 브랜드메시지 와이드 아이템 요소입니다(와이드 리스트형, FL).
+properties:
+  list:
+    type: array
+    description: 아이템 목록입니다.
+    items:
+      $ref: ./BrandMessageItemListEntry.yaml

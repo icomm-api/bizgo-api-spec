@@ -1,0 +1,18 @@
+type: object
+description: |
+  네이버 톡톡 첨부 정보 객체입니다(이미지, 버튼, 쿠폰).
+  쿠폰(`gift`)을 첨부하면 이미지는 첨부되지 않습니다(리포트 코드 72105).
+properties:
+  imageUrl:
+    type: string
+    description: 첨부 이미지 URL입니다.
+  imageHashId:
+    type: string
+    description: 첨부 이미지 hashId입니다. 이미지 hashId에 해당하는 파트너 키나 템플릿 그룹키를 써야 합니다(리포트 코드 72011, 72104).
+  buttons:
+    type: array
+    description: 버튼 목록입니다. 템플릿에 필요한 버튼 개수와 같아야 합니다(리포트 코드 72004).
+    items:
+      $ref: ./NaverTalkButton.yaml
+  gift:
+    $ref: ./NaverTalkGift.yaml

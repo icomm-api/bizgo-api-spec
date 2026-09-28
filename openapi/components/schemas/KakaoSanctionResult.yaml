@@ -1,0 +1,9 @@
+type: object
+description: 제재 조회 응답 데이터입니다.
+properties:
+  kakao:
+    type: object
+    description: 카카오 비즈메시지 응답 데이터입니다.
+    properties:
+      abusing:
+        $ref: ./KakaoSanction.yaml

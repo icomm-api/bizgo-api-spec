@@ -1,0 +1,14 @@
+type: object
+description: 브랜드메시지 캐러셀 객체입니다(FC 캐러셀 피드, FA 캐러셀 커머스).
+properties:
+  head:
+    $ref: ./BrandMessageCarouselHead.yaml
+  list:
+    type: array
+    description: 캐러셀 아이템 목록입니다. 최소 2개, 최대 10개입니다.
+    minItems: 2
+    maxItems: 10
+    items:
+      $ref: ./BrandMessageCarouselItem.yaml
+  tail:
+    $ref: ./BrandMessageCarouselTail.yaml

@@ -1,0 +1,60 @@
+post:
+  operationId: onCounselReferenceWebhook
+  tags: [Webhook]
+  summary: 상담톡 사용자 메타 정보 수신(Webhook)
+  description: |
+    사용자가 상담 연결을 요청한 시점의 메타 정보가 전달됩니다. 현재 메타 정보가 없으면 `lastReference`에 마지막 메타 정보가 옵니다.
+
+    메타 정보(`extra`)는 고객사 웹/모바일 페이지의 상담 연결 버튼이 카카오 URL로 넘깁니다. 이 두 URL은 비즈고 API가 아니라
+    최종 사용자의 브라우저가 여는 카카오 페이지이므로(API Key 불필요, JSON 응답 없이 카카오톡 상담 화면으로 이동) SDK 메서드나 웹훅으로 만들지 않고 여기에 적습니다.
+    - `POST https://bizmessage.kakao.com/chat/open` (`application/x-www-form-urlencoded`): `uuid`(필수, 최대 40자, 발신프로필 키이며 채널 @아이디가 아님), `extra`(최대 1000자), `bot`(`true` 봇 연결 / `false` 상담원 연결(기본) / `auto` 유지 중인 세션 연결), `event`(최대 100자, 봇 전환 이벤트명), `app_open_type`(`direct` 또는 `modal`)
+    - `GET https://bizmessage.kakao.com/chat/open/{uuid}`: 같은 값을 쿼리로 전달하며 `extra`는 최대 50자입니다.
+    - PC에서 메타 정보를 넘길 때는 새 창이나 팝업(최소 권장 1024 x 800)으로 열고, 파트너 페이지를 거쳐 카카오 로그인으로 이동하면 `https://bizmessage.kakao.com/chat/includeScript` 스크립트를 포함합니다.
+
+    `extra`에는 개인정보를 넣지 않는 것을 권장합니다(URL·브라우저 기록에 남을 수 있음).
+
+    등록한 고객 Webhook URL 뒤에 `/cstalk/reference`를 붙인 주소로 POST됩니다. HTTP 200과 `{"code": "A000", "result": "Success"}` 형식의 응답을 받아야 정상 처리되며,
+    응답이 없거나 규격이 다르면 최대 3회 재시도하고 모두 실패하면 다시 보내지 않습니다(Connect/Read Timeout 각 5초).
+    재시도로 같은 이벤트가 다시 올 수 있으므로 멱등 처리하고, 수신 순서는 보장되지 않습니다. 세션 연결은 `sessionId`로 합니다.
+
+    서명: 상담톡 웹훅에는 서명 헤더(`X-IB-Timestamp`/`X-IB-Signature`)가 없습니다. 서명은 리포트·MO 웹훅에만 적용됩니다.
+    수신 엔드포인트에는 HTTPS와 발신 IP 허용 목록([방화벽 및 보안 프로토콜](https://developers.bizgo.io/api-sdk/api-reference#firewall-and-security))을 적용합니다.
+
+    본문에는 최종 사용자 식별자와 상담 내용이 들어 있으므로 개인정보로 취급하고 로그·APM·에러 리포트에 본문을 남기지 않습니다.
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-counsel
+  x-sdk-webhook: counselReference
+  security: []
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/CounselReferenceWebhookPayload.yaml
+        example:
+          msgKey: 20260424104234546POM101182450000
+          userKey: USER_KEY_EXAMPLE
+          senderKey: SENDER_KEY_EXAMPLE
+          serviceType: CSTALK
+          msgType: REFERENCE
+          requestType: reference
+          sendTime: "2026-04-24T10:42:34.546+09:00"
+          reportTime: "2026-04-24T10:42:35.120+09:00"
+          kakaoTime: "2026-04-24T10:42:35.000+09:00"
+          sessionId: SESSION_ID_EXAMPLE
+          reference:
+            extra: orderNo=1234
+          lastReference:
+            extra: orderNo=1233
+            bot: "false"
+            bot_event: 상담시작
+            created_at: "2026-04-23T09:30:00.000+09:00"
+  responses:
+    "200":
+      description: 수신 성공 응답입니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/CounselWebhookAck.yaml
+          example:
+            code: A000
+            result: Success

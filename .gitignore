@@ -1,0 +1,24 @@
+# dependencies / build
+node_modules/
+.venv/
+__pycache__/
+*.pyc
+
+# secrets — never commit
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+secrets/
+
+# local tool output (may contain response data)
+tools/sandbox-check/out/
+*.log
+
+# editors / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

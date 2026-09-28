@@ -1,0 +1,29 @@
+get:
+  operationId: getRcsMessageButtonInsight
+  tags: [Insight]
+  summary: RCS 메시지 버튼 클릭 통계
+  description: |
+    RCS 메시지에 포함된 버튼의 클릭 수를 카드·버튼 단위로 조회합니다.
+    응답 데이터는 `data.data`가 아니라 `data.rcs`에 있습니다.
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/insight
+  x-sdk-resource: insights.rcs
+  x-sdk-method: getMessageButton
+  x-sdk-retry: safe
+  x-sdk-result: data.rcs
+  parameters:
+    - $ref: ../components/parameters/RcsBrandIdPath.yaml
+    - $ref: ../components/parameters/InsightStartDateQuery.yaml
+    - $ref: ../components/parameters/InsightEndDateQuery.yaml
+    - $ref: ../components/parameters/InsightRcsGroupIdQuery.yaml
+    - $ref: ../components/parameters/InsightRcsChatbotIdQuery.yaml
+  responses:
+    "200":
+      description: 일자별 버튼 클릭 통계입니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/InsightRcsMessageButtonStatResponse.yaml
+    "429":
+      $ref: ../components/responses/RateLimited.yaml
+    default:
+      $ref: ../components/responses/ErrorResponse.yaml

@@ -1,0 +1,33 @@
+type: object
+description: "친구 그룹 등록, 전화번호 추가·삭제 요청입니다. 전화번호는 `fileKey` 또는 `phoneNumbers`로 전달합니다."
+required: [friendGroup]
+properties:
+  friendGroup:
+    type: object
+    description: "친구 그룹 정보입니다."
+    required: [senderKey, friendGroupKey]
+    x-unverified: "`fileKey`와 `phoneNumbers`를 둘 다 보내거나 둘 다 생략할 때의 동작이 문서에 없습니다. 친구 그룹 등록 시 `friendGroupKey`를 고객이 정하는지(요청 필수)만 명시되어 있습니다."
+    properties:
+      senderKey:
+        type: string
+        description: "발신프로필 키입니다."
+        example: SENDER_KEY_EXAMPLE
+      friendGroupKey:
+        type: string
+        description: "친구 그룹 키입니다. 1~50자이며 한글·영문·숫자와 일부 특수문자를 쓸 수 있습니다."
+        minLength: 1
+        maxLength: 50
+        example: FRIEND_GROUP_KEY_EXAMPLE
+      fileKey:
+        type: string
+        description: "친구 그룹 파일 업로드로 발급받은 임시 파일 키입니다."
+        example: FILE_KEY_001
+      phoneNumbers:
+        type: array
+        description: "전화번호 목록입니다. 1~10,000건입니다."
+        items:
+          type: string
+          description: "전화번호입니다."
+          example: "01000000000"
+        minItems: 1
+        maxItems: 10000

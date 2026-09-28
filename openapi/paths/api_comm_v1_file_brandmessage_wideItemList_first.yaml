@@ -1,0 +1,36 @@
+post:
+  operationId: uploadBrandMessageWideItemListFirstImage
+  summary: 브랜드메시지 와이드 리스트 첫번째 이미지 업로드
+  description: 와이드 리스트형 브랜드메시지의 첫 번째 리스트 이미지에 사용할 이미지를 업로드합니다.
+  tags: [File]
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand
+  x-sdk-resource: files
+  x-sdk-method: uploadBrandMessageWideItemListFirst
+  x-sdk-retry: rate_limit_only
+  requestBody:
+    required: true
+    content:
+      multipart/form-data:
+        schema:
+          $ref: ../components/schemas/BrandMessageWideItemListFirstFileUploadRequest.yaml
+  responses:
+    "200":
+      description: 업로드 결과입니다. 성공 시 `data.data.imgUrl`에 브랜드메시지에서 사용할 이미지 URL이 담깁니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/BrandMessageFileUploadResponse.yaml
+          example:
+            common:
+              authCode: A000
+              authResult: Success
+              infobankTrId: Infobank-Tracking-Id
+            data:
+              code: A000
+              result: Success
+              data:
+                imgUrl: https://example.kakao.image/brand-image.jpg
+    "429":
+      $ref: ../components/responses/RateLimited.yaml
+    default:
+      $ref: ../components/responses/ErrorResponse.yaml

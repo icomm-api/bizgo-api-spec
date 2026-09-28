@@ -1,0 +1,49 @@
+get:
+  operationId: getMessageStatistics
+  tags: [Message]
+  summary: 통계 조회
+  description: 기간·채널 기준으로 접수 및 리포트 통계를 일자별로 조회합니다.
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/insight
+  x-sdk-resource: messages
+  x-sdk-method: statistics
+  x-sdk-retry: safe
+  parameters:
+    - name: startDate
+      in: query
+      required: true
+      description: 조회 시작일(YYYYMMDD)입니다.
+      schema:
+        type: string
+        pattern: "^[0-9]{8}$"
+      example: "20251101"
+    - name: endDate
+      in: query
+      required: false
+      description: 조회 종료일(YYYYMMDD)입니다.
+      schema:
+        type: string
+        pattern: "^[0-9]{8}$"
+    - name: serviceType
+      in: query
+      required: false
+      description: 채널 타입입니다(SMS, MMS, RCS, ALIMTALK, BRANDMESSAGE).
+      schema:
+        type: string
+        x-known-values: [SMS, MMS, RCS, ALIMTALK, BRANDMESSAGE]
+    - name: groupKey
+      in: query
+      required: false
+      description: 메시지 그룹 키입니다.
+      schema:
+        type: string
+  responses:
+    "200":
+      description: 일자별 통계입니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/MessageStatisticsResponse.yaml
+    "429":
+      $ref: ../components/responses/RateLimited.yaml
+    default:
+      $ref: ../components/responses/ErrorResponse.yaml

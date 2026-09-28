@@ -1,0 +1,16 @@
+type: object
+description: 캐러셀 더보기 버튼 정보입니다.
+required: [urlMobile]
+properties:
+  urlMobile:
+    type: string
+    description: 모바일 환경에서 버튼 클릭 시 이동할 URL입니다.
+  urlPc:
+    type: string
+    description: PC 환경에서 버튼 클릭 시 이동할 URL입니다.
+  schemeIos:
+    type: string
+    description: iOS 환경에서 버튼 클릭 시 실행할 커스텀 스킴입니다.
+  schemeAndroid:
+    type: string
+    description: Android 환경에서 버튼 클릭 시 실행할 커스텀 스킴입니다.

@@ -1,0 +1,25 @@
+type: object
+description: 템플릿 본문 영역의 검증 파라미터 정의입니다.
+required: [param, isMandatory]
+properties:
+  param:
+    type: string
+    description: 검증 파라미터명입니다. 영문, 숫자, `_`만 쓸 수 있습니다(영문 문서 기준).
+    pattern: "^[A-Za-z0-9_]+$"
+  isMandatory:
+    type: string
+    description: 필수 여부입니다.
+    x-unverified: "값 형식(Y/N, true/false 등)이 문서화되어 있지 않습니다."
+  type:
+    type: string
+    description: 기술 검증 타입입니다.
+    x-unverified: "타입 값 목록이 문서화되어 있지 않습니다."
+  strSize:
+    type: string
+    description: 문자열 최대 크기입니다. 문서상 문자열입니다.
+  imageWidth:
+    type: string
+    description: 이미지 최소 가로 크기입니다. 문서상 문자열입니다.
+  imageHeight:
+    type: string
+    description: 이미지 최소 세로 크기입니다. 문서상 문자열입니다.

@@ -1,0 +1,11 @@
+type: object
+properties:
+  media:
+    type: string
+    description: RCS 메시지 본문(`body.media`)에 넣을 미디어 키입니다.
+    example: maapfile://MEDIA_KEY_EXAMPLE
+  expired:
+    type: string
+    description: 미디어 키 만료 일시(ISO 8601)입니다.
+    format: date-time
+    example: "2027-04-24T12:16:38+09:00"

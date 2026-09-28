@@ -1,0 +1,11 @@
+type: object
+description: 상담톡 이용 활성화·비활성화 대상입니다.
+required: [senderKey]
+properties:
+  senderKey:
+    type: string
+    description: 발신프로필 키입니다.
+    example: SENDER_KEY_EXAMPLE
+  committalCompany:
+    type: string
+    description: 위탁사명입니다. 사전에 등록된 경우 생략할 수 있습니다.

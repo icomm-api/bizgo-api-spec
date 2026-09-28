@@ -1,0 +1,8 @@
+type: object
+description: "동영상 업로드 등록 응답입니다. `A000`은 업로드 채널 발급 성공만 뜻하며, 사용 가능 여부는 동영상 조회의 `status`로 확인합니다."
+required: [common]
+properties:
+  common:
+    $ref: "./CommonResult.yaml"
+  data:
+    $ref: "./BrandMessageVideoUploadRegisterServiceResult.yaml"

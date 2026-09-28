@@ -1,0 +1,16 @@
+type: apiKey
+in: header
+name: Authorization
+description: |
+  콘솔 `발송관리 > 연동관리`에서 발급한 통합 API Key를 **접두어 없이** `Authorization` 헤더 값으로 보냅니다.
+
+  ```
+  Authorization: {ApiKey}
+  ```
+
+  `ApiKey {key}`나 `Bearer {key}` 형식은 HTTP 401 / `A401`로 거절됩니다(2026-09-23 sandbox 확인).
+  일부 가이드 문서의 표기와 다르므로 주의합니다.
+
+  API Key는 허용 IP(ACL)로 등록된 서버에서만 쓸 수 있으며, 운영과 sandbox에서 같은 키를 씁니다.
+  키는 서버 환경변수 또는 시크릿 저장소에만 보관하고 브라우저·앱에 노출하지 않습니다.
+x-verified: "2026-09-23 sandbox: raw key → 200/A000, `ApiKey ` 접두어 → 401/A401, `Bearer ` 접두어 → 401/A401"

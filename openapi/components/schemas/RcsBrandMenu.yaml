@@ -1,0 +1,13 @@
+type: object
+description: 브랜드 홈 메뉴입니다.
+x-unverified: "buttonType에 들어갈 수 있는 값과 applink·weblink 사용 조건이 문서화되어 있지 않습니다."
+properties:
+  buttonType:
+    type: string
+    description: 버튼 타입입니다.
+  applink:
+    type: string
+    description: 앱 링크입니다.
+  weblink:
+    type: string
+    description: 웹 링크입니다.

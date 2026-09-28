@@ -1,0 +1,13 @@
+name: X-IB-Signature
+in: header
+required: true
+description: |
+  보안 서명입니다. `HmacSHA256(secret, X-IB-Timestamp)`로 생성됩니다(key = 웹훅 secret, message = `X-IB-Timestamp` 헤더 값).
+  서명 헤더는 `X-IB-Signature`와 `X-IB-Timestamp` 두 개만 사용합니다.
+  secret은 웹훅 검증 전용 값이며 비즈고에 요청하면 별도로 전달받습니다.
+  수신 측은 서명과 timestamp 허용 오차를 검증하고, HTTPS와 발신 IP 허용 목록을 함께 적용하며, `msgKey` 기준으로 중복 처리하고,
+  중요한 판단 전에는 조회 API로 결과를 확인하는 것을 권장합니다.
+x-unverified: >-
+  서명 출력 인코딩(hex/base64)은 아직 확인되지 않았습니다. SDK는 hex(대소문자 무시)와 base64를 모두 허용합니다.
+schema:
+  type: string

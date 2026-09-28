@@ -1,0 +1,13 @@
+type: object
+description: ITEM_LIST 타입의 아이템 하이라이트 영역입니다.
+required: [description]
+properties:
+  title:
+    type: string
+    description: 하이라이트 제목입니다.
+  description:
+    type: string
+    description: 하이라이트 추가 설명입니다.
+  imgUrl:
+    type: string
+    description: 하이라이트 이미지 URL입니다.

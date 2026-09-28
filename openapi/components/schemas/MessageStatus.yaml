@@ -1,0 +1,56 @@
+type: object
+description: 메시지 1건의 접수·발송·리포트 상태입니다. 대체발송이 일어나면 같은 msgKey로 채널별 항목이 여러 개 있습니다.
+properties:
+  msgKey:
+    type: string
+    description: 메시지 키입니다.
+  serviceType:
+    type: string
+    description: 서비스 타입입니다.
+    x-known-values: [SMS, MMS, RCS, ALIMTALK, BRANDMESSAGE]
+  msgType:
+    type: string
+    description: 메시지 타입입니다.
+  to:
+    type: string
+    description: 수신번호입니다.
+  fallback:
+    type: string
+    description: 대체발송 여부입니다.
+    enum: [Y, N]
+  responseCode:
+    type: string
+    description: 접수 결과 코드입니다.
+  responseText:
+    type: string
+    description: 접수 결과 메시지입니다.
+  requestTime:
+    type: string
+    description: 요청 시각(ISO 8601)입니다.
+    x-format: "yyyy-MM-dd'T'HH:mm:ssXXX"
+  sendTime:
+    type: string
+    description: 발송 시각(ISO 8601)입니다.
+    x-format: "yyyy-MM-dd'T'HH:mm:ssXXX"
+  reportTime:
+    type: string
+    description: 리포트 시각(ISO 8601)입니다.
+    x-format: "yyyy-MM-dd'T'HH:mm:ssXXX"
+  reportType:
+    type: string
+    description: 리포트 타입입니다.
+  reportCode:
+    type: string
+    description: 리포트 코드입니다.
+  reportText:
+    type: string
+    description: 리포트 결과 메시지입니다.
+  userType:
+    type: string
+    description: 채널 친구 여부입니다(브랜드메시지 전용).
+  carrier:
+    type: string
+    description: 이통사 코드입니다.
+  ref:
+    type: string
+    description: 요청 시 전달한 참조 필드입니다.

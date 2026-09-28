@@ -1,0 +1,12 @@
+type: object
+description: 브랜드메시지 동영상 요소입니다(FP).
+required: [videoUrl]
+properties:
+  videoUrl:
+    type: string
+    description: 카카오TV 동영상 URL입니다. 최대 500자입니다.
+    maxLength: 500
+  thumbnailUrl:
+    type: string
+    description: 동영상 썸네일 URL입니다. 비공개 동영상이면 필수입니다. 최대 500자입니다.
+    maxLength: 500

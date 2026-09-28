@@ -1,0 +1,59 @@
+type: object
+description: |
+  공통 포맷 또는 템플릿 양식의 상세 정보입니다. 공통 포맷 상세 조회는 모든 필드를,
+  템플릿 양식 상세 조회는 그중 일부(formatId, templateName, body, buttons, agencyId, brandId,
+  messagebaseformId, policyInfo.maxButtonCount/maxMediaSize, registerDate, updateDate, productCode, spec, cardType)를 문서화합니다.
+properties:
+  formatId:
+    type: string
+    description: 템플릿 포맷 ID입니다.
+  templateName:
+    type: string
+    description: 템플릿 등록 시 입력된 템플릿 명칭입니다.
+  body:
+    type: array
+    description: body 정의입니다.
+    items:
+      $ref: ./RcsTemplateBodyParam.yaml
+    x-unverified: "템플릿 양식 상세 조회 문서에는 body 항목의 하위 필드가 없습니다(공통 포맷 상세와 같은 구조로 가정)."
+  buttons:
+    $ref: ./RcsTemplateButton.yaml
+    x-unverified: "표에는 Object(suggestions 배열 포함)로 표기되어 있으나 템플릿 양식 상세 응답 예시는 배열(`[]`)이고, 템플릿 등록 요청의 buttons는 Object Array입니다. suggestions 항목의 하위 필드도 조회 응답에는 문서화되어 있지 않습니다."
+  agencyId:
+    type: string
+    description: 대행사 ID입니다.
+  brandId:
+    type: string
+    description: 브랜드 ID입니다.
+  messagebaseformId:
+    type: string
+    description: 템플릿의 원형인 템플릿 양식 ID입니다.
+  policyInfo:
+    $ref: ./RcsMessagebasePolicyInfo.yaml
+  status:
+    type: string
+    description: 템플릿의 상태입니다.
+  approvalResult:
+    type: string
+    description: 템플릿의 승인 상태입니다.
+  registerDate:
+    type: string
+    description: 템플릿 등록일시입니다.
+  approvalDate:
+    type: string
+    description: 템플릿 승인일시입니다.
+  updateDate:
+    type: string
+    description: 템플릿 수정일시입니다.
+  updateId:
+    type: string
+    description: 템플릿 수정 계정 ID입니다.
+  productCode:
+    type: string
+    description: 메시지 상품 종류입니다.
+  spec:
+    type: string
+    description: 레이아웃 구조입니다.
+  cardType:
+    type: string
+    description: 카드 종류입니다.

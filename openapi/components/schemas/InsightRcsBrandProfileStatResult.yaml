@@ -1,0 +1,8 @@
+type: object
+description: RCS 응답 정보입니다.
+properties:
+  stat:
+    type: array
+    description: 일자별 노출 통계 목록입니다.
+    items:
+      $ref: ./InsightRcsBrandProfileStat.yaml

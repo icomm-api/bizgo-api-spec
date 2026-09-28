@@ -1,0 +1,11 @@
+type: object
+properties:
+  fileKey:
+    type: string
+    description: 업로드 후 발급된 파일 키입니다. 메시지 본문의 `fileKey`에 씁니다.
+    example: FILE_KEY_001
+  expired:
+    type: string
+    description: 파일 키 만료 일시(ISO 8601)입니다.
+    format: date-time
+    example: "2027-04-24T10:45:24+09:00"

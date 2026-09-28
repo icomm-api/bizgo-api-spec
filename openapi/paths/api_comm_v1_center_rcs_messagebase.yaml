@@ -1,0 +1,139 @@
+get:
+  operationId: getRcsTemplate
+  tags: [RCS]
+  summary: RCS 템플릿 상세 조회
+  description: |
+    메시지베이스 ID를 기준으로 등록된 RCS 템플릿 상세 정보를 조회합니다.
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/rcs
+  x-sdk-resource: rcs.templates
+  x-sdk-method: get
+  x-sdk-retry: safe
+  parameters:
+    - name: messagebaseId
+      in: query
+      required: true
+      description: 메시지베이스 ID입니다.
+      schema:
+        type: string
+      example: "MESSAGEBASE_ID_EXAMPLE"
+  responses:
+    "200":
+      description: 처리 결과입니다. 성공 여부는 `common.authCode`와 `data.code`로 확인합니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/RcsTemplateResponse.yaml
+          example:
+            common:
+              authCode: "A000"
+              authResult: "Success"
+              infobankTrId: "Infobank-Tracking-Id"
+            data:
+              code: "A000"
+              result: "Success"
+              data:
+                rcs:
+                  status: "ready"
+                  approvalResult: "승인"
+                  productCode: "lms"
+                  spec: "openrichcard"
+                  cardType: "descriptionNew"
+                  body:
+                    description: "#{이름}님, 안녕하세요."
+                    mTitle: "안내 메시지"
+                    title: "안내 메시지"
+                  brandKey: "RCS_BRAND_KEY"
+                  formatId: "FORMAT_ID_EXAMPLE"
+    "429":
+      $ref: ../components/responses/RateLimited.yaml
+    default:
+      $ref: ../components/responses/ErrorResponse.yaml
+post:
+  operationId: createRcsTemplate
+  tags: [RCS]
+  summary: RCS 템플릿 등록
+  description: |
+    브랜드에 RCS 템플릿을 등록합니다. 응답의 `messagebaseId`를 발송 시 `formatId` 필드에 넣습니다(영문 문서 기준).
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/rcs
+  x-sdk-resource: rcs.templates
+  x-sdk-method: create
+  x-sdk-retry: rate_limit_only
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/RcsTemplateRequest.yaml
+        example:
+          rcs:
+            brandId: BRAND_ID_EXAMPLE
+            templateName: 발송 안내 템플릿
+            body: []
+            buttons: []
+  responses:
+    "200":
+      description: 처리 결과입니다. 성공 여부는 `common.authCode`와 `data.code`로 확인합니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/RcsTemplateIdResponse.yaml
+          example:
+            common:
+              authCode: "A000"
+              authResult: "Success"
+              infobankTrId: "Infobank-Tracking-Id"
+            data:
+              code: "A000"
+              result: "Success"
+              data:
+                rcs:
+                  messagebaseId: "MESSAGEBASE_ID_EXAMPLE"
+    "429":
+      $ref: ../components/responses/RateLimited.yaml
+    default:
+      $ref: ../components/responses/ErrorResponse.yaml
+put:
+  operationId: updateRcsTemplate
+  tags: [RCS]
+  summary: RCS 템플릿 수정
+  description: |
+    등록된 RCS 템플릿 정보를 수정합니다.
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/rcs
+  x-sdk-resource: rcs.templates
+  x-sdk-method: update
+  x-sdk-retry: safe
+  x-unverified: "요청 본문에 수정 대상 템플릿(messagebaseId)을 지정하는 필드가 문서화되어 있지 않습니다."
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/RcsTemplateRequest.yaml
+        example:
+          rcs:
+            brandId: BRAND_ID_EXAMPLE
+            templateName: 발송 안내 템플릿
+            body: []
+            buttons: []
+  responses:
+    "200":
+      description: 처리 결과입니다. 성공 여부는 `common.authCode`와 `data.code`로 확인합니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/RcsTemplateIdResponse.yaml
+          example:
+            common:
+              authCode: "A000"
+              authResult: "Success"
+              infobankTrId: "Infobank-Tracking-Id"
+            data:
+              code: "A000"
+              result: "Success"
+              data:
+                rcs:
+                  messagebaseId: "MESSAGEBASE_ID_EXAMPLE"
+    "429":
+      $ref: ../components/responses/RateLimited.yaml
+    default:
+      $ref: ../components/responses/ErrorResponse.yaml

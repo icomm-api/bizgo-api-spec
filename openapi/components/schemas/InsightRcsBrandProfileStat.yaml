@@ -1,0 +1,14 @@
+type: object
+description: 브랜드 프로필 노출 일자별 통계 1건입니다.
+properties:
+  statDate:
+    type: string
+    description: 통계 일자(yyyyMMdd)입니다.
+    x-format: yyyyMMdd
+    example: "20260801"
+  chatbotId:
+    type: string
+    description: 챗봇 ID입니다.
+  displayedCount:
+    type: integer
+    description: 노출 건수입니다.

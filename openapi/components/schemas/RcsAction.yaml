@@ -1,0 +1,14 @@
+type: object
+description: 버튼 액션 객체입니다. 아래 액션 유형 객체를 넣습니다.
+x-unverified: "한 action에 액션 유형을 하나만 넣어야 하는지 문서에 명시되어 있지 않습니다."
+properties:
+  urlAction:
+    $ref: ./RcsUrlAction.yaml
+  dialerAction:
+    $ref: ./RcsDialerAction.yaml
+  mapAction:
+    $ref: ./RcsMapAction.yaml
+  calendarAction:
+    $ref: ./RcsCalendarAction.yaml
+  composeAction:
+    $ref: ./RcsComposeAction.yaml

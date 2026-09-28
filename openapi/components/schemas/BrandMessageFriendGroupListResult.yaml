@@ -1,0 +1,8 @@
+type: object
+description: "친구 그룹 목록 응답 데이터입니다."
+properties:
+  friendGroups:
+    type: array
+    description: "친구 그룹 목록입니다."
+    items:
+      $ref: "./BrandMessageFriendGroup.yaml"

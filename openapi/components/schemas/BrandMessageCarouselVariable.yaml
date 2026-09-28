@@ -1,0 +1,19 @@
+type: object
+description: 기본형 변수 분리 방식에서 캐러셀 아이템 1개에 대한 변수입니다(FC, FA).
+x-unverified: "각 변수 객체의 내부 구조(키·값 형식)가 문서에 없습니다."
+properties:
+  messageVariable:
+    type: object
+    description: 캐러셀 메시지 영역 변수입니다. FC, FA 캐러셀 리스트에서 사용합니다.
+  buttonVariable:
+    type: object
+    description: 캐러셀 버튼 영역 변수입니다. FC, FA 타입에서 사용합니다.
+  couponVariable:
+    type: object
+    description: 캐러셀 쿠폰 영역 변수입니다. FC, FA 캐러셀 리스트에서 사용합니다.
+  imageVariable:
+    type: object
+    description: 캐러셀 이미지 영역 변수입니다. FC, FA 캐러셀 리스트에서 사용합니다.
+  commerceVariable:
+    type: object
+    description: 캐러셀 커머스 영역 변수입니다. FA 캐러셀 리스트에서 사용합니다.

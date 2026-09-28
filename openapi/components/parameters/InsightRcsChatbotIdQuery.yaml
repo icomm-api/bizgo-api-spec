@@ -1,0 +1,6 @@
+name: chatbotId
+in: query
+required: false
+description: 챗봇 ID입니다. 지정하면 해당 챗봇으로 범위를 좁힙니다.
+schema:
+  type: string

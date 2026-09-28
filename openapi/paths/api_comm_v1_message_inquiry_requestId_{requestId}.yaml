@@ -1,0 +1,27 @@
+get:
+  operationId: getMessageStatusByRequestId
+  tags: [Message]
+  summary: 상태 조회(여러건)
+  description: 동보 요청 1건에 속한 메시지들의 상태를 한 번에 조회합니다.
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/insight
+  x-sdk-resource: messages
+  x-sdk-method: statusByRequestId
+  x-sdk-retry: safe
+  parameters:
+    - name: requestId
+      in: path
+      required: true
+      description: 동보 요청 식별자입니다. msgKey에서 끝 3자리를 뺀 값입니다.
+      schema:
+        type: string
+  responses:
+    "200":
+      description: 메시지 상태 목록입니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/MessageStatusListResponse.yaml
+    "429":
+      $ref: ../components/responses/RateLimited.yaml
+    default:
+      $ref: ../components/responses/ErrorResponse.yaml

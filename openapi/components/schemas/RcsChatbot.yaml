@@ -1,0 +1,95 @@
+type: object
+description: RCS 대화방(챗봇) 정보입니다.
+x-unverified: "일시 필드(approvalDate, registerDate, updateDate)의 형식이 문서화되어 있지 않습니다(예시는 `yyyy-MM-dd HH:mm:ss`). service·display·inputField·rcsReply·searchWeight·status·approvalResult 값 목록도 없습니다."
+properties:
+  chatbotId:
+    type: string
+    description: 대화방 ID입니다.
+    example: CHATBOT_ID_EXAMPLE
+  brandId:
+    type: string
+    description: 대화방이 속한 브랜드 ID입니다.
+    example: BRAND_ID_EXAMPLE
+  groupId:
+    type: string
+    description: 대화방이 속한 그룹 ID입니다.
+  mdn:
+    type: string
+    description: 대화방에 연결된 발신번호입니다.
+    example: "01000000000"
+  subNum:
+    type: string
+    description: 대화방에 연결된 부가번호입니다.
+  isMainNum:
+    type: string
+    description: 대표번호 여부입니다. `Y` 대표번호, `N` 부가번호입니다(영문 문서 기준).
+    enum: [Y, N]
+  subTitle:
+    type: string
+    description: 대화방 부제목입니다.
+  subDescr:
+    type: string
+    description: 대화방 부가 설명입니다.
+  service:
+    type: string
+    description: 대화방의 서비스 구분 값입니다.
+  display:
+    type: string
+    description: 대화방 노출 설정 값입니다.
+  inputField:
+    type: integer
+    description: 대화방 입력창 사용 설정 값입니다.
+  botAgencyId:
+    type: string
+    description: 대화방을 등록한 대행사 ID입니다.
+  saftyStatusYn:
+    type: string
+    description: 안심마크 지정 기업 여부입니다. 필드명은 문서 표기(`safty`)를 따릅니다.
+  psMenuUse:
+    type: string
+    description: 고정 메뉴 사용 여부입니다. `Y` 사용, `N` 미사용입니다(영문 문서 기준).
+    enum: [Y, N]
+  persistentMenu:
+    type: object
+    description: 대화방 고정 메뉴 구성 정보입니다.
+    x-unverified: "하위 필드가 문서화되어 있지 않습니다."
+  rcsReply:
+    type: string
+    description: 대화방 응답 설정 값입니다.
+  webhook:
+    type: string
+    description: 대화방 이벤트를 수신할 웹훅 URL입니다.
+  searchWeight:
+    type: string
+    description: 대화방 검색 가중치입니다.
+  botTcPage:
+    type: string
+    description: 대화방 이용약관 페이지 주소입니다.
+  mediaUrl:
+    type: object
+    description: 대화방 이미지 파일 ID와 URL 및 사용 유형 정보입니다.
+    x-unverified: "문서 타입은 Object이지만 하위 필드가 없습니다. 브랜드의 mediaUrl은 Object Array(fileId/url/typeName/fileName)라서 같은 구조의 배열일 가능성이 있습니다."
+  status:
+    type: string
+    description: 대화방의 상태입니다. 문서 예시 값은 `ready`입니다.
+  approvalResult:
+    type: string
+    description: 대화방 승인 결과입니다. 문서 예시 값은 `approved`입니다.
+  approvalReason:
+    type: string
+    description: 검수 시 반려 사유입니다.
+  approvalDate:
+    type: string
+    description: 승인일시입니다.
+  registerDate:
+    type: string
+    description: 등록일시입니다.
+  registerId:
+    type: string
+    description: 등록자 ID입니다.
+  updateDate:
+    type: string
+    description: 수정일시입니다.
+  updateId:
+    type: string
+    description: 수정자 ID입니다.

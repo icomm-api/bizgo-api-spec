@@ -1,0 +1,10 @@
+type: object
+description: 발신프로필 그룹입니다.
+properties:
+  groupKey:
+    type: string
+    description: 그룹 키입니다.
+    example: GROUP_KEY_EXAMPLE
+  groupName:
+    type: string
+    description: 그룹 이름입니다.

@@ -1,0 +1,30 @@
+type: object
+description: 네이버 톡톡 쿠폰 정보 객체입니다(접수코드 A608).
+required: [code, imageUrl, endDate]
+properties:
+  code:
+    type: string
+    description: 쿠폰 코드입니다.
+  imageUrl:
+    type: string
+    description: 쿠폰 이미지 URL입니다. 쿠폰을 첨부하면 반드시 필요합니다(리포트 코드 72106).
+  endDate:
+    type: string
+    description: 쿠폰 종료일입니다. 오늘 이후 날짜를 `YYYY-MM-DD` 형식으로 입력합니다(리포트 코드 72107).
+    x-format: YYYY-MM-DD
+    pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+  name:
+    type: string
+    description: 쿠폰 이름입니다. 생략하면 템플릿에 등록된 이름으로 발송됩니다.
+  publisher:
+    type: string
+    description: 쿠폰 발급자입니다.
+  couponDescription:
+    type: string
+    description: 쿠폰 설명입니다.
+  label:
+    type: string
+    description: 쿠폰 라벨입니다.
+  value:
+    type: string
+    description: 쿠폰 내용입니다.

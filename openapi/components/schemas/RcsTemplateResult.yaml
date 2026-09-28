@@ -1,0 +1,5 @@
+type: object
+description: RCS 템플릿 상세 조회 결과 데이터입니다.
+properties:
+  rcs:
+    $ref: ./RcsTemplate.yaml

@@ -1,0 +1,26 @@
+post:
+  operationId: onMoWebhook
+  tags: [Webhook]
+  summary: MO 수신(Webhook)
+  description: |
+    사용자가 회신한 MO(인증/투표) 메시지가 등록한 웹훅 URL로 전송됩니다.
+    요청에는 `X-IB-Timestamp`와 `X-IB-Signature`(`HmacSHA256(secret, X-IB-Timestamp)`) 헤더가 붙습니다. secret은 비즈고에 요청해 받습니다.
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/mo
+  x-sdk-webhook: mo
+  security: []
+  parameters:
+    - $ref: ../components/parameters/WebhookTimestampHeader.yaml
+    - $ref: ../components/parameters/WebhookSignatureHeader.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/MoWebhookPayload.yaml
+  responses:
+    "200":
+      description: 수신 성공 응답입니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/WebhookAck.yaml

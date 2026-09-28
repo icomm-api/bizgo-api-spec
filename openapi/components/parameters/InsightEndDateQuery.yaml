@@ -1,0 +1,8 @@
+name: endDate
+in: query
+required: true
+description: 조회 종료일(YYYYMMDD)입니다.
+schema:
+  type: string
+  x-format: yyyyMMdd
+example: "20251130"

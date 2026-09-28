@@ -1,0 +1,6 @@
+type: object
+description: "친구 그룹 상세 응답 데이터입니다."
+properties:
+  friendGroup:
+    $ref: "./BrandMessageFriendGroup.yaml"
+    description: "친구 그룹 상세 정보입니다."

@@ -1,0 +1,49 @@
+type: object
+description: "브랜드메시지 기본형 템플릿 동보 발송 요청입니다."
+required: [brandmessage]
+properties:
+  brandmessage:
+    type: object
+    description: "기본형 템플릿 동보 발송 정보입니다."
+    required: [senderKey, templateCode, sendStartAt]
+    properties:
+      senderKey:
+        type: string
+        description: "발신프로필 키입니다."
+        example: SENDER_KEY_EXAMPLE
+      templateCode:
+        type: string
+        description: "기본형 템플릿 코드입니다. 변수가 없고 상태가 등록(`A`)인 템플릿이어야 합니다."
+        example: TEMPLATE_CODE_EXAMPLE
+      friendGroupKey:
+        type: string
+        description: "친구 그룹 등록으로 발급받은 키입니다. 생략하면 전체 친구를 대상으로 합니다. 친구 그룹을 쓰면 그룹 상태가 완료이고 등록 유저 수(`userCount`)가 10 이상이어야 합니다."
+        example: FRIEND_GROUP_KEY_EXAMPLE
+      sendStartAt:
+        type: string
+        description: "동보 발송 시작 일시(`yyyy-MM-dd HH:mm:ss`, KST)입니다. 요청 시점으로부터 10분 이후, 08:00~20:50 범위로 설정합니다. 20:50~익일 08:00에는 자동 중지 후 익일 08:00 이후 자동 재개됩니다."
+        x-format: "yyyy-MM-dd HH:mm:ss"
+        example: "2026-04-08 16:40:00"
+      campaignId:
+        type: string
+        description: "고객 캠페인 식별자입니다. 동일 캠페인의 중복 발송을 방지하는 데 사용합니다."
+        example: CAMPAIGN_ID_EXAMPLE
+        x-unverified: "한국어 페이지(Part A)에만 있고 Copy Markdown(Part B)에는 없는 필드입니다. 중복 방지 동작(같은 campaignId 재요청 시 결과)도 문서에 없습니다."
+      tpsLimit:
+        type: integer
+        description: "초당 발송 건수 상한입니다."
+        example: 500
+        x-unverified: "한국어 페이지(Part A)에만 있고 Copy Markdown(Part B)에는 없는 필드입니다. 허용 범위가 문서에 없습니다."
+      pushAlarm:
+        type: string
+        description: "메시지 푸시 알림 발송 여부입니다. 기본값은 `Y`입니다."
+        enum: ["Y", "N"]
+        default: "Y"
+      originCID:
+        type: string
+        description: "최초 발신사업자 식별코드입니다. 재판매사·특수부가통신사업자는 필수입니다. 최대 9자입니다."
+        maxLength: 9
+  paymentCode:
+    type: string
+    description: "정산용 부서 코드입니다. 최대 20자입니다."
+    maxLength: 20

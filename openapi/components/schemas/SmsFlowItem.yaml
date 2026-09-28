@@ -1,0 +1,7 @@
+type: object
+title: SMS
+required: [sms]
+additionalProperties: false
+properties:
+  sms:
+    $ref: ./SmsMessage.yaml

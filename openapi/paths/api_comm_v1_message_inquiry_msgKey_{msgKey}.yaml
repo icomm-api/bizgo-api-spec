@@ -1,0 +1,22 @@
+get:
+  operationId: getMessageStatusByMsgKey
+  tags: [Message]
+  summary: 상태 조회(단건)
+  description: 메시지 키 1개의 접수·발송·리포트 상태를 조회합니다. 대체발송이 있으면 채널별 항목이 여러 개 옵니다.
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/insight
+  x-sdk-resource: messages
+  x-sdk-method: status
+  x-sdk-retry: safe
+  parameters:
+    - $ref: ../components/parameters/MsgKeyPath.yaml
+  responses:
+    "200":
+      description: 메시지 상태입니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/MessageStatusListResponse.yaml
+    "429":
+      $ref: ../components/responses/RateLimited.yaml
+    default:
+      $ref: ../components/responses/ErrorResponse.yaml

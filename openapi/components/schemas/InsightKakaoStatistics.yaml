@@ -1,0 +1,42 @@
+type: object
+description: |
+  카카오(알림톡·브랜드메시지) 발송·읽음·클릭 통계 1건입니다. 카카오가 직접 제공하는 채널 기반 통계입니다.
+x-unverified: "비율 필드(sendRate·readRate·clickRate·ctr)의 단위(백분율 여부)와 소수 자릿수가 문서에 없습니다. 예시 값(98.57 등)은 백분율로 보입니다."
+properties:
+  successCount:
+    type: integer
+    description: 발송 성공 건수입니다.
+  failCount:
+    type: integer
+    description: 발송 실패 건수입니다.
+  readCount:
+    type: integer
+    description: 읽음 건수입니다.
+  buttonClickCount:
+    type: integer
+    description: 버튼 클릭 건수입니다.
+  listClickCount:
+    type: integer
+    description: 목록 클릭 건수입니다.
+  thumbnailClickCount:
+    type: integer
+    description: 썸네일 클릭 건수입니다.
+  etcClickCount:
+    type: integer
+    description: 기타 클릭 건수입니다.
+  sendRate:
+    type: number
+    format: double
+    description: 발송 성공률입니다.
+  readRate:
+    type: number
+    format: double
+    description: 읽음률입니다.
+  clickRate:
+    type: number
+    format: double
+    description: 클릭률입니다.
+  ctr:
+    type: number
+    format: double
+    description: CTR(클릭률/읽음률)입니다.

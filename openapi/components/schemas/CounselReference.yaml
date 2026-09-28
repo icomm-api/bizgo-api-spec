@@ -1,0 +1,6 @@
+type: object
+description: 고객사에서 설정한 현재 메타 정보입니다.
+properties:
+  extra:
+    type: string
+    description: 상담 연결 버튼(`https://bizmessage.kakao.com/chat/open`)의 `extra`로 전달된 메타 정보입니다.

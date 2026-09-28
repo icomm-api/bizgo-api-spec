@@ -1,0 +1,7 @@
+type: object
+title: BrandMessage
+required: [brandmessage]
+additionalProperties: false
+properties:
+  brandmessage:
+    $ref: ./BrandMessage.yaml

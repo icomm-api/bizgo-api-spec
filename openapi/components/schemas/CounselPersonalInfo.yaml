@@ -1,0 +1,10 @@
+type: object
+description: 사용자가 수집에 동의한 개인정보입니다. 저장·로그 출력에 주의하고 목적 외로 쓰지 않습니다.
+properties:
+  phone_number:
+    type: string
+    description: 카카오 계정 전화번호입니다.
+    example: "01000000000"
+  nickname:
+    type: string
+    description: 카카오 프로필 닉네임입니다.

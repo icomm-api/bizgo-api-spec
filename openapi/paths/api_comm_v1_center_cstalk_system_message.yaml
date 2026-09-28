@@ -1,0 +1,126 @@
+get:
+  operationId: listCounselSystemMessages
+  tags: [Counsel]
+  summary: 시스템 메시지 조회
+  description: |
+    시스템 메시지 목록을 조회합니다. `id`를 주면 해당 메시지만 조회합니다. 페이지네이션은 문서에 없습니다.
+
+    상담톡 요청·응답에는 최종 사용자 식별자(`userKey`)와 상담 내용이 들어가므로 개인정보로 취급하고 본문을 로그에 남기지 않습니다.
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-counsel
+  x-sdk-resource: counsel.systemMessages
+  x-sdk-method: list
+  x-sdk-retry: safe
+  parameters:
+    - name: senderKey
+      in: query
+      required: true
+      description: 카카오 비즈메시지 발신프로필 키입니다.
+      schema:
+        type: string
+      example: SENDER_KEY_EXAMPLE
+    - name: id
+      in: query
+      required: false
+      description: 시스템 메시지 ID입니다. 특정 메시지만 조회할 때 입력합니다.
+      schema:
+        type: string
+  responses:
+    "200":
+      description: 시스템 메시지 목록입니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/CounselSystemMessageListResponse.yaml
+          example:
+            common:
+              authCode: A000
+              authResult: Success
+              infobankTrId: Infobank-Tracking-Id
+            data:
+              code: A000
+              result: Success
+              data:
+                systemMessages:
+                  - id: "7678"
+                    name: 상담 시작 안내
+                    status: A
+                    createdAt: "2025-08-18 16:40:00"
+                    modifiedAt: "2025-08-18 16:40:00"
+                    inspectStatus: REG
+                    inspectRequestAt: "2025-08-27 13:16:59"
+                    inspectedAt: ""
+                    messages:
+                      - messageType: ST
+                        content: 상담을 시작합니다.
+                        buttons:
+                          - ordering: 1
+                            type: WL
+                            name: 바로가기
+                            urlMobile: https://m.example.com
+                            urlPc: https://www.example.com
+                    comments:
+                      - id: "101"
+                        content: 검수 요청이 등록되었습니다.
+                        userName: 비즈고
+                        createdAt: "2025-08-27 13:17:02"
+                        status: INQ
+    "429":
+      $ref: ../components/responses/RateLimited.yaml
+    default:
+      $ref: ../components/responses/ErrorResponse.yaml
+post:
+  operationId: createCounselSystemMessage
+  tags: [Counsel]
+  summary: 시스템 메시지 등록
+  description: |
+    시스템 메시지를 등록합니다.
+
+    상담톡 요청·응답에는 최종 사용자 식별자(`userKey`)와 상담 내용이 들어가므로 개인정보로 취급하고 본문을 로그에 남기지 않습니다.
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-counsel
+  x-sdk-resource: counsel.systemMessages
+  x-sdk-method: create
+  x-sdk-retry: rate_limit_only
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/CounselSystemMessageCreateRequest.yaml
+        examples:
+          start:
+            summary: 상담 시작 안내
+            value:
+              cstalk:
+                senderKey: SENDER_KEY_EXAMPLE
+                name: 상담 시작 안내
+                messages:
+                  - messageType: ST
+                    content: 상담을 시작합니다.
+                    buttons:
+                      - ordering: 1
+                        type: WL
+                        name: 바로가기
+                        urlMobile: https://m.example.com
+                        urlPc: https://www.example.com
+  responses:
+    "200":
+      description: 생성된 시스템 메시지 ID입니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/CounselSystemMessageCreateResponse.yaml
+          example:
+            common:
+              authCode: A000
+              authResult: Success
+              infobankTrId: Infobank-Tracking-Id
+            data:
+              code: A000
+              result: Success
+              data:
+                systemMessage:
+                  id: "7678"
+    "429":
+      $ref: ../components/responses/RateLimited.yaml
+    default:
+      $ref: ../components/responses/ErrorResponse.yaml

@@ -1,0 +1,13 @@
+type: object
+description: 상담톡 파일 업로드 결과입니다.
+properties:
+  fileUrl:
+    type: string
+    description: 업로드된 파일 URL입니다. 발송 요청의 `attachment.file.fileUrl`에 넣습니다.
+    example: https://example.kakao.file/cstalk_file.pdf
+  fileName:
+    type: string
+    description: 업로드된 파일 이름입니다.
+  size:
+    type: string
+    description: 업로드된 파일 용량입니다. 문서 예시는 byte 단위 문자열(`102400`)입니다.

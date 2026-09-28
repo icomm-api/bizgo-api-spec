@@ -1,0 +1,33 @@
+type: object
+description: 발신프로필·템플릿 제재 정보입니다. 제재가 적용되면 발송이 불가하거나 일부 기능이 제한될 수 있습니다.
+properties:
+  restrictedAt:
+    type: string
+    description: 제재 적용 시각(yyyy-MM-dd HH:mm:ss)입니다.
+    x-format: "yyyy-MM-dd HH:mm:ss"
+  senderKey:
+    type: string
+    description: 발신프로필 키입니다.
+    example: SENDER_KEY_EXAMPLE
+  templateCode:
+    type: string
+    description: 템플릿 코드입니다.
+    example: TEMPLATE_CODE_EXAMPLE
+  groupKey:
+    type: string
+    description: 발신프로필 그룹 키입니다.
+    example: GROUP_KEY_EXAMPLE
+  senderKeyType:
+    type: string
+    description: |
+      발신프로필 키 타입입니다.
+      - `G`: 그룹
+      - `S`: 발신프로필
+    enum: [G, S]
+  reasonType:
+    type: string
+    description: |
+      제재 사유입니다. 알려진 값:
+      - `BZM`: 비즈메시지 운영정책 위반(스팸/어뷰징)
+      - `CHANNEL`: 채널 운영정책 위반
+    x-known-values: [BZM, CHANNEL]

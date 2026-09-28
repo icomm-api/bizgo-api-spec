@@ -1,0 +1,15 @@
+type: object
+description: "발급된 카카오 업로드 채널 정보입니다. `uploadUrl`과 `token`은 발급 후 5분간만 유효합니다. 파일은 `POST {uploadUrl}`에 `x-kamp-upload-token: {token}` 헤더와 multipart `file` 필드로 직접 전송합니다(비즈고 API를 거치지 않음)."
+properties:
+  vid:
+    type: string
+    description: "동영상 식별자입니다. 이후 조회 API에서 사용합니다."
+    example: VID_EXAMPLE
+  uploadUrl:
+    type: string
+    description: "동영상 파일을 전송할 카카오 업로드 URL입니다."
+    example: "https://example.kakao.upload/v4/upload/VID_EXAMPLE/open"
+  token:
+    type: string
+    description: "업로드 요청 시 `x-kamp-upload-token` 헤더로 보낼 인증 토큰(JWT)입니다."
+    example: UPLOAD_TOKEN_EXAMPLE

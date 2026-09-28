@@ -1,0 +1,26 @@
+post:
+  operationId: registerBrandMessageUnsubscribeContent
+  summary: "발신프로필 무료수신거부 정보 입력"
+  description: "발신프로필의 무료수신거부 전화번호와 인증번호를 등록합니다. 광고성 메시지 하단의 무료수신거부 안내에 씁니다."
+  tags: [BrandMessage]
+  x-source: "https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand"
+  x-sdk-resource: brandMessage.unsubscribeContents
+  x-sdk-method: register
+  x-sdk-retry: rate_limit_only
+  requestBody:
+    required: true
+    content:
+      "application/json":
+        schema:
+          $ref: "../components/schemas/BrandMessageUnsubscribeContentRequest.yaml"
+  responses:
+    "200":
+      description: "등록 결과입니다."
+      content:
+        "application/json":
+          schema:
+            $ref: "../components/schemas/ApiResponse.yaml"
+    "429":
+      $ref: "../components/responses/RateLimited.yaml"
+    default:
+      $ref: "../components/responses/ErrorResponse.yaml"

@@ -1,0 +1,22 @@
+type: object
+required: [file, senderKey]
+properties:
+  file:
+    type: string
+    format: binary
+    description: 업로드할 상담톡 이미지 파일입니다. jpg, png, gif 형식, 최대 5MB입니다.
+  fileKey:
+    type: string
+    description: 업로드 파일을 식별하는 키입니다. 생략하면 서버가 자동으로 생성합니다.
+    x-unverified: "한국어 페이지(Part A)에만 있고 Copy Markdown(Part B)에는 없는 필드입니다."
+  imageName:
+    type: string
+    description: 업로드 파일의 이름입니다. 생략하면 확장자를 제외한 파일명을 사용합니다.
+    x-unverified: "한국어 페이지(Part A)에만 있고 Copy Markdown(Part B)에는 없는 필드입니다."
+  senderKey:
+    type: string
+    description: 카카오 비즈메시지 발신프로필 키입니다.
+  imageType:
+    type: string
+    description: 이미지 타입입니다. Rich 메시지 이미지 업로드 시 `rich`를 입력합니다.
+    x-known-values: [rich]

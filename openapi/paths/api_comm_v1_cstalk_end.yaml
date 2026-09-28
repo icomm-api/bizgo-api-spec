@@ -1,0 +1,45 @@
+post:
+  operationId: endCounselSession
+  tags: [Counsel]
+  summary: 상담 종료
+  description: |
+    현재 열려 있는 상담 세션을 종료합니다. 처리 결과는 발송 결과 웹훅(`counselResult`, requestType `end`)으로도 전달됩니다.
+
+    상담톡 요청·응답에는 최종 사용자 식별자(`userKey`)와 상담 내용이 들어가므로 개인정보로 취급하고 본문을 로그에 남기지 않습니다.
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-counsel
+  x-sdk-resource: counsel.sessions
+  x-sdk-method: end
+  x-sdk-retry: rate_limit_only
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/CounselEndRequest.yaml
+        examples:
+          end:
+            summary: 상담 종료
+            value:
+              userKey: USER_KEY_EXAMPLE
+              senderKey: SENDER_KEY_EXAMPLE
+  responses:
+    "200":
+      description: 처리 결과입니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/CounselEndResponse.yaml
+          example:
+            common:
+              authCode: A000
+              authResult: Success
+              infobankTrId: Infobank-Tracking-Id
+            data:
+              code: A000
+              result: Success
+              data:
+                msgKey: 20260424104234546POM101182450000
+    "429":
+      $ref: ../components/responses/RateLimited.yaml
+    default:
+      $ref: ../components/responses/ErrorResponse.yaml

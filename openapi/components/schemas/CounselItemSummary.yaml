@@ -1,0 +1,9 @@
+type: object
+description: ITEM_LIST 타입의 아이템 요약 정보입니다.
+properties:
+  title:
+    type: string
+    description: 요약 정보 제목입니다.
+  description:
+    type: string
+    description: 요약 정보 추가 설명입니다.

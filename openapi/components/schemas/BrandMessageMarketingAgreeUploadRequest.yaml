@@ -1,0 +1,13 @@
+type: object
+required: [senderKey, file]
+properties:
+  senderKey:
+    type: string
+    description: "발신프로필 키입니다. 최대 40자입니다."
+    example: SENDER_KEY_EXAMPLE
+    maxLength: 40
+  file:
+    type: string
+    format: binary
+    description: "업로드할 광고성 정보 수신동의 증적자료 파일입니다."
+    x-unverified: "허용 파일 형식·용량이 문서에 없습니다(예시는 pdf)."

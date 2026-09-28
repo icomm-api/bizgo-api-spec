@@ -1,0 +1,9 @@
+name: startDate
+in: query
+required: true
+description: 조회 시작일(YYYYMMDD)입니다.
+schema:
+  type: string
+  x-format: yyyyMMdd
+example: "20251101"
+x-unverified: "조회할 수 있는 최대 기간(시작일~종료일 범위)과 과거 조회 가능 기간이 문서에 없습니다."

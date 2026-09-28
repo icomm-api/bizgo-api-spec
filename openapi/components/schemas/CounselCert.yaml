@@ -1,0 +1,31 @@
+type: object
+description: 카카오톡 인증(전자서명) 진행 상태입니다.
+properties:
+  txId:
+    type: string
+    description: 인증 트랜잭션 ID입니다.
+  sessionId:
+    type: integer
+    format: int64
+    description: 세션 아이디입니다.
+  signStatus:
+    type: string
+    description: 서명 상태입니다. 문서 예시 값은 `COMPLETED`입니다.
+    x-known-values: [COMPLETED]
+    x-unverified: "signStatus 값 목록이 문서에 없습니다."
+  createdAt:
+    type: string
+    description: 서명 요청 시각입니다.
+    x-format: "yyyy-MM-dd'T'HH:mm:ss"
+  viewedAt:
+    type: string
+    description: 사용자가 서명 내용을 확인한 시각입니다.
+    x-format: "yyyy-MM-dd'T'HH:mm:ss"
+  completedAt:
+    type: string
+    description: 서명 완료 시각입니다.
+    x-format: "yyyy-MM-dd'T'HH:mm:ss"
+  expiredAt:
+    type: string
+    description: 서명 만료 시각입니다.
+    x-format: "yyyy-MM-dd'T'HH:mm:ss"

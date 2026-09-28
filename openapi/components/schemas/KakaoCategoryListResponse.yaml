@@ -1,0 +1,8 @@
+type: object
+description: 발신프로필 카테고리 전체조회 응답입니다.
+required: [common]
+properties:
+  common:
+    $ref: ./CommonResult.yaml
+  data:
+    $ref: ./KakaoCategoryListServiceResult.yaml

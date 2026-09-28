@@ -1,0 +1,25 @@
+get:
+  operationId: getBrandMessageTemplateInsight
+  tags: [Insight]
+  summary: 브랜드메시지 템플릿 상세 조회
+  description: 기간·발신프로필 기준으로 브랜드메시지 템플릿별 통계를 조회합니다.
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/insight
+  x-sdk-resource: insights.brandMessage
+  x-sdk-method: getByTemplate
+  x-sdk-retry: safe
+  parameters:
+    - $ref: ../components/parameters/InsightStartDateQuery.yaml
+    - $ref: ../components/parameters/InsightEndDateQuery.yaml
+    - $ref: ../components/parameters/InsightSenderKeyQuery.yaml
+    - $ref: ../components/parameters/InsightTemplateCodeQuery.yaml
+  responses:
+    "200":
+      description: 브랜드메시지 템플릿별 통계입니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/InsightKakaoTemplateStatisticsResponse.yaml
+    "429":
+      $ref: ../components/responses/RateLimited.yaml
+    default:
+      $ref: ../components/responses/ErrorResponse.yaml

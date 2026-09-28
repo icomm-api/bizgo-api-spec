@@ -1,0 +1,10 @@
+type: object
+description: 상담톡 이미지 요소입니다.
+required: [imgUrl]
+properties:
+  imgUrl:
+    type: string
+    description: 상담톡 이미지 업로드 API(`/api/comm/v1/file/cstalk/image`)로 등록한 이미지 URL입니다.
+  imgLink:
+    type: string
+    description: 이미지 클릭 시 이동할 URL입니다. 설정하지 않으면 카카오톡 내 이미지 뷰어를 사용합니다.

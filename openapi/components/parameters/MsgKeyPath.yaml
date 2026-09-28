@@ -1,0 +1,6 @@
+name: msgKey
+in: path
+required: true
+description: 조회할 메시지 키입니다.
+schema:
+  type: string

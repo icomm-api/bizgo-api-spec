@@ -1,0 +1,13 @@
+type: object
+description: 상담톡 파일 첨부 정보입니다(VIDEO·AUDIO·FILE 타입).
+required: [fileUrl]
+properties:
+  fileUrl:
+    type: string
+    description: 상담톡 파일 업로드 API(`/api/comm/v1/file/cstalk`)로 등록한 파일 URL입니다.
+  fileName:
+    type: string
+    description: 파일명입니다. `msgType`이 `FILE`이면 필수입니다(`CounselPlainMessageRequest`의 `x-sdk-required-if`).
+  fileSize:
+    type: string
+    description: 파일 크기입니다. `msgType`이 `FILE`이면 필수입니다(`CounselPlainMessageRequest`의 `x-sdk-required-if`). 문서상 타입은 문자열입니다.

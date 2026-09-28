@@ -1,0 +1,8 @@
+type: object
+description: "친구 그룹 파일 업로드 응답입니다."
+required: [common]
+properties:
+  common:
+    $ref: "./CommonResult.yaml"
+  data:
+    $ref: "./BrandMessageFriendGroupFileUploadServiceResult.yaml"

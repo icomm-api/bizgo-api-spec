@@ -1,0 +1,42 @@
+type: object
+description: 리포트 웹훅 본문입니다. 리포트 1건당 1회 전송됩니다.
+required: [msgKey, serviceType, reportTime, reportType, reportCode]
+properties:
+  msgKey:
+    type: string
+    description: 메시지 키입니다.
+  serviceType:
+    type: string
+    description: 서비스 타입입니다.
+  msgType:
+    type: string
+    description: 메시지 타입입니다.
+  sendTime:
+    type: string
+    description: 전송 처리 일시입니다.
+    x-format: "yyyy-MM-dd'T'HH:mm:ss.SSSXXX"
+  reportTime:
+    type: string
+    description: 리포트 수신 일시입니다.
+    x-format: "yyyy-MM-dd'T'HH:mm:ss.SSSXXX"
+  reportType:
+    type: string
+    description: 리포트 종류입니다.
+  reportCode:
+    type: string
+    description: 리포트 코드입니다.
+  reportText:
+    type: string
+    description: 리포트 상세 내용입니다.
+  carrier:
+    type: string
+    description: (문자메시지) 이통사 코드입니다.
+  userType:
+    type: string
+    description: (카카오 브랜드메시지) 메시지 발송 처리 타입입니다.
+  resCnt:
+    type: string
+    description: (국제메시지) 메시지 분할 수입니다.
+  ref:
+    type: string
+    description: 요청 시 입력한 참조 필드입니다.

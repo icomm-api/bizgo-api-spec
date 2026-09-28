@@ -1,0 +1,11 @@
+type: object
+description: "브랜드메시지 그룹태그입니다."
+properties:
+  groupTagKey:
+    type: string
+    description: "그룹태그 키입니다."
+    example: GROUP_TAG_KEY_EXAMPLE
+  groupTagName:
+    type: string
+    description: "그룹태그 이름입니다."
+    example: "VIP 고객"

@@ -1,0 +1,54 @@
+get:
+  operationId: getKakaoSenderSanction
+  tags: [Kakao]
+  summary: 발신프로필 제재 조회
+  description: 특정 일자에 발신프로필에 적용된 제재 정보를 조회합니다. 발송 전 운영 상태를 확인할 때 사용합니다.
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-common
+  x-sdk-resource: kakao.sanctions
+  x-sdk-method: getSender
+  x-sdk-retry: safe
+  x-sdk-result: data.data.kakao.abusing
+  parameters:
+    - name: date
+      in: query
+      required: true
+      description: 조회 기준 날짜(YYYYMMDD)입니다. 예 `20260305`.
+      schema:
+        type: string
+        x-format: YYYYMMDD
+        pattern: "^[0-9]{8}$"
+      x-unverified: "날짜 형식은 Copy Markdown(Part B) 예시에만 있습니다."
+    - name: senderKey
+      in: query
+      required: true
+      description: 발신프로필 키입니다.
+      schema:
+        type: string
+  responses:
+    "200":
+      description: 제재 정보입니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/KakaoSanctionResponse.yaml
+          example:
+            common:
+              authCode: A000
+              authResult: Success
+              infobankTrId: Infobank-Tracking-Id
+            data:
+              code: A000
+              result: Success
+              data:
+                kakao:
+                  abusing:
+                    restrictedAt: "2026-03-05 16:33:17"
+                    senderKey: SENDER_KEY_EXAMPLE
+                    templateCode: TEMPLATE_CODE_EXAMPLE
+                    groupKey: GROUP_KEY_EXAMPLE
+                    senderKeyType: S
+                    reasonType: BZM
+    "429":
+      $ref: ../components/responses/RateLimited.yaml
+    default:
+      $ref: ../components/responses/ErrorResponse.yaml

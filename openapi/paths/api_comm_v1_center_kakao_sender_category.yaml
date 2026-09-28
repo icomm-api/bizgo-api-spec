@@ -1,0 +1,28 @@
+get:
+  operationId: getKakaoSenderCategory
+  tags: [Kakao]
+  summary: 발신프로필 카테고리 상세조회
+  description: 카테고리 코드를 기준으로 카카오 비즈메시지 카테고리 상세 정보를 조회합니다.
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-common
+  x-sdk-resource: kakao.categories
+  x-sdk-method: get
+  x-sdk-retry: safe
+  x-sdk-result: data.data.kakao.category
+  parameters:
+    - name: code
+      in: query
+      required: true
+      description: 조회할 카테고리 코드입니다.
+      schema:
+        type: string
+  responses:
+    "200":
+      description: 카테고리 상세 정보입니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/KakaoCategoryResponse.yaml
+    "429":
+      $ref: ../components/responses/RateLimited.yaml
+    default:
+      $ref: ../components/responses/ErrorResponse.yaml

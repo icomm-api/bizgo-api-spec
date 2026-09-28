@@ -1,0 +1,41 @@
+type: object
+description: RCS 템플릿 목록 항목입니다.
+properties:
+  messagebaseId:
+    type: string
+    description: 메시지베이스 ID입니다. 발송 시에는 이 값을 `formatId` 필드에 넣습니다(영문 문서 기준).
+    example: MESSAGEBASE_ID_EXAMPLE
+  formatId:
+    type: string
+    description: 템플릿 양식 ID입니다.
+  templateName:
+    type: string
+    description: 템플릿 이름입니다.
+  brandId:
+    type: string
+    description: 브랜드 ID입니다.
+  status:
+    type: string
+    description: 템플릿의 상태입니다. 알려진 값(영문 문서 기준)은 `ready`(사용 중), `pause`(중지)입니다.
+    x-known-values: [ready, pause]
+  approvalResult:
+    type: string
+    description: 템플릿의 승인 상태입니다. 문서 예시 값은 `approved`입니다.
+  approvalReason:
+    type: string
+    description: 승인 사유입니다.
+  registerDate:
+    type: string
+    description: 템플릿 등록일시입니다.
+  approvalDate:
+    type: string
+    description: 템플릿 승인일시입니다.
+  updateDate:
+    type: string
+    description: 템플릿 수정일시입니다.
+  registerId:
+    type: string
+    description: 템플릿 등록 계정 ID입니다.
+  updateId:
+    type: string
+    description: 템플릿 수정 계정 ID입니다.

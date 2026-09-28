@@ -1,0 +1,8 @@
+name: groupId
+in: query
+required: true
+description: |
+  그룹 ID입니다. RCS 발송 요청에 넣은 `messageFlow[].rcs.groupId` 값이어야 합니다.
+  발송 시 `groupId`를 넣지 않은 건은 집계되지 않습니다.
+schema:
+  type: string

@@ -1,0 +1,9 @@
+type: object
+description: 템플릿 버튼 정의입니다.
+x-unverified: "buttons·suggestions 개수 제한이 문서화되어 있지 않습니다(양식별 policyInfo.maxButtonCount 참고)."
+properties:
+  suggestions:
+    type: array
+    description: 버튼 액션 목록입니다.
+    items:
+      $ref: ./RcsTemplateSuggestion.yaml

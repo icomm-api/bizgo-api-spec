@@ -1,0 +1,8 @@
+type: object
+description: "기존 동영상 등록·동영상 조회 응답입니다."
+required: [common]
+properties:
+  common:
+    $ref: "./CommonResult.yaml"
+  data:
+    $ref: "./BrandMessageVideoInfoServiceResult.yaml"

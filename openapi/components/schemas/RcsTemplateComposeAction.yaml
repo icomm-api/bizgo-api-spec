@@ -1,0 +1,28 @@
+type: object
+description: 템플릿 버튼의 문자/음성/영상 보내기 액션입니다. 발송용 `RcsComposeAction`과 달리 `composeTextMessage`가 선택입니다.
+properties:
+  composeTextMessage:
+    type: object
+    description: 문자 보내기 객체입니다.
+    required: [phoneNumber]
+    properties:
+      phoneNumber:
+        type: string
+        description: 전화번호입니다.
+        example: "01000000000"
+      text:
+        type: string
+        description: 문자(SMS/LMS/MMS) 내용입니다.
+  composeRecordingMessage:
+    type: object
+    description: 음성/영상 보내기 객체입니다.
+    required: [phoneNumber, type]
+    properties:
+      phoneNumber:
+        type: string
+        description: 전화번호입니다.
+        example: "01000000000"
+      type:
+        type: string
+        description: 영상(`VIDEO`) 또는 음성(`AUDIO`)입니다.
+        enum: [VIDEO, AUDIO]

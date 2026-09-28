@@ -1,0 +1,5 @@
+type: object
+description: 세션 조회 결과 데이터입니다.
+properties:
+  session:
+    $ref: ./CounselSession.yaml

@@ -1,0 +1,17 @@
+type: object
+description: "기존 동영상 등록 요청입니다. 카카오톡 채널에 이미 올라가 있는 `PUBLIC` 또는 `PRIVATE` 상태의 동영상을 재업로드 없이 등록합니다."
+required: [senderKey]
+x-unverified: "Part A는 `vid`·`videoUrl` 중 정확히 하나만 입력해야 하며 둘 다 입력하거나 비우면 `A502`라고 하나, Part B 규칙 설명은 '하나 이상, 둘 다 입력 시 videoUrl 우선'이라고 합니다. Part A를 따릅니다."
+properties:
+  senderKey:
+    type: string
+    description: "발신프로필 키입니다. 최대 40자입니다."
+    example: SENDER_KEY_EXAMPLE
+    maxLength: 40
+  vid:
+    type: string
+    description: "등록할 동영상 식별자입니다. `videoUrl`과 함께 사용할 수 없습니다."
+    example: VID_EXAMPLE
+  videoUrl:
+    type: string
+    description: "등록할 채널 동영상 URL입니다. 형식: `https://business.kakao.com/{채널식별자}/videos/{vid}`. `vid`와 함께 사용할 수 없습니다."

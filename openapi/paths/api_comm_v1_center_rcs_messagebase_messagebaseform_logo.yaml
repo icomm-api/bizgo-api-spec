@@ -1,0 +1,42 @@
+get:
+  operationId: listRcsTemplateFormLogos
+  tags: [RCS]
+  summary: RCS 템플릿 양식 로고 이미지 조회
+  description: |
+    템플릿 양식 ID를 기준으로 템플릿 양식에서 사용할 수 있는 로고 이미지 목록을 조회합니다.
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/rcs
+  x-sdk-resource: rcs.templateImages
+  x-sdk-method: listFormLogos
+  x-sdk-retry: safe
+  parameters:
+    - name: messagebaseformId
+      in: query
+      required: true
+      description: 메시지 양식 ID입니다.
+      schema:
+        type: string
+      example: "MESSAGEBASEFORM_ID_EXAMPLE"
+  responses:
+    "200":
+      description: 처리 결과입니다. 성공 여부는 `common.authCode`와 `data.code`로 확인합니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/RcsTemplateFormLogoListResponse.yaml
+          example:
+            common:
+              authCode: "A000"
+              authResult: "Success"
+              infobankTrId: "Infobank-Tracking-Id"
+            data:
+              code: "A000"
+              result: "Success"
+              data:
+                rcs:
+                  images:
+                    - fileId: "FILE_ID_EXAMPLE"
+                      fileName: "template-logo.png"
+    "429":
+      $ref: ../components/responses/RateLimited.yaml
+    default:
+      $ref: ../components/responses/ErrorResponse.yaml

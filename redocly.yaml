@@ -1,0 +1,9 @@
+extends:
+  - recommended
+rules:
+  # 비즈고 API는 상세 오류를 default 응답(ApiResponse)으로 돌려줍니다.
+  operation-4xx-response: off
+  # 웹훅은 API Key 대신 서명 헤더로 검증합니다(security: []).
+  security-defined: off
+  no-invalid-media-type-examples: error
+  no-unused-components: warn

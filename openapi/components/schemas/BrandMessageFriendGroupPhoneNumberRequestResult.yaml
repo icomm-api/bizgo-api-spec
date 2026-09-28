@@ -1,0 +1,6 @@
+type: object
+description: "전화번호 요청 응답 데이터입니다."
+properties:
+  friendGroup:
+    $ref: "./BrandMessageFriendGroupPhoneNumberRequest.yaml"
+    description: "전화번호 추가·삭제 요청 정보입니다."

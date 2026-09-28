@@ -1,0 +1,39 @@
+type: object
+description: |
+  상담톡 웹훅 7종의 공통 필드입니다. 값이 없는 필드는 본문에서 빠지므로 이벤트마다 전달되는 키 집합이 다릅니다.
+  시각 필드는 `yyyy-MM-dd'T'HH:mm:ss.SSS+09:00`(KST) 형식이며 원본 값이 없으면 빈 문자열입니다.
+  상담톡 웹훅 본문은 최종 사용자의 상담 내용·식별자이므로 개인정보로 취급하고 로그·APM·에러 리포트에 남기지 않습니다.
+properties:
+  msgKey:
+    type: string
+    description: |
+      메시지 키입니다. 발송 결과(`result`)에서는 발송 API 응답의 msgKey와 같고, 수신 6종에서는 이벤트마다 새로 발급된 값이라 발송 건과 대응하지 않습니다.
+      재시도로 같은 이벤트가 다시 올 수 있으므로 msgKey 기준으로 멱등 처리합니다.
+  userKey:
+    type: string
+    description: 상담톡 사용자 키입니다. 카카오톡 채널별로 다르며 대소문자를 구분하고, 사용자가 탈퇴 후 재가입하면 바뀝니다.
+  senderKey:
+    type: string
+    description: 메시지를 수신한 발신프로필 키입니다.
+  serviceType:
+    type: string
+    description: 서비스 타입입니다. 문서 예시 값은 `CSTALK`입니다.
+    x-known-values: [CSTALK]
+  msgType:
+    type: string
+    description: 메시지 타입입니다.
+  requestType:
+    type: string
+    description: 요청(이벤트) 타입입니다.
+  sendTime:
+    type: string
+    description: 비즈고가 이벤트를 수신한 시각입니다.
+    x-format: "yyyy-MM-dd'T'HH:mm:ss.SSSXXX"
+  reportTime:
+    type: string
+    description: 비즈고가 웹훅을 전송한 시각입니다.
+    x-format: "yyyy-MM-dd'T'HH:mm:ss.SSSXXX"
+  kakaoTime:
+    type: string
+    description: 카카오(상담톡 서버)가 전달한 시각입니다. 사용자가 메시지를 입력한 시각이 아닙니다.
+    x-format: "yyyy-MM-dd'T'HH:mm:ss.SSSXXX"

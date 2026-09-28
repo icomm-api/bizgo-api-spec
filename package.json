@@ -1,0 +1,14 @@
+{
+  "name": "bizgo-api-spec",
+  "private": true,
+  "description": "OpenAPI 3.1 spec for the Bizgo Communication API",
+  "license": "Apache-2.0",
+  "scripts": {
+    "lint": "redocly lint openapi/openapi.yaml",
+    "bundle": "redocly bundle openapi/openapi.yaml -o dist/openapi.yaml",
+    "check": "npm run lint && npm run bundle && git diff --exit-code -- dist/"
+  },
+  "devDependencies": {
+    "@redocly/cli": "2.54.2"
+  }
+}

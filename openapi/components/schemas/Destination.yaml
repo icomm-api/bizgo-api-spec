@@ -1,0 +1,18 @@
+type: object
+description: 수신자 정보입니다.
+required: [to]
+properties:
+  to:
+    type: string
+    description: 수신번호입니다. 휴대폰 번호는 11자리 형식을 씁니다(국제메시지는 채널 규격 참고).
+    example: "01000000000"
+  replaceWords:
+    type: object
+    description: 치환메시지 변수입니다. 본문·제목의 `#{key}`를 이 값으로 바꿉니다. 알림톡·브랜드메시지 템플릿 자동 치환 발송(`sendType`이 `template`)에서는 필수입니다(각 채널 스키마의 `x-sdk-required-if`).
+    additionalProperties:
+      type: string
+    example:
+      name: 홍길동
+  ref:
+    type: string
+    description: 수신자별 참조 필드입니다. 값이 있으면 이 수신번호에는 요청 단위 `ref` 대신 이 값이 리포트에 담깁니다.

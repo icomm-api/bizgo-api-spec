@@ -1,0 +1,9 @@
+type: object
+description: 공통 포맷·템플릿 양식 상세 조회 결과 데이터입니다.
+properties:
+  rcs:
+    type: object
+    description: RCS 응답 정보입니다.
+    properties:
+      messageForm:
+        $ref: ./RcsMessagebaseFormDetail.yaml

@@ -1,0 +1,7 @@
+type: object
+title: NaverTalk
+required: [navertalk]
+additionalProperties: false
+properties:
+  navertalk:
+    $ref: ./NaverTalkMessage.yaml

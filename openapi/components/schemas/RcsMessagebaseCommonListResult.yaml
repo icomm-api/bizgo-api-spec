@@ -1,0 +1,14 @@
+type: object
+description: 공통 포맷 목록 조회 결과 데이터입니다.
+properties:
+  rcs:
+    type: object
+    description: RCS 응답 정보입니다.
+    properties:
+      pagination:
+        $ref: ./RcsMessagebasePagination.yaml
+      messageForms:
+        type: array
+        description: 공통 포맷 목록입니다.
+        items:
+          $ref: ./RcsMessagebaseCommonSummary.yaml

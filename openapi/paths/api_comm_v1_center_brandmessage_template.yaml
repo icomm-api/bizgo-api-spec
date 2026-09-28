@@ -1,0 +1,95 @@
+get:
+  operationId: getBrandMessageTemplate
+  summary: "브랜드메시지 템플릿 조회"
+  description: "발신프로필 키와 템플릿 코드로 브랜드메시지 템플릿 상세 정보를 조회합니다."
+  tags: [BrandMessage]
+  x-source: "https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand"
+  x-sdk-resource: brandMessage.templates
+  x-sdk-method: get
+  x-sdk-retry: safe
+  parameters:
+    - name: senderKey
+      in: query
+      required: true
+      description: "발신프로필 키입니다."
+      schema:
+        type: string
+      example: SENDER_KEY_EXAMPLE
+    - name: templateCode
+      in: query
+      required: true
+      description: "템플릿 코드입니다."
+      schema:
+        type: string
+      example: TEMPLATE_CODE_EXAMPLE
+    - name: sendType
+      in: query
+      required: false
+      description: "브랜드메시지 발송 타입입니다. `basic`(기본형) 또는 `free`(자유형)입니다."
+      schema:
+        type: string
+        enum: [basic, free]
+      example: basic
+  responses:
+    "200":
+      description: "템플릿 상세 정보입니다."
+      content:
+        "application/json":
+          schema:
+            $ref: "../components/schemas/BrandMessageTemplateResponse.yaml"
+    "429":
+      $ref: "../components/responses/RateLimited.yaml"
+    default:
+      $ref: "../components/responses/ErrorResponse.yaml"
+post:
+  operationId: createBrandMessageTemplate
+  summary: "브랜드메시지 템플릿 등록"
+  description: "브랜드메시지 템플릿을 등록합니다. 이미지가 필요한 유형은 이미지 업로드 API로 발급받은 `imgUrl`을 함께 씁니다."
+  tags: [BrandMessage]
+  x-source: "https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand"
+  x-sdk-resource: brandMessage.templates
+  x-sdk-method: create
+  x-sdk-retry: rate_limit_only
+  requestBody:
+    required: true
+    content:
+      "application/json":
+        schema:
+          $ref: "../components/schemas/BrandMessageTemplateRequest.yaml"
+  responses:
+    "200":
+      description: "등록된 템플릿 정보입니다."
+      content:
+        "application/json":
+          schema:
+            $ref: "../components/schemas/BrandMessageTemplateResponse.yaml"
+    "429":
+      $ref: "../components/responses/RateLimited.yaml"
+    default:
+      $ref: "../components/responses/ErrorResponse.yaml"
+put:
+  operationId: updateBrandMessageTemplate
+  summary: "브랜드메시지 템플릿 수정"
+  description: "등록된 브랜드메시지 템플릿을 수정합니다. 검수 상태와 카카오 정책에 따라 수정 가능한 범위가 달라질 수 있습니다."
+  tags: [BrandMessage]
+  x-source: "https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand"
+  x-sdk-resource: brandMessage.templates
+  x-sdk-method: update
+  x-sdk-retry: safe
+  requestBody:
+    required: true
+    content:
+      "application/json":
+        schema:
+          $ref: "../components/schemas/BrandMessageTemplateRequest.yaml"
+  responses:
+    "200":
+      description: "수정된 템플릿 정보입니다."
+      content:
+        "application/json":
+          schema:
+            $ref: "../components/schemas/BrandMessageTemplateResponse.yaml"
+    "429":
+      $ref: "../components/responses/RateLimited.yaml"
+    default:
+      $ref: "../components/responses/ErrorResponse.yaml"

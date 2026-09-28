@@ -1,0 +1,21 @@
+type: object
+description: 브랜드메시지 첨부 정보(버튼, 이미지, 와이드 아이템, 쿠폰, 커머스, 동영상, 카탈로그)입니다.
+properties:
+  button:
+    type: array
+    description: 버튼 목록입니다. 최대 5개이며, FT/FI 타입에 쿠폰을 함께 쓰면 최대 4개입니다.
+    maxItems: 5
+    items:
+      $ref: ./BrandMessageButton.yaml
+  image:
+    $ref: ./BrandMessageImage.yaml
+  item:
+    $ref: ./BrandMessageItem.yaml
+  coupon:
+    $ref: ./BrandMessageCoupon.yaml
+  commerce:
+    $ref: ./BrandMessageCommerce.yaml
+  video:
+    $ref: ./BrandMessageVideo.yaml
+  catalog:
+    $ref: ./BrandMessageCatalog.yaml

@@ -1,0 +1,40 @@
+type: object
+description: 브랜드메시지 버튼입니다.
+required: [type]
+x-sdk-required-if:
+  - when: { field: type, equals: WL }
+    required: [urlPc, urlMobile]
+  - when: { field: type, equals: AL }
+    required: [urlMobile]
+properties:
+  type:
+    type: string
+    description: 버튼 타입입니다. 문서에 언급된 값은 `WL`, `AL`입니다.
+    x-known-values: [WL, AL]
+    x-unverified: "버튼 타입 코드 전체 목록이 문서에 없습니다."
+    example: WL
+  name:
+    type: string
+    description: 버튼명입니다. 최대 28자입니다.
+    maxLength: 28
+  urlPc:
+    type: string
+    description: PC 클릭 URL입니다. `WL` 타입에서 필수입니다.
+  urlMobile:
+    type: string
+    description: 모바일 클릭 URL입니다. `WL`, `AL` 타입에서 필수입니다.
+  schemeIos:
+    type: string
+    description: iOS 커스텀 스킴입니다.
+  schemeAndroid:
+    type: string
+    description: Android 커스텀 스킴입니다.
+  chatExtra:
+    type: string
+    description: 봇/상담톡 메타데이터입니다.
+  chatEvent:
+    type: string
+    description: 봇/상담톡 이벤트명입니다.
+  bizFormKey:
+    type: string
+    description: 비즈폼 키입니다.

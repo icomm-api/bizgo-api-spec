@@ -1,0 +1,38 @@
+post:
+  operationId: uploadAlimtalkItemHighlightImage
+  tags: [File]
+  summary: 알림톡 템플릿 하이라이트 이미지 업로드
+  description: 아이템리스트형 알림톡 템플릿의 아이템 하이라이트 영역에 사용할 이미지를 업로드합니다. 템플릿 이미지 업로드와 같은 템플릿 등록용 사전 이미지 등록 API입니다.
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-alimtalk
+  x-unverified: "업로드한 하이라이트 이미지 URL을 템플릿 등록 요청의 어느 필드에 넣는지 문서에 없습니다(`attachment.itemHighlight`에 이미지 필드가 없음)."
+  x-sdk-resource: files
+  x-sdk-method: uploadAlimtalkItemHighlightImage
+  x-sdk-retry: rate_limit_only
+  requestBody:
+    required: true
+    content:
+      multipart/form-data:
+        schema:
+          $ref: ../components/schemas/AlimtalkTemplateItemHighlightImageUploadRequest.yaml
+  responses:
+    "200":
+      description: 업로드 결과입니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/AlimtalkTemplateImageUploadResponse.yaml
+          example:
+            common:
+              authCode: A000
+              authResult: Success
+              infobankTrId: Infobank-Tracking-Id
+            data:
+              code: A000
+              result: Success
+              data:
+                imgUrl: https://example.kakao.image/item-highlight.jpg
+                fileName: item-highlight.jpg
+    "429":
+      $ref: ../components/responses/RateLimited.yaml
+    default:
+      $ref: ../components/responses/ErrorResponse.yaml

@@ -1,0 +1,16 @@
+type: object
+description: "예상 시간 응답 데이터입니다."
+properties:
+  brandmessage:
+    type: object
+    description: "동보 발송 예상 시간 결과입니다."
+    properties:
+      estimatedFinishedAt:
+        type: string
+        description: "예상 종료 시각(`yyyy-MM-dd'T'HH:mm:ss`, KST)입니다."
+        x-format: "yyyy-MM-dd'T'HH:mm:ss"
+        example: "2026-04-08T16:58:00"
+      duration:
+        type: integer
+        description: "예상 소요 시간(분)입니다."
+        example: 18

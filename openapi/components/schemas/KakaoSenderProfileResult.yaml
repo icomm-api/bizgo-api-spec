@@ -1,0 +1,5 @@
+type: object
+description: 발신프로필 정보를 담는 카카오 응답 영역입니다.
+properties:
+  senderProfile:
+    $ref: ./KakaoSenderProfile.yaml

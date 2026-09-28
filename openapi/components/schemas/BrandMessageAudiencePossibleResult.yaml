@@ -1,0 +1,11 @@
+type: object
+description: "발송 가능 수 응답 데이터입니다."
+properties:
+  brandmessage:
+    type: object
+    description: "동보 발송 가능 수 결과입니다."
+    properties:
+      possible:
+        type: integer
+        description: "예상 발송 수입니다."
+        example: 320

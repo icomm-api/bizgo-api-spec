@@ -1,0 +1,8 @@
+type: object
+description: "채널 전체 친구 수 조회 응답입니다."
+required: [common]
+properties:
+  common:
+    $ref: "./CommonResult.yaml"
+  data:
+    $ref: "./BrandMessageAudienceFriendCountServiceResult.yaml"

@@ -1,0 +1,30 @@
+type: object
+description: "친구 그룹 전화번호 추가·삭제 요청 1건의 처리 상태입니다."
+properties:
+  friendGroupKey:
+    type: string
+    description: "친구 그룹 키입니다."
+  requestId:
+    type: string
+    description: "요청 아이디입니다."
+    example: "3930171852209730143"
+  type:
+    type: string
+    description: "요청 유형입니다. 문서 예시 값은 `ADD`입니다."
+    x-known-values: [ADD]
+    x-unverified: "요청 유형 값 목록이 문서에 없습니다(예시는 `ADD`만 있음. 삭제 요청의 값은 미확인)."
+  status:
+    type: string
+    description: "요청 처리 상태입니다. 문서 예시 값은 `COMPLETED`입니다."
+    x-known-values: [IN_PROGRESS, COMPLETED]
+  processedCount:
+    type: integer
+    description: "처리된 전화번호 건수입니다."
+  createdAt:
+    type: string
+    description: "요청 일시(`yyyy-MM-dd HH:mm:ss`)입니다."
+    x-format: "yyyy-MM-dd HH:mm:ss"
+  modifiedAt:
+    type: string
+    description: "상태 변경 일시(`yyyy-MM-dd HH:mm:ss`)입니다."
+    x-format: "yyyy-MM-dd HH:mm:ss"

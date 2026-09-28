@@ -1,0 +1,13 @@
+type: object
+description: 웹 링크 연결 액션입니다.
+required: [openUrl]
+properties:
+  openUrl:
+    type: object
+    description: 웹 링크 연결 객체입니다.
+    required: [url]
+    properties:
+      url:
+        type: string
+        description: 웹 링크 URL입니다.
+        example: https://example.com

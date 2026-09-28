@@ -1,0 +1,7 @@
+type: object
+description: 웹훅 수신 응답입니다. 받은 `msgKey`를 그대로 돌려줘야 성공 처리되며, 없거나 규격이 다르면 재전송됩니다.
+required: [msgKey]
+properties:
+  msgKey:
+    type: string
+    description: 수신한 메시지 키입니다.

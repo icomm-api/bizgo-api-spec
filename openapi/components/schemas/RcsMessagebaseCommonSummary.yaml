@@ -1,0 +1,48 @@
+type: object
+description: 공통 포맷 목록 항목입니다.
+properties:
+  messagebaseformId:
+    type: string
+    description: 템플릿의 원형인 템플릿 양식 ID입니다.
+    example: MESSAGEBASEFORM_ID_EXAMPLE
+  formName:
+    type: string
+    description: 포맷 이름입니다.
+  bizCondition:
+    type: array
+    description: 비즈 조건 목록입니다.
+    items:
+      type: string
+      description: 비즈 조건입니다.
+  cardType:
+    type: string
+    description: 카드 유형입니다. 문서 예시 값은 `standalone media top`입니다.
+  formatId:
+    type: string
+    description: 템플릿 포맷 ID입니다.
+  templateName:
+    type: string
+    description: 템플릿 등록 시 입력된 템플릿 명칭입니다.
+  brandId:
+    type: string
+    description: 브랜드 ID입니다.
+  status:
+    type: string
+    description: 템플릿의 상태입니다.
+  approvalResult:
+    type: string
+    description: 템플릿의 승인 상태입니다.
+  updateId:
+    type: string
+    description: 템플릿 수정 계정 ID입니다.
+  registerDate:
+    type: string
+    description: 템플릿 등록일시입니다. 문서 예시는 `yyyy-MM-dd'T'HH:mm:ss` 형식입니다.
+    x-format: "yyyy-MM-dd'T'HH:mm:ss"
+  approvalDate:
+    type: string
+    description: 템플릿 승인일시입니다.
+  updateDate:
+    type: string
+    description: 템플릿 수정일시입니다. 문서 예시는 `yyyy-MM-dd'T'HH:mm:ss` 형식입니다.
+    x-format: "yyyy-MM-dd'T'HH:mm:ss"

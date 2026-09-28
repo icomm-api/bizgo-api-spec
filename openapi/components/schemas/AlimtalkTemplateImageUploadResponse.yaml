@@ -1,0 +1,8 @@
+type: object
+description: 알림톡 템플릿 이미지 업로드 응답입니다. MMS 업로드(`FileUploadResponse`)와 달리 `fileKey`가 아닌 `imgUrl`, `fileName`을 돌려줍니다.
+required: [common]
+properties:
+  common:
+    $ref: ./CommonResult.yaml
+  data:
+    $ref: ./AlimtalkTemplateImageUploadServiceResult.yaml

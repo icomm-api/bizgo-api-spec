@@ -1,0 +1,19 @@
+type: object
+description: "동영상 업로드 등록(업로드 채널 발급) 요청입니다."
+required: [senderKey, fileName, fileSize]
+properties:
+  senderKey:
+    type: string
+    description: "발신프로필 키입니다. 최대 40자입니다."
+    example: SENDER_KEY_EXAMPLE
+    maxLength: 40
+  fileName:
+    type: string
+    description: "업로드할 동영상 파일 이름입니다."
+    example: brand-promotion.mp4
+  fileSize:
+    type: integer
+    description: "업로드할 동영상 파일 크기(byte)입니다."
+    format: int64
+    example: 4075447
+    x-unverified: "문서 타입이 Number로만 표기되어 정수 여부와 최대 용량을 알 수 없습니다."

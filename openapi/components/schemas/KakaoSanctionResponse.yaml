@@ -1,0 +1,8 @@
+type: object
+description: 제재 조회(발신프로필 제재, 그룹템플릿 발신프로필 제외, 템플릿 제재) 응답입니다.
+required: [common]
+properties:
+  common:
+    $ref: ./CommonResult.yaml
+  data:
+    $ref: ./KakaoSanctionServiceResult.yaml

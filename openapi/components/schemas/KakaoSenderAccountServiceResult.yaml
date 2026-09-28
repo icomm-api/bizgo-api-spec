@@ -1,0 +1,13 @@
+allOf:
+  - $ref: ./ServiceResult.yaml
+  - type: object
+    description: |
+      채널 인증·발신프로필 등록·조회(`/account/kakao/sender`, `/account/kakao/sender/token`) 경로의 개별부입니다.
+      다른 API와 달리 `data.data` 없이 `data.resultMsg`, `data.kakao`가 개별부에 바로 옵니다. 토큰 요청 응답에는 `kakao`가 없습니다.
+    x-unverified: "account 경로만 `data.data` 없이 `data.kakao`를 바로 돌려주는 것으로 문서화되어 있어 봉투 구조가 다릅니다."
+    properties:
+      resultMsg:
+        type: string
+        description: 호출 결과 메시지입니다.
+      kakao:
+        $ref: ./KakaoSenderProfileResult.yaml

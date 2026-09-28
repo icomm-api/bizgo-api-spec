@@ -1,0 +1,16 @@
+type: object
+description: 그룹에 발신프로필 등록 요청 본문입니다.
+required: [groupKey, senderKey]
+properties:
+  groupKey:
+    type: string
+    description: 발신프로필을 등록할 그룹 키입니다.
+    example: GROUP_KEY_EXAMPLE
+  senderKey:
+    type: string
+    description: 등록할 발신프로필 키입니다. 최대 40자입니다.
+    maxLength: 40
+    example: SENDER_KEY_EXAMPLE
+  groupName:
+    type: string
+    description: 그룹 이름입니다.

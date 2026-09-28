@@ -1,0 +1,7 @@
+type: object
+properties:
+  report:
+    type: array
+    description: 리포트 목록입니다.
+    items:
+      $ref: ./Report.yaml

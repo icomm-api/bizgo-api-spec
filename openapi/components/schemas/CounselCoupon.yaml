@@ -1,0 +1,24 @@
+type: object
+description: 메시지(또는 캐러셀 아이템) 최하단에 노출되는 쿠폰 요소입니다.
+required: [title, description]
+properties:
+  title:
+    type: string
+    description: 쿠폰 이름입니다. 문서상 정해진 5가지 형식 중 하나여야 합니다.
+    x-unverified: "문서가 5가지 형식 중 하나라고만 하고 형식 목록을 싣지 않았습니다."
+  description:
+    type: string
+    description: 쿠폰 상세 설명입니다. WIDE, WIDE_ITEM_LIST 타입은 최대 18자, 그 외 타입은 최대 12자입니다(캐러셀 쿠폰 설명에는 PREMIUM_VIDEO도 18자로 적혀 있습니다).
+    maxLength: 18
+  urlPc:
+    type: string
+    description: PC 환경에서 쿠폰 클릭 시 이동할 URL입니다.
+  urlMobile:
+    type: string
+    description: 모바일 환경에서 쿠폰 클릭 시 이동할 URL입니다.
+  schemeIos:
+    type: string
+    description: iOS 환경에서 쿠폰 클릭 시 실행할 커스텀 스킴입니다.
+  schemeAndroid:
+    type: string
+    description: Android 환경에서 쿠폰 클릭 시 실행할 커스텀 스킴입니다.

@@ -1,0 +1,20 @@
+description: 개인정보 수신 웹훅(`{고객 Webhook URL}/cstalk/personal_info`) 본문입니다. 사용자가 개인정보 수집에 동의한 뒤 전달됩니다.
+allOf:
+  - $ref: ./CounselWebhookCommon.yaml
+  - type: object
+    required: [msgKey, userKey, senderKey, serviceType, msgType, requestType, sendTime, reportTime]
+    x-unverified: "Copy Markdown(Part B)에는 msgKey 필드가 없습니다. 한국어 페이지(Part A)를 따라 필수로 둡니다."
+    properties:
+      msgType:
+        type: string
+        description: 메시지 타입입니다. 문서 예시 값은 `PERSONAL`입니다.
+        x-known-values: [PERSONAL]
+      requestType:
+        type: string
+        description: 요청 타입입니다. 문서 예시 값은 `personal_info`입니다.
+        x-known-values: [personal_info]
+      sessionId:
+        type: string
+        description: 상담 세션 아이디입니다.
+      personalInfo:
+        $ref: ./CounselPersonalInfo.yaml

@@ -1,0 +1,8 @@
+type: object
+description: 메시지에 첨부할 바로연결 정보입니다.
+properties:
+  quickReply:
+    type: array
+    description: 바로연결 정보입니다.
+    items:
+      $ref: ./AlimtalkQuickReply.yaml

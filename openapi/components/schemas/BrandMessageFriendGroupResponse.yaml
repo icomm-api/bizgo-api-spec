@@ -1,0 +1,8 @@
+type: object
+description: "친구 그룹 조회 응답입니다."
+required: [common]
+properties:
+  common:
+    $ref: "./CommonResult.yaml"
+  data:
+    $ref: "./BrandMessageFriendGroupServiceResult.yaml"

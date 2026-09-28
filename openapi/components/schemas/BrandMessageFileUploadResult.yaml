@@ -1,0 +1,7 @@
+type: object
+description: 브랜드메시지 이미지 업로드 결과입니다.
+properties:
+  imgUrl:
+    type: string
+    description: 브랜드메시지 템플릿·발송 구성(`attachment.image.imgUrl` 등)에 사용할 이미지 URL입니다.
+    example: https://example.kakao.image/brand-image.jpg

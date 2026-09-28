@@ -1,0 +1,43 @@
+get:
+  operationId: getRcsTemplateForm
+  tags: [RCS]
+  summary: RCS 템플릿 양식 상세 조회
+  description: |
+    템플릿 양식 ID를 기준으로 템플릿 양식 상세 정보를 조회합니다.
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/rcs
+  x-sdk-resource: rcs.templateForms
+  x-sdk-method: get
+  x-sdk-retry: safe
+  parameters:
+    - name: messagebaseformId
+      in: query
+      required: true
+      description: 메시지 양식 ID입니다.
+      schema:
+        type: string
+      example: "MESSAGEBASEFORM_ID_EXAMPLE"
+  responses:
+    "200":
+      description: 처리 결과입니다. 성공 여부는 `common.authCode`와 `data.code`로 확인합니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/RcsMessagebaseFormDetailResponse.yaml
+          example:
+            common:
+              authCode: "A000"
+              authResult: "Success"
+              infobankTrId: "Infobank-Tracking-Id"
+            data:
+              code: "A000"
+              result: "Success"
+              data:
+                rcs:
+                  messageForm:
+                    formatId: "FORMAT_ID_EXAMPLE"
+                    templateName: "통합 정보형 템플릿"
+                    body: []
+    "429":
+      $ref: ../components/responses/RateLimited.yaml
+    default:
+      $ref: ../components/responses/ErrorResponse.yaml

@@ -1,0 +1,14 @@
+type: object
+description: "업로드 결과 데이터입니다."
+properties:
+  marketingAgree:
+    type: object
+    description: "업로드된 증적자료 정보입니다."
+    properties:
+      fileKey:
+        type: string
+        description: "업로드된 파일의 식별 키입니다."
+        example: FILE_KEY_001
+      fileUrl:
+        type: string
+        description: "업로드된 파일의 URL입니다."

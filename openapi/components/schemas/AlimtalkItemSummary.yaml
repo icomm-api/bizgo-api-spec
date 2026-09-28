@@ -1,0 +1,14 @@
+type: object
+description: 알림톡 아이템 요약 정보입니다.
+required: [title, description]
+properties:
+  title:
+    type: string
+    description: 요약 타이틀입니다. 최대 6자입니다.
+    maxLength: 6
+  description:
+    type: string
+    description: |
+      요약 가격정보입니다. 최대 14자입니다.
+      허용 문자: 통화 기호(유니코드 통화 기호, 元, 円, 원), 통화 코드(ISO 4217), 숫자, 쉼표, 소수점, 공백. 소수점 이하는 2자리까지 허용합니다.
+    maxLength: 14

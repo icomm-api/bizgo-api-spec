@@ -1,0 +1,26 @@
+type: object
+description: 일자별 접수·리포트 통계입니다.
+properties:
+  statDate:
+    type: string
+    description: 집계일입니다.
+    x-format: YYYYMMDD
+    pattern: "^[0-9]{8}$"
+  recvTotalCnt:
+    type: integer
+    description: 접수 전체 건수입니다.
+  recvSuccCnt:
+    type: integer
+    description: 접수 성공 건수입니다.
+  recvFailCnt:
+    type: integer
+    description: 접수 실패 건수입니다.
+  reportTotalCnt:
+    type: integer
+    description: 리포트 전체 건수입니다.
+  reportSuccCnt:
+    type: integer
+    description: 리포트 성공 건수입니다.
+  reportFailCnt:
+    type: integer
+    description: 리포트 실패 건수입니다.

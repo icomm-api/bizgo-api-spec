@@ -1,0 +1,47 @@
+post:
+  operationId: requestKakaoSenderToken
+  tags: [Kakao]
+  summary: 카카오 채널 인증 토큰 요청
+  description: |
+    발신프로필 등록에 필요한 카카오톡 채널 인증 토큰을 요청합니다.
+
+    발신프로필 등록 흐름:
+    1. 이 API에 채널 아이디(`yellowId`)와 채널 알림을 받는 관리자 전화번호(`phoneNumber`)를 보냅니다.
+    2. 그 전화번호에 연결된 카카오톡이 채널을 차단하지 않았다면 카카오가 해당 카카오톡으로 인증 토큰을 보냅니다.
+    3. 받은 토큰과 같은 전화번호를 헤더(`token`, `phoneNumber`)에 넣어 발신프로필 등록(`POST /api/comm/v1/account/kakao/sender`)을 호출합니다.
+
+    인증받은 토큰은 7일 동안 비즈메시지 센터 서버에 보관됩니다. 다시 호출하면 토큰이 또 발송되므로 자동 재시도하지 않습니다.
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-common
+  x-sdk-resource: kakao.senders
+  x-sdk-method: requestToken
+  x-sdk-retry: rate_limit_only
+  x-sdk-result: data
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/KakaoSenderTokenRequest.yaml
+        example:
+          yellowId: "@KAKAO_CHANNEL_ID_EXAMPLE"
+          phoneNumber: "01000000000"
+  responses:
+    "200":
+      description: 토큰 요청 결과입니다. 이 응답에는 `data.kakao`가 없습니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/KakaoSenderAccountResponse.yaml
+          example:
+            common:
+              authCode: A000
+              authResult: SUCCESS
+              infobankTrId: Infobank-Tracking-Id
+            data:
+              code: A000
+              result: SUCCESS
+              resultMsg: 요청 성공
+    "429":
+      $ref: ../components/responses/RateLimited.yaml
+    default:
+      $ref: ../components/responses/ErrorResponse.yaml

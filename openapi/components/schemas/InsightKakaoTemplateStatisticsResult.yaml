@@ -1,0 +1,7 @@
+type: object
+properties:
+  statistics:
+    type: array
+    description: 템플릿별 통계 목록입니다.
+    items:
+      $ref: ./InsightKakaoTemplateStatistics.yaml

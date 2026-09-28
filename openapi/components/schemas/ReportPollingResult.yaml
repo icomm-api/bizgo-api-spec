@@ -1,0 +1,10 @@
+type: object
+properties:
+  reportId:
+    type: string
+    description: "수신 확인(`DELETE /api/comm/v1/report/polling/{reportId}`)에 쓰는 리포트 ID입니다. 전달할 리포트가 없으면 빈 문자열입니다."
+  report:
+    type: [array, "null"]
+    description: 리포트 목록입니다. 전달할 리포트가 없으면 null입니다.
+    items:
+      $ref: ./Report.yaml

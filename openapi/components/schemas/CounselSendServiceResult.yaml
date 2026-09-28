@@ -1,0 +1,9 @@
+allOf:
+  - $ref: ./ServiceResult.yaml
+  - type: object
+    description: 상담톡 메시지 발송 처리 결과입니다. 다른 API와 달리 `msgKey`가 `data.data`가 아니라 `data` 바로 아래에 옵니다.
+    properties:
+      msgKey:
+        type: string
+        description: 메시지 키입니다. 발송 결과 웹훅(`cstalk/result`)의 `msgKey`와 같은 값입니다.
+    x-unverified: "Plain/Rich 발송은 `data.msgKey`, 상담 종료는 `data.data.msgKey`로 문서가 서로 다른 위치를 씁니다. 실제 응답 위치를 확인해야 합니다."

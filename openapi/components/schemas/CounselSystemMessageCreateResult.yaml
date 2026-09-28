@@ -1,0 +1,5 @@
+type: object
+description: 시스템 메시지 등록 결과 데이터입니다.
+properties:
+  systemMessage:
+    $ref: ./CounselSystemMessageRef.yaml

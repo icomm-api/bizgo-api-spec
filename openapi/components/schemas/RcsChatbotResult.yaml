@@ -1,0 +1,12 @@
+type: object
+description: 대화방 조회·수정·승인 취소·삭제 결과 데이터입니다.
+properties:
+  rcs:
+    type: object
+    description: RCS 응답 영역입니다.
+    properties:
+      chatbot:
+        type: array
+        description: 대화방 정보 배열입니다. 상세 조회에서도 배열로 돌아옵니다.
+        items:
+          $ref: ./RcsChatbot.yaml

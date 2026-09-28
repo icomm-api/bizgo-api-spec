@@ -1,0 +1,6 @@
+type: object
+description: "동보 발송 응답 데이터입니다."
+properties:
+  brandmessage:
+    $ref: "./BrandMessageGroupSend.yaml"
+    description: "동보 발송 기본 정보입니다."

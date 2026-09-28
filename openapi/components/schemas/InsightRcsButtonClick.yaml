@@ -1,0 +1,16 @@
+type: object
+description: RCS 메시지 버튼 1개의 클릭 통계입니다.
+properties:
+  buttonNum:
+    type: integer
+    description: 버튼 번호입니다.
+  actionType:
+    type: string
+    description: 버튼 액션 유형입니다. 알려진 값은 `urlAction`입니다(발송 규격의 action 키 이름으로 보입니다).
+    x-known-values: [urlAction]
+  title:
+    type: string
+    description: 버튼 제목입니다.
+  clickCount:
+    type: integer
+    description: 클릭 수입니다.

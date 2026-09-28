@@ -1,0 +1,5 @@
+type: object
+description: 카카오톡 인증 상태 조회 결과 데이터입니다.
+properties:
+  cert:
+    $ref: ./CounselCert.yaml

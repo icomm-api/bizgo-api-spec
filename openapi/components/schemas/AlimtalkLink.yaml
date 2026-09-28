@@ -1,0 +1,16 @@
+type: object
+description: 알림톡 대표 링크 정보입니다.
+required: [urlPc, urlMobile]
+properties:
+  urlPc:
+    type: string
+    description: PC 환경에서 클릭 시 이동할 URL입니다.
+  urlMobile:
+    type: string
+    description: 모바일 환경에서 클릭 시 이동할 URL입니다.
+  schemeAndroid:
+    type: string
+    description: Android 커스텀 스킴입니다.
+  schemeIos:
+    type: string
+    description: iOS 커스텀 스킴입니다.

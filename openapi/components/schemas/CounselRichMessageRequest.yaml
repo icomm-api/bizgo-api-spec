@@ -1,0 +1,61 @@
+type: object
+description: |
+  상담톡 Rich 메시지 발송 요청입니다. 상담 세션이 열려 있는 사용자에게만 보낼 수 있습니다.
+  본문과 첨부는 최종 사용자와의 상담 내용이므로 개인정보로 취급하고 로그에 남기지 않습니다.
+required: [userKey, senderKey, msgType]
+x-sdk-required-if:
+  - when: { field: msgType, in: [IMAGE, WIDE] }
+    requiredPaths: [attachment.image]
+  - when: { field: msgType, in: [ITEM_LIST, WIDE_ITEM_LIST] }
+    requiredPaths: [attachment.item]
+  - when: { field: msgType, equals: CAROUSEL_FEED }
+    required: [carousel]
+  - when: { field: msgType, equals: KAKAO_CERT }
+    required: [certExpiry]
+properties:
+  userKey:
+    type: string
+    description: 상담톡 사용자 키입니다. 카카오톡 채널별로 다르며 대소문자를 구분합니다. 1~20자이며 비어 있거나 20자를 넘으면 `A507`이 반환됩니다.
+    minLength: 1
+    maxLength: 20
+    example: USER_KEY_EXAMPLE
+  senderKey:
+    type: string
+    description: 발신프로필 키입니다.
+    example: SENDER_KEY_EXAMPLE
+  msgType:
+    type: string
+    description: |
+      메시지 풍선 타입입니다. 문서가 지원 타입으로 나열한 값은 TEXT, IMAGE, WIDE, ITEM_LIST, WIDE_ITEM_LIST, CAROUSEL_FEED, PERSONAL이며,
+      본인인증 요청은 `KAKAO_CERT`입니다. `KAKAO_CERT`는 해당 채널이 본인인증 화이트리스트에 사전 등록되어 있어야 합니다
+      (이용문의 또는 영업담당자를 통해 신청하며, CI 활용 여부 증적 자료와 채널 정보를 제출합니다).
+    x-known-values: [TEXT, IMAGE, WIDE, ITEM_LIST, WIDE_ITEM_LIST, CAROUSEL_FEED, PERSONAL, KAKAO_CERT]
+    x-unverified: "KAKAO_CERT는 한국어 페이지(Part A)의 안내 박스에만 있고 지원 타입 목록에는 없습니다. PERSONAL 타입에 필요한 요청 필드도 문서에 없습니다."
+  message:
+    type: string
+    description: 사용자에게 전달할 메시지입니다.
+    x-unverified: "Rich 메시지 본문의 최대 길이가 문서에 없습니다."
+  description:
+    type: string
+    description: 사용자에게 전달할 부가 메시지입니다.
+  header:
+    type: string
+    description: 헤더입니다.
+  attachment:
+    $ref: ./CounselRichAttachment.yaml
+  carousel:
+    $ref: ./CounselCarousel.yaml
+  autoAnswer:
+    type: string
+    description: 시스템 자동 응답 메시지입니다.
+  lock:
+    type: boolean
+    description: 보안 메시지 여부입니다.
+  certExpiry:
+    type: integer
+    description: 본인인증 유효 시간(분)입니다. `msgType`이 `KAKAO_CERT`일 때 필수입니다.
+    x-unverified: "한국어 페이지(Part A)에만 있고 Copy Markdown(Part B)에는 없습니다. 허용 범위가 문서에 없습니다."
+  ref:
+    type: string
+    description: 참조 필드입니다. 최대 200자이며 발송 결과 웹훅(`cstalk/result`)에서 함께 반환됩니다.
+    maxLength: 200

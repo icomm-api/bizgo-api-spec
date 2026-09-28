@@ -1,0 +1,26 @@
+type: object
+description: 대화방 메뉴 1개의 클릭 통계입니다.
+properties:
+  postbackId:
+    type: string
+    description: 포스트백 ID입니다.
+  menuType:
+    type: string
+    description: 메뉴 유형입니다. 알려진 값은 `text`입니다.
+    x-known-values: [text]
+  actionType:
+    type: string
+    description: 메뉴 액션 유형입니다. 알려진 값은 `postbackAction`입니다.
+    x-known-values: [postbackAction]
+  title:
+    type: string
+    description: 메뉴 제목입니다.
+  clickCount:
+    type: integer
+    description: 클릭 수입니다.
+  subList:
+    type: array
+    description: 하위 메뉴 목록입니다. 상위 메뉴와 같은 항목으로 구성됩니다.
+    x-unverified: "하위 메뉴가 다시 subList를 가질 수 있는지(중첩 깊이)가 문서에 없습니다."
+    items:
+      $ref: ./InsightRcsMenuClick.yaml

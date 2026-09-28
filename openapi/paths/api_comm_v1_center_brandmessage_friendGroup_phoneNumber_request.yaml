@@ -1,0 +1,43 @@
+get:
+  operationId: getBrandMessageFriendGroupPhoneNumberRequest
+  summary: "친구 그룹 전화번호 요청 단건 조회"
+  description: "전화번호 추가·삭제 응답으로 받은 `requestId`로 해당 요청의 처리 상태를 조회합니다."
+  tags: [BrandMessage]
+  x-source: "https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand"
+  x-sdk-resource: brandMessage.friendGroups
+  x-sdk-method: getPhoneNumberRequest
+  x-sdk-retry: safe
+  x-unverified: "이 엔드포인트는 한국어 페이지(Part A)에만 있습니다."
+  parameters:
+    - name: senderKey
+      in: query
+      required: true
+      description: "발신프로필 키입니다."
+      schema:
+        type: string
+      example: SENDER_KEY_EXAMPLE
+    - name: friendGroupKey
+      in: query
+      required: true
+      description: "친구 그룹 키입니다."
+      schema:
+        type: string
+      example: FRIEND_GROUP_KEY_EXAMPLE
+    - name: requestId
+      in: query
+      required: true
+      description: "조회할 요청 아이디입니다."
+      schema:
+        type: string
+      example: "3930171852209730143"
+  responses:
+    "200":
+      description: "전화번호 요청 처리 상태입니다."
+      content:
+        "application/json":
+          schema:
+            $ref: "../components/schemas/BrandMessageFriendGroupPhoneNumberRequestResponse.yaml"
+    "429":
+      $ref: "../components/responses/RateLimited.yaml"
+    default:
+      $ref: "../components/responses/ErrorResponse.yaml"

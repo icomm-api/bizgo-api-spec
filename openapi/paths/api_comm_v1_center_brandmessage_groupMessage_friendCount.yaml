@@ -1,0 +1,28 @@
+get:
+  operationId: getBrandMessageFriendCount
+  summary: "채널 전체 친구 수 조회"
+  description: "발신프로필 기준 친구 수를 조회합니다. 동보 발송 가능 대상 수를 미리 확인할 때 씁니다."
+  tags: [BrandMessage]
+  x-source: "https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand"
+  x-sdk-resource: brandMessage.audience
+  x-sdk-method: getFriendCount
+  x-sdk-retry: safe
+  parameters:
+    - name: senderKey
+      in: query
+      required: true
+      description: "발신프로필 키입니다."
+      schema:
+        type: string
+      example: SENDER_KEY_EXAMPLE
+  responses:
+    "200":
+      description: "보유 친구 수입니다."
+      content:
+        "application/json":
+          schema:
+            $ref: "../components/schemas/BrandMessageAudienceFriendCountResponse.yaml"
+    "429":
+      $ref: "../components/responses/RateLimited.yaml"
+    default:
+      $ref: "../components/responses/ErrorResponse.yaml"

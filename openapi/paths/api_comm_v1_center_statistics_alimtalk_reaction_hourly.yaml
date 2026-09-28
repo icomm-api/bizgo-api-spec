@@ -1,0 +1,25 @@
+get:
+  operationId: getAlimtalkHourlyInsight
+  tags: [Insight]
+  summary: 알림톡 시간별 반응 지표
+  description: 기간·발신프로필 기준으로 알림톡 시간대별(0~23시) 반응 통계를 조회합니다.
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/insight
+  x-sdk-resource: insights.alimtalk
+  x-sdk-method: getHourly
+  x-sdk-retry: safe
+  parameters:
+    - $ref: ../components/parameters/InsightStartDateQuery.yaml
+    - $ref: ../components/parameters/InsightEndDateQuery.yaml
+    - $ref: ../components/parameters/InsightSenderKeyQuery.yaml
+    - $ref: ../components/parameters/InsightTemplateCodeQuery.yaml
+  responses:
+    "200":
+      description: 알림톡 시간대별 통계입니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/InsightKakaoHourlyStatisticsResponse.yaml
+    "429":
+      $ref: ../components/responses/RateLimited.yaml
+    default:
+      $ref: ../components/responses/ErrorResponse.yaml

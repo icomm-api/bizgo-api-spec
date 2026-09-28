@@ -1,0 +1,10 @@
+type: object
+description: 아이템 리스트의 아이템 1개입니다.
+required: [title]
+properties:
+  title:
+    type: string
+    description: 아이템 제목입니다.
+  description:
+    type: string
+    description: ITEM_LIST 타입의 아이템 추가 설명입니다.

@@ -1,0 +1,18 @@
+type: object
+description: 알림톡 템플릿 카테고리입니다.
+properties:
+  code:
+    type: string
+    description: 카테고리 코드입니다.
+  name:
+    type: string
+    description: 카테고리 이름입니다.
+  groupName:
+    type: string
+    description: 카테고리 그룹 이름입니다.
+  inclusion:
+    type: string
+    description: 포함 기준 설명입니다.
+  exclusion:
+    type: string
+    description: 제외 기준 설명입니다.

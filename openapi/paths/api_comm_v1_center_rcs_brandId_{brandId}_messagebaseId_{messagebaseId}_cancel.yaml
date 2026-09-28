@@ -1,0 +1,47 @@
+parameters:
+  - name: brandId
+    in: path
+    required: true
+    description: 브랜드 ID입니다.
+    schema:
+      type: string
+    example: "BRAND_ID_EXAMPLE"
+  - name: messagebaseId
+    in: path
+    required: true
+    description: 메시지베이스 ID입니다. 발송 시에는 `formatId` 필드 이름으로 쓰이므로 혼동하지 않도록 주의합니다.
+    schema:
+      type: string
+    example: "MESSAGEBASE_ID_EXAMPLE"
+put:
+  operationId: cancelRcsTemplateApproval
+  tags: [RCS]
+  summary: RCS 템플릿 승인 취소
+  description: |
+    승인 진행 중인 RCS 템플릿의 승인 요청을 취소합니다.
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/rcs
+  x-sdk-resource: rcs.templates
+  x-sdk-method: cancel
+  x-sdk-retry: safe
+  responses:
+    "200":
+      description: 처리 결과입니다. 성공 여부는 `common.authCode`와 `data.code`로 확인합니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/RcsTemplateIdResponse.yaml
+          example:
+            common:
+              authCode: "A000"
+              authResult: "Success"
+              infobankTrId: "Infobank-Tracking-Id"
+            data:
+              code: "A000"
+              result: "Success"
+              data:
+                rcs:
+                  messagebaseId: "MESSAGEBASE_ID_EXAMPLE"
+    "429":
+      $ref: ../components/responses/RateLimited.yaml
+    default:
+      $ref: ../components/responses/ErrorResponse.yaml

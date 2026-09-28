@@ -1,0 +1,50 @@
+type: object
+description: 브랜드메시지 카탈로그 아이템 1개입니다.
+required: [type]
+properties:
+  type:
+    type: string
+    description: 카탈로그 아이템 타입입니다.
+    x-unverified: "카탈로그 아이템 타입 값 목록이 문서에 없습니다."
+  imgUrl:
+    type: string
+    description: 아이템 이미지 URL입니다.
+  imgLink:
+    type: string
+    description: 이미지 클릭 시 이동할 URL입니다.
+  title:
+    type: string
+    description: 상품명입니다.
+  description:
+    type: string
+    description: 상품 설명입니다.
+  regularPrice:
+    type: integer
+    description: 정상 가격입니다.
+  discountPrice:
+    type: integer
+    description: 할인 후 가격입니다.
+  discountRate:
+    type: integer
+    description: 할인율입니다.
+  discountFixed:
+    type: integer
+    description: 정액 할인금액입니다.
+  regularPriceName:
+    type: string
+    description: 정상 가격명입니다.
+  discountPriceName:
+    type: string
+    description: 할인 후 가격명입니다.
+  regularPriceVariableName:
+    type: string
+    description: 정상 가격 고정변수명입니다.
+  discountPriceVariableName:
+    type: string
+    description: 할인 후 가격 고정변수명입니다.
+  discountRateVariableName:
+    type: string
+    description: 할인율 고정변수명입니다.
+  discountFixedVariableName:
+    type: string
+    description: 정액 할인금액 고정변수명입니다.

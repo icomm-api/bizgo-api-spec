@@ -1,0 +1,8 @@
+type: object
+properties:
+  statistics:
+    type: array
+    description: 발송 통계 목록입니다.
+    x-unverified: "주요 인사이트 응답이 배열인데 항목에 발신프로필·템플릿 구분 필드가 없어, 여러 senderKey를 조회할 때 항목이 무엇 단위로 나뉘는지 문서에 없습니다."
+    items:
+      $ref: ./InsightKakaoStatistics.yaml

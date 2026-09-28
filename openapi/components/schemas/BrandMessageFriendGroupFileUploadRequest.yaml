@@ -1,0 +1,11 @@
+type: object
+required: [senderKey, file]
+properties:
+  senderKey:
+    type: string
+    description: "발신프로필 키입니다."
+    example: SENDER_KEY_EXAMPLE
+  file:
+    type: string
+    format: binary
+    description: "업로드할 전화번호 목록 파일입니다. 줄바꿈으로 구분한 전화번호 파일이며 txt, csv만 허용됩니다."

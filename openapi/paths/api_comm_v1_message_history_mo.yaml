@@ -1,0 +1,62 @@
+get:
+  operationId: getMoHistory
+  tags: [Message]
+  summary: MO(수신) 이력 조회
+  description: MO 발생 시각 기준으로 수신 메시지를 최신순으로 조회합니다. 응답의 `lastSeq`를 다음 요청에 넣어 이어서 조회합니다.
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/insight
+  x-sdk-resource: messages
+  x-sdk-method: moHistory
+  x-sdk-retry: safe
+  x-sdk-pagination:
+    style: cursor
+    request: lastSeq
+    response: data.data.lastSeq
+    hasNext: data.data.hasNext
+    items: data.data.messages
+  parameters:
+    - name: occurredTime
+      in: query
+      required: true
+      description: 조회 기준 MO 발생 시각입니다. 타임존 오프셋을 포함해야 합니다(예 2026-04-23T14:11:01+09:00).
+      schema:
+        type: string
+        x-format: "yyyy-MM-dd'T'HH:mm:ssXXX"
+    - name: from
+      in: query
+      required: false
+      description: 발신번호로 필터링합니다.
+      schema:
+        type: string
+    - name: to
+      in: query
+      required: false
+      description: 수신번호(MO 번호)로 필터링합니다.
+      schema:
+        type: string
+    - name: lastSeq
+      in: query
+      required: false
+      description: 다음 페이지 조회 커서입니다. 없으면 최신 건부터 조회합니다.
+      schema:
+        type: integer
+        format: int64
+    - name: limit
+      in: query
+      required: false
+      description: 조회 건수입니다. 기본값 100, 최대 1,000입니다.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 1000
+        default: 100
+  responses:
+    "200":
+      description: MO 이력입니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/MoMessageListResponse.yaml
+    "429":
+      $ref: ../components/responses/RateLimited.yaml
+    default:
+      $ref: ../components/responses/ErrorResponse.yaml

@@ -1,0 +1,8 @@
+type: object
+description: 알림톡 템플릿 목록 응답입니다.
+required: [common]
+properties:
+  common:
+    $ref: ./CommonResult.yaml
+  data:
+    $ref: ./AlimtalkTemplateListServiceResult.yaml

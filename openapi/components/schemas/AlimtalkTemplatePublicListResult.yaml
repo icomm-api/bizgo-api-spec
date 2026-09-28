@@ -1,0 +1,8 @@
+type: object
+description: 공용템플릿 조회 응답 데이터입니다.
+properties:
+  templates:
+    type: array
+    description: 공용 템플릿 목록입니다.
+    items:
+      $ref: ./AlimtalkTemplatePublic.yaml

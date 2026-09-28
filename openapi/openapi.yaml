@@ -1,0 +1,335 @@
+openapi: 3.1.0
+info:
+  title: Bizgo Communication API
+  version: 1.2.0
+  summary: 비즈고 커뮤니케이션 API (SMS/LMS/MMS, 국제, RCS, 카카오 알림톡·브랜드메시지, 네이버 톡톡)
+  description: |
+    비즈고(Bizgo) 커뮤니케이션 API의 비공식 OpenAPI 스펙입니다. 원문은 [비즈고 개발자센터](https://developers.bizgo.io/api-sdk/api-reference)이며,
+    원문과 다르면 원문을 따릅니다. 문서끼리 다르거나 불명확한 부분은 `x-unverified`로 표시했습니다.
+
+    ## 인증
+    콘솔에서 발급한 API Key를 `Authorization` 헤더로 보냅니다. API Key는 허용 IP로 등록한 서버에서만 쓸 수 있습니다.
+
+    ## 응답 구조
+    모든 응답은 `common`(게이트웨이 결과)과 `data`(상품 처리 결과)로 나뉩니다. 둘 다 `A000`이어야 성공입니다.
+    발송 API는 수신자별 결과(`data.data.destinations[].code`)도 따로 확인해야 합니다.
+
+    ## 호출 한도
+    발송 API는 **초당 200 메시지(수신번호 수 기준)**, 그 외 API는 초당 5 요청이 기본입니다. 수신자 200명짜리 발송 요청 1건은 200으로 계산됩니다. 넘으면 HTTP 429 / 코드 A020이 반환됩니다.
+  license:
+    name: Apache-2.0
+    identifier: Apache-2.0
+  x-spec-scope: 커뮤니케이션 API 전체 (verify API 제외)
+servers:
+  - url: https://mars.ibapi.kr
+    description: 운영(Production)
+  - url: https://sandbox-mars.ibapi.kr
+    description: 테스트(Sandbox). 운영과 같은 API Key를 쓰며 실제로 발송되지 않습니다.
+security:
+  - ApiKeyAuth: []
+tags:
+  - name: Send
+    description: 메시지 발송
+  - name: File
+    description: 이미지 파일 업로드
+  - name: Report
+    description: 발송 결과 리포트
+  - name: Message
+    description: 메시지 상태·이력·통계 조회
+  - name: Webhook
+    description: 비즈고가 고객 서버로 보내는 웹훅
+  - name: Reservation
+    description: 예약 발송과 예약 관리
+  - name: Insight
+    description: 채널별 인사이트(알림톡·브랜드메시지·RCS)
+  - name: Kakao
+    description: 카카오 발신프로필·카테고리·그룹·제재 관리
+  - name: Alimtalk
+    description: 알림톡 템플릿 관리
+  - name: BrandMessage
+    description: 브랜드메시지 동보 발송·템플릿·친구 그룹 관리
+  - name: RCS
+    description: RCS 브랜드·챗봇·템플릿 관리
+  - name: Counsel
+    description: 카카오 상담톡
+paths:
+  /api/comm/v1/send/omni:
+    $ref: paths/api_comm_v1_send_omni.yaml
+  /api/comm/v1/file/mms:
+    $ref: paths/api_comm_v1_file_mms.yaml
+  /api/comm/v1/file/rcs:
+    $ref: paths/api_comm_v1_file_rcs.yaml
+  /api/comm/v1/file/brandmessage/default:
+    $ref: paths/api_comm_v1_file_brandmessage_default.yaml
+  /api/comm/v1/file/brandmessage/wide:
+    $ref: paths/api_comm_v1_file_brandmessage_wide.yaml
+  /api/comm/v1/file/brandmessage/wideItemList/first:
+    $ref: paths/api_comm_v1_file_brandmessage_wideItemList_first.yaml
+  /api/comm/v1/file/brandmessage/wideItemList:
+    $ref: paths/api_comm_v1_file_brandmessage_wideItemList.yaml
+  /api/comm/v1/file/brandmessage/carouselFeed:
+    $ref: paths/api_comm_v1_file_brandmessage_carouselFeed.yaml
+  /api/comm/v1/file/brandmessage/carouselCommerce:
+    $ref: paths/api_comm_v1_file_brandmessage_carouselCommerce.yaml
+  /api/comm/v1/report/polling:
+    $ref: paths/api_comm_v1_report_polling.yaml
+  /api/comm/v1/report/polling/{reportId}:
+    $ref: paths/api_comm_v1_report_polling_{reportId}.yaml
+  /api/comm/v1/report/inquiry/{msgKey}:
+    $ref: paths/api_comm_v1_report_inquiry_{msgKey}.yaml
+  /api/comm/v1/message/statistics:
+    $ref: paths/api_comm_v1_message_statistics.yaml
+  /api/comm/v1/message/history:
+    $ref: paths/api_comm_v1_message_history.yaml
+  /api/comm/v1/message/history/mo:
+    $ref: paths/api_comm_v1_message_history_mo.yaml
+  /api/comm/v1/message/inquiry/msgKey/{msgKey}:
+    $ref: paths/api_comm_v1_message_inquiry_msgKey_{msgKey}.yaml
+  /api/comm/v1/message/inquiry/requestId/{requestId}:
+    $ref: paths/api_comm_v1_message_inquiry_requestId_{requestId}.yaml
+  /api/comm/v1/message/inquiry/mo/msgKey/{msgKey}:
+    $ref: paths/api_comm_v1_message_inquiry_mo_msgKey_{msgKey}.yaml
+  # --- reservation-insights ---
+  /api/comm/v1/reservation:
+    $ref: paths/api_comm_v1_reservation.yaml
+  /api/comm/v1/reservation/list:
+    $ref: paths/api_comm_v1_reservation_list.yaml
+  /api/comm/v1/reservation/resvKey/{resvKey}:
+    $ref: paths/api_comm_v1_reservation_resvKey_{resvKey}.yaml
+  /api/comm/v1/reservation/resvKey/{resvKey}/cancel:
+    $ref: paths/api_comm_v1_reservation_resvKey_{resvKey}_cancel.yaml
+  /api/comm/v1/reservation/resvKey/{resvKey}/stop:
+    $ref: paths/api_comm_v1_reservation_resvKey_{resvKey}_stop.yaml
+  /api/comm/v1/reservation/resvKey/{resvKey}/resume:
+    $ref: paths/api_comm_v1_reservation_resvKey_{resvKey}_resume.yaml
+  /api/comm/v1/reservation/resvKey/{resvKey}/destinations:
+    $ref: paths/api_comm_v1_reservation_resvKey_{resvKey}_destinations.yaml
+  /api/comm/v1/reservation/resvKey/{resvKey}/destinations/msgKey/{msgKey}:
+    $ref: paths/api_comm_v1_reservation_resvKey_{resvKey}_destinations_msgKey_{msgKey}.yaml
+  /api/comm/v1/center/statistics/alimtalk:
+    $ref: paths/api_comm_v1_center_statistics_alimtalk.yaml
+  /api/comm/v1/center/statistics/alimtalk/reaction/hourly:
+    $ref: paths/api_comm_v1_center_statistics_alimtalk_reaction_hourly.yaml
+  /api/comm/v1/center/statistics/alimtalk/template:
+    $ref: paths/api_comm_v1_center_statistics_alimtalk_template.yaml
+  /api/comm/v1/center/statistics/brandmessage:
+    $ref: paths/api_comm_v1_center_statistics_brandmessage.yaml
+  /api/comm/v1/center/statistics/brandmessage/reaction/hourly:
+    $ref: paths/api_comm_v1_center_statistics_brandmessage_reaction_hourly.yaml
+  /api/comm/v1/center/statistics/brandmessage/template:
+    $ref: paths/api_comm_v1_center_statistics_brandmessage_template.yaml
+  /api/comm/v1/center/rcs/brandId/{brandId}/stat/message:
+    $ref: paths/api_comm_v1_center_rcs_brandId_{brandId}_stat_message.yaml
+  /api/comm/v1/center/rcs/brandId/{brandId}/stat/messageButton:
+    $ref: paths/api_comm_v1_center_rcs_brandId_{brandId}_stat_messageButton.yaml
+  /api/comm/v1/center/rcs/brandId/{brandId}/stat/persistentMenu:
+    $ref: paths/api_comm_v1_center_rcs_brandId_{brandId}_stat_persistentMenu.yaml
+  /api/comm/v1/center/rcs/brandId/{brandId}/stat/brandProfile:
+    $ref: paths/api_comm_v1_center_rcs_brandId_{brandId}_stat_brandProfile.yaml
+  # --- kakao-alimtalk ---
+  /api/comm/v1/account/kakao/sender/token:
+    $ref: paths/api_comm_v1_account_kakao_sender_token.yaml
+  /api/comm/v1/account/kakao/sender:
+    $ref: paths/api_comm_v1_account_kakao_sender.yaml
+  /api/comm/v1/account/kakao/sender/profiles:
+    $ref: paths/api_comm_v1_account_kakao_sender_profiles.yaml
+  /api/comm/v1/center/kakao/sender:
+    $ref: paths/api_comm_v1_center_kakao_sender.yaml
+  /api/comm/v1/center/kakao/sender/recover:
+    $ref: paths/api_comm_v1_center_kakao_sender_recover.yaml
+  /api/comm/v1/center/kakao/sender/category/list:
+    $ref: paths/api_comm_v1_center_kakao_sender_category_list.yaml
+  /api/comm/v1/center/kakao/sender/category:
+    $ref: paths/api_comm_v1_center_kakao_sender_category.yaml
+  /api/comm/v1/center/kakao/group:
+    $ref: paths/api_comm_v1_center_kakao_group.yaml
+  /api/comm/v1/center/kakao/group/groupKey/{groupKey}/senderKey/{senderKey}:
+    $ref: paths/api_comm_v1_center_kakao_group_groupKey_{groupKey}_senderKey_{senderKey}.yaml
+  /api/comm/v1/center/kakao/abusing/block/sender:
+    $ref: paths/api_comm_v1_center_kakao_abusing_block_sender.yaml
+  /api/comm/v1/center/kakao/abusing/block/senderGroup:
+    $ref: paths/api_comm_v1_center_kakao_abusing_block_senderGroup.yaml
+  /api/comm/v1/center/kakao/abusing/block/template:
+    $ref: paths/api_comm_v1_center_kakao_abusing_block_template.yaml
+  /api/comm/v1/center/alimtalk/template:
+    $ref: paths/api_comm_v1_center_alimtalk_template.yaml
+  /api/comm/v1/center/alimtalk/template/list:
+    $ref: paths/api_comm_v1_center_alimtalk_template_list.yaml
+  /api/comm/v1/center/alimtalk/template/lastModified:
+    $ref: paths/api_comm_v1_center_alimtalk_template_lastModified.yaml
+  /api/comm/v1/center/alimtalk/template/senderKey/{senderKey}/templateCode/{templateCode}:
+    $ref: paths/api_comm_v1_center_alimtalk_template_senderKey_{senderKey}_templateCode_{templateCode}.yaml
+  /api/comm/v1/file/alimtalk/template:
+    $ref: paths/api_comm_v1_file_alimtalk_template.yaml
+  /api/comm/v1/file/alimtalk/itemHighlight:
+    $ref: paths/api_comm_v1_file_alimtalk_itemHighlight.yaml
+  /api/comm/v1/center/alimtalk/category:
+    $ref: paths/api_comm_v1_center_alimtalk_category.yaml
+  /api/comm/v1/center/alimtalk/template/request:
+    $ref: paths/api_comm_v1_center_alimtalk_template_request.yaml
+  /api/comm/v1/center/alimtalk/template/request/cancel:
+    $ref: paths/api_comm_v1_center_alimtalk_template_request_cancel.yaml
+  /api/comm/v1/center/alimtalk/public/template:
+    $ref: paths/api_comm_v1_center_alimtalk_public_template.yaml
+  # --- brandmessage ---
+  /api/comm/v1/center/brandmessage/groupMessage:
+    $ref: paths/api_comm_v1_center_brandmessage_groupMessage.yaml
+  /api/comm/v1/center/brandmessage/groupMessage/resume:
+    $ref: paths/api_comm_v1_center_brandmessage_groupMessage_resume.yaml
+  /api/comm/v1/center/brandmessage/groupMessage/pause:
+    $ref: paths/api_comm_v1_center_brandmessage_groupMessage_pause.yaml
+  /api/comm/v1/center/brandmessage/groupMessage/terminate:
+    $ref: paths/api_comm_v1_center_brandmessage_groupMessage_terminate.yaml
+  /api/comm/v1/center/brandmessage/groupMessage/possible:
+    $ref: paths/api_comm_v1_center_brandmessage_groupMessage_possible.yaml
+  /api/comm/v1/center/brandmessage/groupMessage/friend/possible:
+    $ref: paths/api_comm_v1_center_brandmessage_groupMessage_friend_possible.yaml
+  /api/comm/v1/center/brandmessage/groupMessage/friendCount:
+    $ref: paths/api_comm_v1_center_brandmessage_groupMessage_friendCount.yaml
+  /api/comm/v1/center/brandmessage/groupMessage/estimate:
+    $ref: paths/api_comm_v1_center_brandmessage_groupMessage_estimate.yaml
+  /api/comm/v1/center/brandmessage/sendPermission:
+    $ref: paths/api_comm_v1_center_brandmessage_sendPermission.yaml
+  /api/comm/v1/file/brandmessage/catalog:
+    $ref: paths/api_comm_v1_file_brandmessage_catalog.yaml
+  /api/comm/v1/file/brandmessage/catalog/oddFirst:
+    $ref: paths/api_comm_v1_file_brandmessage_catalog_oddFirst.yaml
+  /api/comm/v1/center/brandmessage/video/upload/register:
+    $ref: paths/api_comm_v1_center_brandmessage_video_upload_register.yaml
+  /api/comm/v1/center/brandmessage/video/register:
+    $ref: paths/api_comm_v1_center_brandmessage_video_register.yaml
+  /api/comm/v1/center/brandmessage/video:
+    $ref: paths/api_comm_v1_center_brandmessage_video.yaml
+  /api/comm/v1/center/brandmessage/video/list:
+    $ref: paths/api_comm_v1_center_brandmessage_video_list.yaml
+  /api/comm/v1/center/brandmessage/template:
+    $ref: paths/api_comm_v1_center_brandmessage_template.yaml
+  /api/comm/v1/center/brandmessage/template/list:
+    $ref: paths/api_comm_v1_center_brandmessage_template_list.yaml
+  /api/comm/v1/center/brandmessage/template/lastModified:
+    $ref: paths/api_comm_v1_center_brandmessage_template_lastModified.yaml
+  /api/comm/v1/center/brandmessage/template/senderKey/{senderKey}/templateCode/{templateCode}:
+    $ref: paths/api_comm_v1_center_brandmessage_template_senderKey_{senderKey}_templateCode_{templateCode}.yaml
+  /api/comm/v1/center/brandmessage/groupTag/list:
+    $ref: paths/api_comm_v1_center_brandmessage_groupTag_list.yaml
+  /api/comm/v1/center/brandmessage/groupTag:
+    $ref: paths/api_comm_v1_center_brandmessage_groupTag.yaml
+  /api/comm/v1/center/brandmessage/groupTag/senderKey/{senderKey}/groupTagKey/{groupTagKey}:
+    $ref: paths/api_comm_v1_center_brandmessage_groupTag_senderKey_{senderKey}_groupTagKey_{groupTagKey}.yaml
+  /api/comm/v1/center/brandmessage/friendGroup/file:
+    $ref: paths/api_comm_v1_center_brandmessage_friendGroup_file.yaml
+  /api/comm/v1/center/brandmessage/friendGroup:
+    $ref: paths/api_comm_v1_center_brandmessage_friendGroup.yaml
+  /api/comm/v1/center/brandmessage/friendGroup/list:
+    $ref: paths/api_comm_v1_center_brandmessage_friendGroup_list.yaml
+  /api/comm/v1/center/brandmessage/friendGroup/senderKey/{senderKey}/friendGroupKey/{friendGroupKey}:
+    $ref: paths/api_comm_v1_center_brandmessage_friendGroup_senderKey_{senderKey}_friendGroupKey_{friendGroupKey}.yaml
+  /api/comm/v1/center/brandmessage/friendGroup/phoneNumber/update:
+    $ref: paths/api_comm_v1_center_brandmessage_friendGroup_phoneNumber_update.yaml
+  /api/comm/v1/center/brandmessage/friendGroup/phoneNumber/delete:
+    $ref: paths/api_comm_v1_center_brandmessage_friendGroup_phoneNumber_delete.yaml
+  /api/comm/v1/center/brandmessage/friendGroup/phoneNumber/requests:
+    $ref: paths/api_comm_v1_center_brandmessage_friendGroup_phoneNumber_requests.yaml
+  /api/comm/v1/center/brandmessage/friendGroup/phoneNumber/request:
+    $ref: paths/api_comm_v1_center_brandmessage_friendGroup_phoneNumber_request.yaml
+  /api/comm/v1/center/brandmessage/marketingAgree:
+    $ref: paths/api_comm_v1_center_brandmessage_marketingAgree.yaml
+  /api/comm/v1/center/brandmessage/unSubscribeContent:
+    $ref: paths/api_comm_v1_center_brandmessage_unSubscribeContent.yaml
+  # --- rcs ---
+  /api/comm/v1/center/rcs/brand:
+    $ref: paths/api_comm_v1_center_rcs_brand.yaml
+  /api/comm/v1/center/rcs/chatbot/list:
+    $ref: paths/api_comm_v1_center_rcs_chatbot_list.yaml
+  /api/comm/v1/center/rcs/chatbot:
+    $ref: paths/api_comm_v1_center_rcs_chatbot.yaml
+  /api/comm/v1/center/rcs/brandId/{brandId}/chatbotId/{chatbotId}/cancel:
+    $ref: paths/api_comm_v1_center_rcs_brandId_{brandId}_chatbotId_{chatbotId}_cancel.yaml
+  /api/comm/v1/center/rcs/brandId/{brandId}/chatbotId/{chatbotId}:
+    $ref: paths/api_comm_v1_center_rcs_brandId_{brandId}_chatbotId_{chatbotId}.yaml
+  /api/comm/v1/center/rcs/usableQuery/chatbotId/{chatbotId}:
+    $ref: paths/api_comm_v1_center_rcs_usableQuery_chatbotId_{chatbotId}.yaml
+  /api/comm/v1/center/rcs/messagebase/common/list:
+    $ref: paths/api_comm_v1_center_rcs_messagebase_common_list.yaml
+  /api/comm/v1/center/rcs/messagebase/common:
+    $ref: paths/api_comm_v1_center_rcs_messagebase_common.yaml
+  /api/comm/v1/center/rcs/messagebase/messagebaseform/list:
+    $ref: paths/api_comm_v1_center_rcs_messagebase_messagebaseform_list.yaml
+  /api/comm/v1/center/rcs/messagebase/messagebaseform:
+    $ref: paths/api_comm_v1_center_rcs_messagebase_messagebaseform.yaml
+  /api/comm/v1/center/rcs/messagebase/list:
+    $ref: paths/api_comm_v1_center_rcs_messagebase_list.yaml
+  /api/comm/v1/center/rcs/messagebase:
+    $ref: paths/api_comm_v1_center_rcs_messagebase.yaml
+  /api/comm/v1/center/rcs/brandId/{brandId}/messagebaseId/{messagebaseId}/cancel:
+    $ref: paths/api_comm_v1_center_rcs_brandId_{brandId}_messagebaseId_{messagebaseId}_cancel.yaml
+  /api/comm/v1/center/rcs/brandId/{brandId}/messagebaseId/{messagebaseId}:
+    $ref: paths/api_comm_v1_center_rcs_brandId_{brandId}_messagebaseId_{messagebaseId}.yaml
+  /api/comm/v1/center/rcs/messagebase/file:
+    $ref: paths/api_comm_v1_center_rcs_messagebase_file.yaml
+  /api/comm/v1/center/rcs/messagebase/messagebaseform/logo:
+    $ref: paths/api_comm_v1_center_rcs_messagebase_messagebaseform_logo.yaml
+  # --- counsel ---
+  /api/comm/v1/cstalk/plain:
+    $ref: paths/api_comm_v1_cstalk_plain.yaml
+  /api/comm/v1/cstalk/rich:
+    $ref: paths/api_comm_v1_cstalk_rich.yaml
+  /api/comm/v1/cstalk/end:
+    $ref: paths/api_comm_v1_cstalk_end.yaml
+  /api/comm/v1/cstalk/endWithBot:
+    $ref: paths/api_comm_v1_cstalk_endWithBot.yaml
+  /api/comm/v1/center/cstalk/profile/user/block:
+    $ref: paths/api_comm_v1_center_cstalk_profile_user_block.yaml
+  /api/comm/v1/center/cstalk/profile/user/unblock:
+    $ref: paths/api_comm_v1_center_cstalk_profile_user_unblock.yaml
+  /api/comm/v1/center/cstalk/session:
+    $ref: paths/api_comm_v1_center_cstalk_session.yaml
+  /api/comm/v1/center/cstalk/cert/status:
+    $ref: paths/api_comm_v1_center_cstalk_cert_status.yaml
+  /api/comm/v1/file/cstalk/image:
+    $ref: paths/api_comm_v1_file_cstalk_image.yaml
+  /api/comm/v1/file/cstalk:
+    $ref: paths/api_comm_v1_file_cstalk.yaml
+  /api/comm/v1/center/cstalk/sender/activate:
+    $ref: paths/api_comm_v1_center_cstalk_sender_activate.yaml
+  /api/comm/v1/center/cstalk/sender/deactivate:
+    $ref: paths/api_comm_v1_center_cstalk_sender_deactivate.yaml
+  /api/comm/v1/center/cstalk/sender/chat/activate:
+    $ref: paths/api_comm_v1_center_cstalk_sender_chat_activate.yaml
+  /api/comm/v1/center/cstalk/sender/chat/deactivate:
+    $ref: paths/api_comm_v1_center_cstalk_sender_chat_deactivate.yaml
+  /api/comm/v1/center/cstalk/consult/time:
+    $ref: paths/api_comm_v1_center_cstalk_consult_time.yaml
+  /api/comm/v1/center/cstalk/system/message:
+    $ref: paths/api_comm_v1_center_cstalk_system_message.yaml
+  /api/comm/v1/center/cstalk/system/message/senderKey/{senderKey}/id/{id}:
+    $ref: paths/api_comm_v1_center_cstalk_system_message_senderKey_{senderKey}_id_{id}.yaml
+  /api/comm/v1/center/cstalk/system/message/approval/request:
+    $ref: paths/api_comm_v1_center_cstalk_system_message_approval_request.yaml
+  /api/comm/v1/center/cstalk/system/message/approval/cancel:
+    $ref: paths/api_comm_v1_center_cstalk_system_message_approval_cancel.yaml
+  /api/comm/v1/center/cstalk/chat/delete:
+    $ref: paths/api_comm_v1_center_cstalk_chat_delete.yaml
+webhooks:
+  report:
+    $ref: webhooks/report.yaml
+  mo:
+    $ref: webhooks/mo.yaml
+  counselMessage:
+    $ref: webhooks/counsel-message.yaml
+  counselReference:
+    $ref: webhooks/counsel-reference.yaml
+  counselExpiredSession:
+    $ref: webhooks/counsel-expired-session.yaml
+  counselSeenInfo:
+    $ref: webhooks/counsel-seen-info.yaml
+  counselPersonalInfo:
+    $ref: webhooks/counsel-personal-info.yaml
+  counselCertResult:
+    $ref: webhooks/counsel-cert-result.yaml
+  counselResult:
+    $ref: webhooks/counsel-result.yaml
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      $ref: components/securitySchemes/ApiKeyAuth.yaml

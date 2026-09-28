@@ -1,0 +1,150 @@
+type: object
+description: |
+  카카오 브랜드메시지입니다. 카카오톡 채널 친구에게 브랜드형 메시지를 발송합니다. `sendType`으로 발송 방식을 구분합니다.
+
+  | sendType | 방식 | 필수 필드 |
+  | --- | --- | --- |
+  | `basic` | 기본형. 사전 승인된 템플릿으로 발송합니다. 변수 분리 방식(`messageVariable` 등 `*Variable` 필드) 또는 전문 방식(`text`, `attachment`, `carousel`)을 템플릿 구조와 `msgType`에 맞게 선택해 씁니다. Variable 필드는 변수 치환이 필요할 때만 씁니다. | `sendType`, `msgType`, `senderKey`, `templateCode`, `targeting` |
+  | `template` | 기본형 템플릿 자동 치환. 템플릿 코드와 `destinations[].replaceWords`만으로 발송하며 Bizgo API가 전문을 생성합니다. 사용 가능 필드는 `senderKey`, `templateCode`, `sendType`, `targeting`, `pushAlarm`, `originCID`, `unsubscribePhoneNumber`, `unsubscribeAuthNumber`입니다. | `sendType`, `senderKey`, `templateCode`, `targeting` (+ `destinations[].replaceWords`) |
+  | `free` | 자유형. 템플릿 없이 본문·버튼·이미지·캐러셀 등을 직접 구성합니다. `templateCode`와 `*Variable` 필드는 쓰지 않으며, `groupTagKey`·`adult`·`adFlag`는 자유형에서만 씁니다. | `sendType`, `msgType`, `senderKey` |
+
+  위 표의 `sendType`별 필수 필드는 `x-sdk-required-if`에 있으며 SDK가 보내기 전에 검사합니다. 아래 `msgType`별 요소는 설명으로만 두고 SDK가 검사하지 않습니다(`msgType` 값 확인 전).
+
+  `msgType`별 주요 요소(문서의 필드 제약에서 정리):
+  - `FT`: 본문 최대 1,300자
+  - `FI`: `attachment.image` 필수, 본문 최대 400자
+  - `FW`: 와이드 이미지. `attachment.image` 필수, 본문 최대 76자
+  - `FL`: 와이드 리스트. `attachment.item`
+  - `FP`: 동영상. `attachment.video`, 본문 최대 76자
+  - `FM`: 커머스. `attachment.image` 필수, `attachment.commerce`, `additionalContent`
+  - `FC`: 캐러셀 피드. `carousel`, 아이템별 `header`·`message`·`attachment.image` 필수, `carousel.head` 사용 불가
+  - `FA`: 캐러셀 커머스. `carousel`, 아이템별 `attachment.image` 필수·`attachment.commerce`, 아이템 `header`·`message`·`additionalContent` 사용 불가
+  - `FG`: 카탈로그. `header`(헤더 타이틀)·`attachment.catalog`(아이템 3~7개) 필수, `headerDescription` 사용. 친구톡 호환 모드로는 발송할 수 없고, PC톡·맥톡에서는 노출되지 않으며 카카오톡 v25.8.0 이상에서 확인할 수 있습니다. 기본형으로 등록한 카탈로그 템플릿은 `targeting` `M`·`N`으로 발송할 수 있습니다.
+required: [sendType, senderKey]
+x-sdk-required-if:
+  - when: { field: sendType, in: [basic, free] }
+    required: [msgType]
+  - when: { field: sendType, in: [basic, template] }
+    required: [templateCode, targeting]
+  - when: { field: sendType, equals: template }
+    requiredPaths: ["$.destinations[].replaceWords"]
+properties:
+  sendType:
+    type: string
+    description: |
+      브랜드메시지 발송 타입입니다.
+      - `basic`: 기본형 발송
+      - `template`: 기본형 템플릿 자동 치환 발송
+      - `free`: 자유형 발송
+    enum: [basic, template, free]
+    example: basic
+  msgType:
+    type: string
+    description: |
+      카카오 비즈메시지(브랜드메시지) 타입입니다. `basic`, `free` 발송 시 필수입니다(`template`에서는 생략).
+      카카오 원본 chatBubbleType으로 변환됩니다. 알려진 값은 `FT`, `FI`, `FW`, `FL`, `FC`, `FM`, `FA`, `FP`, `FG`입니다.
+    x-known-values: [FT, FI, FW, FL, FC, FM, FA, FP, FG]
+    x-unverified: "문서의 요청 예시는 msgType에 `TEXT`를 쓰지만 필드 설명·템플릿 규격은 `FT` 등 2자리 코드를 씁니다. 각 코드의 명칭(와이드/커머스 등)은 필드 제약과 이미지 업로드 API 이름에서 추정한 것입니다."
+    example: FT
+  senderKey:
+    type: string
+    description: 발신프로필 키입니다.
+    example: SENDER_KEY_EXAMPLE
+  templateCode:
+    type: string
+    description: 브랜드메시지 템플릿 코드입니다. `basic`, `template` 발송 시 필수이며 `free`에서는 쓰지 않습니다.
+    example: TEMPLATE_CODE_EXAMPLE
+  targeting:
+    type: string
+    description: |
+      고객사의 광고성 정보 수신동의 회원 대상 타겟팅입니다. `basic`, `template` 발송 시 필수, `free`에서는 선택입니다. 허용된(allowlist) 발신프로필만 사용할 수 있습니다.
+      - `M`: 광고성 정보 수신동의 회원
+      - `N`: 광고성 정보 수신동의 회원 − 채널 친구
+      - `O`: 광고성 정보 수신동의 회원 ∩ 채널 친구 (수신거부 방식: 080 번호 안내)
+      - `I`: 광고성 정보 수신동의 회원 ∩ 채널 친구 (수신거부 방식: 채널 차단 안내)
+    enum: [M, N, O, I]
+  text:
+    type: string
+    description: 브랜드메시지 본문입니다. 최대 글자 수는 `msgType`에 따라 다릅니다(FT 1,300자, FI 400자, FW/FP 76자).
+    maxLength: 1300
+    x-unverified: "자유형 발송 요청 예시는 본문을 `text`가 아닌 `content` 필드로 보냅니다. 필드 표(Part A)의 `text`를 따릅니다."
+  header:
+    type: string
+    description: 헤더 정보입니다. 최대 20자입니다. `FG`(카탈로그)에서는 헤더 타이틀로 필수입니다.
+    maxLength: 20
+  headerDescription:
+    type: string
+    description: 헤더 디스크립션입니다. `msgType`이 `FG`일 때만 사용합니다.
+  additionalContent:
+    type: string
+    description: 부가 정보입니다. `FM` 타입 전용이며 최대 34자입니다.
+    maxLength: 34
+  groupTagKey:
+    type: string
+    description: 그룹태그 등록으로 발급받은 키입니다. 자유형(`free`) 발송에서 씁니다. 최대 40자입니다.
+    maxLength: 40
+  adult:
+    type: string
+    description: 성인 대상 메시지 여부입니다. 자유형(`free`) 발송에서 씁니다. 기본값은 `N`입니다.
+    enum: [Y, N]
+    default: N
+  pushAlarm:
+    type: string
+    description: 메시지 도착 시 푸시 알림 발송 여부입니다. 기본값은 `Y`입니다.
+    enum: [Y, N]
+    default: Y
+  adFlag:
+    type: string
+    description: 광고성 메시지 필수 표기 사항 노출 여부입니다. 자유형(`free`) 발송에서 씁니다. 기본값은 `Y`이며, `msgType`이 `FL`, `FC`, `FA`이면 `Y`로만 발송할 수 있습니다.
+    enum: [Y, N]
+    default: Y
+  messageVariable:
+    type: object
+    description: 메시지 영역 변수 정의입니다. 기본형(`basic`) 변수 분리 방식에서 씁니다. FT, FI, FW, FL, FP, FM 타입에서 사용합니다.
+    x-unverified: "변수 객체의 내부 구조(키·값 형식)가 문서에 없습니다. 기본형 요청 예시는 `messageVariable`을 `destinations[]` 안에 넣고 있어 위치도 불명확합니다."
+  buttonVariable:
+    type: object
+    description: 버튼 영역 변수 정의입니다. 기본형(`basic`) 변수 분리 방식에서 씁니다. FT, FI, FW, FL, FP, FM 타입에서 사용합니다.
+    x-unverified: "변수 객체의 내부 구조가 문서에 없습니다."
+  couponVariable:
+    type: object
+    description: 쿠폰 영역 변수 정의입니다. 기본형(`basic`) 변수 분리 방식에서 씁니다. FT, FI, FW, FL, FP, FM 타입에서 사용합니다.
+    x-unverified: "변수 객체의 내부 구조가 문서에 없습니다."
+  imageVariable:
+    type: object
+    description: 이미지 영역 변수 정의입니다. 기본형(`basic`) 변수 분리 방식에서 씁니다. FI, FW, FL, FM 타입에서 사용합니다.
+    x-unverified: "변수 객체의 내부 구조가 문서에 없습니다."
+  videoVariable:
+    type: object
+    description: 비디오 영역 변수 정의입니다. 기본형(`basic`) 변수 분리 방식에서 씁니다. FP 타입에서 사용합니다.
+    x-unverified: "변수 객체의 내부 구조가 문서에 없습니다."
+  commerceVariable:
+    type: object
+    description: 커머스 영역 변수 정의입니다. 기본형(`basic`) 변수 분리 방식에서 씁니다. FM 타입에서 사용합니다.
+    x-unverified: "변수 객체의 내부 구조가 문서에 없습니다."
+  carouselVariable:
+    type: array
+    description: 캐러셀 영역 변수 목록입니다. 기본형(`basic`) 변수 분리 방식에서 씁니다. FC, FA 타입에서 사용합니다.
+    items:
+      $ref: ./BrandMessageCarouselVariable.yaml
+  catalogVariable:
+    type: array
+    description: FG(카탈로그) 전용 아이템 단위 변수입니다. 기본형(`basic`) 변수 분리 방식에서 씁니다.
+    items:
+      $ref: ./BrandMessageCatalogVariable.yaml
+  originCID:
+    type: string
+    description: 최초 발신사업자 식별코드(최대 9자)입니다. 재판매사·특수부가통신사업자는 필수입니다.
+    maxLength: 9
+  unsubscribePhoneNumber:
+    type: string
+    description: 무료 수신거부 전화번호입니다. 최대 13자입니다.
+    maxLength: 13
+  unsubscribeAuthNumber:
+    type: string
+    description: 무료 수신거부 인증번호입니다. 최대 10자입니다.
+    maxLength: 10
+  attachment:
+    $ref: ./BrandMessageAttachment.yaml
+  carousel:
+    $ref: ./BrandMessageCarousel.yaml

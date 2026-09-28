@@ -1,0 +1,6 @@
+type: object
+description: 상담시간 저장 요청입니다.
+required: [cstalk]
+properties:
+  cstalk:
+    $ref: ./CounselConsultTimeSetting.yaml

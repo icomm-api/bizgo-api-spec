@@ -1,0 +1,9 @@
+description: |
+  호출 한도를 넘었습니다(코드 A020). 기본 한도는 발송 API 초당 200 메시지(요청이 아니라 수신번호 수 기준), 그 외 API 초당 5 요청입니다.
+  정상 응답에는 남은 한도를 알려주는 헤더(`X-RateLimit-*` 등)가 없으므로 클라이언트가 호출 속도를 직접 조절하고,
+  429를 받으면 지수 백오프로 재시도합니다. `Retry-After` 헤더가 있으면 그 값을 우선합니다.
+content:
+  application/json:
+    schema:
+      $ref: ../schemas/ApiResponse.yaml
+x-unverified: "429 응답에 Retry-After 헤더가 있는지는 확인되지 않았습니다(정상 응답에는 rate-limit 헤더 없음, 2026-09-23 sandbox)."

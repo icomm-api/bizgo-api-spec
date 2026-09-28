@@ -1,0 +1,6 @@
+type: object
+description: 알림톡 템플릿 등록(`POST`)·수정(`PUT`) 요청 본문입니다.
+required: [alimtalk]
+properties:
+  alimtalk:
+    $ref: ./AlimtalkTemplateBody.yaml

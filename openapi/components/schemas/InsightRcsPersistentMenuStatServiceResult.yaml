@@ -1,0 +1,7 @@
+description: RCS 인사이트 응답은 실제 데이터를 `data.data`가 아니라 `data.rcs`에 담습니다.
+allOf:
+  - $ref: ./ServiceResult.yaml
+  - type: object
+    properties:
+      rcs:
+        $ref: ./InsightRcsPersistentMenuStatResult.yaml

@@ -1,0 +1,45 @@
+type: object
+description: "동보 발송 요청 정보입니다."
+properties:
+  requestId:
+    type: string
+    description: "동보 발송 요청 아이디입니다."
+    example: "1203981"
+  status:
+    type: string
+    description: "동보 발송 상태입니다. 알려진 값: `READY`(발송 대기), `SENDING`(발송 중), `PAUSED`(발송 중지), `DONE`(발송 완료), `TERMINATED`(발송 종료), `BLOCKED`(발송 차단)."
+    x-known-values: [READY, SENDING, PAUSED, DONE, TERMINATED, BLOCKED]
+    example: READY
+  sendStartAt:
+    type: string
+    description: "동보 발송 시작 일시(`yyyy-MM-dd HH:mm:ss`, KST)입니다."
+    x-format: "yyyy-MM-dd HH:mm:ss"
+  campaignId:
+    type: string
+    description: "고객 캠페인 식별자입니다."
+  tpsLimit:
+    type: integer
+    description: "초당 발송 건수 상한입니다."
+  pushAlarm:
+    type: string
+    description: "메시지 푸시 알림 발송 여부입니다."
+    enum: ["Y", "N"]
+  expectedCount:
+    type: integer
+    description: "예상 발송 수입니다."
+  sendCount:
+    type: integer
+    description: "실제 발송 처리 수입니다."
+  senderKey:
+    type: string
+    description: "발신프로필 키입니다."
+  msgType:
+    type: string
+    description: "브랜드메시지 메시지 타입입니다."
+    example: FI
+  templateCode:
+    type: string
+    description: "기본형 템플릿 코드입니다."
+  friendGroupKey:
+    type: string
+    description: "친구 그룹 키입니다. 전체 친구 대상이면 없을 수 있습니다."

@@ -1,0 +1,26 @@
+post:
+  operationId: checkBrandMessageAudiencePossibleByPhoneNumbers
+  summary: "발송 예상 모수 확인 (전화번호 명단 기반)"
+  description: "전화번호 명단으로 동보 발송 가능 예상 수를 조회합니다. 국가코드는 자동 정규화되고 유효한 번호로 모수를 계산합니다. 최소 10건이며, 하나라도 형식이 잘못되면 요청 전체가 거부됩니다. 상태를 바꾸지 않는 조회이므로 재시도해도 안전합니다."
+  tags: [BrandMessage]
+  x-source: "https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand"
+  x-sdk-resource: brandMessage.audience
+  x-sdk-method: checkPossibleByPhoneNumbers
+  x-sdk-retry: safe
+  requestBody:
+    required: true
+    content:
+      "application/json":
+        schema:
+          $ref: "../components/schemas/BrandMessageAudiencePossibleByPhoneNumbersRequest.yaml"
+  responses:
+    "200":
+      description: "예상 발송 수입니다."
+      content:
+        "application/json":
+          schema:
+            $ref: "../components/schemas/BrandMessageAudiencePossibleResponse.yaml"
+    "429":
+      $ref: "../components/responses/RateLimited.yaml"
+    default:
+      $ref: "../components/responses/ErrorResponse.yaml"

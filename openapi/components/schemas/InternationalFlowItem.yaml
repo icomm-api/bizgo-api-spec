@@ -1,0 +1,7 @@
+type: object
+title: International
+required: [international]
+additionalProperties: false
+properties:
+  international:
+    $ref: ./InternationalMessage.yaml

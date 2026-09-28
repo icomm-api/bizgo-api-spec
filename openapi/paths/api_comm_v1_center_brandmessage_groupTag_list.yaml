@@ -1,0 +1,28 @@
+get:
+  operationId: listBrandMessageGroupTags
+  summary: "브랜드메시지 전체 그룹태그 조회"
+  description: "발신프로필 키로 브랜드메시지 전체 그룹태그 목록을 조회합니다. 그룹태그 키는 자유형 발송의 `groupTagKey`에 씁니다."
+  tags: [BrandMessage]
+  x-source: "https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand"
+  x-sdk-resource: brandMessage.groupTags
+  x-sdk-method: list
+  x-sdk-retry: safe
+  parameters:
+    - name: senderKey
+      in: query
+      required: true
+      description: "발신프로필 키입니다."
+      schema:
+        type: string
+      example: SENDER_KEY_EXAMPLE
+  responses:
+    "200":
+      description: "그룹태그 목록입니다."
+      content:
+        "application/json":
+          schema:
+            $ref: "../components/schemas/BrandMessageGroupTagListResponse.yaml"
+    "429":
+      $ref: "../components/responses/RateLimited.yaml"
+    default:
+      $ref: "../components/responses/ErrorResponse.yaml"

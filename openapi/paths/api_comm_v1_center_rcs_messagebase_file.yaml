@@ -1,0 +1,94 @@
+get:
+  operationId: getRcsTemplateImage
+  tags: [RCS]
+  summary: RCS 템플릿 이미지 상세 조회
+  description: |
+    브랜드 ID와 템플릿 파일 ID를 기준으로 템플릿 이미지 상세 정보를 조회합니다.
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/rcs
+  x-sdk-resource: rcs.templateImages
+  x-sdk-method: get
+  x-sdk-retry: safe
+  parameters:
+    - name: brandId
+      in: query
+      required: true
+      description: 브랜드 ID입니다.
+      schema:
+        type: string
+      example: "BRAND_ID_EXAMPLE"
+    - name: fileId
+      in: query
+      required: true
+      description: 템플릿 파일 ID입니다.
+      schema:
+        type: string
+      example: "FILE_ID_EXAMPLE"
+  responses:
+    "200":
+      description: 처리 결과입니다. 성공 여부는 `common.authCode`와 `data.code`로 확인합니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/RcsTemplateImageResponse.yaml
+          example:
+            common:
+              authCode: "A000"
+              authResult: "Success"
+              infobankTrId: "Infobank-Tracking-Id"
+            data:
+              code: "A000"
+              result: "Success"
+              data:
+                rcs:
+                  image:
+                    fileId: "FILE_ID_EXAMPLE"
+                    fileName: "template-image.jpg"
+                    imageWidth: 900
+                    imageHeight: 900
+    "429":
+      $ref: ../components/responses/RateLimited.yaml
+    default:
+      $ref: ../components/responses/ErrorResponse.yaml
+post:
+  operationId: uploadRcsTemplateImage
+  tags: [RCS]
+  summary: RCS 템플릿 이미지 등록
+  description: |
+    RCS 템플릿 등록에 사용할 이미지를 업로드하고 템플릿 파일 ID를 발급받습니다.
+    발송용 이미지 업로드(`/api/comm/v1/file/rcs`)와는 다른 API입니다.
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/rcs
+  x-sdk-resource: rcs.templateImages
+  x-sdk-method: upload
+  x-sdk-retry: rate_limit_only
+  requestBody:
+    required: true
+    content:
+      multipart/form-data:
+        schema:
+          $ref: ../components/schemas/RcsTemplateImageUploadRequest.yaml
+  responses:
+    "200":
+      description: 처리 결과입니다. 성공 여부는 `common.authCode`와 `data.code`로 확인합니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/RcsTemplateImageResponse.yaml
+          example:
+            common:
+              authCode: "A000"
+              authResult: "Success"
+              infobankTrId: "Infobank-Tracking-Id"
+            data:
+              code: "A000"
+              result: "Success"
+              data:
+                rcs:
+                  image:
+                    fileId: "FILE_ID_EXAMPLE"
+                    fileName: "template-image.jpg"
+                    imageWidth: 900
+                    imageHeight: 900
+    "429":
+      $ref: ../components/responses/RateLimited.yaml
+    default:
+      $ref: ../components/responses/ErrorResponse.yaml

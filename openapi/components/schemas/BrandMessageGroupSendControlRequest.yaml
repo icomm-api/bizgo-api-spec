@@ -1,0 +1,17 @@
+type: object
+description: "동보 발송 제어(재개·중지·종료) 요청입니다."
+required: [brandmessage]
+properties:
+  brandmessage:
+    type: object
+    description: "동보 발송 제어 정보입니다."
+    required: [senderKey, requestId]
+    properties:
+      senderKey:
+        type: string
+        description: "발신프로필 키입니다."
+        example: SENDER_KEY_EXAMPLE
+      requestId:
+        type: string
+        description: "동보 발송 요청 아이디입니다. 동보 발송 응답의 `requestId`를 씁니다."
+        example: "1203981"

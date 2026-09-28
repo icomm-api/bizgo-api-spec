@@ -1,0 +1,36 @@
+get:
+  operationId: listKakaoSenderCategories
+  tags: [Kakao]
+  summary: 발신프로필 카테고리 전체조회
+  description: 발신프로필 등록 시 사용할 수 있는 카카오 비즈메시지 카테고리 목록을 조회합니다.
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-common
+  x-sdk-resource: kakao.categories
+  x-sdk-method: list
+  x-sdk-retry: safe
+  x-sdk-result: data.data.kakao.categories
+  responses:
+    "200":
+      description: 카테고리 목록입니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/KakaoCategoryListResponse.yaml
+          example:
+            common:
+              authCode: A000
+              authResult: Success
+              infobankTrId: Infobank-Tracking-Id
+            data:
+              code: A000
+              result: Success
+              data:
+                kakao:
+                  categories:
+                    - code: "001"
+                      name: 쇼핑
+                    - code: "002"
+                      name: 금융
+    "429":
+      $ref: ../components/responses/RateLimited.yaml
+    default:
+      $ref: ../components/responses/ErrorResponse.yaml

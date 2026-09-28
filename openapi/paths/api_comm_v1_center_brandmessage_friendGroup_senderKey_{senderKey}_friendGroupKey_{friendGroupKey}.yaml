@@ -1,0 +1,35 @@
+delete:
+  operationId: deleteBrandMessageFriendGroup
+  summary: "친구 그룹 삭제"
+  description: "발신프로필 키와 친구 그룹 키로 친구 그룹을 삭제합니다."
+  tags: [BrandMessage]
+  x-source: "https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand"
+  x-sdk-resource: brandMessage.friendGroups
+  x-sdk-method: delete
+  x-sdk-retry: safe
+  parameters:
+    - name: senderKey
+      in: path
+      required: true
+      description: "발신프로필 키입니다."
+      schema:
+        type: string
+      example: SENDER_KEY_EXAMPLE
+    - name: friendGroupKey
+      in: path
+      required: true
+      description: "삭제할 친구 그룹 키입니다."
+      schema:
+        type: string
+      example: FRIEND_GROUP_KEY_EXAMPLE
+  responses:
+    "200":
+      description: "삭제 결과입니다."
+      content:
+        "application/json":
+          schema:
+            $ref: "../components/schemas/ApiResponse.yaml"
+    "429":
+      $ref: "../components/responses/RateLimited.yaml"
+    default:
+      $ref: "../components/responses/ErrorResponse.yaml"

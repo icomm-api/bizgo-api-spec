@@ -1,0 +1,104 @@
+get:
+  operationId: getRcsChatbot
+  tags: [RCS]
+  summary: RCS 대화방 상세 조회
+  description: |
+    브랜드 ID와 대화방 ID를 기준으로 RCS 대화방 상세 정보를 조회합니다. 결과는 `data.data.rcs.chatbot` 배열로 돌아옵니다.
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/rcs
+  x-sdk-resource: rcs.chatbots
+  x-sdk-method: get
+  x-sdk-retry: safe
+  parameters:
+    - name: brandId
+      in: query
+      required: true
+      description: 조회할 브랜드 ID입니다.
+      schema:
+        type: string
+      example: "BRAND_ID_EXAMPLE"
+    - name: chatbotId
+      in: query
+      required: true
+      description: 조회할 대화방 ID입니다.
+      schema:
+        type: string
+      example: "CHATBOT_ID_EXAMPLE"
+  responses:
+    "200":
+      description: 처리 결과입니다. 성공 여부는 `common.authCode`와 `data.code`로 확인합니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/RcsChatbotResponse.yaml
+          example:
+            common:
+              authCode: "A000"
+              authResult: "Success"
+              infobankTrId: "Infobank-Tracking-Id"
+            data:
+              code: "A000"
+              result: "Success"
+              data:
+                rcs:
+                  chatbot:
+                    - chatbotId: "CHATBOT_ID_EXAMPLE"
+                      brandId: "BRAND_ID_EXAMPLE"
+                      mdn: "01000000000"
+                      subTitle: "고객센터 대화방"
+                      status: "ready"
+                      approvalResult: "approved"
+                      registerDate: "2026-07-21 10:00:00"
+    "429":
+      $ref: ../components/responses/RateLimited.yaml
+    default:
+      $ref: ../components/responses/ErrorResponse.yaml
+put:
+  operationId: updateRcsChatbot
+  tags: [RCS]
+  summary: RCS 대화방 수정
+  description: |
+    등록된 RCS 대화방 정보를 수정합니다. `multipart/form-data`로 보내며, 대화방 정보(`chatbot`)는 JSON 문자열,
+    부가번호 증명 서류(`subNumCertificate`)는 파일로 함께 보냅니다.
+    파일 스트림을 다시 보내야 하고 검수 요청이 다시 걸릴 수 있으므로 SDK는 429만 재시도합니다.
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/rcs
+  x-sdk-resource: rcs.chatbots
+  x-sdk-method: update
+  x-sdk-retry: rate_limit_only
+  requestBody:
+    required: true
+    content:
+      multipart/form-data:
+        schema:
+          $ref: ../components/schemas/RcsChatbotUpdateRequest.yaml
+        encoding:
+          chatbot:
+            contentType: application/json
+  responses:
+    "200":
+      description: 처리 결과입니다. 성공 여부는 `common.authCode`와 `data.code`로 확인합니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/RcsChatbotResponse.yaml
+          example:
+            common:
+              authCode: "A000"
+              authResult: "Success"
+              infobankTrId: "Infobank-Tracking-Id"
+            data:
+              code: "A000"
+              result: "Success"
+              data:
+                rcs:
+                  chatbot:
+                    - chatbotId: "CHATBOT_ID_EXAMPLE"
+                      brandId: "BRAND_ID_EXAMPLE"
+                      mdn: "01000000000"
+                      subTitle: "고객센터 대화방"
+                      status: "ready"
+                      approvalResult: "approved"
+                      registerDate: "2026-07-21 10:00:00"
+    "429":
+      $ref: ../components/responses/RateLimited.yaml
+    default:
+      $ref: ../components/responses/ErrorResponse.yaml

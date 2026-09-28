@@ -1,0 +1,12 @@
+type: object
+description: 브랜드메시지 카탈로그 요소입니다. `msgType`이 `FG`일 때 사용합니다.
+properties:
+  list:
+    type: array
+    description: |
+      카탈로그 아이템 목록입니다. FG 타입에서 필수이며 최소 3개, 최대 7개입니다.
+      아이템이 홀수 개(3·5·7)이면 첫 번째 아이템만 2:1 가로형 이미지(카탈로그 홀수형 첫번째 이미지 업로드)를, 나머지는 1:1 정사각형 이미지(카탈로그 이미지 업로드)를 씁니다. 짝수 개(4·6)이면 전부 1:1입니다.
+    minItems: 3
+    maxItems: 7
+    items:
+      $ref: ./BrandMessageCatalogItem.yaml

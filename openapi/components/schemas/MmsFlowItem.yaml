@@ -1,0 +1,7 @@
+type: object
+title: LMS/MMS
+required: [mms]
+additionalProperties: false
+properties:
+  mms:
+    $ref: ./MmsMessage.yaml

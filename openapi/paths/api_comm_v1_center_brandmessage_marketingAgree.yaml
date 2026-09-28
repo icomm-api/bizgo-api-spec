@@ -1,0 +1,26 @@
+post:
+  operationId: uploadBrandMessageMarketingAgreeEvidence
+  summary: "광고성 정보 수신동의 증적자료 파일 업로드"
+  description: "광고성 정보 수신동의를 입증하는 증적자료 파일을 업로드합니다. 파일은 발신프로필 기준으로 관리되며, 발송권한 신청 조건 중 하나입니다."
+  tags: [BrandMessage]
+  x-source: "https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand"
+  x-sdk-resource: brandMessage.marketingAgreements
+  x-sdk-method: uploadEvidence
+  x-sdk-retry: rate_limit_only
+  requestBody:
+    required: true
+    content:
+      "multipart/form-data":
+        schema:
+          $ref: "../components/schemas/BrandMessageMarketingAgreeUploadRequest.yaml"
+  responses:
+    "200":
+      description: "업로드된 증적자료 정보입니다."
+      content:
+        "application/json":
+          schema:
+            $ref: "../components/schemas/BrandMessageMarketingAgreeResponse.yaml"
+    "429":
+      $ref: "../components/responses/RateLimited.yaml"
+    default:
+      $ref: "../components/responses/ErrorResponse.yaml"

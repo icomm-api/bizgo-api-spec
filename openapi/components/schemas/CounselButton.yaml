@@ -1,0 +1,42 @@
+type: object
+description: 상담톡 Rich 메시지·캐러셀 버튼입니다. 버튼 타입에 따라 필요한 필드가 다릅니다.
+required: [type, name]
+properties:
+  type:
+    type: string
+    description: 카카오 버튼 타입 코드입니다. 문서에 나온 값은 `WL`(웹 링크, 예시)과 `BF`(비즈폼)입니다.
+    x-known-values: [WL, BF]
+    x-unverified: "버튼 타입 코드 전체 목록과 타입별 필수 필드가 문서에 없습니다."
+    example: WL
+  name:
+    type: string
+    description: 버튼명입니다.
+  urlMobile:
+    type: string
+    description: 모바일 환경에서 버튼 클릭 시 이동할 URL입니다.
+  urlPc:
+    type: string
+    description: PC 환경에서 버튼 클릭 시 이동할 URL입니다.
+  schemeIos:
+    type: string
+    description: iOS 환경에서 버튼 클릭 시 실행할 application custom scheme입니다.
+  schemeAndroid:
+    type: string
+    description: Android 환경에서 버튼 클릭 시 실행할 application custom scheme입니다.
+  urlTarget:
+    type: string
+    description: WL 타입에서 외부 브라우저로 열려면 `out`을 입력합니다.
+    x-known-values: [out]
+  extra:
+    type: string
+    description: 봇/상담톡 전환 시 전달할 메타 정보입니다.
+  chatEvent:
+    type: string
+    description: 봇/상담톡 전환 시 연결할 이벤트명입니다.
+  startType:
+    type: string
+    description: 상담 시작 타입입니다.
+    x-unverified: "startType 값 목록이 문서에 없습니다."
+  bizFormKey:
+    type: string
+    description: 비즈폼 키입니다. BF 타입에서 사용합니다.

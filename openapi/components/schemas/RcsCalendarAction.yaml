@@ -1,0 +1,23 @@
+type: object
+description: 일정 등록 액션입니다.
+required: [createCalendarEvent]
+properties:
+  createCalendarEvent:
+    type: object
+    description: 일정 등록 객체입니다.
+    required: [startTime, endTime, title]
+    properties:
+      startTime:
+        type: string
+        description: 시작 시간입니다.
+        x-unverified: "시각 형식이 문서화되어 있지 않습니다."
+      endTime:
+        type: string
+        description: 종료 시간입니다.
+        x-unverified: "시각 형식이 문서화되어 있지 않습니다."
+      title:
+        type: string
+        description: 일정 제목입니다.
+      description:
+        type: string
+        description: 일정 설명입니다.

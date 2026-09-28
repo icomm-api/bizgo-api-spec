@@ -1,0 +1,23 @@
+post:
+  operationId: resumeReservation
+  tags: [Reservation]
+  summary: 예약 재개
+  description: 예약 중지(STOPPED) 상태인 예약 건을 다시 발송 처리합니다.
+  x-source: https://developers.bizgo.io/api-sdk/api-reference/comm/reservation
+  x-sdk-resource: reservations
+  x-sdk-method: resume
+  x-sdk-retry: rate_limit_only
+  x-unverified: "재개 응답 예시의 status가 PROCESSING이 아니라 PENDING입니다. 재개 후 상태가 무엇인지 확인이 필요합니다."
+  parameters:
+    - $ref: ../components/parameters/ResvKeyPath.yaml
+  responses:
+    "200":
+      description: 재개된 예약 건입니다.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ReservationResponse.yaml
+    "429":
+      $ref: ../components/responses/RateLimited.yaml
+    default:
+      $ref: ../components/responses/ErrorResponse.yaml

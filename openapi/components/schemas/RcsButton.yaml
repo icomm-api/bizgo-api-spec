@@ -1,0 +1,9 @@
+type: object
+description: RCS 버튼입니다.
+x-unverified: "buttons 개수와 suggestions 개수 제한이 문서화되어 있지 않습니다."
+properties:
+  suggestions:
+    type: array
+    description: 버튼 액션 정의 목록입니다.
+    items:
+      $ref: ./RcsSuggestion.yaml

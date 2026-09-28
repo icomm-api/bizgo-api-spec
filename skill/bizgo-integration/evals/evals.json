@@ -1,0 +1,35 @@
+{
+  "skill_name": "bizgo-integration",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "FastAPI 서버에서 주문 완료되면 비즈고로 알림톡 보내고 실패하면 문자로 가게 해줘. 발신프로필키랑 템플릿코드는 환경변수에 있어. 주문번호는 order.id, 고객 이름은 order.customer_name, 전화번호는 order.phone.",
+      "expected_output": "Python code using bizgo-sdk-comm: send.omni with AlimtalkMessage then SmsMessage/MmsMessage fallback, replace_words, idempotency_key from order.id, key from env, result.failed handling, no phone numbers in logs, fallback text fits SMS bytes or uses LMS.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "we use bizgo for OTP sms. sometimes our http call times out and users get 2 codes. also we mark it 'sent' right after the API returns. how should I fix this? python backend",
+      "expected_output": "Explains accepted vs delivered, idempotency key per OTP request so retries are rejected as duplicates (DuplicateRequestError treated as success), no blind retry after APIConnectionError without key, final status from reports/status lookup.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Node.js(Express)로 비즈고 리포트 웹훅 받는 엔드포인트 만들어줘. 서명 검증도 해야 돼.",
+      "expected_output": "Express handler with raw body that uses the JavaScript SDK (@bizgo/bizgo-sdk-comm-js WebhookReceiver) or equivalent code: HMAC-SHA256(secret, X-IB-Timestamp) from the X-IB-Signature header verified in constant time (hex or base64), timestamp tolerance, 401 on failure, respond {msgKey} within 5s, dedupe by msgKey, secret from env (requested from Bizgo), recommend HTTPS, the Bizgo source IP allowlist and confirming important results via the inquiry API.",
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "파이썬 Flask로 카카오 상담톡 웹훅(/cstalk/message) 받는 엔드포인트 만들어줘. 비즈고 SDK 써서.",
+      "expected_output": "Flask handler that parses the raw body with bizgo.webhooks.parse_counsel_message (or WebhookReceiver.counsel_message) without requiring a webhook secret or signature headers (counsel webhooks are not signed; signatures apply only to report/MO), returns 400 on WebhookVerificationError for malformed bodies, answers 200 with counsel_ack() = {\"code\": \"A000\", \"result\": \"Success\"} quickly, handles events idempotently (msgKey where present, sessionId for the session), recommends HTTPS and the Bizgo source IP allowlist, and does not log the body.",
+      "files": []
+    },
+    {
+      "id": 5,
+      "prompt": "Ruby on Rails에서 비즈고 문자 발송 API를 직접 호출하려고 해. 타임아웃 나면 재시도하는데 중복 발송은 막고 싶어.",
+      "expected_output": "Net::HTTP (or Faraday) POST to /api/comm/v1/send/omni with the raw API key in Authorization (no Bearer), key from env, timeouts set, idempotencyKey derived from a business ID AND idempotencyTtl sent with it (e.g. 86400; a key without TTL is rejected with A309), retries only for timeouts/5xx/429 with backoff while reusing the same key, A301 treated as already accepted, checks common.authCode, data.code and per-destination codes, no phone numbers or key in logs.",
+      "files": []
+    }
+  ]
+}
