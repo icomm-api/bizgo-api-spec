@@ -1,0 +1,58 @@
+meta {
+  name: RCS 예약 (통합 RCS)
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{baseUrl}}/api/comm/v1/reservation
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "destinations": [
+      {
+        "to": "01000000000"
+      }
+    ],
+    "messageFlow": [
+      {
+        "rcs": {
+          "from": "01000000000",
+          "formatId": "RCS_FORMAT_ID",
+          "brandKey": "RCS_BRAND_KEY",
+          "body": {
+            "title": "통합 RCS 예약 안내",
+            "description": "지정한 시각에 발송되는 통합 RCS 메시지입니다."
+          },
+          "expiryOption": "1"
+        }
+      }
+    ],
+    "resvSendTime": "2026-05-01 10:00:00",
+    "resvName": "통합 RCS 예약 발송",
+    "ref": "rcs-resv-20260501-001"
+  }
+}
+
+docs {
+  **예약 발송 등록** — `POST /api/comm/v1/reservation`
+
+  예시: **RCS 예약 (통합 RCS)** (`rcs`) — 통합 RCS만 예약 발송이 안내되어 있습니다.
+
+  메시지를 지정한 시각에 발송하도록 예약 등록합니다. SMS/LMS/MMS, 국제, 통합 RCS, 알림톡, 브랜드메시지(기본형·자유형)를 예약할 수 있으며,
+  채널별 메시지 필드는 통합 발송 규격과 같습니다. 채널별 안내는 문자·국제·RCS·알림톡·브랜드메시지 API 레퍼런스의 "예약 발송" 섹션에 있습니다.
+
+  - `resvSendTime`은 현재 시각 + 10분부터 1년 이내여야 합니다(A316, A331).
+  - 광고성 메시지는 20:00~08:00(KST)에 예약할 수 없습니다(A330).
+  - 응답의 `data.resvKey`로 예약 조회·수정·취소·중지·재개·수신자 관리를 합니다.
+
+  문서에 멱등성 키가 없으므로, 네트워크 오류로 결과를 모를 때는 다시 등록하기 전에 예약 목록 조회로 등록 여부를 확인합니다.
+
+  - operationId: `createReservation`
+  - SDK: `reservations.create`
+  - 발송 API입니다. sandbox에서 먼저 확인하세요(sandbox는 실제로 발송되지 않습니다).
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/mt
+}

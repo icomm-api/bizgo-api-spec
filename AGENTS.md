@@ -12,8 +12,9 @@
 npm ci                 # 도구 설치 (@redocly/cli, 버전 고정)
 npm run lint           # 스펙 검사 (CI 필수)
 npm run bundle         # dist/openapi.yaml 생성 (단일 파일)
+npm run examples       # 요청 본문 예시가 x-sdk-required-if 규칙을 지키는지 검사 (스키마 검사는 lint가 함)
 npm run collections    # dist/openapi.yaml → collections/ (Postman·Bruno) 다시 생성
-npm run check          # lint + bundle 결과가 커밋된 dist와 같은지, collections/가 최신인지 확인
+npm run check          # lint + examples + bundle 결과가 커밋된 dist와 같은지, collections/가 최신인지 확인
 ```
 
 ## 디렉터리 구조
@@ -27,6 +28,7 @@ openapi/
   components/parameters|responses|headers|securitySchemes/<Name>.yaml
 dist/openapi.yaml                   # 번들 결과 (직접 수정 금지)
 tools/sandbox-check/                # 미확인 항목을 sandbox에서 검증하는 스크립트 (표준 라이브러리만 사용)
+tools/examples/validate.mjs         # 요청 본문 예시의 x-sdk-required-if 검사기 (Node 표준 라이브러리 + 고정된 @redocly/cli)
 tools/collections/generate.mjs      # Postman·Bruno 컬렉션 생성기 (Node 표준 라이브러리 + 고정된 @redocly/cli)
 collections/                        # 생성된 API 테스트 컬렉션 (직접 수정 금지, apiKey 값은 항상 비움)
 ```
