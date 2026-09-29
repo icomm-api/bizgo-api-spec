@@ -1,7 +1,7 @@
 meta {
-  name: 예약 발송 등록 (createReservation)
+  name: 브랜드메시지 예약 (기본형)
   type: http
-  seq: 1
+  seq: 5
 }
 
 post {
@@ -19,30 +19,25 @@ body:json {
     ],
     "messageFlow": [
       {
-        "sms": {
-          "from": "01000000000",
-          "text": "예약 SMS 발송 테스트입니다."
-        }
-      },
-      {
-        "mms": {
-          "from": "01000000000",
-          "title": "예약 MMS 안내",
-          "text": "예약 MMS 발송 테스트입니다.",
-          "fileKey": [
-            "FILE_KEY_001"
-          ]
+        "brandmessage": {
+          "sendType": "basic",
+          "msgType": "FT",
+          "senderKey": "SENDER_KEY_EXAMPLE",
+          "templateCode": "TEMPLATE_CODE_EXAMPLE",
+          "targeting": "M"
         }
       }
     ],
     "resvSendTime": "2026-05-01 10:00:00",
-    "resvName": "문자 예약 발송",
-    "ref": "mt-resv-20260501-001"
+    "resvName": "브랜드메시지 기본형 예약 발송",
+    "ref": "brand-basic-resv-20260501-001"
   }
 }
 
 docs {
   **예약 발송 등록** — `POST /api/comm/v1/reservation`
+
+  예시: **브랜드메시지 예약 (기본형)** (`brandmessage_basic`) — 광고성 메시지는 20:00~08:00(KST)에 예약할 수 없습니다(A330).
 
   메시지를 지정한 시각에 발송하도록 예약 등록합니다. SMS/LMS/MMS, 국제, 통합 RCS, 알림톡, 브랜드메시지(기본형·자유형)를 예약할 수 있으며,
   채널별 메시지 필드는 통합 발송 규격과 같습니다. 채널별 안내는 문자·국제·RCS·알림톡·브랜드메시지 API 레퍼런스의 "예약 발송" 섹션에 있습니다.
@@ -57,34 +52,4 @@ docs {
   - SDK: `reservations.create`
   - 발송 API입니다. sandbox에서 먼저 확인하세요(sandbox는 실제로 발송되지 않습니다).
   - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/mt
-
-  ### 다른 예시
-
-  알림톡 예약 발송 (`alimtalk`)
-
-  ```json
-  {
-    "destinations": [
-      {
-        "to": "01000000000",
-        "replaceWords": {
-          "name": "홍길동"
-        }
-      }
-    ],
-    "messageFlow": [
-      {
-        "alimtalk": {
-          "msgType": "AT",
-          "senderKey": "SENDER_KEY_EXAMPLE",
-          "templateCode": "TEMPLATE_CODE_EXAMPLE",
-          "text": "#{name}님의 예약이 접수되었습니다."
-        }
-      }
-    ],
-    "resvSendTime": "2026-05-01 10:00:00",
-    "resvName": "알림톡 예약 발송",
-    "ref": "alimtalk-resv-20260501-001"
-  }
-  ```
 }

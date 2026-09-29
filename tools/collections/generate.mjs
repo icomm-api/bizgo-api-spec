@@ -26,8 +26,6 @@ const PRODUCTION_URL = "https://mars.ibapi.kr";
 const COLLECTION_NAME = "Bizgo Communication API";
 const METHODS = ["get", "post", "put", "patch", "delete"];
 const PHONE_PLACEHOLDER = "01000000000";
-const IDEMPOTENCY_KEY_PLACEHOLDER = "IDEMPOTENCY_KEY_EXAMPLE_0001";
-const IDEMPOTENCY_TTL = 86400;
 const FILE_PLACEHOLDER = "PATH_TO_FILE";
 
 const API_KEY_DESCRIPTION =
@@ -309,35 +307,22 @@ function buildBody(op) {
   if (json) {
     const mt = rb.content[json];
     const schema = flatten(mt.schema);
-    let value;
-    let exampleName = null;
-    const extra = [];
-    if (mt.example !== undefined) value = clone(mt.example);
+    // 이름 있는 예시(examples)는 모두 씁니다. 2개 이상이면 예시마다 요청을 하나씩 만듭니다(variantsOf).
+    let examples;
+    if (mt.example !== undefined) examples = [{ name: null, value: clone(mt.example) }];
     else if (mt.examples && Object.keys(mt.examples).length) {
-      const entries = Object.entries(mt.examples).map(([k, v]) => [k, deref(v)]);
-      [exampleName] = entries[0];
-      value = clone(entries[0][1].value);
-      for (const [k, v] of entries.slice(1)) extra.push({ name: k, summary: v.summary || k, value: clone(v.value) });
-    } else value = sample(schema, null);
-    fixup(value, schema);
-    for (const e of extra) fixup(e.value, schema);
-    const addIdem = (v) => {
-      if (!v || typeof v !== "object" || Array.isArray(v)) return;
-      if (schema?.properties?.idempotencyKey && schema?.properties?.idempotencyTtl) {
-        if (v.idempotencyKey === undefined) v.idempotencyKey = IDEMPOTENCY_KEY_PLACEHOLDER;
-        if (v.idempotencyTtl === undefined) v.idempotencyTtl = IDEMPOTENCY_TTL;
-      }
-    };
-    addIdem(value);
-    for (const e of extra) addIdem(e.value);
-    return {
-      kind: "json",
-      contentType: json,
-      value: sanitize(value, op.operationId),
-      exampleName,
-      extra: extra.map((e) => ({ ...e, value: sanitize(e.value, op.operationId) })),
-      otherTypes: other,
-    };
+      examples = Object.entries(mt.examples).map(([k, raw]) => {
+        const v = deref(raw);
+        return { name: k, summary: oneLine(v.summary || k), description: oneLine(v.description || ""), value: clone(v.value) };
+      });
+    } else examples = [{ name: null, value: sample(schema, null) }];
+    for (const e of examples) {
+      fixup(e.value, schema);
+      e.value = sanitize(e.value, op.operationId);
+    }
+    const summaries = examples.map((e) => e.summary).filter(Boolean);
+    if (new Set(summaries).size !== summaries.length) throw new Error(`${op.operationId}: 예시 summary가 겹칩니다`);
+    return { kind: "json", contentType: json, value: examples[0].value, examples, otherTypes: other };
   }
   if (multipart) {
     const schema = flatten(rb.content[multipart].schema) || {};
@@ -376,23 +361,31 @@ function requestName(o) {
   return `${oneLine(o.op.summary || o.id)} (${o.id})`;
 }
 
-function docsFor(o) {
+// 이름 있는 예시가 2개 이상인 operation은 예시마다 요청 1개로 나눠 operation 이름의 하위 폴더에 넣습니다.
+function variantsOf(o) {
+  const ex = o.body?.kind === "json" ? o.body.examples : null;
+  return ex && ex.length > 1 ? ex : null;
+}
+
+function requestCount(ops) {
+  return ops.reduce((n, o) => n + (variantsOf(o)?.length || 1), 0);
+}
+
+function docsFor(o, example = null) {
   const lines = [`**${oneLine(o.op.summary || o.id)}** — \`${o.method.toUpperCase()} ${o.route}\``, ""];
+  if (example) {
+    lines.push(`예시: **${example.summary}** (\`${example.name}\`)${example.description ? ` — ${example.description}` : ""}`, "");
+  }
   if (o.op.description) lines.push(String(o.op.description).trim(), "");
   lines.push(`- operationId: \`${o.id}\``);
   if (o.op["x-sdk-resource"]) lines.push(`- SDK: \`${o.op["x-sdk-resource"]}.${o.op["x-sdk-method"]}\``);
   if (o.op["x-sdk-rate"] === "send") lines.push("- 발송 API입니다. sandbox에서 먼저 확인하세요(sandbox는 실제로 발송되지 않습니다).");
   if (o.op["x-source"]) lines.push(`- 원문: ${o.op["x-source"]}`);
-  if (o.body?.kind === "json" && o.body.value && o.body.value.idempotencyKey !== undefined) {
-    lines.push("- `idempotencyKey`는 요청마다 새 값으로 바꾸세요. `idempotencyTtl`(초)은 키와 함께 보내야 합니다(없으면 A309).");
-  }
   if (o.body?.kind === "multipart") lines.push(`- 파일 필드에 업로드할 파일을 지정하세요(${FILE_PLACEHOLDER}는 자리표시자입니다).`);
   if (o.body?.otherTypes?.length) lines.push(`- 이 요청은 ${o.body.otherTypes.map((t) => `\`${t}\``).join(", ")} 형식도 지원합니다(스펙 참고).`);
-  if (o.body?.kind === "json" && o.body.extra.length) {
-    lines.push("", "### 다른 예시");
-    for (const e of o.body.extra) {
-      lines.push("", `${oneLine(e.summary)} (\`${e.name}\`)`, "", "```json", JSON.stringify(e.value, null, 2), "```");
-    }
+  if (!example && variantsOf(o)) {
+    lines.push("", "이 폴더에는 스펙의 예시마다 요청이 하나씩 있습니다:", "");
+    for (const e of variantsOf(o)) lines.push(`- ${e.summary} (\`${e.name}\`)${e.description ? ` — ${e.description}` : ""}`);
   }
   return lines.join("\n");
 }
@@ -413,7 +406,7 @@ function toColonPath(route) {
 
 // ---------------------------------------------------------------- Postman
 
-function postmanRequest(o) {
+function postmanRequest(o, example = null) {
   const pathParams = o.params.filter((p) => p.in === "path");
   const query = o.params.filter((p) => p.in === "query");
   const headers = o.params.filter((p) => p.in === "header");
@@ -443,10 +436,11 @@ function postmanRequest(o) {
     description: oneLine(p.description || ""),
     ...(p.required ? {} : { disabled: true }),
   }));
-  const req = { method: o.method.toUpperCase(), header, url, description: docsFor(o) };
+  const req = { method: o.method.toUpperCase(), header, url, description: docsFor(o, example) };
   if (o.body?.kind === "json") {
     header.push({ key: "Content-Type", value: "application/json" });
-    req.body = { mode: "raw", raw: JSON.stringify(o.body.value, null, 2), options: { raw: { language: "json" } } };
+    const value = example ? example.value : o.body.value;
+    req.body = { mode: "raw", raw: JSON.stringify(value, null, 2), options: { raw: { language: "json" } } };
   } else if (o.body?.kind === "multipart") {
     req.body = {
       mode: "formdata",
@@ -458,7 +452,13 @@ function postmanRequest(o) {
       })),
     };
   }
-  return { name: requestName(o), request: req, response: [] };
+  return { name: example ? example.summary : requestName(o), request: req, response: [] };
+}
+
+function postmanItem(o) {
+  const variants = variantsOf(o);
+  if (!variants) return postmanRequest(o);
+  return { name: oneLine(o.op.summary || o.id), description: docsFor(o), item: variants.map((e) => postmanRequest(o, e)) };
 }
 
 function buildPostman(ops) {
@@ -467,7 +467,7 @@ function buildPostman(ops) {
     if (!tags.has(o.tag)) tags.set(o.tag, new Map());
     const res = tags.get(o.tag);
     if (!res.has(o.resource)) res.set(o.resource, []);
-    res.get(o.resource).push(postmanRequest(o));
+    res.get(o.resource).push(postmanItem(o));
   }
   const tagDesc = Object.fromEntries((spec.tags || []).map((t) => [t.name, t.description || ""]));
   const item = [...tags].map(([tag, res]) => ({
@@ -479,7 +479,7 @@ function buildPostman(ops) {
     info: {
       _postman_id: stableUuid("postman-collection"),
       name: COLLECTION_NAME,
-      description: collectionDocs(ops.length),
+      description: collectionDocs(ops),
       schema: "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     },
     item,
@@ -510,15 +510,16 @@ function postmanEnvironment(name, baseUrl) {
   };
 }
 
-function collectionDocs(count, apiKeyLine = `비어 있습니다. ${API_KEY_DESCRIPTION}`) {
+function collectionDocs(ops, apiKeyLine = `비어 있습니다. ${API_KEY_DESCRIPTION}`) {
   return [
-    `${spec.info?.title || "Bizgo API"} ${spec.info?.version || ""} — \`dist/openapi.yaml\`에서 생성한 ${count}개 요청입니다.`,
+    `${spec.info?.title || "Bizgo API"} ${spec.info?.version || ""} — \`dist/openapi.yaml\`의 operation ${ops.length}개에서 생성한 ${requestCount(ops)}개 요청입니다.`,
     "",
     "이 파일은 `npm run collections`로 생성됩니다. 직접 수정하지 마세요.",
     "",
     `- \`baseUrl\`: 기본 ${SANDBOX_URL}(sandbox, 실제 발송 없음). 운영은 ${PRODUCTION_URL}.`,
     `- \`apiKey\`: ${apiKeyLine}`,
     "- 인증: `Authorization: {{apiKey}}` 헤더(컬렉션 수준).",
+    "- 스펙에 예시가 여러 개인 operation(통합 발송, 예약 발송 등록 등)은 operation 이름의 하위 폴더에 예시마다 요청이 하나씩 있습니다.",
     "- 웹훅(비즈고 → 고객 서버)은 요청이 아니므로 포함하지 않습니다.",
   ].join("\n");
 }
@@ -543,7 +544,7 @@ function bruValue(v) {
   return oneLine(v);
 }
 
-function brunoRequest(o, seq) {
+function brunoRequest(o, seq, example = null) {
   const pathParams = o.params.filter((p) => p.in === "path");
   const query = o.params.filter((p) => p.in === "query");
   const headers = o.params.filter((p) => p.in === "header");
@@ -553,7 +554,7 @@ function brunoRequest(o, seq) {
   const bodyMode = o.body?.kind === "json" ? "json" : o.body?.kind === "multipart" ? "multipartForm" : "none";
 
   const blocks = [];
-  blocks.push(`meta {\n  name: ${requestName(o)}\n  type: http\n  seq: ${seq}\n}`);
+  blocks.push(`meta {\n  name: ${example ? example.summary : requestName(o)}\n  type: http\n  seq: ${seq}\n}`);
   blocks.push(`${o.method} {\n  url: ${url}\n  body: ${bodyMode}\n  auth: inherit\n}`);
   const q = bruDict(
     "params:query",
@@ -571,7 +572,7 @@ function brunoRequest(o, seq) {
   );
   if (hd) blocks.push(hd);
   if (o.body?.kind === "json") {
-    blocks.push(`body:json {\n${indent(JSON.stringify(o.body.value, null, 2))}\n}`);
+    blocks.push(`body:json {\n${indent(JSON.stringify(example ? example.value : o.body.value, null, 2))}\n}`);
   } else if (o.body?.kind === "multipart") {
     const mp = bruDict(
       "body:multipart-form",
@@ -579,7 +580,7 @@ function brunoRequest(o, seq) {
     );
     if (mp) blocks.push(mp);
   }
-  blocks.push(`docs {\n${indent(docsFor(o))}\n}`);
+  blocks.push(`docs {\n${indent(docsFor(o, example))}\n}`);
   return blocks.join("\n\n") + "\n";
 }
 
@@ -598,7 +599,7 @@ function buildBruno(ops) {
     [
       "headers {\n  Authorization: {{apiKey}}\n  Accept: application/json\n}",
       "auth {\n  mode: none\n}",
-      `docs {\n${indent(collectionDocs(ops.length, "환경 파일에는 값이 없고 `{{process.env.BIZGO_API_KEY}}`로 `.env`(커밋 금지) 또는 환경변수에서 읽습니다. 접두어 없이 키 그대로 보냅니다."))}\n}`,
+      `docs {\n${indent(collectionDocs(ops, "환경 파일에는 값이 없고 `{{process.env.BIZGO_API_KEY}}`로 `.env`(커밋 금지) 또는 환경변수에서 읽습니다. 접두어 없이 키 그대로 보냅니다."))}\n}`,
     ].join("\n\n") + "\n",
   );
   const envFile = (baseUrl) =>
@@ -624,7 +625,19 @@ function buildBruno(ops) {
     }
     const seq = (reqSeq.get(resDir) || 0) + 1;
     reqSeq.set(resDir, seq);
-    files.set(`${resDir}/${o.id}.bru`, brunoRequest(o, seq));
+    const variants = variantsOf(o);
+    if (!variants) {
+      files.set(`${resDir}/${o.id}.bru`, brunoRequest(o, seq));
+      continue;
+    }
+    // 예시마다 요청 1개: <리소스>/<operationId>/<예시 이름>.bru, 폴더 이름은 operation summary
+    const opDir = `${resDir}/${o.id}`;
+    files.set(`${opDir}/folder.bru`, `meta {\n  name: ${oneLine(o.op.summary || o.id)}\n  seq: ${seq}\n}\n`);
+    variants.forEach((e, i) => {
+      const file = `${opDir}/${safeDirName(e.name)}.bru`;
+      if (files.has(file)) throw new Error(`${o.id}: 예시 파일 이름이 겹칩니다: ${e.name}`);
+      files.set(file, brunoRequest(o, i + 1, e));
+    });
   }
   return files;
 }
@@ -686,7 +699,10 @@ function main() {
   writeTree(BRUNO_DIR, brunoFiles, [".bru", ".json", ".env.example"]);
 
   const reqCount = [...brunoFiles.keys()].filter((k) => k.endsWith(".bru") && !k.endsWith("folder.bru") && k.includes("/") && !k.startsWith("environments/")).length;
-  console.log(`collections: ${ops.length} operations → postman ${ops.length} requests, bruno ${reqCount} requests`);
+  const countPostman = (items) => items.reduce((n, it) => n + (it.item ? countPostman(it.item) : 1), 0);
+  const pmCount = countPostman(JSON.parse(postmanFiles.get("bizgo-api.postman_collection.json")).item);
+  if (pmCount !== reqCount || pmCount !== requestCount(ops)) throw new Error(`요청 수가 맞지 않습니다: postman ${pmCount}, bruno ${reqCount}`);
+  console.log(`collections: ${ops.length} operations → postman ${pmCount} requests, bruno ${reqCount} requests`);
   if (sanitized.length) console.log(`collections: placeholder로 바꾼 값이 있는 operation: ${[...new Set(sanitized)].join(", ")}`);
 
   if (check) {

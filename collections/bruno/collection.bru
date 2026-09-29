@@ -8,12 +8,13 @@ auth {
 }
 
 docs {
-  Bizgo Communication API 1.2.0 — `dist/openapi.yaml`에서 생성한 146개 요청입니다.
+  Bizgo Communication API 1.2.0 — `dist/openapi.yaml`의 operation 146개에서 생성한 170개 요청입니다.
 
   이 파일은 `npm run collections`로 생성됩니다. 직접 수정하지 마세요.
 
   - `baseUrl`: 기본 https://sandbox-mars.ibapi.kr(sandbox, 실제 발송 없음). 운영은 https://mars.ibapi.kr.
   - `apiKey`: 환경 파일에는 값이 없고 `{{process.env.BIZGO_API_KEY}}`로 `.env`(커밋 금지) 또는 환경변수에서 읽습니다. 접두어 없이 키 그대로 보냅니다.
   - 인증: `Authorization: {{apiKey}}` 헤더(컬렉션 수준).
+  - 스펙에 예시가 여러 개인 operation(통합 발송, 예약 발송 등록 등)은 operation 이름의 하위 폴더에 예시마다 요청이 하나씩 있습니다.
   - 웹훅(비즈고 → 고객 서버)은 요청이 아니므로 포함하지 않습니다.
 }

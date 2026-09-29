@@ -6,9 +6,10 @@
   "scripts": {
     "lint": "redocly lint openapi/openapi.yaml",
     "bundle": "redocly bundle openapi/openapi.yaml -o dist/openapi.yaml",
+    "examples": "node tools/examples/validate.mjs",
     "collections": "node tools/collections/generate.mjs",
     "collections:check": "node tools/collections/generate.mjs --check",
-    "check": "npm run lint && npm run bundle && git diff --exit-code -- dist/ && npm run collections:check"
+    "check": "npm run lint && npm run examples && npm run bundle && git diff --exit-code -- dist/ && npm run collections:check"
   },
   "devDependencies": {
     "@redocly/cli": "2.54.2"

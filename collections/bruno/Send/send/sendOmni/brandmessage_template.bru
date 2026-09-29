@@ -1,0 +1,55 @@
+meta {
+  name: 브랜드메시지 (기본형 템플릿 자동 치환)
+  type: http
+  seq: 12
+}
+
+post {
+  url: {{baseUrl}}/api/comm/v1/send/omni
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "destinations": [
+      {
+        "to": "01000000000",
+        "replaceWords": {
+          "customerName": "홍길동",
+          "point": "500"
+        }
+      }
+    ],
+    "messageFlow": [
+      {
+        "brandmessage": {
+          "sendType": "template",
+          "senderKey": "SENDER_KEY_EXAMPLE",
+          "templateCode": "TEMPLATE_CODE_EXAMPLE",
+          "targeting": "I",
+          "pushAlarm": "Y"
+        }
+      }
+    ],
+    "ref": "brand-template-20260330-001"
+  }
+}
+
+docs {
+  **통합 발송** — `POST /api/comm/v1/send/omni`
+
+  예시: **브랜드메시지 (기본형 템플릿 자동 치환)** (`brandmessage_template`) — `sendType: template`이면 템플릿 코드와 `destinations[].replaceWords`만으로 발송합니다.
+
+  SMS/LMS/MMS, 국제, RCS, 알림톡, 브랜드메시지, 네이버 톡톡을 같은 경로로 발송합니다.
+  채널은 `messageFlow[]`의 채널 키로 구분하며, 여러 개를 넣으면 앞 메시지가 실패할 때 다음 메시지로 대체발송됩니다.
+  수신자는 한 요청에 최대 200명입니다. 접수 결과는 수신자별로 `data.data.destinations[]`에 담기며,
+  최종 발송 결과는 리포트(Polling/Webhook/Inquiry)로 확인합니다.
+
+  중복 발송 방지용 멱등성 키 필드(선택)는 요청 스키마 설명을 참고합니다.
+
+  - operationId: `sendOmni`
+  - SDK: `send.omni`
+  - 발송 API입니다. sandbox에서 먼저 확인하세요(sandbox는 실제로 발송되지 않습니다).
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/mt
+}
