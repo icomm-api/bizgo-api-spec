@@ -25,7 +25,8 @@ post:
           $ref: ../components/schemas/ReservationCreateRequest.yaml
         examples:
           sms:
-            summary: SMS 예약 발송(실패 시 MMS)
+            summary: SMS 예약 (실패 시 MMS)
+            description: 지정한 시각에 SMS를 보내고, 실패하면 MMS로 대체발송합니다.
             value:
               destinations:
                 - to: "01000000000"
@@ -41,8 +42,41 @@ post:
               resvSendTime: "2026-05-01 10:00:00"
               resvName: 문자 예약 발송
               ref: mt-resv-20260501-001
+          international:
+            summary: 국제메시지 예약
+            description: 수신번호는 국가번호를 포함한 E.164 형식(+ 제외)입니다.
+            value:
+              destinations:
+                - to: "821000000000"
+              messageFlow:
+                - international:
+                    from: "01000000000"
+                    text: Your verification code is 000000.
+                    clientSubId: sender-id-01
+              resvSendTime: "2026-05-01 10:00:00"
+              resvName: 국제메시지 예약 발송
+              ref: international-resv-20260501-001
+          rcs:
+            summary: RCS 예약 (통합 RCS)
+            description: 통합 RCS만 예약 발송이 안내되어 있습니다.
+            value:
+              destinations:
+                - to: "01000000000"
+              messageFlow:
+                - rcs:
+                    from: "01000000000"
+                    formatId: RCS_FORMAT_ID
+                    brandKey: RCS_BRAND_KEY
+                    body:
+                      title: 통합 RCS 예약 안내
+                      description: 지정한 시각에 발송되는 통합 RCS 메시지입니다.
+                    expiryOption: "1"
+              resvSendTime: "2026-05-01 10:00:00"
+              resvName: 통합 RCS 예약 발송
+              ref: rcs-resv-20260501-001
           alimtalk:
-            summary: 알림톡 예약 발송
+            summary: 알림톡 예약 (전문 발송)
+            description: 알림톡 전문 발송 형식에 예약 시각을 더합니다.
             value:
               destinations:
                 - to: "01000000000"
@@ -57,6 +91,38 @@ post:
               resvSendTime: "2026-05-01 10:00:00"
               resvName: 알림톡 예약 발송
               ref: alimtalk-resv-20260501-001
+          brandmessage_basic:
+            summary: 브랜드메시지 예약 (기본형)
+            description: 광고성 메시지는 20:00~08:00(KST)에 예약할 수 없습니다(A330).
+            value:
+              destinations:
+                - to: "01000000000"
+              messageFlow:
+                - brandmessage:
+                    sendType: basic
+                    msgType: FT
+                    senderKey: SENDER_KEY_EXAMPLE
+                    templateCode: TEMPLATE_CODE_EXAMPLE
+                    targeting: M
+              resvSendTime: "2026-05-01 10:00:00"
+              resvName: 브랜드메시지 기본형 예약 발송
+              ref: brand-basic-resv-20260501-001
+          brandmessage_free:
+            summary: 브랜드메시지 예약 (자유형 텍스트)
+            description: 템플릿 없이 본문을 직접 구성하는 자유형 예약입니다.
+            value:
+              destinations:
+                - to: "01000000000"
+              messageFlow:
+                - brandmessage:
+                    sendType: free
+                    msgType: FT
+                    senderKey: SENDER_KEY_EXAMPLE
+                    text: 자유형 브랜드메시지 예약 발송 본문입니다.
+                    targeting: M
+              resvSendTime: "2026-05-01 10:00:00"
+              resvName: 브랜드메시지 자유형 예약 발송
+              ref: brand-free-resv-20260501-001
   responses:
     "200":
       description: 예약 등록 결과입니다. 수신자별 `code`도 함께 확인합니다.
