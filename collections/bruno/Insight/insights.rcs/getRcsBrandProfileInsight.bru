@@ -1,0 +1,31 @@
+meta {
+  name: RCS 브랜드 프로필 노출 통계 (getRcsBrandProfileInsight)
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{baseUrl}}/api/comm/v1/center/rcs/brandId/:brandId/stat/brandProfile?startDate=20251101&endDate=20251130
+  body: none
+  auth: inherit
+}
+
+params:query {
+  startDate: 20251101
+  endDate: 20251130
+}
+
+params:path {
+  brandId: BRAND_ID_EXAMPLE
+}
+
+docs {
+  **RCS 브랜드 프로필 노출 통계** — `GET /api/comm/v1/center/rcs/brandId/{brandId}/stat/brandProfile`
+
+  브랜드 프로필이 노출된 건수를 일자별로 조회합니다. 그룹·챗봇 조건 없이 기간만으로 조회합니다.
+  응답 데이터는 `data.data`가 아니라 `data.rcs`에 있습니다.
+
+  - operationId: `getRcsBrandProfileInsight`
+  - SDK: `insights.rcs.getBrandProfile`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/insight
+}

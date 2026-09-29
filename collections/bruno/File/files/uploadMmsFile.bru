@@ -1,0 +1,28 @@
+meta {
+  name: MMS 이미지 업로드 (uploadMmsFile)
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/api/comm/v1/file/mms
+  body: multipartForm
+  auth: inherit
+}
+
+body:multipart-form {
+  file: @file(PATH_TO_FILE)
+  ~fileKey: FILE_KEY_EXAMPLE
+  ~imageName: IMAGE_NAME_EXAMPLE
+}
+
+docs {
+  **MMS 이미지 업로드** — `POST /api/comm/v1/file/mms`
+
+  MMS 발송용 이미지를 올리고 `fileKey`를 받습니다. 받은 키는 `messageFlow[].mms.fileKey`에 넣습니다(최대 3개).
+
+  - operationId: `uploadMmsFile`
+  - SDK: `files.uploadMms`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/mt
+  - 파일 필드에 업로드할 파일을 지정하세요(PATH_TO_FILE는 자리표시자입니다).
+}

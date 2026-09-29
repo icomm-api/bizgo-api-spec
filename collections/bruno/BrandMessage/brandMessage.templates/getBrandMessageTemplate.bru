@@ -1,0 +1,27 @@
+meta {
+  name: 브랜드메시지 템플릿 조회 (getBrandMessageTemplate)
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/api/comm/v1/center/brandmessage/template?senderKey=SENDER_KEY_EXAMPLE&templateCode=TEMPLATE_CODE_EXAMPLE
+  body: none
+  auth: inherit
+}
+
+params:query {
+  senderKey: SENDER_KEY_EXAMPLE
+  templateCode: TEMPLATE_CODE_EXAMPLE
+  ~sendType: basic
+}
+
+docs {
+  **브랜드메시지 템플릿 조회** — `GET /api/comm/v1/center/brandmessage/template`
+
+  발신프로필 키와 템플릿 코드로 브랜드메시지 템플릿 상세 정보를 조회합니다.
+
+  - operationId: `getBrandMessageTemplate`
+  - SDK: `brandMessage.templates.get`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand
+}

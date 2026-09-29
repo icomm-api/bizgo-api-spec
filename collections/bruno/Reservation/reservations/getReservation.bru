@@ -1,0 +1,25 @@
+meta {
+  name: 예약 상세 조회 (getReservation)
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/api/comm/v1/reservation/resvKey/:resvKey
+  body: none
+  auth: inherit
+}
+
+params:path {
+  resvKey: RESV_KEY_EXAMPLE
+}
+
+docs {
+  **예약 상세 조회** — `GET /api/comm/v1/reservation/resvKey/{resvKey}`
+
+  예약 발송 키(resvKey)로 예약 건을 단건 조회합니다.
+
+  - operationId: `getReservation`
+  - SDK: `reservations.get`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/reservation
+}

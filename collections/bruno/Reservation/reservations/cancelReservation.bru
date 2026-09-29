@@ -1,0 +1,25 @@
+meta {
+  name: 예약 취소 (cancelReservation)
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{baseUrl}}/api/comm/v1/reservation/resvKey/:resvKey/cancel
+  body: none
+  auth: inherit
+}
+
+params:path {
+  resvKey: RESV_KEY_EXAMPLE
+}
+
+docs {
+  **예약 취소** — `POST /api/comm/v1/reservation/resvKey/{resvKey}/cancel`
+
+  예약 대기(PENDING) 또는 예약 중지(STOPPED) 상태인 예약 건을 취소합니다. 성공하면 `status`가 `CANCELLED`가 됩니다.
+
+  - operationId: `cancelReservation`
+  - SDK: `reservations.cancel`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/reservation
+}

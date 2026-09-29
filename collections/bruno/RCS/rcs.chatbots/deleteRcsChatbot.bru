@@ -1,0 +1,26 @@
+meta {
+  name: RCS 대화방 삭제 (deleteRcsChatbot)
+  type: http
+  seq: 5
+}
+
+delete {
+  url: {{baseUrl}}/api/comm/v1/center/rcs/brandId/:brandId/chatbotId/:chatbotId
+  body: none
+  auth: inherit
+}
+
+params:path {
+  brandId: BRAND_ID_EXAMPLE
+  chatbotId: CHATBOT_ID_EXAMPLE
+}
+
+docs {
+  **RCS 대화방 삭제** — `DELETE /api/comm/v1/center/rcs/brandId/{brandId}/chatbotId/{chatbotId}`
+
+  등록된 RCS 대화방을 삭제합니다.
+
+  - operationId: `deleteRcsChatbot`
+  - SDK: `rcs.chatbots.delete`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/rcs
+}

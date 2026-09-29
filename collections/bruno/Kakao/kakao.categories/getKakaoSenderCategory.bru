@@ -1,0 +1,25 @@
+meta {
+  name: 발신프로필 카테고리 상세조회 (getKakaoSenderCategory)
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{baseUrl}}/api/comm/v1/center/kakao/sender/category?code=CODE_EXAMPLE
+  body: none
+  auth: inherit
+}
+
+params:query {
+  code: CODE_EXAMPLE
+}
+
+docs {
+  **발신프로필 카테고리 상세조회** — `GET /api/comm/v1/center/kakao/sender/category`
+
+  카테고리 코드를 기준으로 카카오 비즈메시지 카테고리 상세 정보를 조회합니다.
+
+  - operationId: `getKakaoSenderCategory`
+  - SDK: `kakao.categories.get`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-common
+}

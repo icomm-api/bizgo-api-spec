@@ -1,0 +1,26 @@
+meta {
+  name: 예약 수신자 삭제 (deleteReservationRecipient)
+  type: http
+  seq: 3
+}
+
+delete {
+  url: {{baseUrl}}/api/comm/v1/reservation/resvKey/:resvKey/destinations/msgKey/:msgKey
+  body: none
+  auth: inherit
+}
+
+params:path {
+  resvKey: RESV_KEY_EXAMPLE
+  msgKey: MSG_KEY_EXAMPLE
+}
+
+docs {
+  **예약 수신자 삭제** — `DELETE /api/comm/v1/reservation/resvKey/{resvKey}/destinations/msgKey/{msgKey}`
+
+  예약 건에 등록된 수신자를 메시지 키(msgKey) 기준으로 삭제합니다.
+
+  - operationId: `deleteReservationRecipient`
+  - SDK: `reservations.recipients.delete`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/reservation
+}

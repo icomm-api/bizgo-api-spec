@@ -1,0 +1,26 @@
+meta {
+  name: 브랜드메시지 그룹태그 삭제 (deleteBrandMessageGroupTag)
+  type: http
+  seq: 5
+}
+
+delete {
+  url: {{baseUrl}}/api/comm/v1/center/brandmessage/groupTag/senderKey/:senderKey/groupTagKey/:groupTagKey
+  body: none
+  auth: inherit
+}
+
+params:path {
+  senderKey: SENDER_KEY_EXAMPLE
+  groupTagKey: GROUP_TAG_KEY_EXAMPLE
+}
+
+docs {
+  **브랜드메시지 그룹태그 삭제** — `DELETE /api/comm/v1/center/brandmessage/groupTag/senderKey/{senderKey}/groupTagKey/{groupTagKey}`
+
+  발신프로필 키와 그룹태그 키로 그룹태그를 삭제합니다.
+
+  - operationId: `deleteBrandMessageGroupTag`
+  - SDK: `brandMessage.groupTags.delete`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand
+}

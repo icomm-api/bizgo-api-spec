@@ -1,0 +1,32 @@
+meta {
+  name: 상담톡 파일 업로드 (uploadCounselFile)
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/api/comm/v1/file/cstalk
+  body: multipartForm
+  auth: inherit
+}
+
+body:multipart-form {
+  file: @file(PATH_TO_FILE)
+  ~fileKey: FILE_KEY_EXAMPLE
+  ~imageName: IMAGE_NAME_EXAMPLE
+  senderKey: SENDER_KEY_EXAMPLE
+  ~fileType: file
+}
+
+docs {
+  **상담톡 파일 업로드** — `POST /api/comm/v1/file/cstalk`
+
+  상담톡 FILE·AUDIO·VIDEO 타입 첨부 파일을 올리고 `fileUrl`을 받습니다. 운영은 최대 300MB, 샌드박스는 최대 10MB입니다.
+
+  상담톡 요청·응답에는 최종 사용자 식별자(`userKey`)와 상담 내용이 들어가므로 개인정보로 취급하고 본문을 로그에 남기지 않습니다.
+
+  - operationId: `uploadCounselFile`
+  - SDK: `counsel.files.upload`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-counsel
+  - 파일 필드에 업로드할 파일을 지정하세요(PATH_TO_FILE는 자리표시자입니다).
+}

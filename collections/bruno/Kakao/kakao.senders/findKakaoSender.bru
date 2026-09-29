@@ -1,0 +1,26 @@
+meta {
+  name: 발신프로필 키 또는 uuid로 조회 (findKakaoSender)
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{baseUrl}}/api/comm/v1/account/kakao/sender
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~uuid: @KAKAO_CHANNEL_ID_EXAMPLE
+  ~senderKey: SENDER_KEY_EXAMPLE
+}
+
+docs {
+  **발신프로필 키 또는 uuid로 조회** — `GET /api/comm/v1/account/kakao/sender`
+
+  발신프로필 키(`senderKey`) 또는 카카오톡 채널 uuid에 해당하는 발신프로필을 조회합니다. `senderKey`와 `uuid` 중 하나는 반드시 입력해야 합니다.
+
+  - operationId: `findKakaoSender`
+  - SDK: `kakao.senders.find`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-common
+}

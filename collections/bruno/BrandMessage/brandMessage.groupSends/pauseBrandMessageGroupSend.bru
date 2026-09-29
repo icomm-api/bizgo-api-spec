@@ -1,0 +1,30 @@
+meta {
+  name: 브랜드메시지 동보 발송 중지 (pauseBrandMessageGroupSend)
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/api/comm/v1/center/brandmessage/groupMessage/pause
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "brandmessage": {
+      "senderKey": "SENDER_KEY_EXAMPLE",
+      "requestId": "1203981"
+    }
+  }
+}
+
+docs {
+  **브랜드메시지 동보 발송 중지** — `POST /api/comm/v1/center/brandmessage/groupMessage/pause`
+
+  진행 중인 기본형 템플릿 동보 발송 요청을 일시 중지합니다.
+
+  - operationId: `pauseBrandMessageGroupSend`
+  - SDK: `brandMessage.groupSends.pause`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand
+}

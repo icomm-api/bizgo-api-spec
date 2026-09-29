@@ -1,0 +1,27 @@
+meta {
+  name: 알림톡 템플릿 카테고리 조회 (listAlimtalkTemplateCategories)
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/api/comm/v1/center/alimtalk/category
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~categoryCode: CATEGORY_CODE_EXAMPLE
+}
+
+docs {
+  **알림톡 템플릿 카테고리 조회** — `GET /api/comm/v1/center/alimtalk/category`
+
+  알림톡 템플릿 카테고리를 조회합니다. 문서는 같은 경로에 두 기능을 둡니다.
+  - `categoryCode` 없이 호출: 템플릿 카테고리 전체 목록(`data.data.categories`)
+  - `categoryCode`를 넣어 호출: 해당 카테고리 상세(`data.data.category`)
+
+  - operationId: `listAlimtalkTemplateCategories`
+  - SDK: `alimtalk.templateCategories.list`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-alimtalk
+}

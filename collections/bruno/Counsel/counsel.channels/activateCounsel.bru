@@ -1,0 +1,32 @@
+meta {
+  name: 상담톡 이용 활성화 (activateCounsel)
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/api/comm/v1/center/cstalk/sender/activate
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "cstalk": {
+      "senderKey": "SENDER_KEY_EXAMPLE",
+      "committalCompany": "COMMITTAL_COMPANY_EXAMPLE"
+    }
+  }
+}
+
+docs {
+  **상담톡 이용 활성화** — `POST /api/comm/v1/center/cstalk/sender/activate`
+
+  발신프로필의 상담톡 이용을 활성화합니다.
+
+  상담톡 요청·응답에는 최종 사용자 식별자(`userKey`)와 상담 내용이 들어가므로 개인정보로 취급하고 본문을 로그에 남기지 않습니다.
+
+  - operationId: `activateCounsel`
+  - SDK: `counsel.channels.activate`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-counsel
+}

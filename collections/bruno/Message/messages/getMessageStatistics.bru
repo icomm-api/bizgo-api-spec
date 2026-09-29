@@ -1,0 +1,28 @@
+meta {
+  name: 통계 조회 (getMessageStatistics)
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/api/comm/v1/message/statistics?startDate=20251101
+  body: none
+  auth: inherit
+}
+
+params:query {
+  startDate: 20251101
+  ~endDate: END_DATE_EXAMPLE
+  ~serviceType: SERVICE_TYPE_EXAMPLE
+  ~groupKey: GROUP_KEY_EXAMPLE
+}
+
+docs {
+  **통계 조회** — `GET /api/comm/v1/message/statistics`
+
+  기간·채널 기준으로 접수 및 리포트 통계를 일자별로 조회합니다.
+
+  - operationId: `getMessageStatistics`
+  - SDK: `messages.statistics`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/insight
+}

@@ -1,0 +1,30 @@
+meta {
+  name: 브랜드메시지 동보 발송 종료 (terminateBrandMessageGroupSend)
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{baseUrl}}/api/comm/v1/center/brandmessage/groupMessage/terminate
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "brandmessage": {
+      "senderKey": "SENDER_KEY_EXAMPLE",
+      "requestId": "1203981"
+    }
+  }
+}
+
+docs {
+  **브랜드메시지 동보 발송 종료** — `POST /api/comm/v1/center/brandmessage/groupMessage/terminate`
+
+  예약 또는 진행 중인 기본형 템플릿 동보 발송 요청을 종료합니다.
+
+  - operationId: `terminateBrandMessageGroupSend`
+  - SDK: `brandMessage.groupSends.terminate`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand
+}

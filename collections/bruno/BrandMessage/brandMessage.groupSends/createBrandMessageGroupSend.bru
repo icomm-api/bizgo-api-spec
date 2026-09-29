@@ -1,0 +1,32 @@
+meta {
+  name: 브랜드메시지 동보 발송 (createBrandMessageGroupSend)
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/api/comm/v1/center/brandmessage/groupMessage
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "brandmessage": {
+      "senderKey": "SENDER_KEY_EXAMPLE",
+      "templateCode": "TEMPLATE_CODE_EXAMPLE",
+      "sendStartAt": "2026-04-08 16:40:00"
+    }
+  }
+}
+
+docs {
+  **브랜드메시지 동보 발송** — `POST /api/comm/v1/center/brandmessage/groupMessage`
+
+  기본형 템플릿을 기준으로 친구 그룹 또는 전체 친구에게 동보 발송을 예약합니다. 템플릿은 변수가 없고 상태가 등록(`A`)이어야 합니다. 발송 수는 요청 시점의 친구 관계로 정해지고, 실제 발송 시점의 친구 관계에 따라 그 수 안에서 순차 발송됩니다.
+
+  - operationId: `createBrandMessageGroupSend`
+  - SDK: `brandMessage.groupSends.create`
+  - 발송 API입니다. sandbox에서 먼저 확인하세요(sandbox는 실제로 발송되지 않습니다).
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand
+}

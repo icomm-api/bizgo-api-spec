@@ -1,0 +1,25 @@
+meta {
+  name: RCS 공통 포맷 상세 조회 (getRcsCommonFormat)
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{baseUrl}}/api/comm/v1/center/rcs/messagebase/common?messagebaseId=MESSAGEBASE_ID_EXAMPLE
+  body: none
+  auth: inherit
+}
+
+params:query {
+  messagebaseId: MESSAGEBASE_ID_EXAMPLE
+}
+
+docs {
+  **RCS 공통 포맷 상세 조회** — `GET /api/comm/v1/center/rcs/messagebase/common`
+
+  메시지베이스 ID를 기준으로 RCS 공통 포맷 상세 정보를 조회합니다.
+
+  - operationId: `getRcsCommonFormat`
+  - SDK: `rcs.commonFormats.get`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/rcs
+}

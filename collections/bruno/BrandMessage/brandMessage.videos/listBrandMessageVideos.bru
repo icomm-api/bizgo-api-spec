@@ -1,0 +1,28 @@
+meta {
+  name: 브랜드메시지 동영상 목록 조회 (listBrandMessageVideos)
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{baseUrl}}/api/comm/v1/center/brandmessage/video/list?senderKey=SENDER_KEY_EXAMPLE
+  body: none
+  auth: inherit
+}
+
+params:query {
+  senderKey: SENDER_KEY_EXAMPLE
+  ~date: 20260624
+  ~offset: 0
+  ~limit: 100
+}
+
+docs {
+  **브랜드메시지 동영상 목록 조회** — `GET /api/comm/v1/center/brandmessage/video/list`
+
+  발신프로필 기준으로 업로드한 동영상 이력을 조회합니다. 등록일자로 거르고 `offset`·`limit`으로 페이징합니다.
+
+  - operationId: `listBrandMessageVideos`
+  - SDK: `brandMessage.videos.list`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand
+}

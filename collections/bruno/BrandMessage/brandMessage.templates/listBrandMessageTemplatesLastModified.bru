@@ -1,0 +1,29 @@
+meta {
+  name: 최근 변경 브랜드메시지 템플릿 조회 (listBrandMessageTemplatesLastModified)
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{baseUrl}}/api/comm/v1/center/brandmessage/template/lastModified?senderKey=SENDER_KEY_EXAMPLE
+  body: none
+  auth: inherit
+}
+
+params:query {
+  senderKey: SENDER_KEY_EXAMPLE
+  ~senderKeyType: S
+  ~since: 2026-04-23T09:00:00
+  ~page: 1
+  ~count: 100
+}
+
+docs {
+  **최근 변경 브랜드메시지 템플릿 조회** — `GET /api/comm/v1/center/brandmessage/template/lastModified`
+
+  지정한 시각 이후 변경된 브랜드메시지 템플릿 목록을 조회합니다. 템플릿 최신화나 내부 동기화 배치에 씁니다.
+
+  - operationId: `listBrandMessageTemplatesLastModified`
+  - SDK: `brandMessage.templates.listLastModified`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand
+}

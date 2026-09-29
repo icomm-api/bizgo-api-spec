@@ -1,0 +1,29 @@
+meta {
+  name: MO(수신) 이력 조회 (getMoHistory)
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/api/comm/v1/message/history/mo?occurredTime=2026-01-01T09:00:00+09:00
+  body: none
+  auth: inherit
+}
+
+params:query {
+  occurredTime: 2026-01-01T09:00:00+09:00
+  ~from: 01000000000
+  ~to: 01000000000
+  ~lastSeq: 1
+  ~limit: 100
+}
+
+docs {
+  **MO(수신) 이력 조회** — `GET /api/comm/v1/message/history/mo`
+
+  MO 발생 시각 기준으로 수신 메시지를 최신순으로 조회합니다. 응답의 `lastSeq`를 다음 요청에 넣어 이어서 조회합니다.
+
+  - operationId: `getMoHistory`
+  - SDK: `messages.moHistory`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/insight
+}

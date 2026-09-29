@@ -1,0 +1,27 @@
+meta {
+  name: 친구 그룹 전화번호 요청 단건 조회 (getBrandMessageFriendGroupPhoneNumberRequest)
+  type: http
+  seq: 9
+}
+
+get {
+  url: {{baseUrl}}/api/comm/v1/center/brandmessage/friendGroup/phoneNumber/request?senderKey=SENDER_KEY_EXAMPLE&friendGroupKey=FRIEND_GROUP_KEY_EXAMPLE&requestId=3930171852209730143
+  body: none
+  auth: inherit
+}
+
+params:query {
+  senderKey: SENDER_KEY_EXAMPLE
+  friendGroupKey: FRIEND_GROUP_KEY_EXAMPLE
+  requestId: 3930171852209730143
+}
+
+docs {
+  **친구 그룹 전화번호 요청 단건 조회** — `GET /api/comm/v1/center/brandmessage/friendGroup/phoneNumber/request`
+
+  전화번호 추가·삭제 응답으로 받은 `requestId`로 해당 요청의 처리 상태를 조회합니다.
+
+  - operationId: `getBrandMessageFriendGroupPhoneNumberRequest`
+  - SDK: `brandMessage.friendGroups.getPhoneNumberRequest`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand
+}

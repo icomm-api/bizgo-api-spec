@@ -1,0 +1,33 @@
+meta {
+  name: 브랜드메시지 템플릿 등록 (createBrandMessageTemplate)
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/api/comm/v1/center/brandmessage/template
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "brandmessage": {
+      "senderKey": "SENDER_KEY_EXAMPLE",
+      "senderKeyType": "S",
+      "sendType": "basic",
+      "templateName": "브랜드 혜택 안내",
+      "msgType": "FT"
+    }
+  }
+}
+
+docs {
+  **브랜드메시지 템플릿 등록** — `POST /api/comm/v1/center/brandmessage/template`
+
+  브랜드메시지 템플릿을 등록합니다. 이미지가 필요한 유형은 이미지 업로드 API로 발급받은 `imgUrl`을 함께 씁니다.
+
+  - operationId: `createBrandMessageTemplate`
+  - SDK: `brandMessage.templates.create`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand
+}

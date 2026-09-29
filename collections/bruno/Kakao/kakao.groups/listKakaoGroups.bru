@@ -1,0 +1,25 @@
+meta {
+  name: 발신프로필키로 그룹 조회 (listKakaoGroups)
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/api/comm/v1/center/kakao/group
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~senderKey: SENDER_KEY_EXAMPLE
+}
+
+docs {
+  **발신프로필키로 그룹 조회** — `GET /api/comm/v1/center/kakao/group`
+
+  발신프로필 키를 기준으로 연결된 발신프로필 그룹 정보를 조회합니다. `senderKey`를 생략하면 조회 가능한 그룹 정보를 기준으로 응답합니다.
+
+  - operationId: `listKakaoGroups`
+  - SDK: `kakao.groups.list`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-common
+}

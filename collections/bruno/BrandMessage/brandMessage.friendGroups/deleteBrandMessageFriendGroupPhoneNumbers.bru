@@ -1,0 +1,30 @@
+meta {
+  name: 친구 그룹 내 전화번호 삭제 (deleteBrandMessageFriendGroupPhoneNumbers)
+  type: http
+  seq: 7
+}
+
+post {
+  url: {{baseUrl}}/api/comm/v1/center/brandmessage/friendGroup/phoneNumber/delete
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "friendGroup": {
+      "senderKey": "SENDER_KEY_EXAMPLE",
+      "friendGroupKey": "FRIEND_GROUP_KEY_EXAMPLE"
+    }
+  }
+}
+
+docs {
+  **친구 그룹 내 전화번호 삭제** — `POST /api/comm/v1/center/brandmessage/friendGroup/phoneNumber/delete`
+
+  기존 친구 그룹에서 전화번호를 삭제합니다. `fileKey` 또는 `phoneNumbers`로 입력합니다. 처리는 비동기이며 진행 상황은 전화번호 요청 조회로 확인합니다.
+
+  - operationId: `deleteBrandMessageFriendGroupPhoneNumbers`
+  - SDK: `brandMessage.friendGroups.deletePhoneNumbers`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand
+}

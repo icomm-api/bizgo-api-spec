@@ -1,0 +1,25 @@
+meta {
+  name: RCS 템플릿 양식 로고 이미지 조회 (listRcsTemplateFormLogos)
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/api/comm/v1/center/rcs/messagebase/messagebaseform/logo?messagebaseformId=MESSAGEBASEFORM_ID_EXAMPLE
+  body: none
+  auth: inherit
+}
+
+params:query {
+  messagebaseformId: MESSAGEBASEFORM_ID_EXAMPLE
+}
+
+docs {
+  **RCS 템플릿 양식 로고 이미지 조회** — `GET /api/comm/v1/center/rcs/messagebase/messagebaseform/logo`
+
+  템플릿 양식 ID를 기준으로 템플릿 양식에서 사용할 수 있는 로고 이미지 목록을 조회합니다.
+
+  - operationId: `listRcsTemplateFormLogos`
+  - SDK: `rcs.templateImages.listFormLogos`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/rcs
+}

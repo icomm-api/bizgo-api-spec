@@ -1,0 +1,21 @@
+meta {
+  name: RCS 템플릿 목록 조회 (listRcsTemplates)
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/api/comm/v1/center/rcs/messagebase/list
+  body: none
+  auth: inherit
+}
+
+docs {
+  **RCS 템플릿 목록 조회** — `GET /api/comm/v1/center/rcs/messagebase/list`
+
+  브랜드 ID를 기준으로 등록된 RCS 템플릿 목록을 조회합니다.
+
+  - operationId: `listRcsTemplates`
+  - SDK: `rcs.templates.list`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/rcs
+}

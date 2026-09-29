@@ -1,0 +1,28 @@
+meta {
+  name: 알림톡 템플릿 하이라이트 이미지 업로드 (uploadAlimtalkItemHighlightImage)
+  type: http
+  seq: 10
+}
+
+post {
+  url: {{baseUrl}}/api/comm/v1/file/alimtalk/itemHighlight
+  body: multipartForm
+  auth: inherit
+}
+
+body:multipart-form {
+  file: @file(PATH_TO_FILE)
+  ~fileKey: FILE_KEY_EXAMPLE
+  ~imageName: IMAGE_NAME_EXAMPLE
+}
+
+docs {
+  **알림톡 템플릿 하이라이트 이미지 업로드** — `POST /api/comm/v1/file/alimtalk/itemHighlight`
+
+  아이템리스트형 알림톡 템플릿의 아이템 하이라이트 영역에 사용할 이미지를 업로드합니다. 템플릿 이미지 업로드와 같은 템플릿 등록용 사전 이미지 등록 API입니다.
+
+  - operationId: `uploadAlimtalkItemHighlightImage`
+  - SDK: `files.uploadAlimtalkItemHighlightImage`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-alimtalk
+  - 파일 필드에 업로드할 파일을 지정하세요(PATH_TO_FILE는 자리표시자입니다).
+}

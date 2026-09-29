@@ -1,0 +1,25 @@
+meta {
+  name: 브랜드메시지 전체 그룹태그 조회 (listBrandMessageGroupTags)
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/api/comm/v1/center/brandmessage/groupTag/list?senderKey=SENDER_KEY_EXAMPLE
+  body: none
+  auth: inherit
+}
+
+params:query {
+  senderKey: SENDER_KEY_EXAMPLE
+}
+
+docs {
+  **브랜드메시지 전체 그룹태그 조회** — `GET /api/comm/v1/center/brandmessage/groupTag/list`
+
+  발신프로필 키로 브랜드메시지 전체 그룹태그 목록을 조회합니다. 그룹태그 키는 자유형 발송의 `groupTagKey`에 씁니다.
+
+  - operationId: `listBrandMessageGroupTags`
+  - SDK: `brandMessage.groupTags.list`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand
+}

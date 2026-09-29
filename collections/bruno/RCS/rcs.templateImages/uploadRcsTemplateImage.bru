@@ -1,0 +1,28 @@
+meta {
+  name: RCS 템플릿 이미지 등록 (uploadRcsTemplateImage)
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/api/comm/v1/center/rcs/messagebase/file
+  body: multipartForm
+  auth: inherit
+}
+
+body:multipart-form {
+  brandId: BRAND_ID_EXAMPLE
+  file: @file(PATH_TO_FILE)
+}
+
+docs {
+  **RCS 템플릿 이미지 등록** — `POST /api/comm/v1/center/rcs/messagebase/file`
+
+  RCS 템플릿 등록에 사용할 이미지를 업로드하고 템플릿 파일 ID를 발급받습니다.
+  발송용 이미지 업로드(`/api/comm/v1/file/rcs`)와는 다른 API입니다.
+
+  - operationId: `uploadRcsTemplateImage`
+  - SDK: `rcs.templateImages.upload`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/rcs
+  - 파일 필드에 업로드할 파일을 지정하세요(PATH_TO_FILE는 자리표시자입니다).
+}

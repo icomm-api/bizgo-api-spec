@@ -1,0 +1,29 @@
+meta {
+  name: 발송 이력 조회 (getMessageHistory)
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{baseUrl}}/api/comm/v1/message/history?requestTime=2025-11-01T00:00:00
+  body: none
+  auth: inherit
+}
+
+params:query {
+  requestTime: 2025-11-01T00:00:00
+  ~serviceType: SERVICE_TYPE_EXAMPLE
+  ~groupKey: GROUP_KEY_EXAMPLE
+  ~lastSeq: 1
+  ~limit: 100
+}
+
+docs {
+  **발송 이력 조회** — `GET /api/comm/v1/message/history`
+
+  요청 시각 기준으로 발송 이력(접수·발송·리포트 단계)을 조회합니다.
+
+  - operationId: `getMessageHistory`
+  - SDK: `messages.history`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/insight
+}

@@ -1,0 +1,26 @@
+meta {
+  name: 친구 그룹 삭제 (deleteBrandMessageFriendGroup)
+  type: http
+  seq: 5
+}
+
+delete {
+  url: {{baseUrl}}/api/comm/v1/center/brandmessage/friendGroup/senderKey/:senderKey/friendGroupKey/:friendGroupKey
+  body: none
+  auth: inherit
+}
+
+params:path {
+  senderKey: SENDER_KEY_EXAMPLE
+  friendGroupKey: FRIEND_GROUP_KEY_EXAMPLE
+}
+
+docs {
+  **친구 그룹 삭제** — `DELETE /api/comm/v1/center/brandmessage/friendGroup/senderKey/{senderKey}/friendGroupKey/{friendGroupKey}`
+
+  발신프로필 키와 친구 그룹 키로 친구 그룹을 삭제합니다.
+
+  - operationId: `deleteBrandMessageFriendGroup`
+  - SDK: `brandMessage.friendGroups.delete`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand
+}

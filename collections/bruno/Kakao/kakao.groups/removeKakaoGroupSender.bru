@@ -1,0 +1,26 @@
+meta {
+  name: 그룹에서 발신프로필 삭제 (removeKakaoGroupSender)
+  type: http
+  seq: 3
+}
+
+delete {
+  url: {{baseUrl}}/api/comm/v1/center/kakao/group/groupKey/:groupKey/senderKey/:senderKey
+  body: none
+  auth: inherit
+}
+
+params:path {
+  groupKey: GROUP_KEY_EXAMPLE
+  senderKey: SENDER_KEY_EXAMPLE
+}
+
+docs {
+  **그룹에서 발신프로필 삭제** — `DELETE /api/comm/v1/center/kakao/group/groupKey/{groupKey}/senderKey/{senderKey}`
+
+  발신프로필 그룹에서 특정 발신프로필을 삭제합니다.
+
+  - operationId: `removeKakaoGroupSender`
+  - SDK: `kakao.groups.removeSender`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-common
+}

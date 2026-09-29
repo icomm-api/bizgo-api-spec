@@ -1,0 +1,28 @@
+meta {
+  name: 브랜드메시지 와이드 리스트 첫번째 이미지 업로드 (uploadBrandMessageWideItemListFirstImage)
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{baseUrl}}/api/comm/v1/file/brandmessage/wideItemList/first
+  body: multipartForm
+  auth: inherit
+}
+
+body:multipart-form {
+  file: @file(PATH_TO_FILE)
+  ~fileKey: FILE_KEY_EXAMPLE
+  ~imageName: IMAGE_NAME_EXAMPLE
+}
+
+docs {
+  **브랜드메시지 와이드 리스트 첫번째 이미지 업로드** — `POST /api/comm/v1/file/brandmessage/wideItemList/first`
+
+  와이드 리스트형 브랜드메시지의 첫 번째 리스트 이미지에 사용할 이미지를 업로드합니다.
+
+  - operationId: `uploadBrandMessageWideItemListFirstImage`
+  - SDK: `files.uploadBrandMessageWideItemListFirst`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand
+  - 파일 필드에 업로드할 파일을 지정하세요(PATH_TO_FILE는 자리표시자입니다).
+}

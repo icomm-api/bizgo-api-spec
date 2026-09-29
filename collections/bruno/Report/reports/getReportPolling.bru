@@ -1,0 +1,22 @@
+meta {
+  name: 리포트 가져오기(Polling) (getReportPolling)
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/api/comm/v1/report/polling
+  body: none
+  auth: inherit
+}
+
+docs {
+  **리포트 가져오기(Polling)** — `GET /api/comm/v1/report/polling`
+
+  처리가 끝난 리포트를 가져옵니다. 받은 뒤 `reportId`로 수신 확인(DELETE)을 해야 다음 리포트를 받을 수 있습니다.
+  리포트 수신 방식은 API Key별로 콘솔에서 POLLING으로 설정해야 합니다.
+
+  - operationId: `getReportPolling`
+  - SDK: `reports.poll`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/report
+}

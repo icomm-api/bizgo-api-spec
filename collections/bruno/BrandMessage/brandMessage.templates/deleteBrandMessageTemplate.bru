@@ -1,0 +1,26 @@
+meta {
+  name: 브랜드메시지 템플릿 삭제 (deleteBrandMessageTemplate)
+  type: http
+  seq: 6
+}
+
+delete {
+  url: {{baseUrl}}/api/comm/v1/center/brandmessage/template/senderKey/:senderKey/templateCode/:templateCode
+  body: none
+  auth: inherit
+}
+
+params:path {
+  senderKey: SENDER_KEY_EXAMPLE
+  templateCode: TEMPLATE_CODE_EXAMPLE
+}
+
+docs {
+  **브랜드메시지 템플릿 삭제** — `DELETE /api/comm/v1/center/brandmessage/template/senderKey/{senderKey}/templateCode/{templateCode}`
+
+  발신프로필 키와 템플릿 코드로 브랜드메시지 템플릿을 삭제합니다.
+
+  - operationId: `deleteBrandMessageTemplate`
+  - SDK: `brandMessage.templates.delete`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand
+}

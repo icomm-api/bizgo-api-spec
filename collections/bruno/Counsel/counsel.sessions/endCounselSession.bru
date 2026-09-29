@@ -1,0 +1,30 @@
+meta {
+  name: 상담 종료 (endCounselSession)
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/api/comm/v1/cstalk/end
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "userKey": "USER_KEY_EXAMPLE",
+    "senderKey": "SENDER_KEY_EXAMPLE"
+  }
+}
+
+docs {
+  **상담 종료** — `POST /api/comm/v1/cstalk/end`
+
+  현재 열려 있는 상담 세션을 종료합니다. 처리 결과는 발송 결과 웹훅(`counselResult`, requestType `end`)으로도 전달됩니다.
+
+  상담톡 요청·응답에는 최종 사용자 식별자(`userKey`)와 상담 내용이 들어가므로 개인정보로 취급하고 본문을 로그에 남기지 않습니다.
+
+  - operationId: `endCounselSession`
+  - SDK: `counsel.sessions.end`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-counsel
+}

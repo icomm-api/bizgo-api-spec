@@ -1,0 +1,25 @@
+meta {
+  name: RCS 대화방 사용 가능 쿼리 조회 (getRcsChatbotUsableQueries)
+  type: http
+  seq: 6
+}
+
+get {
+  url: {{baseUrl}}/api/comm/v1/center/rcs/usableQuery/chatbotId/:chatbotId
+  body: none
+  auth: inherit
+}
+
+params:path {
+  chatbotId: CHATBOT_ID_EXAMPLE
+}
+
+docs {
+  **RCS 대화방 사용 가능 쿼리 조회** — `GET /api/comm/v1/center/rcs/usableQuery/chatbotId/{chatbotId}`
+
+  대화방 ID를 기준으로 해당 대화방에서 사용할 수 있는 쿼리 정보를 조회합니다.
+
+  - operationId: `getRcsChatbotUsableQueries`
+  - SDK: `rcs.chatbots.getUsableQueries`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/rcs
+}

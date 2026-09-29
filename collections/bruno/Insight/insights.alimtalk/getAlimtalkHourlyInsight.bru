@@ -1,0 +1,28 @@
+meta {
+  name: 알림톡 시간별 반응 지표 (getAlimtalkHourlyInsight)
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{baseUrl}}/api/comm/v1/center/statistics/alimtalk/reaction/hourly?startDate=20251101&endDate=20251130&senderKey=SENDER_KEY_EXAMPLE
+  body: none
+  auth: inherit
+}
+
+params:query {
+  startDate: 20251101
+  endDate: 20251130
+  senderKey: SENDER_KEY_EXAMPLE
+  ~templateCode: TEMPLATE_CODE_EXAMPLE
+}
+
+docs {
+  **알림톡 시간별 반응 지표** — `GET /api/comm/v1/center/statistics/alimtalk/reaction/hourly`
+
+  기간·발신프로필 기준으로 알림톡 시간대별(0~23시) 반응 통계를 조회합니다.
+
+  - operationId: `getAlimtalkHourlyInsight`
+  - SDK: `insights.alimtalk.getHourly`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/insight
+}

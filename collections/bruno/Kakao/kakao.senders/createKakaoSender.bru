@@ -1,0 +1,38 @@
+meta {
+  name: 인증 토큰으로 발신프로필 등록 (createKakaoSender)
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{baseUrl}}/api/comm/v1/account/kakao/sender
+  body: json
+  auth: inherit
+}
+
+headers {
+  token: KAKAO_AUTH_TOKEN_EXAMPLE
+  phoneNumber: 01000000000
+}
+
+body:json {
+  {
+    "yellowId": "@KAKAO_CHANNEL_ID_EXAMPLE",
+    "categoryCode": "00000000001"
+  }
+}
+
+docs {
+  **인증 토큰으로 발신프로필 등록** — `POST /api/comm/v1/account/kakao/sender`
+
+  카카오톡 채널을 발신프로필로 신규 등록합니다.
+  카카오비즈니스 파트너센터에서 비즈니스 인증을 받았고, 프로필이 activated 상태이며 운영자에 의해 차단되지 않은 채널이어야 합니다.
+  카카오 채널 인증 토큰 요청(`POST /api/comm/v1/account/kakao/sender/token`)으로 받은 토큰과 그때 쓴 전화번호를 헤더로 보냅니다.
+
+  다른 허브파트너 요청으로 이미 등록된 채널이면 이전에 등록된 발신프로필의 카테고리 코드로 등록됩니다.
+  브랜드메시지를 쓰는 발신프로필은 무료수신거부 전화번호·인증번호를 설정할 수 있습니다(타겟팅 M, N, O 사용 시 필수).
+
+  - operationId: `createKakaoSender`
+  - SDK: `kakao.senders.create`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-common
+}
