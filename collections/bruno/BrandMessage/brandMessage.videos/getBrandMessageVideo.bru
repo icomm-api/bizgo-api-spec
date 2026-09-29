@@ -1,0 +1,26 @@
+meta {
+  name: 브랜드메시지 동영상 조회 (getBrandMessageVideo)
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/api/comm/v1/center/brandmessage/video?vid=VID_EXAMPLE&senderKey=SENDER_KEY_EXAMPLE
+  body: none
+  auth: inherit
+}
+
+params:query {
+  vid: VID_EXAMPLE
+  senderKey: SENDER_KEY_EXAMPLE
+}
+
+docs {
+  **브랜드메시지 동영상 조회** — `GET /api/comm/v1/center/brandmessage/video`
+
+  동영상 식별자로 업로드된 동영상 한 건의 처리 상태와 메타 정보를 조회합니다.
+
+  - operationId: `getBrandMessageVideo`
+  - SDK: `brandMessage.videos.get`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand
+}

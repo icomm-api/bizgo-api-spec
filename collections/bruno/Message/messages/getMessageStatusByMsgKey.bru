@@ -1,0 +1,25 @@
+meta {
+  name: 상태 조회(단건) (getMessageStatusByMsgKey)
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{baseUrl}}/api/comm/v1/message/inquiry/msgKey/:msgKey
+  body: none
+  auth: inherit
+}
+
+params:path {
+  msgKey: MSG_KEY_EXAMPLE
+}
+
+docs {
+  **상태 조회(단건)** — `GET /api/comm/v1/message/inquiry/msgKey/{msgKey}`
+
+  메시지 키 1개의 접수·발송·리포트 상태를 조회합니다. 대체발송이 있으면 채널별 항목이 여러 개 옵니다.
+
+  - operationId: `getMessageStatusByMsgKey`
+  - SDK: `messages.status`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/insight
+}

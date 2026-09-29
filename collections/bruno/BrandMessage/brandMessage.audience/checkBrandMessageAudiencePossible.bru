@@ -1,0 +1,27 @@
+meta {
+  name: 발송 예상 모수 확인 (친구 그룹 기반) (checkBrandMessageAudiencePossible)
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/api/comm/v1/center/brandmessage/groupMessage/possible?senderKey=SENDER_KEY_EXAMPLE&msgType=FI
+  body: none
+  auth: inherit
+}
+
+params:query {
+  senderKey: SENDER_KEY_EXAMPLE
+  msgType: FI
+  ~friendGroupKey: FRIEND_GROUP_KEY_EXAMPLE
+}
+
+docs {
+  **발송 예상 모수 확인 (친구 그룹 기반)** — `GET /api/comm/v1/center/brandmessage/groupMessage/possible`
+
+  메시지 타입과 친구 그룹 조건으로 동보 발송 예상 발송 수를 조회합니다. 친구 그룹을 쓰면 그룹 상태가 완료이고 등록 유저 수가 10 이상이어야 발송 예약이 가능하며, 친구 관계는 실시간으로 동기화됩니다.
+
+  - operationId: `checkBrandMessageAudiencePossible`
+  - SDK: `brandMessage.audience.checkPossible`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand
+}

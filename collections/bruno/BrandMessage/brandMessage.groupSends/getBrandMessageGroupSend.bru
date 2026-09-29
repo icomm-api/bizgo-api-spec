@@ -1,0 +1,26 @@
+meta {
+  name: 브랜드메시지 동보 발송 조회 (getBrandMessageGroupSend)
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/api/comm/v1/center/brandmessage/groupMessage?senderKey=SENDER_KEY_EXAMPLE&requestId=1203981
+  body: none
+  auth: inherit
+}
+
+params:query {
+  senderKey: SENDER_KEY_EXAMPLE
+  requestId: 1203981
+}
+
+docs {
+  **브랜드메시지 동보 발송 조회** — `GET /api/comm/v1/center/brandmessage/groupMessage`
+
+  발신프로필 키와 요청 아이디로 특정 동보 발송 요청의 상태를 조회합니다.
+
+  - operationId: `getBrandMessageGroupSend`
+  - SDK: `brandMessage.groupSends.get`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand
+}

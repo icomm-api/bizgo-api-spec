@@ -1,0 +1,28 @@
+meta {
+  name: 브랜드메시지 캐러셀 피드 이미지 업로드 (uploadBrandMessageCarouselFeedImage)
+  type: http
+  seq: 7
+}
+
+post {
+  url: {{baseUrl}}/api/comm/v1/file/brandmessage/carouselFeed
+  body: multipartForm
+  auth: inherit
+}
+
+body:multipart-form {
+  file: @file(PATH_TO_FILE)
+  ~fileKey: FILE_KEY_EXAMPLE
+  ~imageName: IMAGE_NAME_EXAMPLE
+}
+
+docs {
+  **브랜드메시지 캐러셀 피드 이미지 업로드** — `POST /api/comm/v1/file/brandmessage/carouselFeed`
+
+  캐러셀 피드형 브랜드메시지에서 사용하는 이미지를 업로드합니다.
+
+  - operationId: `uploadBrandMessageCarouselFeedImage`
+  - SDK: `files.uploadBrandMessageCarouselFeed`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand
+  - 파일 필드에 업로드할 파일을 지정하세요(PATH_TO_FILE는 자리표시자입니다).
+}

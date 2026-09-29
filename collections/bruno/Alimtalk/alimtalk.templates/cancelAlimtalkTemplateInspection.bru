@@ -1,0 +1,30 @@
+meta {
+  name: 알림톡 템플릿 검수 요청 취소 (cancelAlimtalkTemplateInspection)
+  type: http
+  seq: 8
+}
+
+post {
+  url: {{baseUrl}}/api/comm/v1/center/alimtalk/template/request/cancel
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "alimtalk": {
+      "senderKey": "SENDER_KEY_EXAMPLE",
+      "templateCode": "TEMPLATE_CODE_EXAMPLE"
+    }
+  }
+}
+
+docs {
+  **알림톡 템플릿 검수 요청 취소** — `POST /api/comm/v1/center/alimtalk/template/request/cancel`
+
+  검수 요청된 알림톡 템플릿의 검수 요청을 취소합니다.
+
+  - operationId: `cancelAlimtalkTemplateInspection`
+  - SDK: `alimtalk.templates.cancelInspection`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-alimtalk
+}

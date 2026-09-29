@@ -36,6 +36,10 @@ npx @redocly/cli preview-docs dist/openapi.yaml
 
 에러코드 전체 목록은 [`data/error-codes.json`](data/error-codes.json)에 있습니다(게이트웨이/개별부/리포트 코드).
 
+## API 테스트 컬렉션
+
+Postman·Bruno로 API를 바로 호출해 볼 수 있는 컬렉션이 [`collections/`](collections/README.md)에 있습니다. `dist/openapi.yaml`에서 생성하며(`npm run collections`), 기본 환경은 sandbox이고 API Key 값은 비어 있습니다. 가져오기와 키 설정 방법은 [collections/README.md](collections/README.md)를 참고하세요.
+
 ## AI 코딩 도구용 Skill
 
 [`skill/bizgo-integration/`](skill/bizgo-integration/SKILL.md)은 Claude가 비즈고 연동 코드를 정확하고 안전하게 작성하도록 돕는 [Agent Skill](https://docs.claude.com/en/docs/agents-and-tools/agent-skills/overview)입니다.

@@ -1,0 +1,30 @@
+meta {
+  name: 브랜드메시지 동보 발송 재개 (resumeBrandMessageGroupSend)
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{baseUrl}}/api/comm/v1/center/brandmessage/groupMessage/resume
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "brandmessage": {
+      "senderKey": "SENDER_KEY_EXAMPLE",
+      "requestId": "1203981"
+    }
+  }
+}
+
+docs {
+  **브랜드메시지 동보 발송 재개** — `POST /api/comm/v1/center/brandmessage/groupMessage/resume`
+
+  중지된 기본형 템플릿 동보 발송 요청을 다시 시작합니다.
+
+  - operationId: `resumeBrandMessageGroupSend`
+  - SDK: `brandMessage.groupSends.resume`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand
+}

@@ -1,0 +1,21 @@
+meta {
+  name: 발신프로필 카테고리 전체조회 (listKakaoSenderCategories)
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/api/comm/v1/center/kakao/sender/category/list
+  body: none
+  auth: inherit
+}
+
+docs {
+  **발신프로필 카테고리 전체조회** — `GET /api/comm/v1/center/kakao/sender/category/list`
+
+  발신프로필 등록 시 사용할 수 있는 카카오 비즈메시지 카테고리 목록을 조회합니다.
+
+  - operationId: `listKakaoSenderCategories`
+  - SDK: `kakao.categories.list`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-common
+}

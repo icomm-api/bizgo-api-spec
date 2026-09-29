@@ -1,0 +1,27 @@
+meta {
+  name: 광고성 정보 수신동의 증적자료 파일 업로드 (uploadBrandMessageMarketingAgreeEvidence)
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/api/comm/v1/center/brandmessage/marketingAgree
+  body: multipartForm
+  auth: inherit
+}
+
+body:multipart-form {
+  senderKey: SENDER_KEY_EXAMPLE
+  file: @file(PATH_TO_FILE)
+}
+
+docs {
+  **광고성 정보 수신동의 증적자료 파일 업로드** — `POST /api/comm/v1/center/brandmessage/marketingAgree`
+
+  광고성 정보 수신동의를 입증하는 증적자료 파일을 업로드합니다. 파일은 발신프로필 기준으로 관리되며, 발송권한 신청 조건 중 하나입니다.
+
+  - operationId: `uploadBrandMessageMarketingAgreeEvidence`
+  - SDK: `brandMessage.marketingAgreements.uploadEvidence`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand
+  - 파일 필드에 업로드할 파일을 지정하세요(PATH_TO_FILE는 자리표시자입니다).
+}

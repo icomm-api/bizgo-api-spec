@@ -1,0 +1,31 @@
+meta {
+  name: 알림톡 공용템플릿 조회 (listAlimtalkPublicTemplates)
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/api/comm/v1/center/alimtalk/public/template
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~since: 20250708000000
+  ~page: 1
+  ~count: 100
+}
+
+docs {
+  **알림톡 공용템플릿 조회** — `GET /api/comm/v1/center/alimtalk/public/template`
+
+  카카오가 제공하는 공용템플릿 목록을 조회합니다.
+
+  **신규 발송에 권장하지 않습니다.** 공용템플릿은 비즈고 콘솔 템플릿 선택 화면에서 제외되었고 조회 API만 남아 있으며, 이후 제공이 중단될 예정입니다.
+  발송 시 변수 치환 결과가 템플릿에 정의된 글자 수를 넘으면 잘라내거나 대체발송하지 않고 실패로 처리합니다.
+  신규 연동은 템플릿 등록으로 직접 만든 템플릿을 사용합니다.
+
+  - operationId: `listAlimtalkPublicTemplates`
+  - SDK: `alimtalk.publicTemplates.list`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-alimtalk
+}

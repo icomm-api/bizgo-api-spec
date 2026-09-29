@@ -1,0 +1,25 @@
+meta {
+  name: 예약 재개 (resumeReservation)
+  type: http
+  seq: 7
+}
+
+post {
+  url: {{baseUrl}}/api/comm/v1/reservation/resvKey/:resvKey/resume
+  body: none
+  auth: inherit
+}
+
+params:path {
+  resvKey: RESV_KEY_EXAMPLE
+}
+
+docs {
+  **예약 재개** — `POST /api/comm/v1/reservation/resvKey/{resvKey}/resume`
+
+  예약 중지(STOPPED) 상태인 예약 건을 다시 발송 처리합니다.
+
+  - operationId: `resumeReservation`
+  - SDK: `reservations.resume`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/reservation
+}

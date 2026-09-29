@@ -1,0 +1,26 @@
+meta {
+  name: 발신프로필 제재 조회 (getKakaoSenderSanction)
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/api/comm/v1/center/kakao/abusing/block/sender?date=20260101&senderKey=SENDER_KEY_EXAMPLE
+  body: none
+  auth: inherit
+}
+
+params:query {
+  date: 20260101
+  senderKey: SENDER_KEY_EXAMPLE
+}
+
+docs {
+  **발신프로필 제재 조회** — `GET /api/comm/v1/center/kakao/abusing/block/sender`
+
+  특정 일자에 발신프로필에 적용된 제재 정보를 조회합니다. 발송 전 운영 상태를 확인할 때 사용합니다.
+
+  - operationId: `getKakaoSenderSanction`
+  - SDK: `kakao.sanctions.getSender`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-common
+}

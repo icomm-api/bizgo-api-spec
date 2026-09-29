@@ -1,0 +1,28 @@
+meta {
+  name: 브랜드메시지 카탈로그 이미지 업로드 (uploadBrandMessageCatalogImage)
+  type: http
+  seq: 11
+}
+
+post {
+  url: {{baseUrl}}/api/comm/v1/file/brandmessage/catalog
+  body: multipartForm
+  auth: inherit
+}
+
+body:multipart-form {
+  file: @file(PATH_TO_FILE)
+  ~fileKey: FILE_KEY_EXAMPLE
+  ~imageName: IMAGE_NAME_EXAMPLE
+}
+
+docs {
+  **브랜드메시지 카탈로그 이미지 업로드** — `POST /api/comm/v1/file/brandmessage/catalog`
+
+  카탈로그형(FG) 브랜드메시지에서 쓰는 1:1 비율 이미지를 업로드하고 템플릿에 쓸 `imgUrl`을 발급받습니다. 홀수형(아이템 3·5·7개)의 첫 번째 아이템은 카탈로그 홀수형 첫번째 이미지 업로드를 씁니다.
+
+  - operationId: `uploadBrandMessageCatalogImage`
+  - SDK: `files.uploadBrandMessageCatalog`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand
+  - 파일 필드에 업로드할 파일을 지정하세요(PATH_TO_FILE는 자리표시자입니다).
+}

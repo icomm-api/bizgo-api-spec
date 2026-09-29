@@ -1,0 +1,27 @@
+meta {
+  name: 세션 조회 (getCounselSession)
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/api/comm/v1/center/cstalk/session?userKey=USER_KEY_EXAMPLE
+  body: none
+  auth: inherit
+}
+
+params:query {
+  userKey: USER_KEY_EXAMPLE
+}
+
+docs {
+  **세션 조회** — `GET /api/comm/v1/center/cstalk/session`
+
+  사용자 키 기준으로 현재 상담 세션 정보를 조회합니다.
+
+  상담톡 요청·응답에는 최종 사용자 식별자(`userKey`)와 상담 내용이 들어가므로 개인정보로 취급하고 본문을 로그에 남기지 않습니다.
+
+  - operationId: `getCounselSession`
+  - SDK: `counsel.sessions.get`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-counsel
+}

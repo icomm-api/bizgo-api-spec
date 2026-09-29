@@ -1,0 +1,31 @@
+meta {
+  name: 채팅 기능 비활성화 (deactivateCounselChat)
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/api/comm/v1/center/cstalk/sender/chat/deactivate
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "cstalk": {
+      "senderKey": "SENDER_KEY_EXAMPLE"
+    }
+  }
+}
+
+docs {
+  **채팅 기능 비활성화** — `POST /api/comm/v1/center/cstalk/sender/chat/deactivate`
+
+  카카오톡 채널의 채팅 기능을 비활성화합니다.
+
+  상담톡 요청·응답에는 최종 사용자 식별자(`userKey`)와 상담 내용이 들어가므로 개인정보로 취급하고 본문을 로그에 남기지 않습니다.
+
+  - operationId: `deactivateCounselChat`
+  - SDK: `counsel.channels.deactivateChat`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-counsel
+}

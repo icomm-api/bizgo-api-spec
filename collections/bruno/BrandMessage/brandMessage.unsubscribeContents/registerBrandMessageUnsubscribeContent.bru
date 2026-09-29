@@ -1,0 +1,30 @@
+meta {
+  name: 발신프로필 무료수신거부 정보 입력 (registerBrandMessageUnsubscribeContent)
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/api/comm/v1/center/brandmessage/unSubscribeContent
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "brandmessage": {
+      "senderKey": "SENDER_KEY_EXAMPLE",
+      "unsubscribePhoneNumber": "080-0000-0000"
+    }
+  }
+}
+
+docs {
+  **발신프로필 무료수신거부 정보 입력** — `POST /api/comm/v1/center/brandmessage/unSubscribeContent`
+
+  발신프로필의 무료수신거부 전화번호와 인증번호를 등록합니다. 광고성 메시지 하단의 무료수신거부 안내에 씁니다.
+
+  - operationId: `registerBrandMessageUnsubscribeContent`
+  - SDK: `brandMessage.unsubscribeContents.register`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand
+}

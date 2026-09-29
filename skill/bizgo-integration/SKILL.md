@@ -23,11 +23,11 @@ Most integration bugs come from a handful of misunderstandings. Keep these in mi
 
      | Language | Install | llms.txt |
      |---|---|---|
-     | Java 11+ | `implementation 'io.github.icomm-api:bizgo-sdk-comm-java:1.2.0'` | https://github.com/icomm-api/bizgo-sdk-comm-java/blob/main/llms.txt |
-     | JavaScript/TypeScript (Node) | `npm install @bizgo/bizgo-sdk-comm-js@^1.2.0` | https://github.com/icomm-api/bizgo-sdk-comm-js/blob/main/llms.txt |
-     | Go | `go get github.com/icomm-api/bizgo-sdk-comm-go@v1.2.0` | https://github.com/icomm-api/bizgo-sdk-comm-go/blob/main/llms.txt |
-     | C#/.NET | `dotnet add package Bizgo.Sdk.Comm --version 1.2.0` | https://github.com/icomm-api/bizgo-sdk-comm-cs/blob/main/llms.txt |
-     | PHP | `composer require icomm-api/bizgo-sdk-comm:^1.2` | https://github.com/icomm-api/bizgo-sdk-comm-php/blob/main/llms.txt |
+     | Java 17+ | `implementation 'io.github.icomm-api:bizgo-sdk-comm-java:1.2.0'` | https://github.com/icomm-api/bizgo-sdk-comm-java/blob/main/llms.txt |
+     | JavaScript/TypeScript (Node 18+) | `npm install @bizgo/bizgo-sdk-comm-js@^1.2.0` | https://github.com/icomm-api/bizgo-sdk-comm-js/blob/main/llms.txt |
+     | Go 1.26+ | `go get github.com/icomm-api/bizgo-sdk-comm-go@v1.2.0` | https://github.com/icomm-api/bizgo-sdk-comm-go/blob/main/llms.txt |
+     | C#/.NET (.NET 8+ / netstandard2.0) | `dotnet add package Bizgo.Sdk.Comm --version 1.2.0` | https://github.com/icomm-api/bizgo-sdk-comm-cs/blob/main/llms.txt |
+     | PHP 8.2+ | `composer require icomm-api/bizgo-sdk-comm:^1.2` | https://github.com/icomm-api/bizgo-sdk-comm-php/blob/main/llms.txt |
 
      Don't copy code from the old `infobank-omni-sdk-*` repositories or the v1 `bizgo-sdk-comm-java/js` READMEs — they target the previous OMNI API.
    - Anything else → call the HTTP API directly: [references/http-api.md](references/http-api.md).

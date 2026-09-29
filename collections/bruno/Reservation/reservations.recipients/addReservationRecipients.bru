@@ -1,0 +1,40 @@
+meta {
+  name: 예약 수신자 추가 (addReservationRecipients)
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/api/comm/v1/reservation/resvKey/:resvKey/destinations
+  body: json
+  auth: inherit
+}
+
+params:path {
+  resvKey: RESV_KEY_EXAMPLE
+}
+
+body:json {
+  {
+    "destinations": [
+      {
+        "to": "01000000000",
+        "replaceWords": {
+          "name": "홍길동"
+        },
+        "ref": "dest-001"
+      }
+    ]
+  }
+}
+
+docs {
+  **예약 수신자 추가** — `POST /api/comm/v1/reservation/resvKey/{resvKey}/destinations`
+
+  기존 예약 건에 수신자를 추가합니다. 한 번에 최대 1,000건까지 추가할 수 있습니다. 수신자별 `code`를 함께 확인합니다.
+
+  - operationId: `addReservationRecipients`
+  - SDK: `reservations.recipients.create`
+  - 발송 API입니다. sandbox에서 먼저 확인하세요(sandbox는 실제로 발송되지 않습니다).
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/reservation
+}

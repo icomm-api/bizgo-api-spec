@@ -1,0 +1,47 @@
+meta {
+  name: 시스템 메시지 등록 (createCounselSystemMessage)
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/api/comm/v1/center/cstalk/system/message
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "cstalk": {
+      "senderKey": "SENDER_KEY_EXAMPLE",
+      "name": "상담 시작 안내",
+      "messages": [
+        {
+          "messageType": "ST",
+          "content": "상담을 시작합니다.",
+          "buttons": [
+            {
+              "ordering": 1,
+              "type": "WL",
+              "name": "바로가기",
+              "urlMobile": "https://m.example.com",
+              "urlPc": "https://www.example.com"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+
+docs {
+  **시스템 메시지 등록** — `POST /api/comm/v1/center/cstalk/system/message`
+
+  시스템 메시지를 등록합니다.
+
+  상담톡 요청·응답에는 최종 사용자 식별자(`userKey`)와 상담 내용이 들어가므로 개인정보로 취급하고 본문을 로그에 남기지 않습니다.
+
+  - operationId: `createCounselSystemMessage`
+  - SDK: `counsel.systemMessages.create`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-counsel
+}

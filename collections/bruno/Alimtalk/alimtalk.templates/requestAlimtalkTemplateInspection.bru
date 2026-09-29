@@ -1,0 +1,34 @@
+meta {
+  name: 알림톡 템플릿 검수 요청 (requestAlimtalkTemplateInspection)
+  type: http
+  seq: 7
+}
+
+post {
+  url: {{baseUrl}}/api/comm/v1/center/alimtalk/template/request
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "alimtalk": {
+      "senderKey": "SENDER_KEY_EXAMPLE",
+      "templateCode": "TEMPLATE_CODE_EXAMPLE",
+      "comment": "검수 요청합니다."
+    }
+  }
+}
+
+docs {
+  **알림톡 템플릿 검수 요청** — `POST /api/comm/v1/center/alimtalk/template/request`
+
+  등록된 알림톡 템플릿을 카카오 검수로 요청합니다. 템플릿 상태가 대기이고 검수 상태가 등록(`REG`)인 경우 요청할 수 있습니다.
+  - `application/json`: 첨부 없이 요청합니다. 템플릿 정보는 `alimtalk` 객체에 넣습니다.
+  - `multipart/form-data`: 파일을 첨부해 요청합니다. 필드를 최상위에 두며 `comment`가 필수입니다. 파일 형식은 png, jpg, jpeg, gif, pdf, hwp, doc, docx입니다.
+
+  - operationId: `requestAlimtalkTemplateInspection`
+  - SDK: `alimtalk.templates.requestInspection`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-alimtalk
+  - 이 요청은 `multipart/form-data` 형식도 지원합니다(스펙 참고).
+}

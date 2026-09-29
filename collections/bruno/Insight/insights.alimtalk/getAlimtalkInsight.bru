@@ -1,0 +1,28 @@
+meta {
+  name: 알림톡 주요 인사이트 조회 (getAlimtalkInsight)
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/api/comm/v1/center/statistics/alimtalk?startDate=20251101&endDate=20251130&senderKey=SENDER_KEY_EXAMPLE
+  body: none
+  auth: inherit
+}
+
+params:query {
+  startDate: 20251101
+  endDate: 20251130
+  senderKey: SENDER_KEY_EXAMPLE
+  ~templateCode: TEMPLATE_CODE_EXAMPLE
+}
+
+docs {
+  **알림톡 주요 인사이트 조회** — `GET /api/comm/v1/center/statistics/alimtalk`
+
+  기간·발신프로필 기준으로 알림톡 발송 성공/실패·읽음·클릭 등 주요 통계를 조회합니다. 카카오가 직접 제공하는 통계입니다.
+
+  - operationId: `getAlimtalkInsight`
+  - SDK: `insights.alimtalk.get`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/insight
+}

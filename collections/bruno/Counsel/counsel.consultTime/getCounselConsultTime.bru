@@ -1,0 +1,27 @@
+meta {
+  name: 상담시간 조회 (getCounselConsultTime)
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/api/comm/v1/center/cstalk/consult/time?senderKey=SENDER_KEY_EXAMPLE
+  body: none
+  auth: inherit
+}
+
+params:query {
+  senderKey: SENDER_KEY_EXAMPLE
+}
+
+docs {
+  **상담시간 조회** — `GET /api/comm/v1/center/cstalk/consult/time`
+
+  상담 운영 시간(요일별)을 조회합니다.
+
+  상담톡 요청·응답에는 최종 사용자 식별자(`userKey`)와 상담 내용이 들어가므로 개인정보로 취급하고 본문을 로그에 남기지 않습니다.
+
+  - operationId: `getCounselConsultTime`
+  - SDK: `counsel.consultTime.get`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-counsel
+}

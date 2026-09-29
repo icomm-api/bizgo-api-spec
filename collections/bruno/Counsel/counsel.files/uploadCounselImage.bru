@@ -1,0 +1,32 @@
+meta {
+  name: 상담톡 이미지 업로드 (uploadCounselImage)
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/api/comm/v1/file/cstalk/image
+  body: multipartForm
+  auth: inherit
+}
+
+body:multipart-form {
+  file: @file(PATH_TO_FILE)
+  ~fileKey: FILE_KEY_EXAMPLE
+  ~imageName: IMAGE_NAME_EXAMPLE
+  senderKey: SENDER_KEY_EXAMPLE
+  ~imageType: IMAGE_TYPE_EXAMPLE
+}
+
+docs {
+  **상담톡 이미지 업로드** — `POST /api/comm/v1/file/cstalk/image`
+
+  상담톡 이미지(jpg, png, gif, 최대 5MB)를 올리고 `imgUrl`을 받습니다. Rich 메시지용은 `imageType=rich`로 올립니다.
+
+  상담톡 요청·응답에는 최종 사용자 식별자(`userKey`)와 상담 내용이 들어가므로 개인정보로 취급하고 본문을 로그에 남기지 않습니다.
+
+  - operationId: `uploadCounselImage`
+  - SDK: `counsel.files.uploadImage`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-counsel
+  - 파일 필드에 업로드할 파일을 지정하세요(PATH_TO_FILE는 자리표시자입니다).
+}

@@ -1,0 +1,29 @@
+meta {
+  name: 브랜드메시지 동영상 업로드 등록 (registerBrandMessageVideoUpload)
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/api/comm/v1/center/brandmessage/video/upload/register
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "senderKey": "SENDER_KEY_EXAMPLE",
+    "fileName": "brand-promotion.mp4",
+    "fileSize": 4075447
+  }
+}
+
+docs {
+  **브랜드메시지 동영상 업로드 등록** — `POST /api/comm/v1/center/brandmessage/video/upload/register`
+
+  브랜드메시지에 쓸 동영상의 업로드를 등록하고 카카오 업로드 채널(`vid`, `uploadUrl`, `token`)을 발급받습니다. 파일은 이 API로 보내지 않고 `uploadUrl`로 직접 전송합니다(5분 안에). 전송 후 동영상 조회로 `status`가 `PUBLIC`인지 확인합니다.
+
+  - operationId: `registerBrandMessageVideoUpload`
+  - SDK: `brandMessage.videos.registerUpload`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand
+}

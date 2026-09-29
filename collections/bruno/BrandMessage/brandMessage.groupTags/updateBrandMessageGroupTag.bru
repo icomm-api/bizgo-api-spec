@@ -1,0 +1,30 @@
+meta {
+  name: 브랜드메시지 그룹태그 수정 (updateBrandMessageGroupTag)
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{baseUrl}}/api/comm/v1/center/brandmessage/groupTag
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "groupTag": {
+      "groupTagKey": "GROUP_TAG_KEY_EXAMPLE",
+      "groupTagName": "VIP 고객"
+    }
+  }
+}
+
+docs {
+  **브랜드메시지 그룹태그 수정** — `PUT /api/comm/v1/center/brandmessage/groupTag`
+
+  등록된 브랜드메시지 그룹태그 정보를 수정합니다.
+
+  - operationId: `updateBrandMessageGroupTag`
+  - SDK: `brandMessage.groupTags.update`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand
+}

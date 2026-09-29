@@ -1,0 +1,34 @@
+meta {
+  name: 상담 메시지 삭제 (deleteCounselMessage)
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{baseUrl}}/api/comm/v1/center/cstalk/chat/delete
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "cstalk": {
+      "senderKey": "SENDER_KEY_EXAMPLE",
+      "userKey": "USER_KEY_EXAMPLE",
+      "msgKey": "20260424104234546POM101182450000"
+    }
+  }
+}
+
+docs {
+  **상담 메시지 삭제** — `POST /api/comm/v1/center/cstalk/chat/delete`
+
+  이미 발송된 상담톡 메시지를 삭제합니다. 삭제한 메시지는 복구할 수 없습니다.
+  응답 코드: `A000` 삭제 성공, `A502` 발신프로필 미등록·`senderKey`/`msgKey` 오류·소유자 불일치, `A507` `userKey` 오류, `A822` 삭제 불가 상태, `A213` 그 외 처리 실패.
+
+  상담톡 요청·응답에는 최종 사용자 식별자(`userKey`)와 상담 내용이 들어가므로 개인정보로 취급하고 본문을 로그에 남기지 않습니다.
+
+  - operationId: `deleteCounselMessage`
+  - SDK: `counsel.messages.delete`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-counsel
+}

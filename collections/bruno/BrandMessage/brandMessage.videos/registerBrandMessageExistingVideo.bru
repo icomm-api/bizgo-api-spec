@@ -1,0 +1,27 @@
+meta {
+  name: 브랜드메시지 기존 동영상 등록 (registerBrandMessageExistingVideo)
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/api/comm/v1/center/brandmessage/video/register
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "senderKey": "SENDER_KEY_EXAMPLE"
+  }
+}
+
+docs {
+  **브랜드메시지 기존 동영상 등록** — `POST /api/comm/v1/center/brandmessage/video/register`
+
+  카카오톡 채널에 이미 올라가 있는 동영상을 재업로드 없이 브랜드메시지 발송용으로 등록합니다. `vid` 또는 `videoUrl` 중 하나만 지정합니다.
+
+  - operationId: `registerBrandMessageExistingVideo`
+  - SDK: `brandMessage.videos.registerExisting`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand
+}

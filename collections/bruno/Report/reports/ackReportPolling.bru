@@ -1,0 +1,25 @@
+meta {
+  name: 리포트 수신 확인 (ackReportPolling)
+  type: http
+  seq: 2
+}
+
+delete {
+  url: {{baseUrl}}/api/comm/v1/report/polling/:reportId
+  body: none
+  auth: inherit
+}
+
+params:path {
+  reportId: REPORT_ID_EXAMPLE
+}
+
+docs {
+  **리포트 수신 확인** — `DELETE /api/comm/v1/report/polling/{reportId}`
+
+  가져오기(GET) 응답의 `reportId`로 수신 확인을 합니다.
+
+  - operationId: `ackReportPolling`
+  - SDK: `reports.ack`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/report
+}

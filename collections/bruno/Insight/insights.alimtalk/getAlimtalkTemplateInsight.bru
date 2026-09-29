@@ -1,0 +1,28 @@
+meta {
+  name: 알림톡 템플릿 상세 조회 (getAlimtalkTemplateInsight)
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/api/comm/v1/center/statistics/alimtalk/template?startDate=20251101&endDate=20251130&senderKey=SENDER_KEY_EXAMPLE
+  body: none
+  auth: inherit
+}
+
+params:query {
+  startDate: 20251101
+  endDate: 20251130
+  senderKey: SENDER_KEY_EXAMPLE
+  ~templateCode: TEMPLATE_CODE_EXAMPLE
+}
+
+docs {
+  **알림톡 템플릿 상세 조회** — `GET /api/comm/v1/center/statistics/alimtalk/template`
+
+  기간·발신프로필 기준으로 알림톡 템플릿별 통계를 조회합니다.
+
+  - operationId: `getAlimtalkTemplateInsight`
+  - SDK: `insights.alimtalk.getByTemplate`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/insight
+}

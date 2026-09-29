@@ -1,0 +1,33 @@
+meta {
+  name: 예약 수정 (updateReservation)
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{baseUrl}}/api/comm/v1/reservation/resvKey/:resvKey
+  body: json
+  auth: inherit
+}
+
+params:path {
+  resvKey: RESV_KEY_EXAMPLE
+}
+
+body:json {
+  {
+    "resvSendTime": "2026-05-01 11:00:00",
+    "resvName": "금요일 캠페인 수정"
+  }
+}
+
+docs {
+  **예약 수정** — `PUT /api/comm/v1/reservation/resvKey/{resvKey}`
+
+  예약 대기(PENDING) 상태인 예약 건의 발송 시각과 예약명을 수정합니다. 다른 상태이면 거절됩니다(A824).
+  수정 응답에는 `resvData`가 빠질 수 있습니다.
+
+  - operationId: `updateReservation`
+  - SDK: `reservations.update`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/reservation
+}

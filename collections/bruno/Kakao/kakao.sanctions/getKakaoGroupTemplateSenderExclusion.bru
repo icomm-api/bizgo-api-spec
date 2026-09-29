@@ -1,0 +1,28 @@
+meta {
+  name: 그룹템플릿 발신프로필 제외 조회 (getKakaoGroupTemplateSenderExclusion)
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{baseUrl}}/api/comm/v1/center/kakao/abusing/block/senderGroup?date=20260101&senderKey=SENDER_KEY_EXAMPLE&groupKey=GROUP_KEY_EXAMPLE&templateCode=TEMPLATE_CODE_EXAMPLE
+  body: none
+  auth: inherit
+}
+
+params:query {
+  date: 20260101
+  senderKey: SENDER_KEY_EXAMPLE
+  groupKey: GROUP_KEY_EXAMPLE
+  templateCode: TEMPLATE_CODE_EXAMPLE
+}
+
+docs {
+  **그룹템플릿 발신프로필 제외 조회** — `GET /api/comm/v1/center/kakao/abusing/block/senderGroup`
+
+  그룹템플릿에서 특정 발신프로필이 제외(제한)된 제재 정보를 조회합니다.
+
+  - operationId: `getKakaoGroupTemplateSenderExclusion`
+  - SDK: `kakao.sanctions.getGroupTemplateExclusion`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-common
+}

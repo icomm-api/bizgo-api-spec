@@ -1,0 +1,29 @@
+meta {
+  name: RCS 이미지 업로드 (uploadRcsFile)
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/api/comm/v1/file/rcs
+  body: multipartForm
+  auth: inherit
+}
+
+body:multipart-form {
+  file: @file(PATH_TO_FILE)
+  ~fileKey: FILE_KEY_EXAMPLE
+  ~imageName: IMAGE_NAME_EXAMPLE
+}
+
+docs {
+  **RCS 이미지 업로드** — `POST /api/comm/v1/file/rcs`
+
+  RCS 발송 전에 이미지를 업로드합니다. 응답의 `data.data.media` 값을 발송 요청의
+  `messageFlow[].rcs.body.media`에 넣어 사용합니다.
+
+  - operationId: `uploadRcsFile`
+  - SDK: `files.uploadRcs`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/rcs
+  - 파일 필드에 업로드할 파일을 지정하세요(PATH_TO_FILE는 자리표시자입니다).
+}

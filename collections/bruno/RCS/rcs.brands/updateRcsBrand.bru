@@ -1,0 +1,32 @@
+meta {
+  name: RCS 브랜드 수정 (updateRcsBrand)
+  type: http
+  seq: 2
+}
+
+put {
+  url: {{baseUrl}}/api/comm/v1/center/rcs/brand
+  body: multipartForm
+  auth: inherit
+}
+
+body:multipart-form {
+  brandId: BRAND_ID_EXAMPLE
+  regBrand: {"brandId":"BRAND_ID_EXAMPLE","name":"NAME_EXAMPLE"}
+  ~brandProfile: @file(PATH_TO_FILE)
+  ~brandBackground: @file(PATH_TO_FILE)
+  ~seasonDocFile: @file(PATH_TO_FILE)
+}
+
+docs {
+  **RCS 브랜드 수정** — `PUT /api/comm/v1/center/rcs/brand`
+
+  브랜드 기본 정보와 브랜드 이미지를 수정합니다. `multipart/form-data`로 보내며,
+  `regBrand`는 JSON 문자열 파트, 이미지·증빙 파일은 바이너리 파트입니다.
+  파일 스트림을 다시 보내야 하고 검수 요청이 다시 걸릴 수 있으므로 SDK는 429만 재시도합니다.
+
+  - operationId: `updateRcsBrand`
+  - SDK: `rcs.brands.update`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/rcs
+  - 파일 필드에 업로드할 파일을 지정하세요(PATH_TO_FILE는 자리표시자입니다).
+}

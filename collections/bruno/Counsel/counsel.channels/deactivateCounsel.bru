@@ -1,0 +1,32 @@
+meta {
+  name: 상담톡 이용 비활성화 (deactivateCounsel)
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/api/comm/v1/center/cstalk/sender/deactivate
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "cstalk": {
+      "senderKey": "SENDER_KEY_EXAMPLE",
+      "committalCompany": "COMMITTAL_COMPANY_EXAMPLE"
+    }
+  }
+}
+
+docs {
+  **상담톡 이용 비활성화** — `POST /api/comm/v1/center/cstalk/sender/deactivate`
+
+  발신프로필의 상담톡 이용을 비활성화합니다. 해지하면 저장된 상담시간이 삭제됩니다.
+
+  상담톡 요청·응답에는 최종 사용자 식별자(`userKey`)와 상담 내용이 들어가므로 개인정보로 취급하고 본문을 로그에 남기지 않습니다.
+
+  - operationId: `deactivateCounsel`
+  - SDK: `counsel.channels.deactivate`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-counsel
+}

@@ -1,0 +1,27 @@
+meta {
+  name: 템플릿 제재 조회 (getKakaoTemplateSanction)
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/api/comm/v1/center/kakao/abusing/block/template?date=20260101&senderKey=SENDER_KEY_EXAMPLE&templateCode=TEMPLATE_CODE_EXAMPLE
+  body: none
+  auth: inherit
+}
+
+params:query {
+  date: 20260101
+  senderKey: SENDER_KEY_EXAMPLE
+  templateCode: TEMPLATE_CODE_EXAMPLE
+}
+
+docs {
+  **템플릿 제재 조회** — `GET /api/comm/v1/center/kakao/abusing/block/template`
+
+  특정 일자에 템플릿에 적용된 제재 정보를 조회합니다.
+
+  - operationId: `getKakaoTemplateSanction`
+  - SDK: `kakao.sanctions.getTemplate`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-common
+}

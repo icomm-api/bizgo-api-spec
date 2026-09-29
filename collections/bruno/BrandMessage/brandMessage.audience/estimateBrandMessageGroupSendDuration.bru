@@ -1,0 +1,28 @@
+meta {
+  name: 동보 발송 예상 소요시간 조회 (estimateBrandMessageGroupSendDuration)
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{baseUrl}}/api/comm/v1/center/brandmessage/groupMessage/estimate?senderKey=SENDER_KEY_EXAMPLE&startTime=2026-04-08T16:40:00&count=320
+  body: none
+  auth: inherit
+}
+
+params:query {
+  senderKey: SENDER_KEY_EXAMPLE
+  startTime: 2026-04-08T16:40:00
+  count: 320
+  ~target: FRIEND_GROUP
+}
+
+docs {
+  **동보 발송 예상 소요시간 조회** — `GET /api/comm/v1/center/brandmessage/groupMessage/estimate`
+
+  동보 발송 시작 시각과 대상 수로 예상 종료 시각과 소요 시간을 조회합니다.
+
+  - operationId: `estimateBrandMessageGroupSendDuration`
+  - SDK: `brandMessage.audience.estimate`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand
+}

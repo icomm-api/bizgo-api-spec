@@ -1,0 +1,39 @@
+meta {
+  name: 발송 예상 모수 확인 (전화번호 명단 기반) (checkBrandMessageAudiencePossibleByPhoneNumbers)
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/api/comm/v1/center/brandmessage/groupMessage/friend/possible
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "senderKey": "SENDER_KEY_EXAMPLE",
+    "phoneNumbers": [
+      "01000000000",
+      "01000000000",
+      "01000000000",
+      "01000000000",
+      "01000000000",
+      "01000000000",
+      "01000000000",
+      "01000000000",
+      "01000000000",
+      "01000000000"
+    ]
+  }
+}
+
+docs {
+  **발송 예상 모수 확인 (전화번호 명단 기반)** — `POST /api/comm/v1/center/brandmessage/groupMessage/friend/possible`
+
+  전화번호 명단으로 동보 발송 가능 예상 수를 조회합니다. 국가코드는 자동 정규화되고 유효한 번호로 모수를 계산합니다. 최소 10건이며, 하나라도 형식이 잘못되면 요청 전체가 거부됩니다. 상태를 바꾸지 않는 조회이므로 재시도해도 안전합니다.
+
+  - operationId: `checkBrandMessageAudiencePossibleByPhoneNumbers`
+  - SDK: `brandMessage.audience.checkPossibleByPhoneNumbers`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand
+}

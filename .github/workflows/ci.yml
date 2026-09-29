@@ -21,7 +21,10 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci --ignore-scripts
-      - run: npm run check
+      - name: lint + bundle + dist 최신 여부
+        run: npm run lint && npm run bundle && git diff --exit-code -- dist/
+      - name: Postman·Bruno 컬렉션 최신 여부 (dist/openapi.yaml에서 다시 생성해 비교)
+        run: npm run collections:check
 
   secrets-scan:
     runs-on: ubuntu-latest

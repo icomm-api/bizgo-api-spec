@@ -1,0 +1,25 @@
+meta {
+  name: MO(수신) 단건 조회 (getMoByMsgKey)
+  type: http
+  seq: 6
+}
+
+get {
+  url: {{baseUrl}}/api/comm/v1/message/inquiry/mo/msgKey/:msgKey
+  body: none
+  auth: inherit
+}
+
+params:path {
+  msgKey: MSG_KEY_EXAMPLE
+}
+
+docs {
+  **MO(수신) 단건 조회** — `GET /api/comm/v1/message/inquiry/mo/msgKey/{msgKey}`
+
+  메시지 키로 MO 메시지를 조회합니다. 같은 msgKey가 여러 건일 수 있어 배열로 반환합니다.
+
+  - operationId: `getMoByMsgKey`
+  - SDK: `messages.mo`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/insight
+}

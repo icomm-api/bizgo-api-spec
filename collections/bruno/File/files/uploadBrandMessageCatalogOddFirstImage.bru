@@ -1,0 +1,28 @@
+meta {
+  name: 브랜드메시지 카탈로그 홀수형 첫번째 이미지 업로드 (uploadBrandMessageCatalogOddFirstImage)
+  type: http
+  seq: 12
+}
+
+post {
+  url: {{baseUrl}}/api/comm/v1/file/brandmessage/catalog/oddFirst
+  body: multipartForm
+  auth: inherit
+}
+
+body:multipart-form {
+  file: @file(PATH_TO_FILE)
+  ~fileKey: FILE_KEY_EXAMPLE
+  ~imageName: IMAGE_NAME_EXAMPLE
+}
+
+docs {
+  **브랜드메시지 카탈로그 홀수형 첫번째 이미지 업로드** — `POST /api/comm/v1/file/brandmessage/catalog/oddFirst`
+
+  카탈로그형(FG) 홀수형의 첫 번째 아이템에 쓰는 2:1 비율 이미지를 업로드합니다. 나머지 아이템과 짝수형(4·6개)은 카탈로그 이미지 업로드를 씁니다.
+
+  - operationId: `uploadBrandMessageCatalogOddFirstImage`
+  - SDK: `files.uploadBrandMessageCatalogOddFirst`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand
+  - 파일 필드에 업로드할 파일을 지정하세요(PATH_TO_FILE는 자리표시자입니다).
+}

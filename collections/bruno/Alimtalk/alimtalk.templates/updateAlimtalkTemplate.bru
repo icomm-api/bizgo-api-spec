@@ -1,0 +1,34 @@
+meta {
+  name: 알림톡 템플릿 수정 (updateAlimtalkTemplate)
+  type: http
+  seq: 3
+}
+
+put {
+  url: {{baseUrl}}/api/comm/v1/center/alimtalk/template
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "alimtalk": {
+      "senderKey": "SENDER_KEY_EXAMPLE",
+      "templateName": "주문 완료 안내 수정",
+      "templateCode": "TEMPLATE_CODE_EXAMPLE",
+      "templateMessageType": "BA",
+      "templateEmphasizeType": "NONE",
+      "text": "#{name}님, 주문 접수가 완료되었습니다."
+    }
+  }
+}
+
+docs {
+  **알림톡 템플릿 수정** — `PUT /api/comm/v1/center/alimtalk/template`
+
+  등록된 알림톡 템플릿 정보를 수정합니다. 검수 상태와 카카오 정책에 따라 수정 가능한 범위가 달라질 수 있습니다. 대상 템플릿은 본문의 `senderKey`와 `templateCode`로 지정합니다.
+
+  - operationId: `updateAlimtalkTemplate`
+  - SDK: `alimtalk.templates.update`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-alimtalk
+}

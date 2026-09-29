@@ -1,0 +1,26 @@
+meta {
+  name: 친구 그룹 조회 (getBrandMessageFriendGroup)
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{baseUrl}}/api/comm/v1/center/brandmessage/friendGroup?senderKey=SENDER_KEY_EXAMPLE&friendGroupKey=FRIEND_GROUP_KEY_EXAMPLE
+  body: none
+  auth: inherit
+}
+
+params:query {
+  senderKey: SENDER_KEY_EXAMPLE
+  friendGroupKey: FRIEND_GROUP_KEY_EXAMPLE
+}
+
+docs {
+  **친구 그룹 조회** — `GET /api/comm/v1/center/brandmessage/friendGroup`
+
+  발신프로필 키와 친구 그룹 키로 친구 그룹 상세 정보를 조회합니다.
+
+  - operationId: `getBrandMessageFriendGroup`
+  - SDK: `brandMessage.friendGroups.get`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand
+}

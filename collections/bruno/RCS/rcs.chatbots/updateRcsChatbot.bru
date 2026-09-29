@@ -1,0 +1,30 @@
+meta {
+  name: RCS 대화방 수정 (updateRcsChatbot)
+  type: http
+  seq: 3
+}
+
+put {
+  url: {{baseUrl}}/api/comm/v1/center/rcs/chatbot
+  body: multipartForm
+  auth: inherit
+}
+
+body:multipart-form {
+  brandId: BRAND_ID_EXAMPLE
+  chatbot: {}
+  subNumCertificate: @file(PATH_TO_FILE)
+}
+
+docs {
+  **RCS 대화방 수정** — `PUT /api/comm/v1/center/rcs/chatbot`
+
+  등록된 RCS 대화방 정보를 수정합니다. `multipart/form-data`로 보내며, 대화방 정보(`chatbot`)는 JSON 문자열,
+  부가번호 증명 서류(`subNumCertificate`)는 파일로 함께 보냅니다.
+  파일 스트림을 다시 보내야 하고 검수 요청이 다시 걸릴 수 있으므로 SDK는 429만 재시도합니다.
+
+  - operationId: `updateRcsChatbot`
+  - SDK: `rcs.chatbots.update`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/rcs
+  - 파일 필드에 업로드할 파일을 지정하세요(PATH_TO_FILE는 자리표시자입니다).
+}

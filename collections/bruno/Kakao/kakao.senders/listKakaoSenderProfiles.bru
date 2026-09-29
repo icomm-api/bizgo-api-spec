@@ -1,0 +1,29 @@
+meta {
+  name: 발신프로필 목록 조회 (listKakaoSenderProfiles)
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{baseUrl}}/api/comm/v1/account/kakao/sender/profiles
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~startDate: START_DATE_EXAMPLE
+  ~endDate: END_DATE_EXAMPLE
+  ~senderKey: SENDER_KEY_EXAMPLE
+  ~page: 1
+  ~rows: 1
+}
+
+docs {
+  **발신프로필 목록 조회** — `GET /api/comm/v1/account/kakao/sender/profiles`
+
+  API 키에 등록된 발신프로필 목록을 조회합니다. 검색 기간과 발신프로필 키로 범위를 좁힐 수 있고, 결과는 페이지 단위로 반환합니다.
+
+  - operationId: `listKakaoSenderProfiles`
+  - SDK: `kakao.senders.list`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-common
+}

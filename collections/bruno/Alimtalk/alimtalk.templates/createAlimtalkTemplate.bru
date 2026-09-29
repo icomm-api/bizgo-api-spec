@@ -1,0 +1,36 @@
+meta {
+  name: 알림톡 템플릿 등록 (createAlimtalkTemplate)
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/api/comm/v1/center/alimtalk/template
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "alimtalk": {
+      "senderKey": "SENDER_KEY_EXAMPLE",
+      "templateName": "주문 완료 안내",
+      "templateCode": "TEMPLATE_CODE_EXAMPLE",
+      "templateMessageType": "BA",
+      "templateEmphasizeType": "NONE",
+      "text": "#{name}님, 주문이 완료되었습니다.",
+      "categoryCode": "001001"
+    }
+  }
+}
+
+docs {
+  **알림톡 템플릿 등록** — `POST /api/comm/v1/center/alimtalk/template`
+
+  알림톡 템플릿을 등록합니다. 등록한 템플릿은 검수 요청(`POST /api/comm/v1/center/alimtalk/template/request`) 후 카카오 승인을 받아야 발송할 수 있습니다.
+  이미지형·아이템리스트형 템플릿은 템플릿 이미지 업로드 API로 받은 `imgUrl`을 함께 넣습니다.
+
+  - operationId: `createAlimtalkTemplate`
+  - SDK: `alimtalk.templates.create`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-alimtalk
+}

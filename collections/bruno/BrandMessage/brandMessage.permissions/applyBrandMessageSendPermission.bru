@@ -1,0 +1,29 @@
+meta {
+  name: 브랜드메시지 발송권한 신청 (applyBrandMessageSendPermission)
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/api/comm/v1/center/brandmessage/sendPermission
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "brandMessage": {
+      "senderKey": "SENDER_KEY_EXAMPLE"
+    }
+  }
+}
+
+docs {
+  **브랜드메시지 발송권한 신청** — `POST /api/comm/v1/center/brandmessage/sendPermission`
+
+  고객사 회원 대상 발송(targeting M·N·O) 권한을 신청합니다. 권한은 톡채널 단위로 부여되므로 같은 톡채널을 쓰는 다른 딜러사의 발신프로필에도 함께 적용됩니다. 고객사 회원 대상 발송(targeting M·N·O)에는 카카오 발송 권한이 필요합니다. 조건: 비즈니스 인증 채널, 등록된 채널 전화번호, 채널 친구 수 5만 이상, 업로드된 광고성 정보 수신동의 증적파일, 3개월 이내 알림톡 발송 이력. 어떤 조건이 미달인지는 응답으로 구분되지 않습니다.
+
+  - operationId: `applyBrandMessageSendPermission`
+  - SDK: `brandMessage.permissions.apply`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand
+}

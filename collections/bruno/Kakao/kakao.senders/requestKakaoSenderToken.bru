@@ -1,0 +1,35 @@
+meta {
+  name: 카카오 채널 인증 토큰 요청 (requestKakaoSenderToken)
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/api/comm/v1/account/kakao/sender/token
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "yellowId": "@KAKAO_CHANNEL_ID_EXAMPLE",
+    "phoneNumber": "01000000000"
+  }
+}
+
+docs {
+  **카카오 채널 인증 토큰 요청** — `POST /api/comm/v1/account/kakao/sender/token`
+
+  발신프로필 등록에 필요한 카카오톡 채널 인증 토큰을 요청합니다.
+
+  발신프로필 등록 흐름:
+  1. 이 API에 채널 아이디(`yellowId`)와 채널 알림을 받는 관리자 전화번호(`phoneNumber`)를 보냅니다.
+  2. 그 전화번호에 연결된 카카오톡이 채널을 차단하지 않았다면 카카오가 해당 카카오톡으로 인증 토큰을 보냅니다.
+  3. 받은 토큰과 같은 전화번호를 헤더(`token`, `phoneNumber`)에 넣어 발신프로필 등록(`POST /api/comm/v1/account/kakao/sender`)을 호출합니다.
+
+  인증받은 토큰은 7일 동안 비즈메시지 센터 서버에 보관됩니다. 다시 호출하면 토큰이 또 발송되므로 자동 재시도하지 않습니다.
+
+  - operationId: `requestKakaoSenderToken`
+  - SDK: `kakao.senders.requestToken`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-common
+}

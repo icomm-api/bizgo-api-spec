@@ -1,0 +1,33 @@
+meta {
+  name: 브랜드메시지 템플릿 수정 (updateBrandMessageTemplate)
+  type: http
+  seq: 3
+}
+
+put {
+  url: {{baseUrl}}/api/comm/v1/center/brandmessage/template
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "brandmessage": {
+      "senderKey": "SENDER_KEY_EXAMPLE",
+      "senderKeyType": "S",
+      "sendType": "basic",
+      "templateName": "브랜드 혜택 안내",
+      "msgType": "FT"
+    }
+  }
+}
+
+docs {
+  **브랜드메시지 템플릿 수정** — `PUT /api/comm/v1/center/brandmessage/template`
+
+  등록된 브랜드메시지 템플릿을 수정합니다. 검수 상태와 카카오 정책에 따라 수정 가능한 범위가 달라질 수 있습니다.
+
+  - operationId: `updateBrandMessageTemplate`
+  - SDK: `brandMessage.templates.update`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-brand
+}

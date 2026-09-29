@@ -1,0 +1,32 @@
+meta {
+  name: 사용자 수신 차단 (blockCounselUser)
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/api/comm/v1/center/cstalk/profile/user/block
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "cstalk": {
+      "senderKey": "SENDER_KEY_EXAMPLE",
+      "userKey": "USER_KEY_EXAMPLE"
+    }
+  }
+}
+
+docs {
+  **사용자 수신 차단** — `POST /api/comm/v1/center/cstalk/profile/user/block`
+
+  특정 사용자의 상담톡 수신을 차단합니다. 차단하면 해당 사용자의 상담 세션도 종료됩니다.
+
+  상담톡 요청·응답에는 최종 사용자 식별자(`userKey`)와 상담 내용이 들어가므로 개인정보로 취급하고 본문을 로그에 남기지 않습니다.
+
+  - operationId: `blockCounselUser`
+  - SDK: `counsel.users.block`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/kakao-counsel
+}

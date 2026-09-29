@@ -1,0 +1,25 @@
+meta {
+  name: 리포트 개별조회 (getReportInquiry)
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/api/comm/v1/report/inquiry/:msgKey
+  body: none
+  auth: inherit
+}
+
+params:path {
+  msgKey: MSG_KEY_EXAMPLE
+}
+
+docs {
+  **리포트 개별조회** — `GET /api/comm/v1/report/inquiry/{msgKey}`
+
+  메시지 키 1개의 리포트를 조회합니다. 최대 30일 이전까지 조회할 수 있으며, Polling/Webhook에서 빠진 리포트를 보완하는 데 씁니다.
+
+  - operationId: `getReportInquiry`
+  - SDK: `reports.inquiry`
+  - 원문: https://developers.bizgo.io/api-sdk/api-reference/comm/report
+}
